@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pen+ Shader Editor</title>
+    <style>
+      body {
+        overflow: hidden;
+
+        --CodeVis: hidden;
+        --BlocklyVis: visible;
+
+        --EditorTheme_Color_1: #0fbd8c;
+        --EditorTheme_Color_2: #0eaa7e;
+        --EditorTheme_Color_3: #0c9770;
+
+        --EditorTheme_Theme_1: #0f0f0f;
+        --EditorTheme_Theme_2: #141414;
+        --EditorTheme_Theme_3: #1f1f1f;
+        --EditorTheme_Theme_4: #2f2f2f;
+
+        --EditorTheme_Text_1: #ffffff;
+        --EditorTheme_Text_2: #bfbfbf;
+        --EditorTheme_Text_3: #ffffff;
+
+        --EditorTheme_TopBarSize: 48px;
+      }
+
+      input[type="text"]{
+          background-color: var(--EditorTheme_Theme_2);
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 4px;
+          border-width: 1px;
+          border-style: solid;
+          border-color: var(--EditorTheme_Theme_3);
+          color: var(--EditorTheme_Text_1);
+      }
+
+      input[type="checkbox"]{
+          appearance: none;
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          
+          background-color: #ffffff;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+        
+      input[type="checkbox"]:checked{
+          background-color: var(--EditorTheme_Color_1);
+          /*As a data URL so that we don't have to load it from a url*/
+          background-image: url("data:image/svg+xml,%3C!-- https://akaricons.com/ --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M4 12l6 6L20 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: center;
+      }
+
+      .tempCodePreview {
+        background: var(--EditorTheme_Theme_1);
+        color: var(--EditorTheme_Text_1);
+        width: 70vw;
+        height: calc(100vh - var(--EditorTheme_TopBarSize));
+        position: absolute;
+        left: 30vw;
+        top: var(--EditorTheme_TopBarSize);
+        resize: none;
+        visibility: var(--CodeVis);
+        border-radius: 0px;
+        border-color: transparent;
+      }
+
+      .BlocklyShaderButtons {
+        left: 30vw;
+        width: 70vw;
+        height: var(--EditorTheme_TopBarSize);
+        position: absolute;
+      }
+
+      .shaderMenu {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--EditorTheme_Theme_1);
+        left: 0px;
+        top: 0px;
+      }
+
+      .buttonSelected {
+        background-color: var(--EditorTheme_Color_1);
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-width: 0.25em;
+        border-style: solid;
+        border-color: var(--EditorTheme_Theme_1);
+        top: 0px;
+        position: relative;
+        height: var(--EditorTheme_TopBarSize);
+        margin: 0px;
+        color: var(--EditorTheme_Text_1);
+
+        transition: all 250ms;
+      }
+
+      .buttonUnselected {
+        background-color: var(--EditorTheme_Color_2);
+        border-radius: 0.5em;
+        border-width: 0.25em;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        top: calc(var(--EditorTheme_TopBarSize) / 2.5);
+        border-style: solid;
+        height: calc(var(--EditorTheme_TopBarSize)/2);
+        position: relative;
+        border-color: var(--EditorTheme_Theme_1);
+        margin: 0px;
+        color: var(--EditorTheme_Text_2);
+
+        transition: all 250ms;
+      }
+
+      .buttonDisabled {
+        background-color: var(--EditorTheme_Theme_4);
+        border-radius: 0px;
+        border-color: transparent;
+        color: var(--EditorTheme_Text_2);
+      }
+
+      .previewAndConsole {
+        width: 30%;
+        height: 100%;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+      }
+
+      .shaderpreview {
+        width: 100%;
+        height: calc(50vh - var(--EditorTheme_TopBarSize));
+        position: absolute;
+        top: var(--EditorTheme_TopBarSize);
+        left: 0px;
+        background: var(--EditorTheme_Theme_3);
+      }
+
+      .shaderLog {
+        position: absolute;
+        width: 30vw;
+        height: 50vh;
+        top: 50vh;
+        left: 0px;
+        background: var(--EditorTheme_Theme_1);
+        overflow-y: scroll;
+      }
+
+      .BlocklyDiv {
+        width: 70%;
+        height: calc(100vh - var(--EditorTheme_TopBarSize));
+        left: 30%;
+        top: var(--EditorTheme_TopBarSize);
+        position: absolute;
+        background-color: var(--EditorTheme_Theme_3);
+        visibility: var(--BlocklyVis);
+      }
+
+      .logText{
+        width: 100%;
+        height: auto;
+        background: var(--EditorTheme_Theme_2);
+        color: var(--EditorTheme_Text_1);
+      }
+      
+      .topBar {
+        background-color: var(--EditorTheme_Color_1);
+        position: absolute;
+        width: 100%;
+        height: var(--EditorTheme_TopBarSize);
+      }
+
+      .Modal {
+        width: var(--ModalWidth);
+        height: var(--ModalHeight);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        overflow: hidden;
+      }
+
+      .noSelect {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shaderMenu">
+      <div class="topBar">
+        <div class="previewAndConsole">
+          <canvas id="shaderpreview" class="shaderpreview"></canvas>
+          <div id="shaderLog" class="shaderLog"></div>
+        </div>
+        <div class="BlocklyShaderButtons">
+          <button class="buttonSelected" id="ButtonBlockly">Scratch</button>
+          <button class="buttonUnselected" id="ButtonGLSL">GLSL</button>
+        </div>
+
+        <div id="BlocklyDiv" class="BlocklyDiv"></div>
+        <textarea id="myBlocklyCodeOutput" class="tempCodePreview" spellcheck="false"></textarea>
+      </div>
+    </div>
+    <div id="popupModal"></div>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <!--Blockly Addons-->
+    <!--
+    Color Fields, HSV color, continuous toolbox are used.
+    Also predefined variables by Hendrik Diel on google groups https://groups.google.com/g/blockly/c/22B9CMXpJpc
+  -->
+    <script src="BlocklyAddons.js"></script>
+
+    <!--helper functions-->
+    <script src="HelperFunctions.js"></script>
+    <!--Blockly Theme-->
+    <script src="penPlusTheme.js"></script>
+    <!--Adding Blocks to palletes-->
+    <script src="blocks.js"></script>
+    <script src="buttons.js"></script>
+
+    <!--Shader Preview and errors-->
+    <script src="shaders.js"></script>
+
+    <!--GLSL generator-->
+    <script src="GEN_GLSL.js"></script>
+    
+    <script src="main.js"></script>
+    <!--neato-->
+  </body>
+</html>
