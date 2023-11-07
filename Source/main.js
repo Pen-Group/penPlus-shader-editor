@@ -536,21 +536,21 @@ function onAllAddonsLoaded() {
                 <div style="background-color:#5AB897;position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                 </div>
 
-                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Vector 2</p>
+                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 2</p>
               </div>
               <!--Vec 3-->
               <div style="left:75%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                 <div style="background-color:#5BB4B7;position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                 </div>
 
-                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Vector 3</p>
+                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 3</p>
               </div>
               <!--Vec 4-->
               <div style="left:100%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                 <div style="background-color:#59BC77;position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                 </div>
 
-                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Vector 4</p>
+                <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 4</p>
               </div>
               <!--Texture-->
               <div style="left:125%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
@@ -576,10 +576,18 @@ function onAllAddonsLoaded() {
             </div>
             </div>
             <div style="top:80%;height:20%;width:100%;position:absolute;">
-              <div>
-                <div>
+              <div style="display: flex;position:absolute;left:50%;width:50%;height:80%; font-size: 1.125em; font-family: 'Helvetica Neue', 'helvetica', serif; color:var(--EditorTheme_Text_1); transform: translate(-50%);">
+                <div style="display: flex;">
                   <input type="checkbox"></input>
-                  <p>Uniform</p>
+                  <p style="transform:translate(0%,-1em);">Uniform</p>
+                </div>
+                <div style="display: flex;">
+                  <input type="checkbox"></input>
+                  <p style="transform:translate(0%,-1em);">Vertex</p>
+                </div>
+                <div style="display: flex;">
+                  <input type="checkbox"></input>
+                  <p style="transform:translate(0%,-1em);">Pixel</p>
                 </div>
               </div>
               <p class="noSelect" style="position:absolute;left:50%;top:20%;Transform:Translate(-50%,-50%);font-family: 'Helvetica Neue', 'helvetica', serif; color:var(--EditorTheme_Text_2);">Variable Scope</p>
