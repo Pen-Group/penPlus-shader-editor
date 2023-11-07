@@ -16,6 +16,14 @@ const OutputDir = "Build/";
 
 //Default build prefix
 let buildPrefix = "Default";
+//Check if persist and build folders exist
+if (!fs.existsSync("persist")) {
+    fs.mkdirSync("persist");
+}
+
+if (!fs.existsSync("Build")) {
+    fs.mkdirSync("Build");
+}
 
 //Check if the build name exists
 if (!fs.existsSync("persist/buildName.txt")) {
@@ -139,8 +147,7 @@ function build() {
                                 console.log("File creation failed");
                             }
                             console.log("file exported as '" + buildPrefix + "_" + htmlFile + "_Build_" + Date.now() + "' check Build for the result")
-                            //Close the console
-                            process.kill();
+                            process.exit();
                         });
                 }
             }
