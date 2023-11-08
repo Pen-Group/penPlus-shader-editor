@@ -136,3 +136,14 @@ function createModal(HTML) {
 
     return modal;
 }
+
+//DO NOT STEAL! ORIGINAL BLOCK format.
+window.penPlusExtension = class {
+    constructor(){
+        this.getInfo();
+    }
+
+    getInfo() {
+        console.log("Category has no info");
+    }
+}
