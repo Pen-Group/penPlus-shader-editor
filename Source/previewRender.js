@@ -1,11 +1,18 @@
 //Isolating render preview variables and code just so we don't accidentally overrite them!
 {
-  let penPlusAttributes = [
+  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+  let previewData_Pen = [
     //X    Y   Z    w    R    G    B    transparency U    V
       -0.5,0.5,0, 1.0, 1.0, 1.0, 1.0, 1.0,         0.0, 0.0,
       -0.5,-0.5,0, 1.0, 1.0, 1.0, 1.0, 1.0,        1.0, 0.0,
       0.5,-0.5,0, 1.0, 1.0, 1.0, 1.0, 1.0,         0.0, 1.0,
   ]
+
+  //our buffer we will be pumping 90% of default data through.
+  const buffer_Pen = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer_Pen);
+  gl.bufferData(gl.ARRAY_BUFFER, previewData_Pen, gl.STATIC_DRAW);
 
   window.shaderParams = {}
   window.shaderParams.sampleTextures = [

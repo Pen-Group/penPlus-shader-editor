@@ -84,7 +84,8 @@ function genProgram() {
     window.Generated_Frag = window.Generated_Frag.replace(" fragment", " main");
 
     //Remove attributes from fragment
-    window.Generated_Frag = window.Generated_Frag.replace(/attribute (.*?);/g, "");
+    window.ShaderAttributes = window.Generated_GLSL.matchAll(/attribute (.*?);/g);
+    window.ShaderAttributes = window.Generated_GLSL.matchAll(/uniform (.*?);/g);
 
     //Get the variables for later use from the global window class
     let vert = window.Generated_Vert;
