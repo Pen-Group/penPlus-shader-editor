@@ -87,8 +87,18 @@ function genProgram() {
     window.Generated_Frag = window.Generated_Frag.replace(/attribute (.*?);/g, "");
 
     //Get attributes and add them into an array.
-    window.ShaderAttributes = window.Generated_GLSL.matchAll(/attribute (.*?);/g);
-    window.ShaderAttributes = window.ShaderAttributes.concat(window.Generated_GLSL.matchAll(/uniform (.*?);/g));
+    window.ShaderAttributes = [...window.Generated_GLSL.matchAll(/attribute (.*?);/g)];
+
+    window.ShaderAttributes = window.ShaderAttributes.concat([
+      ...window.Generated_GLSL.matchAll(/uniform (.*?);/g)
+    ]);
+
+    //Then only get the type, scope, and name
+    for (let i=0; i<window.ShaderAttributes.length; i++) {
+      window.ShaderAttributes[i] = window.ShaderAttributes[i][0];
+    }
+    
+    console.log(window.ShaderAttributes);
 
     //Get the variables for later use from the global window class
     let vert = window.Generated_Vert;
