@@ -45,6 +45,25 @@
           color: var(--EditorTheme_Text_1);
       }
 
+      input[type="checkbox"]{
+          appearance: none;
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+
+          background-color: #ffffff;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      input[type="checkbox"]:checked{
+          background-color: var(--EditorTheme_Color_1);
+          /*As a data URL so that we don't have to load it from a url*/
+          background-image: url("data:image/svg+xml,%3C!-- https://akaricons.com/ --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M4 12l6 6L20 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: center;
+      }
+
       .tempCodePreview {
         background: var(--EditorTheme_Theme_1);
         color: var(--EditorTheme_Text_1);
@@ -216,6 +235,12 @@
         left: 50%;
         transform: translate(-50%,-50%);
         overflow: hidden;
+      }
+
+      .noSelect {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
       }
     </style>
   </head>
