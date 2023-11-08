@@ -18,9 +18,46 @@ function shaderLog(reason) {
 
 function replacementShader(reason) {
     shaderLog(reason);
+    window.Generated_GLSL = `//replacement shader
+    //Base Variables
+    attribute highp vec4 a_position;
+    attribute highp vec4 a_color;
+    attribute highp vec2 a_texCoord;
+     
+    varying highp vec4 v_color;
+    varying highp vec2 v_texCoord;
+    
+    varying highp float v_depth;
+    
+    //Pen+ Textures
+    uniform sampler2D u_texture;
+    uniform mediump vec2 u_res;
+    uniform sampler2D u_depthTexture;
+    
+    //Base functions
+    highp float log10(highp float a) {
+      return log(a)/log(10.0);
+    }
+    
+    highp float eulernum(highp float a) {
+        return 2.718 * a;
+    }
+    
+    //Vertex Shader
+    void vertex() {
+    gl_Position = a_position;
+    }
+    //Fragment Shader
+    void fragment() {
+    gl_FragColor = v_color;
+    }`;
+    genProgram();
 }
 
+window.compiling = false
+
 function genProgram() {
+    window.compiling = true;
     //If we already have a shader delete it to hopefully save memory.
     if (window.ShaderObject.program) {
         gl.deleteProgram(window.ShaderObject.program);
@@ -100,4 +137,7 @@ function genProgram() {
         vert: vertShader,
         frag: fragShader,
     };
+
+    gl.useProgram(window.ShaderObject.program);
+    window.compiling = false;
 }
