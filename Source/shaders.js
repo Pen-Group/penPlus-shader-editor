@@ -97,8 +97,6 @@ function genProgram() {
     for (let i=0; i<window.ShaderAttributes.length; i++) {
       window.ShaderAttributes[i] = window.ShaderAttributes[i][0];
     }
-    
-    console.log(window.ShaderAttributes);
 
     //Get the variables for later use from the global window class
     let vert = window.Generated_Vert;
