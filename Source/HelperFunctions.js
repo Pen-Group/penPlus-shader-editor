@@ -142,17 +142,22 @@ window.penPlusExtension = class {
     constructor(){
         const myInfo = this.getInfo();
 
+        //Snatch the extension's ID
         const id = myInfo.id + "_";
+
+        //Check if style data exists.
         if (!window.blockStyles) {
             window.blockStyles = {};
         }
 
+        //Add the block styles for this category. Each block can have its own override.
         window.blockStyles[id+"blocks"] = {
             colourPrimary: myInfo.color1,
             colourSecondary: myInfo.color2,
             colourTertiary: myInfo.color3,
         };
 
+        //Define the category definition here
         let createdContentData = {
             kind: "category",
             name: myInfo.name,
@@ -160,47 +165,104 @@ window.penPlusExtension = class {
             contents: []
         };
 
+        //Loop through each block deciding its fate!
         myInfo.blocks.forEach(block => {
-            const type = block.type;
-            const opcode = block.opcode;
-            const text = block.text;
-
-            //Declare the function to convert to
-            window.GLSL_GEN.forBlock[id+opcode] = this[opcode];
-            
-            let defArgs = {
-                kind: "block",
-                type: id+opcode,
-            };
-
-            let blockDef = {
-                message0: text,
-                style: id+"blocks",
-                args0: []
-            };
-
-            if (block.output) {
-                blockDef.output = block.output;
+            //Seperator Shorthand
+            if (block == "---") {
+                createdContentData.contents.push({
+                    kind: "label",
+                    text: ""
+                  });
             }
+            //Label Shorthand
+            else if (typeof block == "string") {
+                createdContentData.contents.push({
+                    kind: "label",
+                    text: block
+                });
+            }
+            //if it is an object (Or anything else really)
+            else {
+                //Get the type and text
+                const type = block.type;
+                const text = block.text;
 
-            if (block.arguments) {
-                block.arguments.forEach(argument => {
-                    if (argument.shadow) {
-                        if (!defArgs.inputs) {
-                            defArgs.inputs = {};
-                        }
-                        defArgs.inputs[argument.name] = {
-                            shadow:argument.shadow
+                switch (type) {
+                    case "label":
+                        createdContentData.contents.push({
+                            kind: "label",
+                            text: text
+                        });
+                        break;
+
+                    case "button":
+                        //Create button
+                        const opcode = block.opcode;
+                        createdContentData.contents.push({
+                            kind: "button",
+                            text: text,
+                            callbackKey: opcode
+                        });
+
+                        //Register callback code for the button
+                        window.workspace.registerButtonCallback(id+opcode, this[opcode]);
+                        break;
+                
+                    default:
+                        const opcode = block.opcode;
+                        //Declare the function to convert to
+                        window.GLSL_GEN.forBlock[id+opcode] = this[opcode];
+                        
+                        //Define the arguments used in block creation
+                        let defArgs = {
+                            kind: "block",
+                            type: id+opcode,
                         };
-                        delete argument.shadow;
-                    }
-                    blockDef.args0.push(argument);
-                })
-            }
-            //Add the blockly block definition
-            addBlocklyBlock(id+opcode,type, blockDef);
 
-            createdContentData.contents.push(defArgs);
+                        //And the toolbox definition
+                        let blockDef = {
+                            message0: text,
+                            style: block.style || id+"blocks",
+                            args0: []
+                        };
+
+                        //If there is an output or tooltop add them to the block definition
+                        //Note that output only determines what the block puts out.
+                        if (block.output) {
+                            blockDef.output = block.output;
+                        }
+
+                        if (block.tooltip) {
+                            blockDef.tooltip = block.tooltip;
+                        }
+
+                        //If it has arguments loop through those and add them to the args 0
+                        //Should probably add something for multiline things.
+                        //Maybe Arrays
+                        if (block.arguments) {
+                            block.arguments.forEach(argument => {
+                                //Check for shadow data if so add it to the toolbox definition and remove it from the block definition
+                                if (argument.shadow) {
+                                    //Check for if the block has inputs if not add them
+                                    if (!defArgs.inputs) {
+                                        defArgs.inputs = {};
+                                    }
+
+                                    defArgs.inputs[argument.name] = {
+                                        shadow:argument.shadow
+                                    };
+                                    delete argument.shadow;
+                                }
+                                blockDef.args0.push(argument);
+                            })
+                        }
+                        //Add the blockly block definition
+                        addBlocklyBlock(id+opcode,type, blockDef);
+
+                        createdContentData.contents.push(defArgs);
+                        break;
+                }
+            }
         });
 
         window.toolbox.contents.push(createdContentData);
