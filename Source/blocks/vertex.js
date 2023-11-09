@@ -124,25 +124,25 @@
                     },
                     {
                         opcode:"getX",
-                        type:"command",
+                        type:"reporter",
                         text:"vertex X",
                         tooltip: "Get the vertice's X position",
                     },
                     {
                         opcode:"getY",
-                        type:"command",
+                        type:"reporter",
                         text:"vertex Y",
                         tooltip: "Get the vertice's Y position",
                     },
                     {
                         opcode:"getZ",
-                        type:"command",
+                        type:"reporter",
                         text:"vertex depth",
                         tooltip: "Get the vertice's depth or Z position",
                     },
                     {
                         opcode:"getW",
-                        type:"command",
+                        type:"reporter",
                         text:"vertex corner pinch",
                         tooltip: "Get the vertice's corner pinch or W position",
                     }
