@@ -505,7 +505,7 @@ function onAllAddonsLoaded() {
     workspace.registerButtonCallback("createVariable", (button) => {
       //Html Modal Mess
       const varModal = createModal(`
-        <div class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
+        <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
           <div style="position:absolute;left:0px;top:0px; width:100%; height:40%; background-color: var(--EditorTheme_Theme_4);">
             <input id="VarName" placeholder="Variable Name" style="position:absolute;left:50%;top:50%;Transform:Translate(-50%,-50%); width:50%; height:20%;" type="text"></input>
             <p class="noSelect" style="position:absolute;left:50%;top:75%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Only use A-Z</p>
@@ -610,6 +610,8 @@ function onAllAddonsLoaded() {
 
       let currentType = variableTypeChangers.float;
 
+      let variableModalElement = document.getElementById("variableModal");
+
       //Short function to cycle types
       const cycleVariable = (type) => {currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)";variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)";currentType = variableTypeChangers[type];};
       cycleVariable("float");
@@ -626,9 +628,76 @@ function onAllAddonsLoaded() {
       const createVariableButton = document.getElementById("createVariable");
       const variableNameInput = document.getElementById("VarName");
 
-      createVariableButton.onclick = () => {
-        window.workspace.createVariable(variableNameInput.value, currentType.id);
+      const doesVariableExist = (variablename) => {
+        const variables = workspace.getAllVariables();
+        if (!variablename.match(/^[a-zA-Z]+$/)) return ["stringInvalid"];
+        for (let varIndex = 0; varIndex < variables.length; varIndex++) {
+          const curVar = variables[varIndex];
+          if (curVar.name == variablename) {
+            return ["varExists",curVar.name,curVar.type];
+          }
+        }
 
+        return false;
+      }
+
+      let errorPopup = null;
+
+      createVariableButton.onclick = () => {
+        let variable_Exists = doesVariableExist(variableNameInput.value);
+        
+        if (errorPopup) {
+          variableModalElement.removeChild(errorPopup);
+        }
+
+        //Switch for variable name errors
+        if (variable_Exists) {
+          errorPopup = document.createElement("div");
+          let text = document.createElement("p");
+
+          text.style.color = "var(--EditorTheme_Text_3)";
+
+          text.style.textAlign = "center";
+
+          text.style.fontSize = "1.5em";
+
+          text.style.transform = "translate(0%,-75%)";
+          
+          errorPopup.appendChild(text);
+
+          switch (variable_Exists[0]) {
+            case "stringInvalid":
+              text.innerHTML = "Desired variable name is invalid.";
+              break;
+
+            case "varExists":
+              text.innerHTML = "variable " + variable_Exists[1] + " exists as a " + variable_Exists[2];
+              break;
+          
+            default:
+              text.innerHTML = "Honestly I dunno why you got this. Check the console";
+              break;
+          }
+          errorPopup.style.width = "80%";
+          errorPopup.style.transform = "translate(-50%,50%)"
+          errorPopup.style.position = "absolute";
+          errorPopup.style.top = "0%";
+          errorPopup.style.left = "50%";
+
+          errorPopup.style.height = "7.5%";
+
+          errorPopup.style.backgroundColor = "#990404";
+          errorPopup.style.borderWidth = "4rem";
+          errorPopup.style.borderRadius = "0.375rem";
+
+          errorPopup.style.alignItems = "center";
+
+          variableModalElement.appendChild(errorPopup);
+          return;
+        }
+
+        //Close the modal
+        window.workspace.createVariable(variableNameInput.value, currentType.id);
         varModal.close();
       }
     })
