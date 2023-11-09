@@ -62,6 +62,7 @@
                         ],
                         tooltip: "Set the vertice's corner pinch or W value to this",
                     },
+                    "---",
                     {
                         opcode:"changeX",
                         type:"command",
@@ -122,6 +123,7 @@
                         ],
                         tooltip: "Change the vertice's corner pinch or W value by this",
                     },
+                    "---",
                     {
                         opcode:"getX",
                         type:"reporter",
