@@ -1,10 +1,14 @@
 function onAllAddonsLoaded() {
+  window.toolbox = {
+    kind: "categoryToolbox",
+    contents: []
+  }
     createGLSLGen();
     addImportantReporters();
     addVariableTypes();
     addBlocks();
 
-    const toolbox = {
+    /*window.toolbox = {
       kind: "categoryToolbox",
       contents: [
         {
@@ -474,9 +478,10 @@ function onAllAddonsLoaded() {
           contents: window.variableTypes
         }
       ],
-    };
+    };*/
+
     workspace = Blockly.inject("BlocklyDiv", {
-      toolbox: toolbox,
+      toolbox: window.toolbox,
       collapse: false,
       comments: true,
       renderer: "zelos",
