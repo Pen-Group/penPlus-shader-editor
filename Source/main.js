@@ -480,6 +480,29 @@ function onAllAddonsLoaded() {
       collapse: false,
       comments: true,
       renderer: "zelos",
+      grid:
+         {spacing: 40,
+          length: 3,
+          colour: '#484848',
+          snap: false},
+      zoom:{
+          controls: true,
+          wheel: false,
+          startScale: 0.8,
+          maxScale: 1.5,
+          minScale: 0.3,
+          scaleSpeed: 1.2,
+          pinch: true
+      },
+      move:{
+        scrollbars: {
+          horizontal: true,
+          vertical: true
+        },
+        drag: true,
+        wheel: true
+      },
+      trashcan: true,
       plugins: {
         toolbox: window.ContinuousToolbox,
         flyoutsVerticalToolbox: window.ContinuousFlyout,
@@ -488,6 +511,9 @@ function onAllAddonsLoaded() {
       theme: penPlusBlocklyTheme(),
     });
     window.workspace = workspace;
+
+    const zoomToFit = new ZoomToFitControl(workspace);
+    zoomToFit.init();
 
     window.supportedEvents = new Set([
       Blockly.Events.BLOCK_CHANGE,
