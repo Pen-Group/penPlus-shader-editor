@@ -1,7 +1,265 @@
 window.addEventListener("load", () => {
-
-    //continuousToolbox
     /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: Apache-2.0
+   */
+
+  /**
+   * Class for zoom to fit control.
+   */
+  class ZoomToFitControl {
+    /**
+     * The unique id for this component.
+     */
+    id = "zoomToFit"
+
+    /**
+     * The SVG group containing the zoom-to-fit control.
+     */
+    svgGroup = null
+
+    /**
+     * Left coordinate of the zoom-to-fit control.
+     */
+    left = 0
+
+    /**
+     * Top coordinate of the zoom-to-fit control.
+     */
+    top = 0
+
+    /**
+     * Width of the zoom-to-fit control.
+     */
+    width = 32
+
+    /**
+     * Height of the zoom-to-fit control.
+     */
+    height = 32
+
+    /**
+     * Distance between zoom-to-fit control and bottom or top edge of workspace.
+     */
+    marginVertical = 20
+
+    /**
+     * Distance between zoom-to-fit control and right or left edge of workspace.
+     */
+    marginHorizontal = 20
+
+    /**
+     * Whether this has been initialized.
+     */
+    initialized = false
+
+    onZoomToFitWrapper = null
+
+    /**
+     * Constructor for zoom-to-fit control.
+     *
+     * @param workspace The workspace that the zoom-to-fit
+     *     control will be added to.
+     */
+    constructor(workspace) {
+      this.workspace = workspace
+    }
+
+    /**
+     * Initializes the zoom reset control.
+     */
+    init() {
+      this.workspace.getComponentManager().addComponent({
+        component: this,
+        weight: 2,
+        capabilities: [Blockly.ComponentManager.Capability.POSITIONABLE]
+      })
+      this.createDom()
+      this.initialized = true
+      this.workspace.resize()
+    }
+    /**
+     * Disposes of workspace search.
+     * Unlink from all DOM elements and remove all event listeners
+     * to prevent memory leaks.
+     */
+    dispose() {
+      if (this.svgGroup) {
+        Blockly.utils.dom.removeNode(this.svgGroup)
+      }
+      if (this.onZoomToFitWrapper) {
+        Blockly.browserEvents.unbind(this.onZoomToFitWrapper)
+        this.onZoomToFitWrapper = null
+      }
+    }
+
+    /**
+     * Creates DOM for ui element.
+     */
+    createDom() {
+      this.svgGroup = Blockly.utils.dom.createSvgElement(
+        Blockly.utils.Svg.IMAGE,
+        {
+          height: `${this.height}px`,
+          width: `${this.width}px`,
+          class: "zoomToFit"
+        }
+      )
+      this.svgGroup.setAttributeNS(
+        Blockly.utils.dom.XLINK_NS,
+        "xlink:href",
+        zoomToFitSvgDataUri
+      )
+
+      Blockly.utils.dom.insertAfter(
+        this.svgGroup,
+        this.workspace.getBubbleCanvas()
+      )
+
+      // Attach listener.
+      this.onZoomToFitWrapper = Blockly.browserEvents.conditionalBind(
+        this.svgGroup,
+        "mousedown",
+        null,
+        this.onClick.bind(this)
+      )
+    }
+
+    /**
+     * Handle click event.
+     */
+    onClick() {
+      this.workspace.zoomToFit()
+      const uiEvent = new (Blockly.Events.get(Blockly.Events.CLICK))(
+        null,
+        this.workspace.id,
+        "zoom_reset_control"
+      )
+      Blockly.Events.fire(uiEvent)
+    }
+
+    /**
+     * Returns the bounding rectangle of the UI element in pixel units relative to
+     * the Blockly injection div.
+     *
+     * @returns The component’s bounding box.
+     */
+    getBoundingRectangle() {
+      return new Blockly.utils.Rect(
+        this.top,
+        this.top + this.height,
+        this.left,
+        this.left + this.width
+      )
+    }
+
+    /**
+     * Positions the zoom-to-fit control.
+     * It is positioned in the opposite corner to the corner the
+     * categories/toolbox starts at.
+     *
+     * @param metrics The workspace metrics.
+     * @param savedPositions List of rectangles that
+     *     are already on the workspace.
+     */
+    position(metrics, savedPositions) {
+      if (!this.initialized) {
+        return
+      }
+      const hasVerticalScrollbars =
+        this.workspace.scrollbar &&
+        this.workspace.scrollbar.canScrollHorizontally()
+      const hasHorizontalScrollbars =
+        this.workspace.scrollbar && this.workspace.scrollbar.canScrollVertically()
+
+      if (
+        metrics.toolboxMetrics.position === Blockly.TOOLBOX_AT_LEFT ||
+        (this.workspace.horizontalLayout && !this.workspace.RTL)
+      ) {
+        // Right corner placement.
+        this.left =
+          metrics.absoluteMetrics.left +
+          metrics.viewMetrics.width -
+          this.width -
+          this.marginHorizontal
+        if (hasVerticalScrollbars && !this.workspace.RTL) {
+          this.left -= Blockly.Scrollbar.scrollbarThickness
+        }
+      } else {
+        // Left corner placement.
+        this.left = this.marginHorizontal
+        if (hasVerticalScrollbars && this.workspace.RTL) {
+          this.left += Blockly.Scrollbar.scrollbarThickness
+        }
+      }
+
+      const startAtBottom =
+        metrics.toolboxMetrics.position !== Blockly.TOOLBOX_AT_BOTTOM
+      if (startAtBottom) {
+        // Bottom corner placement
+        this.top =
+          metrics.absoluteMetrics.top +
+          metrics.viewMetrics.height -
+          this.height -
+          this.marginVertical
+        if (hasHorizontalScrollbars) {
+          // The horizontal scrollbars are always positioned on the bottom.
+          this.top -= Blockly.Scrollbar.scrollbarThickness
+        }
+      } else {
+        // Upper corner placement
+        this.top = metrics.absoluteMetrics.top + this.marginVertical
+      }
+
+      // Check for collision and bump if needed.
+      let boundingRect = this.getBoundingRectangle()
+      for (let i = 0, otherEl; (otherEl = savedPositions[i]); i++) {
+        if (boundingRect.intersects(otherEl)) {
+          if (startAtBottom) {
+            // Bump up.
+            this.top = otherEl.top - this.height - this.marginVertical
+          } else {
+            // Bump down.
+            this.top = otherEl.bottom + this.marginVertical
+          }
+          // Recheck other savedPositions
+          boundingRect = this.getBoundingRectangle()
+          i = -1
+        }
+      }
+
+      this.svgGroup?.setAttribute(
+        "transform",
+        `translate(${this.left}, ${this.top})`
+      )
+    }
+  }
+
+  /**
+   * Base64 encoded data uri for zoom to fit icon.
+   */
+  const zoomToFitSvgDataUri =
+    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC" +
+    "9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCIgZm" +
+    "lsbD0iIzU0NkU3QSI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PH" +
+    "BhdGggZD0iTTUgNi40Mkw4LjA5IDkuNSA5LjUgOC4wOSA2LjQxIDVIOVYzSDN2Nmgyem0xMC" +
+    "0zLjQxdjJoMi41N0wxNC41IDguMDlsMS40MSAxLjQxTDE5IDYuNDFWOWgyVjMuMDF6bTQgMT" +
+    "QuNTdsLTMuMDktMy4wOC0xLjQxIDEuNDFMMTcuNTkgMTlIMTV2Mmg2di02aC0yek04LjA5ID" +
+    "E0LjVMNSAxNy41OVYxNUgzdjZoNnYtMkg2LjQybDMuMDgtMy4wOXoiLz48L3N2Zz4="
+
+  Blockly.Css.register(`
+  .zoomToFit {
+    opacity: 0.4;
+  }
+  .zoomToFit:hover {
+    opacity: 0.6;
+  }
+  .zoomToFit:active {
+    opacity: 0.8;
+  }
+  `)
+/**
      * @license
      * Copyright 2020 Google LLC
      * SPDX-License-Identifier: Apache-2.0
@@ -20,7 +278,7 @@ window.addEventListener("load", () => {
         constructor(categoryDef, toolbox) {
             super(categoryDef, toolbox);
         }
-
+  
         /** @override */
         createLabelDom_(name) {
             const label = document.createElement("div");
@@ -29,7 +287,7 @@ window.addEventListener("load", () => {
             label.classList.add(this.cssConfig_["label"]);
             return label;
         }
-
+  
         /** @override */
         createIconDom_() {
             const icon = document.createElement("div");
@@ -37,12 +295,12 @@ window.addEventListener("load", () => {
             icon.style.backgroundColor = this.colour_;
             return icon;
         }
-
+  
         /** @override */
         addColourBorder_() {
             // No-op
         }
-
+  
         /** @override */
         setSelected(isSelected) {
             if (isSelected) {
@@ -65,14 +323,13 @@ window.addEventListener("load", () => {
             );
         }
     }
-
+  
     Blockly.registry.register(
         Blockly.registry.Type.TOOLBOX_ITEM,
         Blockly.ToolboxCategory.registrationName,
         ContinuousCategory,
         true
     );
-    //continuous flyout
     /**
      * @license
      * Copyright 2021 Google LLC
@@ -100,7 +357,7 @@ window.addEventListener("load", () => {
             const toolboxMetrics = this.getToolboxMetrics();
             const flyoutMetrics = this.getFlyoutMetrics(false);
             const toolboxPosition = toolboxMetrics.position;
-
+  
             if (this.workspace_.getToolbox()) {
                 // Note: Not actually supported at this time due to ContinunousToolbox
                 // only supporting a vertical flyout. But included for completeness.
@@ -124,7 +381,7 @@ window.addEventListener("load", () => {
                 left: -this.workspace_.scrollX / scale,
             };
         }
-
+  
         /**
          * Moves the absoluteLeft and absoluteTop so they no longer include the
          * flyout.
@@ -135,7 +392,7 @@ window.addEventListener("load", () => {
             const flyoutMetrics = this.getFlyoutMetrics(false);
             const toolboxPosition = toolboxMetrics.position;
             let absoluteLeft = 0;
-
+  
             if (
                 this.workspace_.getToolbox() &&
                 toolboxPosition == Blockly.TOOLBOX_AT_LEFT
@@ -155,7 +412,7 @@ window.addEventListener("load", () => {
             };
         }
     }
-
+  
     Blockly.registry.register(
         Blockly.registry.Type.METRICS_MANAGER,
         "CustomMetricsManager",
@@ -194,7 +451,7 @@ window.addEventListener("load", () => {
                 this.getContentMetrics(getWorkspaceCoordinates);
             const viewMetrics =
                 cachedViewMetrics || this.getViewMetrics(getWorkspaceCoordinates);
-
+  
             if (scrollMetrics) {
                 scrollMetrics.height += this.flyout_.calculateBottomPadding(
                     contentMetrics,
@@ -2077,6 +2334,7 @@ window.addEventListener("load", () => {
     window.ContinuousMetrics = ContinuousMetrics;
     window.ContinuousToolbox = ContinuousToolbox;
     window.DisableTopBlocks = DisableTopBlocks;
+    window.ZoomToFitControl = ZoomToFitControl;
 
     onAllAddonsLoaded();
 });
