@@ -1,6 +1,6 @@
 {
-    window.categories = {};
-
+    window.categories = window.categories || {};
+    
     class vertex_category extends window.penPlusExtension {
         getInfo() {
             return {

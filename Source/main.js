@@ -1,8 +1,9 @@
 function onAllAddonsLoaded() {
-  window.toolbox = {
-    kind: "categoryToolbox",
-    contents: []
-  }
+    window.toolbox = {
+      kind: "categoryToolbox",
+      contents: []
+    }
+    
     createGLSLGen();
     addImportantReporters();
     addVariableTypes();

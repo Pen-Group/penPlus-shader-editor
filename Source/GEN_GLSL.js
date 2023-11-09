@@ -38,6 +38,16 @@ gl_FragColor = v_color;
 }
 `;
 
+function nextBlockToCode(block, generator) {
+    const nextBlock =
+        block.nextConnection && block.nextConnection.targetBlock();
+    let appended = ''
+    if (nextBlock) {
+        return '\n' + GLSL_GEN.blockToCode(nextBlock);
+    }
+    return ''
+}
+
 function createGLSLGen() {
     window.GLSL_GEN = new Blockly.Generator('GLSL');
     const GLSL_GEN = window.GLSL_GEN;
@@ -46,15 +56,7 @@ function createGLSLGen() {
         ATOMIC: 0,
     }
 
-    function nextBlockToCode(block, generator) {
-        const nextBlock =
-            block.nextConnection && block.nextConnection.targetBlock();
-        let appended = ''
-        if (nextBlock) {
-            return '\n' + GLSL_GEN.blockToCode(nextBlock);
-        }
-        return ''
-    }
+    
 
     GLSL_GEN.forBlock['number_reporter'] = function (block, generator) {
         const numba = block.getFieldValue("NUMBER");
@@ -177,24 +179,6 @@ function createGLSLGen() {
         return [`vec4(${converted.r},${converted.g},${converted.b},1.0)`, Order.ATOMIC];
     };
 
-    GLSL_GEN.forBlock['pixel_pixcolour'] = function (block, generator) {
-        return [`gl_FragColor`, Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['pixel_vertcolour'] = function (block, generator) {
-        return [`v_color`, Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['pixel_color'] = function (block, generator) {
-        const colour = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
-        return `gl_FragColor = ${colour};` + nextBlockToCode(block, generator);
-    };
-
-    GLSL_GEN.forBlock['pixel_vertColor'] = function (block, generator) {
-        const colour = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
-        return `v_color = ${colour};` + nextBlockToCode(block, generator);
-    };
-
     GLSL_GEN.forBlock['pixel_X'] = function (block, generator) {
         return [`gl_FragCoord.x`, Order.ATOMIC];
     }
@@ -274,28 +258,11 @@ function createGLSLGen() {
         loopID += 1;
         return `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<${times};penPlusLoop_${loopID}++) {\n${code}\n}`;
     }
-
-    GLSL_GEN.forBlock['as_vertex'] = function (block, generator) {
-        //const innerCode = generator.blockToCode(block.nextStatement);
-        functionsThatExist.vert = true;
-        return `//Vertex Shader\nvoid vertex() {\ngl_Position = a_position;${nextBlockToCode(block, generator)}\n}`;
-    };
-
-    GLSL_GEN.forBlock['as_frag'] = function (block, generator) {
-        //const innerCode = generator.blockToCode(block.nextStatement);
-        functionsThatExist.frag = true;
-        return `//Fragment Shader\nvoid fragment() {${nextBlockToCode(block, generator)}\n}`;
-    };
 }
 
 function updateGLSL(event) {
     if (window.workspace.isDragging()) return; // Don't update while changes are happening.
     if (!window.supportedEvents.has(event.type)) return;
-
-    functionsThatExist = {
-        vert: false,
-        frag: false,
-    }
 
     window.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;

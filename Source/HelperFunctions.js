@@ -186,7 +186,8 @@ window.penPlusExtension = class {
                 //Get the type and text
                 const type = block.type;
                 const text = block.text;
-
+                
+                const opcode = block.opcode;
                 switch (type) {
                     case "label":
                         createdContentData.contents.push({
@@ -197,7 +198,6 @@ window.penPlusExtension = class {
 
                     case "button":
                         //Create button
-                        const opcode = block.opcode;
                         createdContentData.contents.push({
                             kind: "button",
                             text: text,
@@ -209,7 +209,6 @@ window.penPlusExtension = class {
                         break;
                 
                     default:
-                        const opcode = block.opcode;
                         //Declare the function to convert to
                         window.GLSL_GEN.forBlock[id+opcode] = this[opcode];
                         

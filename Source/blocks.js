@@ -166,15 +166,12 @@ function addBlocks() {
     addBlocklyBlock("as_vertex", "hat", {
         type: "vertice",
         message0: "for each vertex",
-        style: "hat_blocks",
-        tooltip:
-            "The vertices execute this. (The points of a triangle or square!)",
+        tooltip:"This will be in the scope of vertex.",
     });
 
     addBlocklyBlock("as_frag", "hat", {
         type: "fragment",
         message0: "for each pixel",
-        style: "hat_blocks",
         tooltip:
             "The pixels execute this. (The points of a triangle or square!)",
     });
@@ -745,5 +742,7 @@ function addBlocks() {
         helpUrl: "https://doors-game.fandom.com/wiki/DOORS_Wiki",
     })
 
+    new window.categories.events();
     new window.categories.vertex();
+    new window.categories.looks();
 }
