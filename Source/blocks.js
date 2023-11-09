@@ -744,4 +744,6 @@ function addBlocks() {
         tooltip: "Uses the value of the arithmatic",
         helpUrl: "https://doors-game.fandom.com/wiki/DOORS_Wiki",
     })
+
+    new window.categories.vertex();
 }

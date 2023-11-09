@@ -142,6 +142,17 @@ window.penPlusExtension = class {
     constructor(){
         const myInfo = this.getInfo();
 
+        const id = myInfo.id + "_";
+        if (!window.blockStyles) {
+            window.blockStyles = {};
+        }
+
+        window.blockStyles[id+"blocks"] = {
+            colourPrimary: myInfo.color1,
+            colourSecondary: myInfo.color2,
+            colourTertiary: myInfo.color3,
+        };
+
         let createdContentData = {
             kind: "category",
             name: myInfo.name,
@@ -154,12 +165,43 @@ window.penPlusExtension = class {
             const opcode = block.opcode;
             const text = block.text;
 
-            block.arguments.forEach(argument => {
-                
-            })
-        });
+            //Declare the function to convert to
+            window.GLSL_GEN.forBlock[id+opcode] = this[opcode];
+            
+            let defArgs = {
+                kind: "block",
+                type: id+opcode,
+            };
 
-        createdContentData.contents.push();
+            let blockDef = {
+                message0: text,
+                style: id+"blocks",
+                args0: []
+            };
+
+            if (block.output) {
+                blockDef.output = block.output;
+            }
+
+            if (block.arguments) {
+                block.arguments.forEach(argument => {
+                    if (argument.shadow) {
+                        if (!defArgs.inputs) {
+                            defArgs.inputs = {};
+                        }
+                        defArgs.inputs[argument.name] = {
+                            shadow:argument.shadow
+                        };
+                        delete argument.shadow;
+                    }
+                    blockDef.args0.push(argument);
+                })
+            }
+            //Add the blockly block definition
+            addBlocklyBlock(id+opcode,type, blockDef);
+
+            createdContentData.contents.push(defArgs);
+        });
 
         window.toolbox.contents.push(createdContentData);
     }

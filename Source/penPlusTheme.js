@@ -1,6 +1,6 @@
 function penPlusBlocklyTheme() {
 
-    window.blockStyles = {
+    /*window.blockStyles = {
         hat_blocks: {
             colourPrimary: "#ffbf00",
             colourSecondary: "#e6ac00",
@@ -72,7 +72,7 @@ function penPlusBlocklyTheme() {
             colourSecondary: "#636ed6",
             colourTertiary: "#5560cb"
         }
-    };
+    };*/
 
     return Blockly.Theme.defineTheme("themeName", {
         blockStyles: blockStyles,
