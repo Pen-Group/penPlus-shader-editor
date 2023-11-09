@@ -1,5 +1,6 @@
 function penPlusBlocklyTheme() {
 
+    //Bad theme thing
     /*window.blockStyles = {
         hat_blocks: {
             colourPrimary: "#ffbf00",
