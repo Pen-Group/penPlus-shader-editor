@@ -331,21 +331,21 @@ highp float eulernum(highp float a) {
 
     if (!(window.Generated_GLSL.includes("//Fragment Shader") && window.Generated_GLSL.includes("//Vertex Shader"))) {
         if ((!window.Generated_GLSL.includes("//Vertex Shader")) && window.Generated_GLSL.includes("//Fragment Shader")) {
-            replacementShader("Missing Vertex Shader creating manual replacement");
+            shaderLog("Missing Vertex Shader creating manual replacement");
             window.Generated_GLSL += `//Vertex Shader
 void vertex() {
 gl_Position = a_position;
 }`;
         }
         else if ((!window.Generated_GLSL.includes("//Fragment Shader")) && window.Generated_GLSL.includes("//Vertex Shader")) {
-            replacementShader("Missing Pixel/Fragment Shader creating manual replacement");
+            shaderLog("Missing Pixel/Fragment Shader creating manual replacement");
             window.Generated_GLSL += `//Fragment Shader
 void fragment() {
 gl_FragColor = v_color;
 }`;
         }
         else {
-            replacementShader("Missing both shaders using generic set");
+            shaderLog("Missing both shaders using generic set");
             window.Generated_GLSL += `//Vertex Shader t
 void vertex() {
 gl_Position = a_position;
