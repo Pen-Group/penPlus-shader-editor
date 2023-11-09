@@ -140,7 +140,28 @@ function createModal(HTML) {
 //DO NOT STEAL! ORIGINAL BLOCK format.
 window.penPlusExtension = class {
     constructor(){
-        this.getInfo();
+        const myInfo = this.getInfo();
+
+        let createdContentData = {
+            kind: "category",
+            name: myInfo.name,
+            colour: myInfo.color1,
+            contents: []
+        };
+
+        myInfo.blocks.forEach(block => {
+            const type = block.type;
+            const opcode = block.opcode;
+            const text = block.text;
+
+            block.arguments.forEach(argument => {
+                
+            })
+        });
+
+        createdContentData.contents.push();
+
+        window.toolbox.contents.push(createdContentData);
     }
 
     getInfo() {
