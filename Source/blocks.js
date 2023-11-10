@@ -167,5 +167,5 @@ function addBlocks() {
     new window.categories.looks();
     new window.categories.controls();
     new window.categories.operators();
-    //new window.categories.variables();
+    new window.categories.variables();
 }

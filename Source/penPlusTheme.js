@@ -1,5 +1,27 @@
 function penPlusBlocklyTheme() {
-
+    window.penPlusTheme = {
+        blockStyles: {},
+        fontStyle: {
+            'family': 'helvetica Neue, helvetica, serif',
+            'weight': 500,
+            'size': 12
+        },
+        componentStyles: {
+            workspaceBackgroundColour: '#1e1e1e',
+            toolboxBackgroundColour: 'blackBackground',
+            toolboxForegroundColour: '#fff',
+            flyoutBackgroundColour: '#252526',
+            flyoutForegroundColour: '#ccc',
+            flyoutOpacity: 1,
+            scrollbarColour: '#797979',
+            insertionMarkerColour: '#fff',
+            insertionMarkerOpacity: 0.3,
+            scrollbarOpacity: 0.4,
+            cursorColour: '#d0d0d0',
+            blackBackground: '#333',
+        },
+        startHats: true,
+    }
     //Bad theme thing
     /*window.blockStyles = {
         hat_blocks: {
@@ -75,27 +97,12 @@ function penPlusBlocklyTheme() {
         }
     };*/
 
-    return Blockly.Theme.defineTheme("themeName", {
-        blockStyles: blockStyles,
-        fontStyle: {
-            'family': 'helvetica Neue, helvetica, serif',
-            'weight': 500,
-            'size': 12
-        },
-        componentStyles: {
-            workspaceBackgroundColour: '#1e1e1e',
-            toolboxBackgroundColour: 'blackBackground',
-            toolboxForegroundColour: '#fff',
-            flyoutBackgroundColour: '#252526',
-            flyoutForegroundColour: '#ccc',
-            flyoutOpacity: 1,
-            scrollbarColour: '#797979',
-            insertionMarkerColour: '#fff',
-            insertionMarkerOpacity: 0.3,
-            scrollbarOpacity: 0.4,
-            cursorColour: '#d0d0d0',
-            blackBackground: '#333',
-        },
-        startHats: true,
-    });
+    return window.penPlusTheme;
 }
+
+window.refreshTheme = () => {
+    //Hacky fix
+    //Works
+
+    workspace.setTheme(Blockly.Theme.defineTheme('penPlus',window.penPlusTheme))
+};

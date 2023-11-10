@@ -1,3 +1,7 @@
+const Order = {
+    ATOMIC: 0,
+}
+
 let functionsThatExist = {
     vert: false,
     frag: false,
@@ -49,124 +53,16 @@ function nextBlockToCode(block, generator) {
 
 function createGLSLGen() {
     window.GLSL_GEN = new Blockly.Generator('GLSL');
-    const GLSL_GEN = window.GLSL_GEN;
-
-    const Order = {
-        ATOMIC: 0,
-    }
-
-    
+    const GLSL_GEN = window.GLSL_GEN;    
 
     GLSL_GEN.forBlock['number_reporter'] = function (block, generator) {
         const numba = block.getFieldValue("NUMBER");
         return [`${numba}`, Order.ATOMIC];
     };
 
-    GLSL_GEN.forBlock['operator_add'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} + ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_sub'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} - ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_mul'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} * ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_div'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} / ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_pow'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`pow(${A}, ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_equalTo'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} == ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_notequalTo'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} != ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_lessThan'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} < ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_lessThanEqual'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} <= ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_moreThan'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} > ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_moreThanEqual'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} >= ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_and'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} && ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_or'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`(${A} || ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_not'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        return [`!(${A})` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_true'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`true` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_false'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`false` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['operator_mod'] = function (block, generator) {
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        const B = generator.valueToCode(block, 'B', Order.ATOMIC);
-        return [`mod(float(${A}),float(${B}))` + nextBlockToCode(block, generator), Order.ATOMIC];
-    };
-
-    GLSL_GEN.forBlock['operator_arith'] = function (block, generator) {
-        const arith = block.getFieldValue('arithmatic');
-        const A = generator.valueToCode(block, 'A', Order.ATOMIC);
-        return [`${arith}(float(${A}))` + nextBlockToCode(block, generator), Order.ATOMIC];
+    GLSL_GEN.forBlock['int_reporter'] = function (block, generator) {
+        const numba = block.getFieldValue("NUMBER");
+        return [`${numba}`, Order.ATOMIC];
     };
 
     GLSL_GEN.forBlock['color_reporter'] = function (block, generator) {

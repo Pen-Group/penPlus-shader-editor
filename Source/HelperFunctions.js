@@ -151,7 +151,7 @@ window.penPlusExtension = class {
         }
 
         //Add the block styles for this category. Each block can have its own override.
-        window.blockStyles[id+"blocks"] = {
+        window.penPlusTheme.blockStyles[id+"blocks"] = {
             colourPrimary: myInfo.color1,
             colourSecondary: myInfo.color2,
             colourTertiary: myInfo.color3,
@@ -201,7 +201,7 @@ window.penPlusExtension = class {
                         createdContentData.contents.push({
                             kind: "button",
                             text: text,
-                            callbackKey: opcode
+                            callbackKey: id+opcode
                         });
 
                         //Register callback code for the button
@@ -265,6 +265,12 @@ window.penPlusExtension = class {
         });
 
         window.toolbox.contents.push(createdContentData);
+
+        window.workspace.updateToolbox(window.toolbox);
+
+        workspace.getToolbox().refreshSelection();
+
+        window.refreshTheme();
     }
 
     getInfo() {
