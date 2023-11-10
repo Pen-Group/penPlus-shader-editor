@@ -1,5 +1,7 @@
 {
     window.categories = window.categories || {};
+
+    //WIP
     
     class operators_category extends window.penPlusExtension {
         getInfo() {

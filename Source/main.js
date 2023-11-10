@@ -211,9 +211,7 @@ function onAllAddonsLoaded() {
               type: "control_repeat",
               inputs: {
                 times: {
-                  shadow: {
-                    type: "number_reporter",
-                  },
+                  
                 }
               }
             },

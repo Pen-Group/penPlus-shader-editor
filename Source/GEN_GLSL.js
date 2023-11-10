@@ -1,4 +1,3 @@
-let loopID = 0;
 let functionsThatExist = {
     vert: false,
     frag: false,
@@ -178,86 +177,6 @@ function createGLSLGen() {
         converted.b /= 255;
         return [`vec4(${converted.r},${converted.g},${converted.b},1.0)`, Order.ATOMIC];
     };
-
-    GLSL_GEN.forBlock['pixel_X'] = function (block, generator) {
-        return [`gl_FragCoord.x`, Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['pixel_Y'] = function (block, generator) {
-        return [`gl_FragCoord.y`, Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['vertex_gotoPos'] = function (block, generator) {
-        const X = generator.valueToCode(block, 'X', Order.ATOMIC);
-        const Y = generator.valueToCode(block, 'Y', Order.ATOMIC);
-        return `gl_Position.xy = vec2(float(${X}),float(${Y}));` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_setZ'] = function (block, generator) {
-        const Z = generator.valueToCode(block, 'Z', Order.ATOMIC);
-        return `gl_Position.z = float(${Z});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_setW'] = function (block, generator) {
-        const W = generator.valueToCode(block, 'W', Order.ATOMIC);
-        return `gl_Position.w = float(${W});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_changeX'] = function (block, generator) {
-        const X = generator.valueToCode(block, 'X', Order.ATOMIC);
-        return `gl_Position.x += float(${X});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_changeY'] = function (block, generator) {
-        const Y = generator.valueToCode(block, 'Y', Order.ATOMIC);
-        return `gl_Position.y += float(${Y});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_changeZ'] = function (block, generator) {
-        const Z = generator.valueToCode(block, 'Z', Order.ATOMIC);
-        return `gl_Position.z += float(${Z});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_changeW'] = function (block, generator) {
-        const W = generator.valueToCode(block, 'W', Order.ATOMIC);
-        return `gl_Position.w += float(${W});` + nextBlockToCode(block, generator);
-    }
-
-    GLSL_GEN.forBlock['vertex_getX'] = function (block, generator) {
-        return [`gl_Position.x` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['vertex_getY'] = function (block, generator) {
-        return [`gl_Position.y` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['vertex_getZ'] = function (block, generator) {
-        return [`gl_Position.z` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['vertex_getW'] = function (block, generator) {
-        return [`gl_Position.w` + nextBlockToCode(block, generator), Order.ATOMIC];
-    }
-
-    GLSL_GEN.forBlock['control_if'] = function (block, generator) {
-        const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
-        const trueExec = generator.statementToCode(block, "true");
-        return `if (${condition}) {\n${trueExec}\n}`;
-    }
-
-    GLSL_GEN.forBlock['control_ifelse'] = function (block, generator) {
-        const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
-        const trueExec = generator.statementToCode(block, "true");
-        const falseExec = generator.statementToCode(block, "false");
-        return `if (${condition}) {\n${trueExec}\n}\nelse{\n${falseExec}\n}`;
-    }
-
-    GLSL_GEN.forBlock['control_repeat'] = function (block, generator) {
-        const times = generator.valueToCode(block, "times", Order.ATOMIC);
-        const code = generator.statementToCode(block, "code");
-        loopID += 1;
-        return `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<${times};penPlusLoop_${loopID}++) {\n${code}\n}`;
-    }
 }
 
 function updateGLSL(event) {
@@ -294,7 +213,7 @@ highp float eulernum(highp float a) {
     window.Generated_Frag = "";
     window.Generated_Vert = "";
 
-    loopID = 0;
+    window.loopID = 0;
 
     if (!(window.Generated_GLSL.includes("//Fragment Shader") && window.Generated_GLSL.includes("//Vertex Shader"))) {
         if ((!window.Generated_GLSL.includes("//Vertex Shader")) && window.Generated_GLSL.includes("//Fragment Shader")) {
