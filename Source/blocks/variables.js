@@ -16,7 +16,7 @@
                       text:"Create Variable",
                   },
                   "Float",
-                    {
+                  {
                         opcode:"set_float",
                         type:"command",
                         text:"set %1 to %2",
@@ -26,19 +26,21 @@
                               type: "field_variable",
                               name: "VAR",
                               variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              variableTypes: [variableType],    // Specifies what types to put in the dropdown
-                              defaultType: variableType  //The default type of the variable
+                              variableTypes: ["float"],    // Specifies what types to put in the dropdown
+                              defaultType: "float"  //The default type of the variable
                           },
                           {
                               type: "input_value",    // This expects an input of any type
                               name: "VALUE",
-                              check: check
+                              shadow: {
+                                type: "number_reporter",
+                              },
                           }
                         ]
                     },
                     {
                       opcode:"get_float",
-                      type:"command",
+                      type:"reporter",
                       text:"%1",
                       tooltip: "Return's the selected variable's value.",
                       arguments: [
@@ -46,10 +48,84 @@
                             type: "field_variable",
                             name: "VAR",
                             variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                            variableTypes: [variableType],    // Specifies what types to put in the dropdown
-                            defaultType: variableType  //The default type of the variable
+                            variableTypes: ["float"],    // Specifies what types to put in the dropdown
+                            defaultType: "float"  //The default type of the variable
                         }
                       ]
+                  },
+                  "Integer",
+                  {
+                        opcode:"set_integer",
+                        type:"command",
+                        text:"set %1 to %2",
+                        tooltip: "Set the variable to the desired value.",
+                        arguments: [
+                          {
+                              type: "field_variable",
+                              name: "VAR",
+                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              variableTypes: ["int"],    // Specifies what types to put in the dropdown
+                              defaultType: "int"  //The default type of the variable
+                          },
+                          {
+                              type: "input_value",    // This expects an input of any type
+                              name: "VALUE",
+                              shadow: {
+                                type: "int_reporter",
+                              },
+                          }
+                        ]
+                  },
+                  {
+                    opcode:"get_integer",
+                    type:"reporter",
+                    text:"%1",
+                    tooltip: "Return's the selected variable's value.",
+                    arguments: [
+                      {
+                          type: "field_variable",
+                          name: "VAR",
+                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                          variableTypes: ["int"],    // Specifies what types to put in the dropdown
+                          defaultType: "int"  //The default type of the variable
+                      }
+                    ]
+                  },
+                  "Vector 2",
+                  {
+                        opcode:"set_v2",
+                        type:"command",
+                        text:"set %1 to %2",
+                        tooltip: "Set the variable to the desired value.",
+                        arguments: [
+                          {
+                              type: "field_variable",
+                              name: "VAR",
+                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
+                              defaultType: "vec2"  //The default type of the variable
+                          },
+                          {
+                              type: "input_value",    // This expects an input of any type
+                              name: "VALUE",
+                          }
+                        ]
+                  },
+                  {
+                    opcode:"get_v2",
+                    type:"reporter",
+                    text:"%1",
+                    tooltip: "Return's the selected variable's value.",
+                    arguments: [
+                      {
+                          type: "field_variable",
+                          name: "VAR",
+                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                          check: ["vec2", "VectorCompliant"],
+                          variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
+                          defaultType: "vec2"  //The default type of the variable
+                      }
+                    ]
                   },
               ],
           }
