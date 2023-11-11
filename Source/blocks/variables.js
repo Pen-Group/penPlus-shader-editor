@@ -1,247 +1,344 @@
 {
   window.categories = window.categories || {};
-  
-  class variables_category extends window.penPlusExtension {
-      getInfo() {
-          return {
-              name:"Variables",
-              id:"variables",
-              color1:"#ff8c1a",
-              color2:"#dd8126",
-              color3:"#cc7015",
-              blocks: [
-                  {
-                      opcode:"createVariable",
-                      type:"button",
-                      text:"Create Variable",
-                  },
-                  "Float",
-                  {
-                        opcode:"set_float",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              variableTypes: ["float"],    // Specifies what types to put in the dropdown
-                              defaultType: "float"  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                              shadow: {
-                                type: "number_reporter",
-                              },
-                          }
-                        ]
-                    },
-                    {
-                      opcode:"get_float",
-                      type:"reporter",
-                      text:"%1",
-                      tooltip: "Return's the selected variable's value.",
-                      arguments: [
-                        {
-                            type: "field_variable",
-                            name: "VAR",
-                            variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                            variableTypes: ["float"],    // Specifies what types to put in the dropdown
-                            defaultType: "float"  //The default type of the variable
-                        }
-                      ]
-                  },
-                  "Integer",
-                  {
-                        opcode:"set_integer",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              variableTypes: ["int"],    // Specifies what types to put in the dropdown
-                              defaultType: "int"  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                              shadow: {
-                                type: "int_reporter",
-                              },
-                          }
-                        ]
-                  },
-                  {
-                    opcode:"get_integer",
-                    type:"reporter",
-                    text:"%1",
-                    tooltip: "Return's the selected variable's value.",
-                    arguments: [
-                      {
-                          type: "field_variable",
-                          name: "VAR",
-                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          variableTypes: ["int"],    // Specifies what types to put in the dropdown
-                          defaultType: "int"  //The default type of the variable
-                      }
-                    ]
-                  },
-                  "Vector 2",
-                  {
-                        opcode:"set_v2",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              check: ["vec2", "VectorCompliant"],
-                              variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
-                              defaultType: "vec2"  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                          }
-                        ]
-                  },
-                  {
-                    opcode:"get_v2",
-                    type:"reporter",
-                    text:"%1",
-                    tooltip: "Return's the selected variable's value.",
-                    arguments: [
-                      {
-                          type: "field_variable",
-                          name: "VAR",
-                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
-                          defaultType: "vec2"  //The default type of the variable
-                      }
-                    ]
-                  },
-                  "Vector 3",
-                  {
-                        opcode:"set_v3",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              check: ["vec3", "VectorCompliant"],
-                              variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
-                              defaultType: "vec3"  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                          }
-                        ]
-                  },
-                  {
-                    opcode:"get_v3",
-                    type:"reporter",
-                    text:"%1",
-                    tooltip: "Return's the selected variable's value.",
-                    arguments: [
-                      {
-                          type: "field_variable",
-                          name: "VAR",
-                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
-                          defaultType: "vec3"  //The default type of the variable
-                      }
-                    ]
-                  },
-                  "Vector 4",
-                  {
-                        opcode:"set_v4",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              check: ["vec4", "VectorCompliant"],
-                              variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
-                              defaultType: "vec4"  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                          }
-                        ]
-                  },
-                  {
-                    opcode:"get_v4",
-                    type:"reporter",
-                    text:"%1",
-                    tooltip: "Return's the selected variable's value.",
-                    arguments: [
-                      {
-                          type: "field_variable",
-                          name: "VAR",
-                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
-                          defaultType: "vec4"  //The default type of the variable
-                      }
-                    ]
-                  },
-                  "Boolean",
-                  {
-                        opcode:"set_bool",
-                        type:"command",
-                        text:"set %1 to %2",
-                        tooltip: "Set the variable to the desired value.",
-                        arguments: [
-                          {
-                              type: "field_variable",
-                              name: "VAR",
-                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                              variableTypes: ["bool"],    // Specifies what types to put in the dropdown
-                              defaultType: "bool",  //The default type of the variable
-                          },
-                          {
-                              type: "input_value",    // This expects an input of any type
-                              name: "VALUE",
-                              check: "Boolean",
-                          }
-                        ]
-                  },
-                  {
-                    opcode:"get_bool",
-                    type:"reporter",
-                    text:"%1",
-                    tooltip: "Return's the selected variable's value.",
-                    arguments: [
-                      {
-                          type: "field_variable",
-                          name: "VAR",
-                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          variableTypes: ["bool"],    // Specifies what types to put in the dropdown
-                          defaultType: "bool"  //The default type of the variable
-                      }
-                    ]
-                  },
-              ],
-          }
-      }
 
-      createVariable (button) {
-          //Html Modal Mess
-          const varModal = createModal(`
+  class variables_category extends window.penPlusExtension {
+    getInfo() {
+      addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
+      addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
+      addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
+      addBlockColorSet("int_blocks", "#ffde00", "#e6c800", "#ccb100");
+      addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
+      return {
+        name: "Variables",
+        id: "variables",
+        color1: "#ff8c1a",
+        color2: "#dd8126",
+        color3: "#cc7015",
+        blocks: [
+          {
+            opcode: "createVariable",
+            type: "button",
+            text: "Create Variable",
+          },
+          "Float",
+          {
+            opcode: "set_float",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["float"],    // Specifies what types to put in the dropdown
+                defaultType: "float"  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              }
+            ]
+          },
+          {
+            opcode: "get_float",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["float"],    // Specifies what types to put in the dropdown
+                defaultType: "float"  //The default type of the variable
+              }
+            ]
+          },
+          "Integer",
+          {
+            opcode: "set_integer",
+            type: "command",
+            text: "set %1 to %2",
+            style: "int_blocks",
+            tooltip: "Set the variable to the desired value.",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["int"],    // Specifies what types to put in the dropdown
+                defaultType: "int"  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                shadow: {
+                  type: "int_reporter",
+                },
+              }
+            ]
+          },
+          {
+            opcode: "get_integer",
+            type: "reporter",
+            text: "%1",
+            style: "int_blocks",
+            tooltip: "Return's the selected variable's value.",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["int"],    // Specifies what types to put in the dropdown
+                defaultType: "int"  //The default type of the variable
+              }
+            ]
+          },
+          "Vector 2",
+          {
+            opcode: "set_v2",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "vec2_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                check: ["vec2", "VectorCompliant"],
+                variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
+                defaultType: "vec2"  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+              }
+            ]
+          },
+          {
+            opcode: "get_v2",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            output: "vec2",
+            style: "vec2_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
+                defaultType: "vec2",  //The default type of the variable
+              }
+            ]
+          },
+          "Vector 3",
+          {
+            opcode: "set_v3",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "vec3_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                check: ["vec3", "VectorCompliant"],
+                variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
+                defaultType: "vec3"  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+              }
+            ]
+          },
+          {
+            opcode: "get_v3",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            style: "vec3_blocks",
+            output: "vec3",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
+                defaultType: "vec3",  //The default type of the variable
+              }
+            ]
+          },
+          "Vector 4",
+          {
+            opcode: "set_v4",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "vec4_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                check: ["vec4", "VectorCompliant"],
+                variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
+                defaultType: "vec4"  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+              }
+            ]
+          },
+          {
+            opcode: "get_v4",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            style: "vec4_blocks",
+            output: "vec4",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
+                defaultType: "vec4",  //The default type of the variable
+              }
+            ]
+          },
+          "Boolean",
+          {
+            opcode: "set_bool",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "bool_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["bool"],    // Specifies what types to put in the dropdown
+                defaultType: "bool",  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                check: "Boolean",
+              }
+            ]
+          },
+          {
+            opcode: "get_bool",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            output: "Boolean",
+            style: "bool_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["bool"],    // Specifies what types to put in the dropdown
+                defaultType: "bool",  //The default type of the variable
+              }
+            ]
+          },
+          "Texture",
+          {
+            opcode: "set_tex",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "texture_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["texture"],    // Specifies what types to put in the dropdown
+                defaultType: "texture",  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                check: "texture",
+              }
+            ]
+          },
+          {
+            opcode: "get_tex",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            style: "texture_blocks",
+            output: "texture",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["texture"],    // Specifies what types to put in the dropdown
+                defaultType: "texture",  //The default type of the variable
+              }
+            ]
+          },
+          "Cubemaps",
+          {
+            opcode: "set_cubemap",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "cubemap_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["cubemap"],    // Specifies what types to put in the dropdown
+                defaultType: "cubemap",  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                check: "cubemap",
+              }
+            ]
+          },
+          {
+            opcode: "get_cubemap",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            style: "cubemap_blocks",
+            output: "cubemap",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["cubemap"],    // Specifies what types to put in the dropdown
+                defaultType: "cubemap"  //The default type of the variable
+              }
+            ]
+          },
+        ],
+      }
+    }
+
+    createVariable(button) {
+      //Html Modal Mess
+      const varModal = createModal(`
           <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
             <div style="position:absolute;left:0px;top:0px; width:100%; height:40%; background-color: var(--EditorTheme_Theme_4);">
               <input id="VarName" placeholder="Variable Name" style="position:absolute;left:50%;top:50%;Transform:Translate(-50%,-50%); width:50%; height:20%;" type="text"></input>
@@ -334,114 +431,114 @@
           </div>
           `);
 
-          const variableTypeChangers = {
-            float: document.getElementById("float"),
-            int: document.getElementById("int"),
-            vec2: document.getElementById("vec2"),
-            vec3: document.getElementById("vec3"),
-            vec4: document.getElementById("vec4"),
-            texture: document.getElementById("texture"),
-            cubemap: document.getElementById("cubemap"),
-            matrix: document.getElementById("matrix")
-          };
+      const variableTypeChangers = {
+        float: document.getElementById("float"),
+        int: document.getElementById("int"),
+        vec2: document.getElementById("vec2"),
+        vec3: document.getElementById("vec3"),
+        vec4: document.getElementById("vec4"),
+        texture: document.getElementById("texture"),
+        cubemap: document.getElementById("cubemap"),
+        matrix: document.getElementById("matrix")
+      };
 
-          let currentType = variableTypeChangers.float;
+      let currentType = variableTypeChangers.float;
 
-          let variableModalElement = document.getElementById("variableModal");
+      let variableModalElement = document.getElementById("variableModal");
 
-          //Short function to cycle types
-          const cycleVariable = (type) => {currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)";variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)";currentType = variableTypeChangers[type];};
-          cycleVariable("float");
+      //Short function to cycle types
+      const cycleVariable = (type) => { currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)"; variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)"; currentType = variableTypeChangers[type]; };
+      cycleVariable("float");
 
-          variableTypeChangers.float.onclick = () => {cycleVariable("float")};
-          variableTypeChangers.int.onclick = () => {cycleVariable("int")};
-          variableTypeChangers.vec2.onclick = () => {cycleVariable("vec2")};
-          variableTypeChangers.vec3.onclick = () => {cycleVariable("vec3")};
-          variableTypeChangers.vec4.onclick = () => {cycleVariable("vec4")};
-          variableTypeChangers.texture.onclick = () => {cycleVariable("texture")};
-          variableTypeChangers.cubemap.onclick = () => {cycleVariable("cubemap")};
-          variableTypeChangers.matrix.onclick = () => {cycleVariable("matrix")};
+      variableTypeChangers.float.onclick = () => { cycleVariable("float") };
+      variableTypeChangers.int.onclick = () => { cycleVariable("int") };
+      variableTypeChangers.vec2.onclick = () => { cycleVariable("vec2") };
+      variableTypeChangers.vec3.onclick = () => { cycleVariable("vec3") };
+      variableTypeChangers.vec4.onclick = () => { cycleVariable("vec4") };
+      variableTypeChangers.texture.onclick = () => { cycleVariable("texture") };
+      variableTypeChangers.cubemap.onclick = () => { cycleVariable("cubemap") };
+      variableTypeChangers.matrix.onclick = () => { cycleVariable("matrix") };
 
-          const createVariableButton = document.getElementById("createVariable");
-          const variableNameInput = document.getElementById("VarName");
+      const createVariableButton = document.getElementById("createVariable");
+      const variableNameInput = document.getElementById("VarName");
 
-          const doesVariableExist = (variablename) => {
-            const variables = workspace.getAllVariables();
-            if (!variablename.match(/^[a-zA-Z]+$/)) return ["stringInvalid"];
-            for (let varIndex = 0; varIndex < variables.length; varIndex++) {
-              const curVar = variables[varIndex];
-              if (curVar.name == variablename) {
-                return ["varExists",curVar.name,curVar.type];
-              }
-            }
-
-            return false;
+      const doesVariableExist = (variablename) => {
+        const variables = workspace.getAllVariables();
+        if (!variablename.match(/^[a-zA-Z]+$/)) return ["stringInvalid"];
+        for (let varIndex = 0; varIndex < variables.length; varIndex++) {
+          const curVar = variables[varIndex];
+          if (curVar.name == variablename) {
+            return ["varExists", curVar.name, curVar.type];
           }
+        }
 
-          let errorPopup = null;
-
-          createVariableButton.onclick = () => {
-            let variable_Exists = doesVariableExist(variableNameInput.value);
-            
-            if (errorPopup) {
-              variableModalElement.removeChild(errorPopup);
-            }
-
-            //Switch for variable name errors
-            if (variable_Exists) {
-              errorPopup = document.createElement("div");
-              let text = document.createElement("p");
-
-              text.style.color = "var(--EditorTheme_Text_3)";
-
-              text.style.textAlign = "center";
-
-              text.style.fontSize = "1.5em";
-
-              text.style.transform = "translate(0%,-75%)";
-              
-              errorPopup.appendChild(text);
-
-              switch (variable_Exists[0]) {
-                case "stringInvalid":
-                  text.innerHTML = "Desired variable name is invalid.";
-                  break;
-
-                case "varExists":
-                  text.innerHTML = "variable " + variable_Exists[1] + " exists as a " + variable_Exists[2];
-                  break;
-              
-                default:
-                  text.innerHTML = "Honestly I dunno why you got this. Check the console";
-                  break;
-              }
-              errorPopup.style.width = "80%";
-              errorPopup.style.transform = "translate(-50%,50%)"
-              errorPopup.style.position = "absolute";
-              errorPopup.style.top = "0%";
-              errorPopup.style.left = "50%";
-
-              errorPopup.style.height = "7.5%";
-
-              errorPopup.style.backgroundColor = "#990404";
-              errorPopup.style.borderWidth = "4rem";
-              errorPopup.style.borderRadius = "0.375rem";
-
-              errorPopup.style.alignItems = "center";
-
-              variableModalElement.appendChild(errorPopup);
-              return;
-            }
-
-            //Close the modal
-            window.workspace.createVariable(variableNameInput.value, currentType.id);
-            varModal.close();
-          }
+        return false;
       }
 
-      set_float() {}
+      let errorPopup = null;
 
-      get_float() {}
+      createVariableButton.onclick = () => {
+        let variable_Exists = doesVariableExist(variableNameInput.value);
+
+        if (errorPopup) {
+          variableModalElement.removeChild(errorPopup);
+        }
+
+        //Switch for variable name errors
+        if (variable_Exists) {
+          errorPopup = document.createElement("div");
+          let text = document.createElement("p");
+
+          text.style.color = "var(--EditorTheme_Text_3)";
+
+          text.style.textAlign = "center";
+
+          text.style.fontSize = "1.5em";
+
+          text.style.transform = "translate(0%,-75%)";
+
+          errorPopup.appendChild(text);
+
+          switch (variable_Exists[0]) {
+            case "stringInvalid":
+              text.innerHTML = "Desired variable name is invalid.";
+              break;
+
+            case "varExists":
+              text.innerHTML = "variable " + variable_Exists[1] + " exists as a " + variable_Exists[2];
+              break;
+
+            default:
+              text.innerHTML = "Honestly I dunno why you got this. Check the console";
+              break;
+          }
+          errorPopup.style.width = "80%";
+          errorPopup.style.transform = "translate(-50%,50%)"
+          errorPopup.style.position = "absolute";
+          errorPopup.style.top = "0%";
+          errorPopup.style.left = "50%";
+
+          errorPopup.style.height = "7.5%";
+
+          errorPopup.style.backgroundColor = "#990404";
+          errorPopup.style.borderWidth = "4rem";
+          errorPopup.style.borderRadius = "0.375rem";
+
+          errorPopup.style.alignItems = "center";
+
+          variableModalElement.appendChild(errorPopup);
+          return;
+        }
+
+        //Close the modal
+        window.workspace.createVariable(variableNameInput.value, currentType.id);
+        varModal.close();
+      }
+    }
+
+    set_float() { }
+
+    get_float() { }
 
   }
 

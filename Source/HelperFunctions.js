@@ -137,6 +137,18 @@ function createModal(HTML) {
     return modal;
 }
 
+function addBlockColorSet(name,color1,color2,color3) {
+    window.penPlusTheme.blockStyles[name] = {
+        colourPrimary: color1,
+        colourSecondary: color2,
+        colourTertiary: color3,
+    };
+
+    workspace.getToolbox().refreshSelection();
+
+    window.refreshTheme();
+}
+
 //DO NOT STEAL! ORIGINAL BLOCK format.
 window.penPlusExtension = class {
     constructor(){

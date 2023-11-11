@@ -1,19 +1,21 @@
 {
     window.categories = window.categories || {};
-    
+
     class looks_category extends window.penPlusExtension {
         getInfo() {
+            addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
+            addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
             return {
-                name:"Looks",
-                id:"looks",
-                color1:"#9966ff",
-                color2:"#855cd6",
-                color3:"#774dcb",
+                name: "Looks",
+                id: "looks",
+                color1: "#9966ff",
+                color2: "#855cd6",
+                color3: "#774dcb",
                 blocks: [
                     {
-                        opcode:"setVertColor",
-                        type:"command",
-                        text:"set the vertice's colour to %1",
+                        opcode: "setVertColor",
+                        type: "command",
+                        text: "set the vertice's colour to %1",
                         tooltip: "Will be ran per vertex",
                         arguments: [
                             {
@@ -27,16 +29,16 @@
                         ]
                     },
                     {
-                        opcode:"getVertColor",
-                        type:"reporter",
-                        text:"vertex colour",
+                        opcode: "getVertColor",
+                        type: "reporter",
+                        text: "vertex colour",
                         tooltip: "Will be ran per pixel"
                     },
                     "---",
                     {
-                        opcode:"setPixColor",
-                        type:"command",
-                        text:"set the pixel's colour to %1",
+                        opcode: "setPixColor",
+                        type: "command",
+                        text: "set the pixel's colour to %1",
                         tooltip: "Will be ran per vertex",
                         arguments: [
                             {
@@ -50,72 +52,72 @@
                         ]
                     },
                     {
-                        opcode:"getPixColor",
-                        type:"reporter",
-                        text:"pixel colour",
+                        opcode: "getPixColor",
+                        type: "reporter",
+                        text: "pixel colour",
                         tooltip: "Will be ran per pixel"
                     },
                     "---",
                     {
-                        opcode:"pixX",
-                        type:"reporter",
-                        text:"pixel X",
+                        opcode: "pixX",
+                        type: "reporter",
+                        text: "pixel X",
                         tooltip: "The pixel's X position"
                     },
                     {
-                        opcode:"pixY",
-                        type:"reporter",
-                        text:"pixel Y",
+                        opcode: "pixY",
+                        type: "reporter",
+                        text: "pixel Y",
                         tooltip: "The pixel's Y position"
                     },
                     "---",
                     {
-                        opcode:"resX",
-                        type:"reporter",
-                        text:"resolution X",
+                        opcode: "resX",
+                        type: "reporter",
+                        text: "resolution X",
                         tooltip: "The render's width"
                     },
                     {
-                        opcode:"resY",
-                        type:"reporter",
-                        text:"resolution Y",
+                        opcode: "resY",
+                        type: "reporter",
+                        text: "resolution Y",
                         tooltip: "The render's height"
                     }
                 ],
             }
         }
 
-        setPixColor (block, generator) {
+        setPixColor(block, generator) {
             const colour = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
             return `gl_FragColor = ${colour};` + nextBlockToCode(block, generator);
         }
 
-        getPixColor (block, generator) {
+        getPixColor(block, generator) {
             return [`gl_FragColor`, Order.ATOMIC];
         }
 
-        setPixColor (block, generator) {
+        setPixColor(block, generator) {
             const colour = generator.valueToCode(block, 'COLOR', Order.ATOMIC);
             return `v_color = ${colour};` + nextBlockToCode(block, generator);
         }
 
-        getPixColor (block, generator) {
+        getPixColor(block, generator) {
             return [`v_color`, Order.ATOMIC];
         }
 
-        pixX () {
+        pixX() {
             return [`gl_FragCoord.x`, Order.ATOMIC];
         }
 
-        pixY () {
+        pixY() {
             return [`gl_FragCoord.y`, Order.ATOMIC];
         }
 
-        resX () {
+        resX() {
             return [`u_res.x`, Order.ATOMIC];
         }
 
-        resY () {
+        resY() {
             return [`u_res.y`, Order.ATOMIC];
         }
 

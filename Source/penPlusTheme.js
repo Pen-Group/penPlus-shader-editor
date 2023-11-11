@@ -36,12 +36,12 @@ function penPlusBlocklyTheme() {
         startHats: true,
     }
 
-    document.body.style.setProperty("--EditorTheme_Theme_1",window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
-    document.body.style.setProperty("--EditorTheme_Theme_2",window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
-    document.body.style.setProperty("--EditorTheme_Theme_3",window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
-    document.body.style.setProperty("--EditorTheme_Theme_4",window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
+    document.body.style.setProperty("--EditorTheme_Theme_1", window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
+    document.body.style.setProperty("--EditorTheme_Theme_2", window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
+    document.body.style.setProperty("--EditorTheme_Theme_3", window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
+    document.body.style.setProperty("--EditorTheme_Theme_4", window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
 
-    document.body.style.setProperty("--EditorTheme_Text_1",window.editorTheme == "dark" ? "#ffffff" : "000000");
+    document.body.style.setProperty("--EditorTheme_Text_1", window.editorTheme == "dark" ? "#ffffff" : "000000");
     document.body.style.setProperty("--EditorTheme_Text_2", window.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f");
     //Bad theme thing
     /*window.blockStyles = {
@@ -125,12 +125,12 @@ window.refreshTheme = () => {
     //Hacky fix
     //Works
 
-    document.body.style.setProperty("--EditorTheme_Theme_1",window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
-    document.body.style.setProperty("--EditorTheme_Theme_2",window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
-    document.body.style.setProperty("--EditorTheme_Theme_3",window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
-    document.body.style.setProperty("--EditorTheme_Theme_4",window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
+    document.body.style.setProperty("--EditorTheme_Theme_1", window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
+    document.body.style.setProperty("--EditorTheme_Theme_2", window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
+    document.body.style.setProperty("--EditorTheme_Theme_3", window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
+    document.body.style.setProperty("--EditorTheme_Theme_4", window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
 
-    document.body.style.setProperty("--EditorTheme_Text_1",window.editorTheme == "dark" ? "#ffffff" : "000000");
+    document.body.style.setProperty("--EditorTheme_Text_1", window.editorTheme == "dark" ? "#ffffff" : "000000");
     document.body.style.setProperty("--EditorTheme_Text_2", window.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f");
 
     window.penPlusTheme.componentStyles = window.editorTheme == "dark" ? {
@@ -161,5 +161,5 @@ window.refreshTheme = () => {
         blackBackground: '#ccc',
     }
 
-    workspace.setTheme(Blockly.Theme.defineTheme('penPlus',window.penPlusTheme))
+    workspace.setTheme(Blockly.Theme.defineTheme('penPlus', window.penPlusTheme))
 };
