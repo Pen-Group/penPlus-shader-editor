@@ -8,6 +8,7 @@
       addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
       addBlockColorSet("int_blocks", "#ffde00", "#e6c800", "#ccb100");
       addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
+      addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
       return {
         name: "Variables",
         id: "variables",
@@ -332,6 +333,45 @@
               }
             ]
           },
+          "Matricies",
+          {
+            opcode: "set_cubemap",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "Set the variable to the desired value.",
+            style: "matrix_blocks",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["matrix_2x","matrix_2x3","matrix_2x4","matrix_3x","matrix_3x2","matrix_3x4","matrix_4x","matrix_4x2","matrix_4x3"],    // Specifies what types to put in the dropdown
+                defaultType: "matrix_2x",  //The default type of the variable
+              },
+              {
+                type: "input_value",    // This expects an input of any type
+                name: "VALUE",
+                check: "matrix",
+              }
+            ]
+          },
+          {
+            opcode: "get_cubemap",
+            type: "reporter",
+            text: "%1",
+            tooltip: "Return's the selected variable's value.",
+            style: "matrix_blocks",
+            output: "matrix",
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                variableTypes: ["matrix_2x","matrix_2x3","matrix_2x4","matrix_3x","matrix_3x2","matrix_3x4","matrix_4x","matrix_4x2","matrix_4x3"],    // Specifies what types to put in the dropdown
+                defaultType: "matrix_2x"  //The default type of the variable
+              }
+            ]
+          },
         ],
       }
     }
@@ -426,6 +466,17 @@
                 </div>
                 <p class="noSelect" style="position:absolute;left:50%;top:20%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Variable Scope</p>
                 <button id="createVariable" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">OK</button>
+                <select id="matrixSizes" name="Matrix Sizes" style="position:absolute; left:15%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1); visibility:hidden;">
+                  <option value="2x">2x2</option>
+                  <option value="2x3">2x3</option>
+                  <option value="2x4">2x4</option>
+                  <option value="3x">3x3</option>
+                  <option value="3x2">3x2</option>
+                  <option value="3x4">3x4</option>
+                  <option value="4x">4x4</option>
+                  <option value="4x2">4x2</option>
+                  <option value="4x3">4x3</option>
+                </select>
               </div>
             </div>
           </div>
@@ -442,12 +493,26 @@
         matrix: document.getElementById("matrix")
       };
 
+      const matrixSizeChanger = document.getElementById("matrixSizes");
+
       let currentType = variableTypeChangers.float;
+      let typeName = "float";
 
       let variableModalElement = document.getElementById("variableModal");
 
       //Short function to cycle types
-      const cycleVariable = (type) => { currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)"; variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)"; currentType = variableTypeChangers[type]; };
+      const cycleVariable = (type) => { 
+        typeName = type;
+        currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)"; 
+        variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)"; 
+        currentType = variableTypeChangers[type]; 
+        if (type == "matrix") {
+          matrixSizeChanger.style.visibility = "visible";
+        }
+        else {
+          matrixSizeChanger.style.visibility = "hidden";
+        }
+      };
       cycleVariable("float");
 
       variableTypeChangers.float.onclick = () => { cycleVariable("float") };
@@ -531,7 +596,13 @@
         }
 
         //Close the modal
-        window.workspace.createVariable(variableNameInput.value, currentType.id);
+        if (typeName == "matrix") {
+          window.workspace.createVariable(variableNameInput.value, currentType.id + "_" + matrixSizeChanger.value);
+        }
+        else {
+          window.workspace.createVariable(variableNameInput.value, currentType.id);
+        }
+        
         varModal.close();
       }
     }
