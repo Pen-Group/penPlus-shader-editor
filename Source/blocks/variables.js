@@ -618,11 +618,19 @@
         }
 
         //Close the modal
+        let scope = "uniform"
+        if (Attribute.checked) {
+          scope = "attribute"
+        }
+        else if (Varying.checked) {
+          scope = "varying"
+        }
+
         if (typeName == "matrix") {
-          window.workspace.createVariable(variableNameInput.value, currentType.id + "_" + matrixSizeChanger.value);
+          window.workspace.createVariable(variableNameInput.value, currentType.id + "_" + matrixSizeChanger.value, scope + "_" + variableNameInput.value);
         }
         else {
-          window.workspace.createVariable(variableNameInput.value, currentType.id);
+          window.workspace.createVariable(variableNameInput.value, currentType.id, scope + "_" + variableNameInput.value);
         }
         
         varModal.close();
