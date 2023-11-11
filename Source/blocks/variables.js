@@ -335,7 +335,7 @@
           },
           "Matricies",
           {
-            opcode: "set_cubemap",
+            opcode: "set_matrix",
             type: "command",
             text: "set %1 to %2",
             tooltip: "Set the variable to the desired value.",
@@ -356,7 +356,7 @@
             ]
           },
           {
-            opcode: "get_cubemap",
+            opcode: "get_matrix",
             type: "reporter",
             text: "%1",
             tooltip: "Return's the selected variable's value.",
@@ -452,15 +452,15 @@
               <div style="top:80%;height:20%;width:100%;position:absolute;">
                 <div style="display: flex;position:absolute;left:50%;width:50%;height:80%; font-size: 1.125em;  color:var(--EditorTheme_Text_1); transform: translate(-50%);">
                   <div style="display: flex; width:33.3333%">
-                    <input type="checkbox"></input>
+                    <input type="checkbox" checked id="Uniform"></input>
                     <p style="transform:translate(0%,-1em);">Uniform</p>
                   </div>
                   <div style="display: flex; width:33.3333%">
-                    <input type="checkbox"></input>
+                    <input type="checkbox" id="Attribute"></input>
                     <p style="transform:translate(0%,-1em);">Vertex</p>
                   </div>
                   <div style="display: flex; width:33.3333%">
-                    <input type="checkbox"></input>
+                    <input type="checkbox" id="Varying"></input>
                     <p style="transform:translate(0%,-1em);">Pixel</p>
                   </div>
                 </div>
@@ -523,6 +523,28 @@
       variableTypeChangers.texture.onclick = () => { cycleVariable("texture") };
       variableTypeChangers.cubemap.onclick = () => { cycleVariable("cubemap") };
       variableTypeChangers.matrix.onclick = () => { cycleVariable("matrix") };
+
+      const Uniform = document.getElementById("Uniform");
+      const Attribute = document.getElementById("Attribute");
+      const Varying = document.getElementById("Varying");
+
+      Uniform.onclick = () => {
+        Attribute.checked = false;
+        Varying.checked = false;
+        Uniform.checked = true;
+      }
+
+      Attribute.onclick = () => {
+        Uniform.checked = false;
+        Varying.checked = false;
+        Attribute.checked = true;
+      }
+
+      Varying.onclick = () => {
+        Uniform.checked = false;
+        Attribute.checked = false;
+        Varying.checked = true;
+      }
 
       const createVariableButton = document.getElementById("createVariable");
       const variableNameInput = document.getElementById("VarName");
@@ -607,10 +629,104 @@
       }
     }
 
-    set_float() { }
+    set_float(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
 
-    get_float() { }
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
 
+    get_float(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_integer(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_integer(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_v2(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_v2(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_v3(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_v3(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_v4(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_v4(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_bool(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_bool(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_tex(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_tex(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_cubemap(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_cubemap(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    set_matrix(block, generator) {
+      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
+      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+
+      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+    }
+
+    get_matrix(block, generator) {
+      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
   }
 
   window.categories.variables = variables_category;
