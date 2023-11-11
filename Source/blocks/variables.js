@@ -102,6 +102,7 @@
                               type: "field_variable",
                               name: "VAR",
                               variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              check: ["vec2", "VectorCompliant"],
                               variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
                               defaultType: "vec2"  //The default type of the variable
                           },
@@ -121,9 +122,116 @@
                           type: "field_variable",
                           name: "VAR",
                           variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                          check: ["vec2", "VectorCompliant"],
                           variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
                           defaultType: "vec2"  //The default type of the variable
+                      }
+                    ]
+                  },
+                  "Vector 3",
+                  {
+                        opcode:"set_v3",
+                        type:"command",
+                        text:"set %1 to %2",
+                        tooltip: "Set the variable to the desired value.",
+                        arguments: [
+                          {
+                              type: "field_variable",
+                              name: "VAR",
+                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              check: ["vec3", "VectorCompliant"],
+                              variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
+                              defaultType: "vec3"  //The default type of the variable
+                          },
+                          {
+                              type: "input_value",    // This expects an input of any type
+                              name: "VALUE",
+                          }
+                        ]
+                  },
+                  {
+                    opcode:"get_v3",
+                    type:"reporter",
+                    text:"%1",
+                    tooltip: "Return's the selected variable's value.",
+                    arguments: [
+                      {
+                          type: "field_variable",
+                          name: "VAR",
+                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                          variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
+                          defaultType: "vec3"  //The default type of the variable
+                      }
+                    ]
+                  },
+                  "Vector 4",
+                  {
+                        opcode:"set_v4",
+                        type:"command",
+                        text:"set %1 to %2",
+                        tooltip: "Set the variable to the desired value.",
+                        arguments: [
+                          {
+                              type: "field_variable",
+                              name: "VAR",
+                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              check: ["vec4", "VectorCompliant"],
+                              variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
+                              defaultType: "vec4"  //The default type of the variable
+                          },
+                          {
+                              type: "input_value",    // This expects an input of any type
+                              name: "VALUE",
+                          }
+                        ]
+                  },
+                  {
+                    opcode:"get_v4",
+                    type:"reporter",
+                    text:"%1",
+                    tooltip: "Return's the selected variable's value.",
+                    arguments: [
+                      {
+                          type: "field_variable",
+                          name: "VAR",
+                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                          variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
+                          defaultType: "vec4"  //The default type of the variable
+                      }
+                    ]
+                  },
+                  "Boolean",
+                  {
+                        opcode:"set_bool",
+                        type:"command",
+                        text:"set %1 to %2",
+                        tooltip: "Set the variable to the desired value.",
+                        arguments: [
+                          {
+                              type: "field_variable",
+                              name: "VAR",
+                              variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                              variableTypes: ["bool"],    // Specifies what types to put in the dropdown
+                              defaultType: "bool",  //The default type of the variable
+                          },
+                          {
+                              type: "input_value",    // This expects an input of any type
+                              name: "VALUE",
+                              check: "Boolean",
+                          }
+                        ]
+                  },
+                  {
+                    opcode:"get_bool",
+                    type:"reporter",
+                    text:"%1",
+                    tooltip: "Return's the selected variable's value.",
+                    arguments: [
+                      {
+                          type: "field_variable",
+                          name: "VAR",
+                          variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
+                          variableTypes: ["bool"],    // Specifies what types to put in the dropdown
+                          defaultType: "bool"  //The default type of the variable
                       }
                     ]
                   },

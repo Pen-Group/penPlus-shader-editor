@@ -21,6 +21,7 @@
         --EditorTheme_Color_1: #0fbd8c;
         --EditorTheme_Color_2: #0eaa7e;
         --EditorTheme_Color_3: #0c9770;
+        --EditorTheme_Color_4: #28d1a1;
 
         --EditorTheme_Theme_1: #0f0f0f;
         --EditorTheme_Theme_2: #141414;
@@ -216,7 +217,7 @@
         color: #fff;
       }
 
-      .toggleButton:hover {background-color: #28d1a1}
+      .toggleButton:hover {background-color: var(--EditorTheme_Color_4)}
 
       .toggleButton:active {background-color: var(--EditorTheme_Color_3)}
 
@@ -253,6 +254,9 @@
           </button>
           <button class="toggleButton" id="TerminalToggle">
             <img src="icons/terminal.svg" class="buttonSVG"></svg>
+          </button>
+          <button class="toggleButton" id="OptionsButton">
+            <img src="icons/settings.svg" class="buttonSVG"></svg>
           </button>
         </div>
         <div class="title">

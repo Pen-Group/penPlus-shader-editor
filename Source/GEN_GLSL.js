@@ -79,6 +79,8 @@ function updateGLSL(event) {
     if (window.workspace.isDragging()) return; // Don't update while changes are happening.
     if (!window.supportedEvents.has(event.type)) return;
 
+    document.getElementById("shaderLog").innerHTML = "";
+
     window.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;

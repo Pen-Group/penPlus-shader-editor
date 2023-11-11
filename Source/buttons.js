@@ -1,8 +1,11 @@
 {
-    const glsl_Button = document.getElementById("ButtonGLSL")
-    const blockly_Button = document.getElementById("ButtonBlockly")
-    const terminal_Button = document.getElementById("TerminalToggle")
-    const blockly = document.getElementById("BlocklyDiv")
+    const glsl_Button = document.getElementById("ButtonGLSL");
+    const blockly_Button = document.getElementById("ButtonBlockly");
+    const terminal_Button = document.getElementById("TerminalToggle");
+    const theme_Button = document.getElementById("DarkToggle");
+    const blockly = document.getElementById("BlocklyDiv");
+
+    window.editorTheme = localStorage.getItem("penPlusEditorTheme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
     glsl_Button.onclick = () => {
         document.body.style.setProperty("--CodeVis", "visible");
@@ -34,5 +37,18 @@
             blockly.style.left = "0px"
             Blockly.svgResize(workspace);
         }
+    }
+
+    theme_Button.onclick = () => {
+        if (window.editorTheme == "dark") {
+            window.editorTheme = "light";
+        }
+        else {
+            window.editorTheme = "dark";
+        }
+
+        localStorage.setItem("penPlusEditorTheme",window.editorTheme);
+
+        window.refreshTheme();
     }
 }

@@ -6,22 +6,43 @@ function penPlusBlocklyTheme() {
             'weight': 500,
             'size': 12
         },
-        componentStyles: {
+        componentStyles: window.editorTheme == "dark" ? {
             workspaceBackgroundColour: '#1e1e1e',
             toolboxBackgroundColour: 'blackBackground',
             toolboxForegroundColour: '#fff',
             flyoutBackgroundColour: '#252526',
             flyoutForegroundColour: '#ccc',
-            flyoutOpacity: 1,
+            flyoutOpacity: 0.5,
             scrollbarColour: '#797979',
             insertionMarkerColour: '#fff',
             insertionMarkerOpacity: 0.3,
             scrollbarOpacity: 0.4,
             cursorColour: '#d0d0d0',
             blackBackground: '#333',
+        } : {
+            workspaceBackgroundColour: '#1e1e1e',
+            toolboxBackgroundColour: 'blackBackground',
+            toolboxForegroundColour: '#fff',
+            flyoutBackgroundColour: '#fbfbfb',
+            flyoutForegroundColour: '#777',
+            flyoutOpacity: 0.5,
+            scrollbarColour: '#b9b9b9',
+            insertionMarkerColour: '#000',
+            insertionMarkerOpacity: 0.3,
+            scrollbarOpacity: 0.4,
+            cursorColour: '#202020',
+            blackBackground: '#ccc',
         },
         startHats: true,
     }
+
+    document.body.style.setProperty("--EditorTheme_Theme_1",window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
+    document.body.style.setProperty("--EditorTheme_Theme_2",window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
+    document.body.style.setProperty("--EditorTheme_Theme_3",window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
+    document.body.style.setProperty("--EditorTheme_Theme_4",window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
+
+    document.body.style.setProperty("--EditorTheme_Text_1",window.editorTheme == "dark" ? "#ffffff" : "000000");
+    document.body.style.setProperty("--EditorTheme_Text_2", window.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f");
     //Bad theme thing
     /*window.blockStyles = {
         hat_blocks: {
@@ -103,6 +124,42 @@ function penPlusBlocklyTheme() {
 window.refreshTheme = () => {
     //Hacky fix
     //Works
+
+    document.body.style.setProperty("--EditorTheme_Theme_1",window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff");
+    document.body.style.setProperty("--EditorTheme_Theme_2",window.editorTheme == "dark" ? "#141414" : "#f4f4f4");
+    document.body.style.setProperty("--EditorTheme_Theme_3",window.editorTheme == "dark" ? "#1f1f1f" : "#efefef");
+    document.body.style.setProperty("--EditorTheme_Theme_4",window.editorTheme == "dark" ? "#2f2f2f" : "#dfdfdf");
+
+    document.body.style.setProperty("--EditorTheme_Text_1",window.editorTheme == "dark" ? "#ffffff" : "000000");
+    document.body.style.setProperty("--EditorTheme_Text_2", window.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f");
+
+    window.penPlusTheme.componentStyles = window.editorTheme == "dark" ? {
+        workspaceBackgroundColour: '#1e1e1e',
+        toolboxBackgroundColour: 'blackBackground',
+        toolboxForegroundColour: '#fff',
+        flyoutBackgroundColour: '#252526',
+        flyoutForegroundColour: '#ccc',
+        flyoutOpacity: 0.5,
+        scrollbarColour: '#797979',
+        insertionMarkerColour: '#fff',
+        insertionMarkerOpacity: 0.3,
+        scrollbarOpacity: 0.4,
+        cursorColour: '#d0d0d0',
+        blackBackground: '#333',
+    } : {
+        workspaceBackgroundColour: '#F9F9F9',
+        toolboxBackgroundColour: 'blackBackground',
+        toolboxForegroundColour: '#fff',
+        flyoutBackgroundColour: '#fbfbfb',
+        flyoutForegroundColour: '#777',
+        flyoutOpacity: 0.5,
+        scrollbarColour: '#b9b9b9',
+        insertionMarkerColour: '#000',
+        insertionMarkerOpacity: 0.3,
+        scrollbarOpacity: 0.4,
+        cursorColour: '#202020',
+        blackBackground: '#ccc',
+    }
 
     workspace.setTheme(Blockly.Theme.defineTheme('penPlus',window.penPlusTheme))
 };
