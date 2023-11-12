@@ -32,17 +32,17 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"],    // Specifies what types to put in the dropdown
-                defaultType: "float"  //The default type of the variable
+                variableTypes: ["float"], // Specifies what types to put in the dropdown
+                defaultType: "float", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
                 },
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_float",
@@ -54,10 +54,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"],    // Specifies what types to put in the dropdown
-                defaultType: "float"  //The default type of the variable
-              }
-            ]
+                variableTypes: ["float"], // Specifies what types to put in the dropdown
+                defaultType: "float", //The default type of the variable
+              },
+            ],
           },
           "Integer",
           {
@@ -71,17 +71,17 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"],    // Specifies what types to put in the dropdown
-                defaultType: "int"  //The default type of the variable
+                variableTypes: ["int"], // Specifies what types to put in the dropdown
+                defaultType: "int", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 shadow: {
                   type: "int_reporter",
                 },
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_integer",
@@ -94,10 +94,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"],    // Specifies what types to put in the dropdown
-                defaultType: "int"  //The default type of the variable
-              }
-            ]
+                variableTypes: ["int"], // Specifies what types to put in the dropdown
+                defaultType: "int", //The default type of the variable
+              },
+            ],
           },
           "Vector 2",
           {
@@ -112,14 +112,14 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec2", "VectorCompliant"],
-                variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
-                defaultType: "vec2"  //The default type of the variable
+                variableTypes: ["vec2"], // Specifies what types to put in the dropdown
+                defaultType: "vec2", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_v2",
@@ -133,10 +133,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec2"],    // Specifies what types to put in the dropdown
-                defaultType: "vec2",  //The default type of the variable
-              }
-            ]
+                variableTypes: ["vec2"], // Specifies what types to put in the dropdown
+                defaultType: "vec2", //The default type of the variable
+              },
+            ],
           },
           "Vector 3",
           {
@@ -151,14 +151,14 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec3", "VectorCompliant"],
-                variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
-                defaultType: "vec3"  //The default type of the variable
+                variableTypes: ["vec3"], // Specifies what types to put in the dropdown
+                defaultType: "vec3", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_v3",
@@ -172,10 +172,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec3"],    // Specifies what types to put in the dropdown
-                defaultType: "vec3",  //The default type of the variable
-              }
-            ]
+                variableTypes: ["vec3"], // Specifies what types to put in the dropdown
+                defaultType: "vec3", //The default type of the variable
+              },
+            ],
           },
           "Vector 4",
           {
@@ -190,14 +190,14 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec4", "VectorCompliant"],
-                variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
-                defaultType: "vec4"  //The default type of the variable
+                variableTypes: ["vec4"], // Specifies what types to put in the dropdown
+                defaultType: "vec4", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_v4",
@@ -211,10 +211,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec4"],    // Specifies what types to put in the dropdown
-                defaultType: "vec4",  //The default type of the variable
-              }
-            ]
+                variableTypes: ["vec4"], // Specifies what types to put in the dropdown
+                defaultType: "vec4", //The default type of the variable
+              },
+            ],
           },
           "Boolean",
           {
@@ -228,15 +228,15 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"],    // Specifies what types to put in the dropdown
-                defaultType: "bool",  //The default type of the variable
+                variableTypes: ["bool"], // Specifies what types to put in the dropdown
+                defaultType: "bool", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 check: "Boolean",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_bool",
@@ -250,10 +250,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"],    // Specifies what types to put in the dropdown
-                defaultType: "bool",  //The default type of the variable
-              }
-            ]
+                variableTypes: ["bool"], // Specifies what types to put in the dropdown
+                defaultType: "bool", //The default type of the variable
+              },
+            ],
           },
           "Texture",
           {
@@ -267,15 +267,15 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"],    // Specifies what types to put in the dropdown
-                defaultType: "texture",  //The default type of the variable
+                variableTypes: ["texture"], // Specifies what types to put in the dropdown
+                defaultType: "texture", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 check: "texture",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_tex",
@@ -289,10 +289,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"],    // Specifies what types to put in the dropdown
-                defaultType: "texture",  //The default type of the variable
-              }
-            ]
+                variableTypes: ["texture"], // Specifies what types to put in the dropdown
+                defaultType: "texture", //The default type of the variable
+              },
+            ],
           },
           "Cubemaps",
           {
@@ -306,15 +306,15 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"],    // Specifies what types to put in the dropdown
-                defaultType: "cubemap",  //The default type of the variable
+                variableTypes: ["cubemap"], // Specifies what types to put in the dropdown
+                defaultType: "cubemap", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 check: "cubemap",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_cubemap",
@@ -328,10 +328,10 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"],    // Specifies what types to put in the dropdown
-                defaultType: "cubemap"  //The default type of the variable
-              }
-            ]
+                variableTypes: ["cubemap"], // Specifies what types to put in the dropdown
+                defaultType: "cubemap", //The default type of the variable
+              },
+            ],
           },
           "Matricies",
           {
@@ -345,15 +345,25 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["matrix_2x","matrix_2x3","matrix_2x4","matrix_3x","matrix_3x2","matrix_3x4","matrix_4x","matrix_4x2","matrix_4x3"],    // Specifies what types to put in the dropdown
-                defaultType: "matrix_2x",  //The default type of the variable
+                variableTypes: [
+                  "matrix_2x",
+                  "matrix_2x3",
+                  "matrix_2x4",
+                  "matrix_3x",
+                  "matrix_3x2",
+                  "matrix_3x4",
+                  "matrix_4x",
+                  "matrix_4x2",
+                  "matrix_4x3",
+                ], // Specifies what types to put in the dropdown
+                defaultType: "matrix_2x", //The default type of the variable
               },
               {
-                type: "input_value",    // This expects an input of any type
+                type: "input_value", // This expects an input of any type
                 name: "VALUE",
                 check: "matrix",
-              }
-            ]
+              },
+            ],
           },
           {
             opcode: "get_matrix",
@@ -367,13 +377,23 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["matrix_2x","matrix_2x3","matrix_2x4","matrix_3x","matrix_3x2","matrix_3x4","matrix_4x","matrix_4x2","matrix_4x3"],    // Specifies what types to put in the dropdown
-                defaultType: "matrix_2x"  //The default type of the variable
-              }
-            ]
+                variableTypes: [
+                  "matrix_2x",
+                  "matrix_2x3",
+                  "matrix_2x4",
+                  "matrix_3x",
+                  "matrix_3x2",
+                  "matrix_3x4",
+                  "matrix_4x",
+                  "matrix_4x2",
+                  "matrix_4x3",
+                ], // Specifies what types to put in the dropdown
+                defaultType: "matrix_2x", //The default type of the variable
+              },
+            ],
           },
         ],
-      }
+      };
     }
 
     createVariable(button) {
@@ -490,7 +510,7 @@
         vec4: document.getElementById("vec4"),
         texture: document.getElementById("texture"),
         cubemap: document.getElementById("cubemap"),
-        matrix: document.getElementById("matrix")
+        matrix: document.getElementById("matrix"),
       };
 
       const matrixSizeChanger = document.getElementById("matrixSizes");
@@ -501,28 +521,44 @@
       let variableModalElement = document.getElementById("variableModal");
 
       //Short function to cycle types
-      const cycleVariable = (type) => { 
+      const cycleVariable = (type) => {
         typeName = type;
-        currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)"; 
-        variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)"; 
-        currentType = variableTypeChangers[type]; 
+        currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)";
+        variableTypeChangers[type].style.backgroundColor =
+          "var(--EditorTheme_Theme_4)";
+        currentType = variableTypeChangers[type];
         if (type == "matrix") {
           matrixSizeChanger.style.visibility = "visible";
-        }
-        else {
+        } else {
           matrixSizeChanger.style.visibility = "hidden";
         }
       };
       cycleVariable("float");
 
-      variableTypeChangers.float.onclick = () => { cycleVariable("float") };
-      variableTypeChangers.int.onclick = () => { cycleVariable("int") };
-      variableTypeChangers.vec2.onclick = () => { cycleVariable("vec2") };
-      variableTypeChangers.vec3.onclick = () => { cycleVariable("vec3") };
-      variableTypeChangers.vec4.onclick = () => { cycleVariable("vec4") };
-      variableTypeChangers.texture.onclick = () => { cycleVariable("texture") };
-      variableTypeChangers.cubemap.onclick = () => { cycleVariable("cubemap") };
-      variableTypeChangers.matrix.onclick = () => { cycleVariable("matrix") };
+      variableTypeChangers.float.onclick = () => {
+        cycleVariable("float");
+      };
+      variableTypeChangers.int.onclick = () => {
+        cycleVariable("int");
+      };
+      variableTypeChangers.vec2.onclick = () => {
+        cycleVariable("vec2");
+      };
+      variableTypeChangers.vec3.onclick = () => {
+        cycleVariable("vec3");
+      };
+      variableTypeChangers.vec4.onclick = () => {
+        cycleVariable("vec4");
+      };
+      variableTypeChangers.texture.onclick = () => {
+        cycleVariable("texture");
+      };
+      variableTypeChangers.cubemap.onclick = () => {
+        cycleVariable("cubemap");
+      };
+      variableTypeChangers.matrix.onclick = () => {
+        cycleVariable("matrix");
+      };
 
       const Uniform = document.getElementById("Uniform");
       const Attribute = document.getElementById("Attribute");
@@ -532,19 +568,19 @@
         Attribute.checked = false;
         Varying.checked = false;
         Uniform.checked = true;
-      }
+      };
 
       Attribute.onclick = () => {
         Uniform.checked = false;
         Varying.checked = false;
         Attribute.checked = true;
-      }
+      };
 
       Varying.onclick = () => {
         Uniform.checked = false;
         Attribute.checked = false;
         Varying.checked = true;
-      }
+      };
 
       const createVariableButton = document.getElementById("createVariable");
       const variableNameInput = document.getElementById("VarName");
@@ -560,7 +596,7 @@
         }
 
         return false;
-      }
+      };
 
       let errorPopup = null;
 
@@ -592,15 +628,20 @@
               break;
 
             case "varExists":
-              text.innerHTML = "variable " + variable_Exists[1] + " exists as a " + variable_Exists[2];
+              text.innerHTML =
+                "variable " +
+                variable_Exists[1] +
+                " exists as a " +
+                variable_Exists[2];
               break;
 
             default:
-              text.innerHTML = "Honestly I dunno why you got this. Check the console";
+              text.innerHTML =
+                "Honestly I dunno why you got this. Check the console";
               break;
           }
           errorPopup.style.width = "80%";
-          errorPopup.style.transform = "translate(-50%,50%)"
+          errorPopup.style.transform = "translate(-50%,50%)";
           errorPopup.style.position = "absolute";
           errorPopup.style.top = "0%";
           errorPopup.style.left = "50%";
@@ -618,122 +659,227 @@
         }
 
         //Close the modal
-        let scope = "uniform"
+        let scope = "uniform";
         if (Attribute.checked) {
-          scope = "attribute"
-        }
-        else if (Varying.checked) {
-          scope = "varying"
+          scope = "attribute";
+        } else if (Varying.checked) {
+          scope = "varying";
         }
 
         if (typeName == "matrix") {
-          window.workspace.createVariable(variableNameInput.value, currentType.id + "_" + matrixSizeChanger.value, scope + "_" + variableNameInput.value);
+          window.workspace.createVariable(
+            variableNameInput.value,
+            currentType.id + "_" + matrixSizeChanger.value,
+            scope + "_" + variableNameInput.value
+          );
+        } else {
+          window.workspace.createVariable(
+            variableNameInput.value,
+            currentType.id,
+            scope + "_" + variableNameInput.value
+          );
         }
-        else {
-          window.workspace.createVariable(variableNameInput.value, currentType.id, scope + "_" + variableNameInput.value);
-        }
-        
+
         varModal.close();
-      }
+      };
     }
 
     set_float(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_float(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_integer(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_integer(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_v2(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_v2(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_v3(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_v3(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_v4(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_v4(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_bool(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_bool(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_tex(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_tex(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_cubemap(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_cubemap(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     set_matrix(block, generator) {
-      const variableName = Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name;
-      const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC);
+      const variableName = Blockly.Variables.getVariable(
+        window.workspace,
+        block.getFieldValue("VAR")
+      ).name;
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       return `${variableName} = ${value}` + nextBlockToCode(block, generator);
     }
 
     get_matrix(block, generator) {
-      return [`${Blockly.Variables.getVariable(window.workspace,block.getFieldValue('VAR')).name}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `${
+          Blockly.Variables.getVariable(
+            window.workspace,
+            block.getFieldValue("VAR")
+          ).name
+        }` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
   }
 
