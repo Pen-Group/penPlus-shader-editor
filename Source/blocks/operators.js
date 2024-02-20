@@ -496,7 +496,7 @@
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
       return [
-        `mod(float(${A}),float(${B}))` + nextBlockToCode(block, generator),
+        `mod(${A},${B})` + nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }
@@ -505,7 +505,7 @@
       const arith = block.getFieldValue("arithmatic");
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       return [
-        `${arith}(float(${A}))` + nextBlockToCode(block, generator),
+        `${arith}(${A})` + nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }

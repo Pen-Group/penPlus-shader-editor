@@ -97,7 +97,7 @@
       const times = generator.valueToCode(block, "times", Order.ATOMIC);
       const code = generator.statementToCode(block, "code");
       window.loopID += 1;
-      return `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<${times};penPlusLoop_${loopID}++) {\n${code}\n}`;
+      return `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<int(${times});penPlusLoop_${loopID}++) {\n${code}\n}`;
     }
   }
 

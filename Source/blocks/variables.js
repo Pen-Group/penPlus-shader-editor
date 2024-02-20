@@ -32,11 +32,11 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"], // Specifies what types to put in the dropdown
-                defaultType: "float", //The default type of the variable
+                variableTypes: ["float"], 
+                defaultType: "float", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
@@ -54,8 +54,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"], // Specifies what types to put in the dropdown
-                defaultType: "float", //The default type of the variable
+                variableTypes: ["float"], 
+                defaultType: "float", 
               },
             ],
           },
@@ -71,11 +71,11 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"], // Specifies what types to put in the dropdown
-                defaultType: "int", //The default type of the variable
+                variableTypes: ["int"], 
+                defaultType: "int", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 shadow: {
                   type: "int_reporter",
@@ -94,8 +94,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"], // Specifies what types to put in the dropdown
-                defaultType: "int", //The default type of the variable
+                variableTypes: ["int"], 
+                defaultType: "int", 
               },
             ],
           },
@@ -112,12 +112,15 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec2", "VectorCompliant"],
-                variableTypes: ["vec2"], // Specifies what types to put in the dropdown
-                defaultType: "vec2", //The default type of the variable
+                variableTypes: ["vec2"], 
+                defaultType: "vec2", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
+                shadow: {
+                  type: "vec2_reporter",
+                },
               },
             ],
           },
@@ -133,8 +136,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec2"], // Specifies what types to put in the dropdown
-                defaultType: "vec2", //The default type of the variable
+                variableTypes: ["vec2"], 
+                defaultType: "vec2", 
               },
             ],
           },
@@ -151,12 +154,15 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec3", "VectorCompliant"],
-                variableTypes: ["vec3"], // Specifies what types to put in the dropdown
-                defaultType: "vec3", //The default type of the variable
+                variableTypes: ["vec3"], 
+                defaultType: "vec3", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
+                shadow: {
+                  type: "vec3_reporter",
+                },
               },
             ],
           },
@@ -172,8 +178,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec3"], // Specifies what types to put in the dropdown
-                defaultType: "vec3", //The default type of the variable
+                variableTypes: ["vec3"], 
+                defaultType: "vec3", 
               },
             ],
           },
@@ -190,12 +196,15 @@
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 check: ["vec4", "VectorCompliant"],
-                variableTypes: ["vec4"], // Specifies what types to put in the dropdown
-                defaultType: "vec4", //The default type of the variable
+                variableTypes: ["vec4"], 
+                defaultType: "vec4", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
+                shadow: {
+                  type: "vec4_reporter",
+                },
               },
             ],
           },
@@ -211,8 +220,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec4"], // Specifies what types to put in the dropdown
-                defaultType: "vec4", //The default type of the variable
+                variableTypes: ["vec4"], 
+                defaultType: "vec4", 
               },
             ],
           },
@@ -228,11 +237,11 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"], // Specifies what types to put in the dropdown
-                defaultType: "bool", //The default type of the variable
+                variableTypes: ["bool"], 
+                defaultType: "bool", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 check: "Boolean",
               },
@@ -250,8 +259,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"], // Specifies what types to put in the dropdown
-                defaultType: "bool", //The default type of the variable
+                variableTypes: ["bool"], 
+                defaultType: "bool", 
               },
             ],
           },
@@ -267,11 +276,11 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"], // Specifies what types to put in the dropdown
-                defaultType: "texture", //The default type of the variable
+                variableTypes: ["texture"], 
+                defaultType: "texture", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 check: "texture",
               },
@@ -289,8 +298,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"], // Specifies what types to put in the dropdown
-                defaultType: "texture", //The default type of the variable
+                variableTypes: ["texture"], 
+                defaultType: "texture", 
               },
             ],
           },
@@ -306,11 +315,11 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"], // Specifies what types to put in the dropdown
-                defaultType: "cubemap", //The default type of the variable
+                variableTypes: ["cubemap"], 
+                defaultType: "cubemap", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 check: "cubemap",
               },
@@ -328,8 +337,8 @@
                 type: "field_variable",
                 name: "VAR",
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"], // Specifies what types to put in the dropdown
-                defaultType: "cubemap", //The default type of the variable
+                variableTypes: ["cubemap"], 
+                defaultType: "cubemap", 
               },
             ],
           },
@@ -355,11 +364,11 @@
                   "matrix_4x",
                   "matrix_4x2",
                   "matrix_4x3",
-                ], // Specifies what types to put in the dropdown
-                defaultType: "matrix_2x", //The default type of the variable
+                ], 
+                defaultType: "matrix_2x", 
               },
               {
-                type: "input_value", // This expects an input of any type
+                type: "input_value", 
                 name: "VALUE",
                 check: "matrix",
               },
@@ -387,8 +396,8 @@
                   "matrix_4x",
                   "matrix_4x2",
                   "matrix_4x3",
-                ], // Specifies what types to put in the dropdown
-                defaultType: "matrix_2x", //The default type of the variable
+                ], 
+                defaultType: "matrix_2x", 
               },
             ],
           },

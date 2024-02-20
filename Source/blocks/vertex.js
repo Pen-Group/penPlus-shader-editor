@@ -30,7 +30,7 @@
                 },
               },
             ],
-            tooltip: "Set the vertice's screen position to this",
+            tooltip: "Set the vertex's screen position to this",
           },
           {
             opcode: "setZ",
@@ -45,12 +45,12 @@
                 },
               },
             ],
-            tooltip: "Set the vertice's Depth or Z to this",
+            tooltip: "Set the vertex's Depth or Z to this",
           },
           {
             opcode: "setW",
             type: "command",
-            text: "set corner pinch to %1",
+            text: "set w to %1",
             arguments: [
               {
                 type: "input_value",
@@ -60,7 +60,7 @@
                 },
               },
             ],
-            tooltip: "Set the vertice's corner pinch or W value to this",
+            tooltip: "Set the vertex's corner pinch or W value to this",
           },
           "---",
           {
@@ -76,7 +76,7 @@
                 },
               },
             ],
-            tooltip: "Change the vertice's x position by the desired value.",
+            tooltip: "Change the vertex's x position by the desired value.",
           },
           {
             opcode: "changeY",
@@ -91,7 +91,7 @@
                 },
               },
             ],
-            tooltip: "Change the vertice's y position by the desired value.",
+            tooltip: "Change the vertex's y position by the desired value.",
           },
           {
             opcode: "changeZ",
@@ -106,12 +106,12 @@
                 },
               },
             ],
-            tooltip: "Change the vertice's Depth or Z by this",
+            tooltip: "Change the vertex's Depth or Z by this",
           },
           {
             opcode: "changeW",
             type: "command",
-            text: "change corner pinch by %1",
+            text: "change w by %1",
             arguments: [
               {
                 type: "input_value",
@@ -121,32 +121,32 @@
                 },
               },
             ],
-            tooltip: "Change the vertice's corner pinch or W value by this",
+            tooltip: "Change the vertex's corner pinch or W value by this",
           },
           "---",
           {
             opcode: "getX",
             type: "reporter",
             text: "vertex X",
-            tooltip: "Get the vertice's X position",
+            tooltip: "Get the vertex's X position",
           },
           {
             opcode: "getY",
             type: "reporter",
             text: "vertex Y",
-            tooltip: "Get the vertice's Y position",
+            tooltip: "Get the vertex's Y position",
           },
           {
             opcode: "getZ",
             type: "reporter",
             text: "vertex depth",
-            tooltip: "Get the vertice's depth or Z position",
+            tooltip: "Get the vertex's depth or Z position",
           },
           {
             opcode: "getW",
             type: "reporter",
-            text: "vertex corner pinch",
-            tooltip: "Get the vertice's corner pinch or W position",
+            text: "vertex w",
+            tooltip: "Get the vertex's corner pinch or W position",
           },
         ],
       };

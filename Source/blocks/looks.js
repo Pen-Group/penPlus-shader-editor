@@ -61,26 +61,32 @@
           {
             opcode: "pixX",
             type: "reporter",
-            text: "pixel X",
+            text: "pixel x",
             tooltip: "The pixel's X position",
           },
           {
             opcode: "pixY",
             type: "reporter",
-            text: "pixel Y",
+            text: "pixel y",
+            tooltip: "The pixel's Y position",
+          },
+          {
+            opcode: "pixZ",
+            type: "reporter",
+            text: "pixel depth",
             tooltip: "The pixel's Y position",
           },
           "---",
           {
             opcode: "resX",
             type: "reporter",
-            text: "resolution X",
+            text: "resolution width",
             tooltip: "The render's width",
           },
           {
             opcode: "resY",
             type: "reporter",
-            text: "resolution Y",
+            text: "resolution height",
             tooltip: "The render's height",
           },
         ],
@@ -92,7 +98,7 @@
       return `gl_FragColor = ${colour};` + nextBlockToCode(block, generator);
     }
 
-    getPixColor(block, generator) {
+    getPixColor() {
       return [`gl_FragColor`, Order.ATOMIC];
     }
 
@@ -101,7 +107,7 @@
       return `v_color = ${colour};` + nextBlockToCode(block, generator);
     }
 
-    getPixColor(block, generator) {
+    getPixColor() {
       return [`v_color`, Order.ATOMIC];
     }
 
@@ -111,6 +117,10 @@
 
     pixY() {
       return [`gl_FragCoord.y`, Order.ATOMIC];
+    }
+
+    pixZ() {
+      return [`gl_FragCoord.z`, Order.ATOMIC];
     }
 
     resX() {

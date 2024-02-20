@@ -37,17 +37,17 @@ function addImportantReporters() {
 
   addBlocklyBlock("vec2_reporter", "reporter", {
     message0: "x:%1 y:%2",
-    style: "variable_vec2_block",
+    style: "vec2_blocks",
     output: "vec2",
     args0: [
       {
         type: "field_number",
-        name: "NUMBER",
+        name: "x",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER2",
+        name: "y",
         value: 0,
       },
     ],
@@ -55,22 +55,22 @@ function addImportantReporters() {
 
   addBlocklyBlock("vec3_reporter", "reporter", {
     message0: "x:%1 y:%2 z:%3",
-    style: "variable_vec3_block",
+    style: "vec3_blocks",
     output: "vec3",
     args0: [
       {
         type: "field_number",
-        name: "NUMBER",
+        name: "x",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER2",
+        name: "y",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER3",
+        name: "z",
         value: 0,
       },
     ],
@@ -78,27 +78,27 @@ function addImportantReporters() {
 
   addBlocklyBlock("vec4_reporter", "reporter", {
     message0: "x:%1 y:%2 z:%3 w:%4",
-    style: "variable_vec4_block",
+    style: "vec4_blocks",
     output: "vec4",
     args0: [
       {
         type: "field_number",
-        name: "NUMBER",
+        name: "x",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER2",
+        name: "y",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER2",
+        name: "z",
         value: 0,
       },
       {
         type: "field_number",
-        name: "NUMBER2",
+        name: "w",
         value: 0,
       },
     ],
@@ -191,4 +191,5 @@ function addBlocks() {
   new window.categories.controls();
   new window.categories.operators();
   new window.categories.variables();
+  new window.categories.matrix();
 }
