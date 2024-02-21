@@ -682,7 +682,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_float(block, generator) {
@@ -704,7 +704,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_integer(block, generator) {
@@ -726,7 +726,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_v2(block, generator) {
@@ -748,7 +748,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_v3(block, generator) {
@@ -770,7 +770,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_v4(block, generator) {
@@ -792,7 +792,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_bool(block, generator) {
@@ -814,7 +814,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_tex(block, generator) {
@@ -836,7 +836,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_cubemap(block, generator) {
@@ -858,7 +858,7 @@
       ).name;
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      return `${variableName} = ${value}` + nextBlockToCode(block, generator);
+      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
     }
 
     get_matrix(block, generator) {

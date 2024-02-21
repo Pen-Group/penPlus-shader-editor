@@ -135,6 +135,10 @@ highp float eulernum(highp float a) {
 }
 `;
 
+  workspace.getAllVariables().forEach(variable => {
+    window.Generated_GLSL += `\nuniform highp ${variable.type} ${variable.name};`
+  });
+
   window.Generated_GLSL += window.GLSL_GEN.workspaceToCode(window.workspace);
 
   window.Generated_Frag = "";
