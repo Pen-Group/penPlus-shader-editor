@@ -659,14 +659,16 @@
 
         if (typeName == "matrix") {
           window.workspace.createVariable(
-            variableNameInput.value,
+            scope + " " + variableNameInput.value,
             currentType.id + "_" + matrixSizeChanger.value,
+            //This is going to be random anyways
             scope + "_" + variableNameInput.value
           );
         } else {
           window.workspace.createVariable(
-            variableNameInput.value,
+            scope + " " + variableNameInput.value,
             currentType.id,
+            //This is going to be random anyways
             scope + "_" + variableNameInput.value
           );
         }

@@ -135,9 +135,20 @@ highp float eulernum(highp float a) {
 }
 `;
 
+  //Add Variables
   workspace.getAllVariables().forEach(variable => {
-    window.Generated_GLSL += `\nuniform highp ${variable.type} ${variable.name};`
+    let type = variable.type;
+
+    if (type == "texture") type = "sampler2D"; 
+    if (type == "cubemap") type = "samplerCube"; 
+
+    //Types that don't have precision
+    if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${variable.type} ${variable.name.split(" ")[1]};\n`;
+    else window.Generated_GLSL += `\n${variable.name.split(" ")[0]} highp ${variable.type} ${variable.name.split(" ")[1]};\n`;
   });
+
+  //Add some spacing
+  window.Generated_GLSL += `\n`;
 
   window.Generated_GLSL += window.GLSL_GEN.workspaceToCode(window.workspace);
 
