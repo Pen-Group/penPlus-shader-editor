@@ -356,14 +356,8 @@
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 variableTypes: [
                   "matrix_2x",
-                  "matrix_2x3",
-                  "matrix_2x4",
                   "matrix_3x",
-                  "matrix_3x2",
-                  "matrix_3x4",
-                  "matrix_4x",
-                  "matrix_4x2",
-                  "matrix_4x3",
+                  "matrix_4x"
                 ], 
                 defaultType: "matrix_2x", 
               },
@@ -388,14 +382,8 @@
                 variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
                 variableTypes: [
                   "matrix_2x",
-                  "matrix_2x3",
-                  "matrix_2x4",
                   "matrix_3x",
-                  "matrix_3x2",
-                  "matrix_3x4",
                   "matrix_4x",
-                  "matrix_4x2",
-                  "matrix_4x3",
                 ], 
                 defaultType: "matrix_2x", 
               },
@@ -497,14 +485,8 @@
                 <button id="createVariable" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">OK</button>
                 <select id="matrixSizes" name="Matrix Sizes" style="position:absolute; left:15%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1); visibility:hidden;">
                   <option value="2x">2x2</option>
-                  <option value="2x3">2x3</option>
-                  <option value="2x4">2x4</option>
                   <option value="3x">3x3</option>
-                  <option value="3x2">3x2</option>
-                  <option value="3x4">3x4</option>
                   <option value="4x">4x4</option>
-                  <option value="4x2">4x2</option>
-                  <option value="4x3">4x3</option>
                 </select>
               </div>
             </div>

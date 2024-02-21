@@ -11,122 +11,255 @@
           color3: "#5560cb",
           blocks: [
             {
-              opcode: "setVertColor",
-              type: "command",
-              text: "set the vertice's colour to %1",
-              tooltip: "Will be ran per vertex",
+              opcode: "mat2",
+              type: "reporter",
+              text: "%1 %2 \n %3 %4",
+              tooltip: "A 2x2 Matrix",
               arguments: [
                 {
-                  type: "input_value",
-                  name: "COLOR",
-                  check: "vec4",
+                  type: "input_value", 
+                  name: "00",
                   shadow: {
-                    type: "color_reporter",
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "01",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "10",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "11",
+                  shadow: {
+                    type: "number_reporter",
                   },
                 },
               ],
             },
             {
-              opcode: "getVertColor",
+              opcode: "mat3",
               type: "reporter",
-              text: "vertex colour",
-              tooltip: "Will be ran per pixel",
-            },
-            "---",
-            {
-              opcode: "setPixColor",
-              type: "command",
-              text: "set the pixel's colour to %1",
-              tooltip: "Will be ran per vertex",
+              text: "%1 %2 %3 \n %4 %5 %6 \n %7 %8 %9",
+              tooltip: "A 3x3 Matrix",
               arguments: [
                 {
-                  type: "input_value",
-                  name: "COLOR",
-                  check: "vec4",
+                  type: "input_value", 
+                  name: "00",
                   shadow: {
-                    type: "color_reporter",
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "01",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "02",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "10",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "11",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "12",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "20",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "21",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "22",
+                  shadow: {
+                    type: "number_reporter",
                   },
                 },
               ],
             },
             {
-              opcode: "getPixColor",
+              opcode: "mat4",
               type: "reporter",
-              text: "pixel colour",
-              tooltip: "Will be ran per pixel",
-            },
-            "---",
-            {
-              opcode: "pixX",
-              type: "reporter",
-              text: "pixel x",
-              tooltip: "The pixel's X position",
-            },
-            {
-              opcode: "pixY",
-              type: "reporter",
-              text: "pixel y",
-              tooltip: "The pixel's Y position",
-            },
-            {
-              opcode: "pixZ",
-              type: "reporter",
-              text: "pixel depth",
-              tooltip: "The pixel's Y position",
-            },
-            "---",
-            {
-              opcode: "resX",
-              type: "reporter",
-              text: "resolution width",
-              tooltip: "The render's width",
-            },
-            {
-              opcode: "resY",
-              type: "reporter",
-              text: "resolution height",
-              tooltip: "The render's height",
+              text: "%1 %2 %3 %4 \n %5 %6 %7 %8 \n %9 %10 %11 %12 \n %13 %14 %15 %16",
+              tooltip: "A 3x3 Matrix",
+              arguments: [
+                {
+                  type: "input_value", 
+                  name: "00",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "01",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "02",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "03",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "10",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "11",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "12",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "13",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "20",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "21",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "22",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "23",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "30",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "31",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "32",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "input_value", 
+                  name: "33",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+              ],
             },
           ],
         };
       }
   
-      setPixColor(block, generator) {
-        const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
-        return `gl_FragColor = ${colour};` + nextBlockToCode(block, generator);
+      mat2(block, generator) {
+        return [
+          `mat2(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+          Order.ATOMIC,
+        ];
       }
-  
-      getPixColor() {
-        return [`gl_FragColor`, Order.ATOMIC];
+
+      mat3(block, generator) {
+        return [
+          `mat3(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "02", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)},${generator.valueToCode(block, "12", Order.ATOMIC)},${generator.valueToCode(block, "20", Order.ATOMIC)},${generator.valueToCode(block, "21", Order.ATOMIC)},${generator.valueToCode(block, "22", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+          Order.ATOMIC,
+        ];
       }
-  
-      setPixColor(block, generator) {
-        const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
-        return `v_color = ${colour};` + nextBlockToCode(block, generator);
-      }
-  
-      getPixColor() {
-        return [`v_color`, Order.ATOMIC];
-      }
-  
-      pixX() {
-        return [`gl_FragCoord.x`, Order.ATOMIC];
-      }
-  
-      pixY() {
-        return [`gl_FragCoord.y`, Order.ATOMIC];
-      }
-  
-      pixZ() {
-        return [`gl_FragCoord.z`, Order.ATOMIC];
-      }
-  
-      resX() {
-        return [`u_res.x`, Order.ATOMIC];
-      }
-  
-      resY() {
-        return [`u_res.y`, Order.ATOMIC];
+
+      mat4(block, generator) {
+        return [
+          `mat4(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "02", Order.ATOMIC)},${generator.valueToCode(block, "03", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)},${generator.valueToCode(block, "12", Order.ATOMIC)},${generator.valueToCode(block, "13", Order.ATOMIC)},${generator.valueToCode(block, "20", Order.ATOMIC)},${generator.valueToCode(block, "21", Order.ATOMIC)},${generator.valueToCode(block, "22", Order.ATOMIC)},${generator.valueToCode(block, "23", Order.ATOMIC)},${generator.valueToCode(block, "30", Order.ATOMIC)},${generator.valueToCode(block, "31", Order.ATOMIC)},${generator.valueToCode(block, "32", Order.ATOMIC)},${generator.valueToCode(block, "33", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+          Order.ATOMIC,
+        ];
       }
     }
   
