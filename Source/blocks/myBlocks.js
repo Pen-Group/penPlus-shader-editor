@@ -11,7 +11,7 @@
           color3: "#FF3355",
           blocks: [
             {
-              opcode: "customBlockTest",
+              opcode: "customBlockDef",
               type: "hat",
               text: "define %1",
               tooltip: "A Custom Block!",
@@ -21,15 +21,42 @@
                   name: "statement",
                   check: "myBlock_Input",
                   shadow: {
-                    type: "myblocks_customBlockCInline",
+                    type: "myblocks_customBlockPreview",
                   },
                 },
               ],
             },
             {
-                opcode: "customBlockCInline",
+              opcode: "customBlockReturnDef",
+              type: "hat_return",
+              text: "define %1 %2 %3 return %4",
+              tooltip: "A Custom Block that returns a [insert type here]!",
+              arguments: [
+                {
+                  type: "input_value",
+                  name: "statement",
+                  check: "myBlock_Input",
+                  shadow: {
+                    type: "myblocks_customBlockPreview",
+                  },
+                },
+                {
+                  type: "input_dummy",
+                },
+                {
+                  type: "input_statement",
+                  name: "code",
+                },
+                {
+                  type: "input_value",
+                  name: "return",
+                },
+              ],
+            },
+            {
+                opcode: "customBlockPreview",
                 type: "myBlockShadow",
-                text: "wghat in the fudge",
+                text: "default Custom Block",
                 tooltip: "A Custom Block!",
                 output: "myBlock_Input",
                 hideFromPallete: true

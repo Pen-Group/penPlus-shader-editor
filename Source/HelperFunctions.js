@@ -5,6 +5,9 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       BlockJson.nextStatement = null;
       break;
 
+    case "hat_return":
+      break;
+
     case "reporter":
       BlockJson.output = BlockJson.output || "Number";
       break;
