@@ -25,6 +25,10 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       BlockJson.previousStatement = "Action";
       break;
 
+    case "terminal":
+      BlockJson.previousStatement = "Action";
+      break;
+
     default:
       BlockJson.nextStatement = null;
       BlockJson.previousStatement = null;

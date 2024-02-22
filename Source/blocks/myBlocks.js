@@ -3,6 +3,7 @@
   
     class myBlocks_category extends window.penPlusExtension {
       getInfo() {
+        addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
         return {
           name: "My Blocks",
           id: "myblocks",
@@ -30,6 +31,7 @@
               opcode: "customBlockReturnDef",
               type: "hat_return",
               text: "define %1 %2 %3 return %4",
+              style: "vec3_blocks",
               tooltip: "A Custom Block that returns a [insert type here]!",
               arguments: [
                 {
@@ -60,13 +62,28 @@
                 tooltip: "A Custom Block!",
                 output: "myBlock_Input",
                 hideFromPallete: true
-              }
+            },
+            {
+                opcode: "customBlockReturn",
+                type: "terminal",
+                text: "return %1",
+                tooltip: "A Custom Block!",
+                style: "return_block",
+                arguments: [
+                  {
+                    type: "input_value",
+                    name: "return",
+                  },
+                ],
+            }
           ],
         };
       }
   
-      vertex(block, generator) {
-        return `\n//hello world\n`;
+      set_integer(block, generator) {
+        const value = generator.valueToCode(block, "return", Order.ATOMIC);
+  
+        return `return ${value};` + nextBlockToCode(block, generator);
       }
     }
   
