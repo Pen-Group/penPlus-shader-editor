@@ -192,4 +192,5 @@ function addBlocks() {
   new window.categories.operators();
   new window.categories.variables();
   new window.categories.matrix();
+  new window.categories.myBlocks();
 }

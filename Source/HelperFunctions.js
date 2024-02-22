@@ -9,6 +9,10 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       BlockJson.output = BlockJson.output || "Number";
       break;
 
+    case "myBlockShadow":
+      BlockJson.output = "myBlock_Input";
+      break;
+
     case "boolean":
       BlockJson.output = "Boolean";
       break;
@@ -278,8 +282,9 @@ window.penPlusExtension = class {
             }
             //Add the blockly block definition
             addBlocklyBlock(id + opcode, type, blockDef);
-
-            createdContentData.contents.push(defArgs);
+            if (!block.hideFromPallete) {
+              createdContentData.contents.push(defArgs);
+            }
             break;
         }
       }
