@@ -31,7 +31,7 @@ window.customZelosConstant = class extends window.Blockly.zelos.ConstantProvider
 
         function makeRightPath(height, up, right) {
             const halfHeight = height / 2;
-            return (Blockly.utils.svgPaths.lineTo(0,height));
+            return (Blockly.utils.svgPaths.lineTo(0,0));
         }
 
         var this2 = this
@@ -50,7 +50,7 @@ window.customZelosConstant = class extends window.Blockly.zelos.ConstantProvider
                 return connectionHeight / 2;
             },
             connectionOffsetX(connectionWidth) {
-                return -connectionWidth;
+                return -connectionWidth/2;
             },
             pathDown(height) {
                 return makeMainPath(height,true,false);

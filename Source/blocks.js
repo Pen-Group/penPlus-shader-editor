@@ -23,6 +23,19 @@ function addImportantReporters() {
     ],
   });
 
+  addBlocklyBlock("string_reporter", "reporter", {
+    message0: " %1 ",
+    output: "string",
+    args0: [
+      {
+        type: "field_input",
+        name: "STRING",
+        value: "Text Here",
+        spellcheck: false  
+      },
+    ],
+  });
+
   addBlocklyBlock("int_reporter", "reporter", {
     message0: " %1 ",
     args0: [

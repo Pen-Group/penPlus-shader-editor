@@ -5,11 +5,11 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       BlockJson.nextStatement = null;
       break;
 
-    case "hat_return":
+    case "hat_customBlock":
       break;
 
     case "reporter":
-      BlockJson.output = BlockJson.output || "Number";
+      BlockJson.output |= "Number";
       break;
 
     case "myBlockShadow":
@@ -21,12 +21,12 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       break;
 
     case "command":
-      BlockJson.nextStatement = "Action";
-      BlockJson.previousStatement = "Action";
+      BlockJson.nextStatement |= "Action";
+      BlockJson.previousStatement |= "Action";
       break;
 
     case "terminal":
-      BlockJson.previousStatement = "Action";
+      BlockJson.previousStatement |= "Action";
       break;
 
     default:
@@ -263,8 +263,16 @@ window.penPlusExtension = class {
               blockDef.output = block.output;
             }
 
-            if (block.tooltip) {
-              blockDef.tooltip = block.tooltip;
+            if (block.output) {
+              blockDef.output = block.output;
+            }
+
+            if (block.nextStatement) {
+              blockDef.nextStatement = block.nextStatement;
+            }
+
+            if (block.previousStatement) {
+              blockDef.previousStatement = block.previousStatement;
             }
 
             //If it has arguments loop through those and add them to the args 0

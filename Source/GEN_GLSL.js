@@ -101,6 +101,11 @@ function createGLSLGen() {
     const w = block.getFieldValue("w");
     return [`vec4(${x},${y},${z},${w})`, Order.ATOMIC];
   };
+
+  GLSL_GEN.forBlock["string_reporter"] = function (block, generator) {
+    const numba = block.getFieldValue("STRING");
+    return [`${numba}`, Order.ATOMIC];
+  };
 }
 
 function updateGLSL(event) {
@@ -141,6 +146,11 @@ highp float eulernum(highp float a) {
 
     if (type == "texture") type = "sampler2D"; 
     if (type == "cubemap") type = "samplerCube"; 
+    if (type == "matrix_2x") type = "mat2"; 
+    if (type == "matrix_3x") type = "mat3"; 
+    if (type == "matrix_4x") type = "mat4"; 
+
+    if (!variable.name.split(" ")[1]) return;
 
     //Types that don't have precision
     if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${variable.type} ${variable.name.split(" ")[1]};\n`;

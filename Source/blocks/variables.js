@@ -6,7 +6,7 @@
       addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
       addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
       addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
-      addBlockColorSet("int_blocks", "#ffde00", "#e6c800", "#ccb100");
+      addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");
       addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
       addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
       return {
@@ -19,7 +19,7 @@
           {
             opcode: "createVariable",
             type: "button",
-            text: "Create Variable",
+            text: "Make a Variable",
           },
           "Float",
           {
@@ -402,7 +402,7 @@
               <p class="noSelect" style="position:absolute;left:50%;top:75%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Only use A-Z</p>
             </div>
             <div class="noSelect" style="background-color: var(--EditorTheme_Color_1); width:100%; height:1.1em; position:absolute;  color:var(--EditorTheme_Text_3); text-align: center; justify-content: center; align-items: center;font-size: 2em;">
-              Create Variable  
+              New Variable  
             </div>
             <div style="position:absolute; top:40%; width:100%; height:40%; color:var(--EditorTheme_Text_1);">
               <p class="noSelect" style="position:absolute;left:50%;top:75%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Variable Type</p>
