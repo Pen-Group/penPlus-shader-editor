@@ -10,6 +10,7 @@
         color1: "#FF6680",
         color2: "#FF4D6A",
         color3: "#FF3355",
+        dynamic:"createCustomBlocks",
         blocks: [
           {
             opcode: "customBlockDef",
@@ -263,6 +264,20 @@
           break;
       }
       return `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});`
+    }
+
+    createCustomBlocks(workspace) {
+      return [
+        {
+          opcode: "dynamicTest",
+          type: "terminal",
+          text: "Hello I am dynamic",
+          tooltip: "A dynamic block",
+          operation: () => {
+            return `//hello!`
+          }
+        }    
+      ]
     }
   }
 

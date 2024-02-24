@@ -198,20 +198,23 @@ window.penPlusExtension = class {
     };
 
     //Loop through each block deciding its fate!
-    myInfo.blocks.forEach((block) => {
+    this.defaultBlockInfo = [];
+
+    const addBlock = (block,dynamicBlock) => {
+      let blockData = {};
       //Seperator Shorthand
       if (block == "---") {
-        createdContentData.contents.push({
+        blockData = {
           kind: "label",
           text: "",
-        });
+        };
       }
       //Label Shorthand
       else if (typeof block == "string") {
-        createdContentData.contents.push({
+        blockData = {
           kind: "label",
           text: block,
-        });
+        };
       }
       //if it is an object (Or anything else really)
       else {
@@ -222,19 +225,19 @@ window.penPlusExtension = class {
         const opcode = block.opcode;
         switch (type) {
           case "label":
-            createdContentData.contents.push({
+            blockData = {
               kind: "label",
               text: text,
-            });
+            };
             break;
 
           case "button":
             //Create button
-            createdContentData.contents.push({
+            blockData = {
               kind: "button",
               text: text,
               callbackKey: id + opcode,
-            });
+            };
 
             //Register callback code for the button
             window.workspace.registerButtonCallback(id + opcode, this[opcode]);
@@ -242,8 +245,12 @@ window.penPlusExtension = class {
 
           default:
             //Declare the function to convert to
-            window.GLSL_GEN.forBlock[id + opcode] = this[opcode];
-
+            if (dynamicBlock) {
+              window.GLSL_GEN.forBlock[id + opcode] = block.operation;
+            }
+            else {
+              window.GLSL_GEN.forBlock[id + opcode] = this[opcode];
+            }
             //Define the arguments used in block creation
             let defArgs = {
               kind: "block",
@@ -297,13 +304,37 @@ window.penPlusExtension = class {
             }
             //Add the blockly block definition
             addBlocklyBlock(id + opcode, type, blockDef);
-            if (!block.hideFromPallete) {
-              createdContentData.contents.push(defArgs);
-            }
+            blockData = defArgs;
             break;
         }
       }
+
+      if (!block.hideFromPallete) {
+        if (dynamicBlock) return blockData;
+        createdContentData.contents.push(blockData);
+      }
+    }
+    
+    myInfo.blocks.forEach((block) => {
+      addBlock(block);
     });
+
+    this.defaultBlockInfo = createdContentData.contents;
+
+    //Check for a dynamic function
+    if (myInfo.dynamic) {
+      createdContentData.custom = 'dynamic_'+myInfo.id;
+      window.workspace.registerToolboxCategoryCallback('dynamic_'+myInfo.id, (workspace) => {
+        let createdBlockData = this[myInfo.dynamic](workspace);
+        let formattedDynamic = [];
+        createdBlockData.forEach(block => {
+          formattedDynamic.push(addBlock(block,true));
+        })
+        console.log(formattedDynamic);
+        console.log(this.defaultBlockInfo);
+        return this.defaultBlockInfo.concat(formattedDynamic);
+      });  
+    }
 
     window.toolbox.contents.push(createdContentData);
 
