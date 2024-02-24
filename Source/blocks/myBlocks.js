@@ -1,6 +1,72 @@
 {
   window.categories = window.categories || {};
 
+  window.blockIterations = {};
+
+  let customBlockArguments = []
+
+  function __colorCustomBlock(customBlockType) {
+    switch (customBlockType) {
+      case "highp float":
+        return "variables_blocks";
+
+      case "int":
+        return "int_blocks";
+
+      case "highp vec2":
+        return "vec2_blocks";
+
+      case "highp vec3":
+        return "vec3_blocks";
+
+      case "highp vec4":
+        return "vec4_blocks";
+
+      case "highp mat2":
+        return "matrix_blocks";
+
+      case "highp mat3":
+        return "matrix_blocks";
+
+      case "highp mat4":
+        return "matrix_blocks";
+
+      default:
+        return "myblocks_blocks";
+    }
+  }
+
+  function __getShadowForArgumentType(argumentType) {
+    switch (argumentType) {
+      case "highp float":
+        return "number_reporter";
+
+      case "int":
+        return "int_reporter";
+
+      case "highp vec2":
+        return "vec2_reporter";
+
+      case "highp vec3":
+        return "vec3_reporter";
+
+      case "highp vec4":
+        return "vec4_reporter";
+
+      case "highp mat2":
+        return "matrix_mat2";
+
+      case "highp mat3":
+        return "matrix_mat3";
+
+      case "highp mat4":
+        return "matrix_mat4";
+
+      default:
+        return "number_reporter";
+    }
+  }
+
   class myBlocks_category extends window.penPlusExtension {
     getInfo() {
       addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
@@ -114,97 +180,41 @@
     customBlockDef(block, generator) {
       //Cheap hack
       const customBlockType = block.getFieldValue("type");
+      const name = generator.valueToCode(block, "name", Order.ATOMIC);
       //If lily and or anybody else knows a better solution please commit. I fucking beg
       window.customBlockType = customBlockType;
+      customBlockArguments = [];
 
       const innerCode = generator.statementToCode(block, "code");
       const functionArguments = generator.statementToCode(block, "arguments");
 
       //Stupid Switch statement prob a way to do this without a switch
-      switch (customBlockType) {
-        case "highp float":
-          block.setStyle("variables_blocks")
-          break;
+      block.setStyle(__colorCustomBlock(customBlockType));
 
-        case "int":
-          block.setStyle("int_blocks")
-          break;
+      window.customBlocks.push({
+        name:name,
+        type:customBlockType,
+        arguments:customBlockArguments
+      });
 
-        case "highp vec2":
-          block.setStyle("vec2_blocks")
-          break;
-
-        case "highp vec3":
-          block.setStyle("vec3_blocks")
-          break;
-
-        case "highp vec4":
-          block.setStyle("vec4_blocks")
-          break;
-
-        case "highp mat2":
-          block.setStyle("matrix_blocks")
-          break;
-
-        case "highp mat3":
-          block.setStyle("matrix_blocks")
-          break;
-
-        case "highp mat4":
-          block.setStyle("matrix_blocks")
-          break;
-
-        default:
-          block.setStyle("myblocks_blocks")
-          break;
-      }
-      //block.applyColour();
-      return `${customBlockType} ${generator.valueToCode(block, "name", Order.ATOMIC)}(${functionArguments}) {\n${innerCode}\n}`
+      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}`
     }
 
     customBlockArgument(block, generator) {
       const customBlockType = block.getFieldValue("type");
-      switch (customBlockType) {
-        case "highp float":
-          block.setStyle("variables_blocks")
-          break;
 
-        case "int":
-          block.setStyle("int_blocks")
-          break;
+      block.setStyle(__colorCustomBlock(customBlockType));
 
-        case "highp vec2":
-          block.setStyle("vec2_blocks")
-          break;
+      const argumentName = generator.valueToCode(block, "name", Order.ATOMIC);
 
-        case "highp vec3":
-          block.setStyle("vec3_blocks")
-          break;
-
-        case "highp vec4":
-          block.setStyle("vec4_blocks")
-          break;
-
-        case "highp mat2":
-          block.setStyle("matrix_blocks")
-          break;
-
-        case "highp mat3":
-          block.setStyle("matrix_blocks")
-          break;
-
-        case "highp mat4":
-          block.setStyle("matrix_blocks")
-          break;
-
-        default:
-          block.setStyle("myblocks_blocks")
-          break;
-      }
+      customBlockArguments.push({
+        name: argumentName,
+        type: customBlockType
+      })
 
       let nextCode = nextBlockToCode(block, generator);
 
-      return `${customBlockType} ${generator.valueToCode(block, "name", Order.ATOMIC)} ${nextCode ? `, ${nextCode}` : ``}`;
+      return `${customBlockType} ${argumentName} ${nextCode ? `, ${nextCode}` : ``}`;
     }
 
     customBlockReturn(block, generator) {
@@ -263,22 +273,50 @@
           block.inputList[0].setCheck("noInput");
           break;
       }
-      
+
       return `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});`
     }
 
     createCustomBlocks(workspace) {
-      return [
-        {
-          opcode: "dynamicTest",
-          type: "terminal",
-          text: "Hello I am dynamic",
-          tooltip: "A dynamic block",
-          operation: () => {
-            return `//hello!`
-          }
-        }    
-      ]
+      let createdBlocks = [];
+      if (window.customBlocks) {
+        window.customBlocks.forEach(block => {
+          let block_arguments = [];
+          let block_arg_count = 0;
+          let block_arg_string = "";
+          block.arguments.forEach(argument => {
+            block_arguments.push({
+              type: "input_value", 
+              name: `${block_arg_count}`,
+              shadow: {
+                type: __getShadowForArgumentType(argument.type),
+              },
+            });
+            block_arg_count += 1;
+            block_arg_string += ` ${argument.name}:%${block_arg_count}`;
+          });
+
+          console.log(block.name + block_arg_string);
+
+          //Dumb idea. Might work.
+          window.blockIterations[block.name] |= 0; 
+          window.blockIterations[block.name] += 1; 
+
+          createdBlocks.push({
+              opcode: `customBlock_${block.name}_${window.blockIterations[block.name]}`,
+              type: (customBlockType == "void") ? "command" : "reporter",
+              text: block.name + block_arg_string,
+              style:__colorCustomBlock(block.type),
+              tooltip: "Your custom block!",
+              arguments: block_arguments,
+              operation: () => {
+                return `${block.name}();`;
+              }
+            });
+        })
+        return createdBlocks;
+      }
+      return [];
     }
   }
 

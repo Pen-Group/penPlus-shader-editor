@@ -58,11 +58,6 @@ function onAllAddonsLoaded() {
     Blockly.Events.BLOCK_MOVE,
   ]);
 
-  //Prevent zooming
-  Blockly.VerticalFlyout.prototype.getFlyoutScale = function () {
-    return 0.8;
-  };
-
   // Add the disableOrphans event handler. This is not done automatically by
   // the plugin and should be handled by your application.
   workspace.addChangeListener(Blockly.Events.disableOrphans);

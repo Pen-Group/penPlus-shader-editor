@@ -111,6 +111,8 @@ function createGLSLGen() {
 function updateGLSL(event) {
   if (window.workspace.isDragging()) return; // Don't update while changes are happening.
   if (!window.supportedEvents.has(event.type)) return;
+  
+  window.customBlocks = [];
 
   document.getElementById("shaderLog").innerHTML = "";
 
@@ -166,6 +168,8 @@ highp float eulernum(highp float a) {
   window.Generated_Vert = "";
 
   window.loopID = 0;
+
+  workspace.getToolbox().refreshSelection();
 
   if (!(window.Generated_GLSL.includes("//Fragment Shader") && window.Generated_GLSL.includes("//Vertex Shader"))) {
     if (!window.Generated_GLSL.includes("//Vertex Shader") && window.Generated_GLSL.includes("//Fragment Shader")) {

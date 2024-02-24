@@ -1,6 +1,19 @@
 {
   window.categories = window.categories || {};
 
+  function __colorVariableBlock(variableType) {
+    switch (variableType) {
+      case "float":
+        return "variables_blocks";
+
+      case "matrix_2x" || "matrix_3x" || "matrix_4x":
+        return "matrix_blocks";
+
+      default:
+        return `${variableType}_blocks`;
+    }
+  }
+
   class variables_category extends window.penPlusExtension {
     getInfo() {
       addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
@@ -15,25 +28,66 @@
         color1: "#ff8c1a",
         color2: "#dd8126",
         color3: "#cc7015",
+        dynamic:"createVariableReporters",
         blocks: [
           {
             opcode: "createVariable",
             type: "button",
             text: "Make a Variable",
           },
-          "Float",
-          {
-            opcode: "set_float",
+        ],
+      };
+    }
+
+    createVariableReporters(workspace) {
+      let returnedBlocks = [];
+      const variables = workspace.getAllVariables();
+      variables.forEach(variable => {
+        let type = variable.type;
+
+        returnedBlocks.push({
+          opcode: `variable_${variable.name.split(" ")[1]}`,
+          type: (type == "bool") ? "boolean" : "reporter",
+          text: variable.name,
+          style:__colorVariableBlock(type),
+          tooltip: "A variable",
+          operation: () => {
+            return `${variable.name.split(" ")[1]}`;
+          }
+        })
+      });
+
+      if (variables.length > 0) {
+        let validVariables = []
+        variables.forEach(variable => {
+          if (variable.type != "texture" && variable.type != "cubemap") {
+            validVariables.push(variable);
+          }
+        });
+
+        if (validVariables.length > 0) {
+          returnedBlocks.push({
+            opcode: "variable_set",
             type: "command",
             text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
+            tooltip: "sets the desired variable to the value",
+            style:__colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
                 name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"], 
-                defaultType: "float", 
+                variable: validVariables[0].name,
+                defaultType: validVariables[0].type,
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
               },
               {
                 type: "input_value", 
@@ -43,354 +97,140 @@
                 },
               },
             ],
-          },
-          {
-            opcode: "get_float",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["float"], 
-                defaultType: "float", 
-              },
-            ],
-          },
-          "Integer",
-          {
-            opcode: "set_integer",
+            operation: (block, generator) => {
+              const variable = Blockly.Variables.getVariable(
+                window.workspace,
+                block.getFieldValue("VAR")
+              );
+
+              const variableName = variable.name;
+              const variableType = variable.type;
+
+              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+              block.setStyle(__colorVariableBlock(variableType));
+
+              return `${variableName.split(" ")[1]} = ${value};\n`;
+            }
+          });
+
+          returnedBlocks.push({
+            opcode: "variable_change",
             type: "command",
-            text: "set %1 to %2",
-            style: "int_blocks",
-            tooltip: "Set the variable to the desired value.",
+            text: "change %1 by %2",
+            tooltip: "changes the desired variable by the value",
+            style:__colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
                 name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"], 
-                defaultType: "int", 
+                variable: validVariables[0].name,
+                defaultType: validVariables[0].type,
               },
               {
                 type: "input_value", 
                 name: "VALUE",
                 shadow: {
-                  type: "int_reporter",
+                  type: "number_reporter",
                 },
               },
             ],
-          },
-          {
-            opcode: "get_integer",
-            type: "reporter",
-            text: "%1",
-            style: "int_blocks",
-            tooltip: "Return's the selected variable's value.",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["int"], 
-                defaultType: "int", 
-              },
-            ],
-          },
-          "Vector 2",
-          {
-            opcode: "set_v2",
+            operation: (block, generator) => {
+              const variable = Blockly.Variables.getVariable(
+                window.workspace,
+                block.getFieldValue("VAR")
+              );
+
+              const variableName = variable.name;
+              const variableType = variable.type;
+
+              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+              block.setStyle(__colorVariableBlock(variableType));
+
+              return `${variableName.split(" ")[1]} += ${value};\n`;
+            }
+          });
+
+          returnedBlocks.push({
+            opcode: "variable_multiply",
             type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "vec2_blocks",
+            text: "multiply %1 by %2",
+            tooltip: "multiplies the desired variable by the value",
+            style:__colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
                 name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                check: ["vec2", "VectorCompliant"],
-                variableTypes: ["vec2"], 
-                defaultType: "vec2", 
+                variable: validVariables[0].name,
+                defaultType: validVariables[0].type,
               },
               {
                 type: "input_value", 
                 name: "VALUE",
                 shadow: {
-                  type: "vec2_reporter",
+                  type: "number_reporter",
                 },
               },
             ],
-          },
-          {
-            opcode: "get_v2",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            output: "vec2",
-            style: "vec2_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec2"], 
-                defaultType: "vec2", 
-              },
-            ],
-          },
-          "Vector 3",
-          {
-            opcode: "set_v3",
+            operation: (block, generator) => {
+              const variable = Blockly.Variables.getVariable(
+                window.workspace,
+                block.getFieldValue("VAR")
+              );
+
+              const variableName = variable.name;
+              const variableType = variable.type;
+
+              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+              block.setStyle(__colorVariableBlock(variableType));
+
+              return `${variableName.split(" ")[1]} *= ${value};\n`;
+            }
+          });
+
+          returnedBlocks.push({
+            opcode: "variable_divide",
             type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "vec3_blocks",
+            text: "divide %1 by %2",
+            tooltip: "divides the desired variable by the value",
+            style:__colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
                 name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                check: ["vec3", "VectorCompliant"],
-                variableTypes: ["vec3"], 
-                defaultType: "vec3", 
+                variable: validVariables[0].name,
+                defaultType: validVariables[0].type,
               },
               {
                 type: "input_value", 
                 name: "VALUE",
                 shadow: {
-                  type: "vec3_reporter",
+                  type: "number_reporter",
                 },
               },
             ],
-          },
-          {
-            opcode: "get_v3",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            style: "vec3_blocks",
-            output: "vec3",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec3"], 
-                defaultType: "vec3", 
-              },
-            ],
-          },
-          "Vector 4",
-          {
-            opcode: "set_v4",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "vec4_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                check: ["vec4", "VectorCompliant"],
-                variableTypes: ["vec4"], 
-                defaultType: "vec4", 
-              },
-              {
-                type: "input_value", 
-                name: "VALUE",
-                shadow: {
-                  type: "vec4_reporter",
-                },
-              },
-            ],
-          },
-          {
-            opcode: "get_v4",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            style: "vec4_blocks",
-            output: "vec4",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["vec4"], 
-                defaultType: "vec4", 
-              },
-            ],
-          },
-          "Boolean",
-          {
-            opcode: "set_bool",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "bool_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"], 
-                defaultType: "bool", 
-              },
-              {
-                type: "input_value", 
-                name: "VALUE",
-                check: "Boolean",
-              },
-            ],
-          },
-          {
-            opcode: "get_bool",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            output: "Boolean",
-            style: "bool_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["bool"], 
-                defaultType: "bool", 
-              },
-            ],
-          },
-          "Texture",
-          {
-            opcode: "set_tex",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "texture_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"], 
-                defaultType: "texture", 
-              },
-              {
-                type: "input_value", 
-                name: "VALUE",
-                check: "texture",
-              },
-            ],
-          },
-          {
-            opcode: "get_tex",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            style: "texture_blocks",
-            output: "texture",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["texture"], 
-                defaultType: "texture", 
-              },
-            ],
-          },
-          "Cubemaps",
-          {
-            opcode: "set_cubemap",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "cubemap_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"], 
-                defaultType: "cubemap", 
-              },
-              {
-                type: "input_value", 
-                name: "VALUE",
-                check: "cubemap",
-              },
-            ],
-          },
-          {
-            opcode: "get_cubemap",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            style: "cubemap_blocks",
-            output: "cubemap",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: ["cubemap"], 
-                defaultType: "cubemap", 
-              },
-            ],
-          },
-          "Matricies",
-          {
-            opcode: "set_matrix",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "Set the variable to the desired value.",
-            style: "matrix_blocks",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: [
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x"
-                ], 
-                defaultType: "matrix_2x", 
-              },
-              {
-                type: "input_value", 
-                name: "VALUE",
-                check: "matrix",
-              },
-            ],
-          },
-          {
-            opcode: "get_matrix",
-            type: "reporter",
-            text: "%1",
-            tooltip: "Return's the selected variable's value.",
-            style: "matrix_blocks",
-            output: "matrix",
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: "%{BKY_VARIABLES_DEFAULT_NAME}",
-                variableTypes: [
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ], 
-                defaultType: "matrix_2x", 
-              },
-            ],
-          },
-        ],
-      };
+            operation: (block, generator) => {
+              const variable = Blockly.Variables.getVariable(
+                window.workspace,
+                block.getFieldValue("VAR")
+              );
+
+              const variableName = variable.name;
+              const variableType = variable.type;
+
+              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+              block.setStyle(__colorVariableBlock(variableType));
+
+              return `${variableName.split(" ")[1]} /= ${value};\n`;
+            }
+          });
+        }
+      }
+
+      return returnedBlocks;
     }
 
     createVariable(button) {
@@ -677,203 +517,6 @@
       };
     }
 
-    set_float(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_float(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_integer(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_integer(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_v2(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_v2(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_v3(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_v3(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_v4(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_v4(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_bool(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_bool(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_tex(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_tex(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_cubemap(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_cubemap(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
-
-    set_matrix(block, generator) {
-      const variableName = Blockly.Variables.getVariable(
-        window.workspace,
-        block.getFieldValue("VAR")
-      ).name;
-      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-      return `${variableName} = ${value};` + nextBlockToCode(block, generator);
-    }
-
-    get_matrix(block, generator) {
-      return [
-        `${
-          Blockly.Variables.getVariable(
-            window.workspace,
-            block.getFieldValue("VAR")
-          ).name
-        }` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
-    }
   }
 
   window.categories.variables = variables_category;

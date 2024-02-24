@@ -303,7 +303,10 @@ window.penPlusExtension = class {
               });
             }
             //Add the blockly block definition
+            if (dynamicBlock) delete Blockly.Blocks[id + opcode];
             addBlocklyBlock(id + opcode, type, blockDef);
+            //Dynamic blocks don't like reinilization so we do this to spite them
+
             blockData = defArgs;
             break;
         }
