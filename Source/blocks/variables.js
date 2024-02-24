@@ -41,7 +41,10 @@
 
     createVariableReporters(workspace) {
       let returnedBlocks = [];
+
       const variables = workspace.getAllVariables();
+
+      //iterate through variables adding the needed reporters
       variables.forEach(variable => {
         let type = variable.type;
 
@@ -57,6 +60,7 @@
         })
       });
 
+      //if variables is more than 0 check for valid setters
       if (variables.length > 0) {
         let validVariables = []
         variables.forEach(variable => {
@@ -65,7 +69,9 @@
           }
         });
 
+        //Then check for if the valid setters length is more than 0
         if (validVariables.length > 0) {
+          //Add the set change multiply and divide blocks with the needed color for the most correctness
           returnedBlocks.push({
             opcode: "variable_set",
             type: "command",
@@ -516,7 +522,6 @@
         varModal.close();
       };
     }
-
   }
 
   window.categories.variables = variables_category;
