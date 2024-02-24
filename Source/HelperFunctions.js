@@ -323,15 +323,21 @@ window.penPlusExtension = class {
 
     //Check for a dynamic function
     if (myInfo.dynamic) {
+      //Create the custom function
       createdContentData.custom = 'dynamic_'+myInfo.id;
+      //Add the callback
       window.workspace.registerToolboxCategoryCallback('dynamic_'+myInfo.id, (workspace) => {
+        //create data holders
         let createdBlockData = this[myInfo.dynamic](workspace);
         let formattedDynamic = [];
+
+        //Loop through and gather compiled data
         createdBlockData.forEach(block => {
           formattedDynamic.push(addBlock(block,true));
         })
-        console.log(formattedDynamic);
-        console.log(this.defaultBlockInfo);
+
+        //Concatanate the blocks
+        //Did I spell that right?
         return this.defaultBlockInfo.concat(formattedDynamic);
       });  
     }

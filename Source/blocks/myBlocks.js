@@ -263,6 +263,7 @@
           block.inputList[0].setCheck("noInput");
           break;
       }
+      
       return `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});`
     }
 
