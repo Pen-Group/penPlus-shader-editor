@@ -132,6 +132,15 @@ function createMenu(contents, named) {
   };
 }
 
+function createGrid(contents, named, columns) {
+  return {
+    type: "field_grid_dropdown",
+    name: named,
+    columns: columns,
+    options: contents,
+  };
+}
+
 function createModal(HTML) {
   const modal = {
     background: document.createElement("div"),

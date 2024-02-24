@@ -102,6 +102,27 @@ function createGLSLGen() {
     return [`vec4(${x},${y},${z},${w})`, Order.ATOMIC];
   };
 
+  GLSL_GEN.forBlock["matrix2_reporter"] = function (block, generator) {
+    return [
+      `mat2(${generator.getFieldValue(block, "00", Order.ATOMIC)},${generator.getFieldValue(block, "01", Order.ATOMIC)},${generator.getFieldValue(block, "10", Order.ATOMIC)},${generator.getFieldValue(block, "11", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+      Order.ATOMIC,
+    ];
+  };
+
+  GLSL_GEN.forBlock["matrix3_reporter"] = function (block, generator) {
+    return [
+      `mat3(${generator.getFieldValue(block, "00", Order.ATOMIC)},${generator.getFieldValue(block, "01", Order.ATOMIC)},${generator.getFieldValue(block, "02", Order.ATOMIC)},${generator.getFieldValue(block, "10", Order.ATOMIC)},${generator.getFieldValue(block, "11", Order.ATOMIC)},${generator.getFieldValue(block, "12", Order.ATOMIC)},${generator.getFieldValue(block, "20", Order.ATOMIC)},${generator.getFieldValue(block, "21", Order.ATOMIC)},${generator.getFieldValue(block, "22", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+      Order.ATOMIC,
+    ];
+  };
+
+  GLSL_GEN.forBlock["matrix4_reporter"] = function (block, generator) {
+    return [
+      `mat4(${generator.getFieldValue(block, "00", Order.ATOMIC)},${generator.getFieldValue(block, "01", Order.ATOMIC)},${generator.getFieldValue(block, "02", Order.ATOMIC)},${generator.getFieldValue(block, "03", Order.ATOMIC)},${generator.getFieldValue(block, "10", Order.ATOMIC)},${generator.getFieldValue(block, "11", Order.ATOMIC)},${generator.getFieldValue(block, "12", Order.ATOMIC)},${generator.getFieldValue(block, "13", Order.ATOMIC)},${generator.getFieldValue(block, "20", Order.ATOMIC)},${generator.getFieldValue(block, "21", Order.ATOMIC)},${generator.getFieldValue(block, "22", Order.ATOMIC)},${generator.getFieldValue(block, "23", Order.ATOMIC)},${generator.getFieldValue(block, "30", Order.ATOMIC)},${generator.getFieldValue(block, "31", Order.ATOMIC)},${generator.getFieldValue(block, "32", Order.ATOMIC)},${generator.getFieldValue(block, "33", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+      Order.ATOMIC,
+    ];
+  };
+
   GLSL_GEN.forBlock["string_reporter"] = function (block, generator) {
     const numba = block.getFieldValue("STRING");
     return [`${numba}`, Order.ATOMIC];

@@ -53,9 +53,10 @@
           type: (type == "bool") ? "boolean" : "reporter",
           text: variable.name,
           style:__colorVariableBlock(type),
+          output:type,
           tooltip: "A variable",
           operation: () => {
-            return `${variable.name.split(" ")[1]}`;
+            return [`${variable.name.split(" ")[1]}`,Order.ATOMIC];
           }
         })
       });

@@ -15,6 +15,7 @@
               type: "reporter",
               text: "%1 %2 \n %3 %4",
               tooltip: "A 2x2 Matrix",
+              output:"matrix_2x",
               arguments: [
                 {
                   type: "input_value", 
@@ -51,6 +52,7 @@
               type: "reporter",
               text: "%1 %2 %3 \n %4 %5 %6 \n %7 %8 %9",
               tooltip: "A 3x3 Matrix",
+              output:"matrix_3x",
               arguments: [
                 {
                   type: "input_value", 
@@ -121,7 +123,8 @@
               opcode: "mat4",
               type: "reporter",
               text: "%1 %2 %3 %4 \n %5 %6 %7 %8 \n %9 %10 %11 %12 \n %13 %14 %15 %16",
-              tooltip: "A 3x3 Matrix",
+              tooltip: "A 4x4 Matrix",
+              output:"matrix_4x",
               arguments: [
                 {
                   type: "input_value", 
@@ -237,6 +240,98 @@
                 },
               ],
             },
+            "---",
+            {
+              opcode: "getitem",
+              type: "reporter",
+              text: "row %1 of column %2 of %3",
+              tooltip: "Gets one value from a matrix",
+              //style: "return_block", I somewhat like this gray
+              arguments: [
+                createGrid(
+                  [
+                    ["1", "0"],
+                    ["2", "1"],
+                    ["3", "2"],
+                    ["4", "3"]
+                  ],
+                  "row",
+                  4
+                ),
+                createGrid(
+                  [
+                    ["1", "0"],
+                    ["2", "1"],
+                    ["3", "2"],
+                    ["4", "3"]
+                  ],
+                  "column",
+                  1
+                ),
+                {
+                  type: "input_value", 
+                  name: "matrix",
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  shadow: {
+                    type: "matrix4_reporter",
+                  },
+                }
+              ],
+            },
+            {
+              opcode: "getrow",
+              type: "reporter",
+              text: "row %1 of %2",
+              tooltip: "Gets a row of a matrix",
+              //style: "return_block", I somewhat like this gray
+              arguments: [
+                createGrid(
+                  [
+                    ["1", "0"],
+                    ["2", "1"],
+                    ["3", "2"],
+                    ["4", "3"]
+                  ],
+                  "column",
+                  4
+                ),
+                {
+                  type: "input_value", 
+                  name: "matrix",
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  shadow: {
+                    type: "matrix4_reporter",
+                  },
+                }
+              ],
+            },
+            {
+              opcode: "getcolumn",
+              type: "reporter",
+              text: "column %1 of %2",
+              tooltip: "Gets a column of a matrix",
+              //style: "return_block", I somewhat like this gray
+              arguments: [
+                createGrid(
+                  [
+                    ["1", "0"],
+                    ["2", "1"],
+                    ["3", "2"],
+                    ["4", "3"]
+                  ],
+                  "row",
+                  1
+                ),
+                {
+                  type: "input_value", 
+                  name: "matrix",
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  shadow: {
+                    type: "matrix4_reporter",
+                  },
+                }
+              ],
+            }
           ],
         };
       }
@@ -260,6 +355,50 @@
           `mat4(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "02", Order.ATOMIC)},${generator.valueToCode(block, "03", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)},${generator.valueToCode(block, "12", Order.ATOMIC)},${generator.valueToCode(block, "13", Order.ATOMIC)},${generator.valueToCode(block, "20", Order.ATOMIC)},${generator.valueToCode(block, "21", Order.ATOMIC)},${generator.valueToCode(block, "22", Order.ATOMIC)},${generator.valueToCode(block, "23", Order.ATOMIC)},${generator.valueToCode(block, "30", Order.ATOMIC)},${generator.valueToCode(block, "31", Order.ATOMIC)},${generator.valueToCode(block, "32", Order.ATOMIC)},${generator.valueToCode(block, "33", Order.ATOMIC)})` + nextBlockToCode(block, generator),
           Order.ATOMIC,
         ];
+      }
+
+      getitem(block, generator) {
+        return [
+          `${generator.valueToCode("matrix")}[${generator.valueToCode("column")}][${generator.valueToCode("row")}]`,
+          Order.ATOMIC
+        ]
+      }
+
+      getrow(block, generator) {
+        return [
+          `${generator.valueToCode("matrix")}[${generator.valueToCode("column")}]`,
+          Order.ATOMIC
+        ]
+      }
+
+      getcolumn(block, generator) {
+        let columnNumber = 4;
+        switch (block.getInputTargetBlock("matrix").type) {
+          default:
+            break;
+          
+          case "matrix_mat2" || "matrix2_reporter":
+            columnNumber = 2;
+            break;
+          
+          case "matrix_mat3" || "matrix3_reporter":
+            columnNumber = 3;
+            break;
+        
+          case "matrix_mat4" || "matrix4_reporter":
+            columnNumber = 4;
+            break;
+        }
+
+        let getters = "";
+        for (let column = 0; column < columnNumber; column++) {
+          getters += `${(column == 0) ? "" : ","}${generator.valueToCode("matrix")}[${column}][${generator.valueToCode("row")}]`;
+        }
+        
+        return [
+          `vec${columnNumber}(${getters})`,
+          Order.ATOMIC
+        ]
       }
     }
   

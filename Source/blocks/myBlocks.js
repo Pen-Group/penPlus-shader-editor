@@ -54,13 +54,13 @@
         return "vec4_reporter";
 
       case "highp mat2":
-        return "matrix_mat2";
+        return "matrix2_reporter";
 
       case "highp mat3":
-        return "matrix_mat3";
+        return "matrix3_reporter";
 
       case "highp mat4":
-        return "matrix_mat4";
+        return "matrix4_reporter";
 
       default:
         return "number_reporter";
@@ -295,8 +295,6 @@
             block_arg_count += 1;
             block_arg_string += ` ${argument.name}:%${block_arg_count}`;
           });
-
-          console.log(block.name + block_arg_string);
 
           //Dumb idea. Might work.
           window.blockIterations[block.name] |= 0; 
