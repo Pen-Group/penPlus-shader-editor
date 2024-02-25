@@ -306,12 +306,12 @@
               style:__colorCustomBlock(block.type),
               tooltip: "Your custom block!",
               arguments: block_arguments,
-              operation: () => {
+              operation: (block_ref, generator) => {
                 let argString = "";
                 //Using a typical for loop for this one since we need the id somewhat.
                 for (let argID = 0; argID < block_arg_count; argID++) {
                   const argument = block_arguments[argID];
-                  argString += `${(argID == 0) ? "" : ","}${generator.valueToCode(block, argument.name, Order.ATOMIC)}`;
+                  argString += `${(argID == 0) ? "" : ","}${generator.valueToCode(block_ref, argument.name, Order.ATOMIC)}`;
                 }
                 return `${block.name}(${argString});`;
               }
