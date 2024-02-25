@@ -15,13 +15,13 @@
           {
             opcode: "setVertColor",
             type: "command",
-            text: "set the vertice's colour to %1",
-            tooltip: "Will be ran per vertex",
+            text: "set vertex colour to %1",
+            tooltip: "Changes the vertex's color value a desired color.",
             arguments: [
               {
                 type: "input_value",
                 name: "COLOR",
-                check: "vec4",
+                check: ["vec4", "vector", "arithmatic"],
                 shadow: {
                   type: "color_reporter",
                 },
@@ -32,19 +32,19 @@
             opcode: "getVertColor",
             type: "reporter",
             text: "vertex colour",
-            tooltip: "Will be ran per pixel",
+            tooltip: "Vertex Color",
           },
           "---",
           {
             opcode: "setPixColor",
             type: "command",
-            text: "set the pixel's colour to %1",
-            tooltip: "Will be ran per vertex",
+            text: "set pixel colour to %1",
+            tooltip: "Changes the pixel's color value a desired color.",
             arguments: [
               {
                 type: "input_value",
                 name: "COLOR",
-                check: "vec4",
+                check: ["vec4", "vector", "arithmatic"],
                 shadow: {
                   type: "color_reporter",
                 },
@@ -55,7 +55,7 @@
             opcode: "getPixColor",
             type: "reporter",
             text: "pixel colour",
-            tooltip: "Will be ran per pixel",
+            tooltip: "Pixel color",
           },
           "---",
           {
@@ -89,6 +89,54 @@
             text: "resolution height",
             tooltip: "The render's height",
           },
+          "---",
+          "Sampling",
+          {
+            opcode: "sample_texture",
+            type: "reporter",
+            text: "color at %1 of texture %2",
+            tooltip: "Sample the pixel at the UV coordinates desired",
+            style:"texture_blocks",
+            output:["vec4", "vector", "arithmatic"],
+            arguments: [
+              {
+                type: "input_value",
+                name: "UV",
+                check: "vec2",
+                shadow: {
+                  type: "vec2_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "TEXTURE",
+                check: "texture"
+              },
+            ],
+          },
+          {
+            opcode: "sample_cubemap",
+            type: "reporter",
+            text: "color at %1 of cubemap %2",
+            tooltip: "Sample the pixel at the UV coordinates desired",
+            style:"cubemap_blocks",
+            output:"vec4",
+            arguments: [
+              {
+                type: "input_value",
+                name: "UVW",
+                check: ["vec3", "vector", "arithmatic"],
+                shadow: {
+                  type: "vec3_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "TEXTURE",
+                check: "cubemap"
+              },
+            ],
+          }
         ],
       };
     }
@@ -129,6 +177,19 @@
 
     resY() {
       return [`u_res.y`, Order.ATOMIC];
+    }
+
+    sample_texture(block, generator) {
+      const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
+      const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
+      return `texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator);
+
+    }
+
+    sample_cubemap(block, generator) {
+      const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
+      const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
+      return `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator);
     }
   }
 

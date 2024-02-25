@@ -14,6 +14,7 @@ function addImportantReporters() {
   });
   addBlocklyBlock("number_reporter", "reporter", {
     message0: " %1 ",
+    output: "float",
     args0: [
       {
         type: "field_number",

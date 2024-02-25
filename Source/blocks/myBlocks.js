@@ -99,8 +99,7 @@
               },
               {
                 type: "input_statement",
-                name: "code",
-                check: "Action"
+                name: "code"
               },
               createMenu(
                 [
@@ -130,7 +129,7 @@
           },
           {
             opcode: "customBlockArgument",
-            type: "terminal",
+            type: "command",
             text: "argument %1 of type %2",
             tooltip: "A Custom Block!",
             nextStatement: "CustomBlockArgument",

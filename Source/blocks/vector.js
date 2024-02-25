@@ -124,13 +124,93 @@
                             {
                                 type: "input_value",
                                 name: "vector",
-                                check: ['vec2', 'vec3', 'vec4'],
+                                check: ['vec2', 'vec3', 'vec4', "arithmatic", "vector"],
                                 shadow: {
                                     type: "vec4_reporter",
                                 },
                             }
                         ],
-                    }
+                    },
+                    "---",
+                    "Vector Operations",
+                    {
+                        opcode: "normalize",
+                        type: "reporter",
+                        text: "normalize %1",
+                        tooltip: "Makes the length of a vector 1",
+                        output: "vector",
+                        arguments: [
+                            {
+                                type: "input_value",
+                                name: "a",
+                                shadow: {
+                                    type: "vec2_reporter",
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        opcode: "dot",
+                        type: "reporter",
+                        text: "dot product of %1 and %2",
+                        tooltip: "Makes the length of a vector 1",
+                        output: "float",
+                        arguments: [
+                            {
+                                type: "input_value",
+                                name: "a",
+                                shadow: {
+                                    type: "vec3_reporter",
+                                },
+                            },
+                            {
+                                type: "input_value",
+                                name: "b",
+                                shadow: {
+                                    type: "vec3_reporter",
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        opcode: "cross",
+                        type: "reporter",
+                        text: "cross product of %1 and %2",
+                        tooltip: "Makes the length of a vector 1",
+                        output: "float",
+                        arguments: [
+                            {
+                                type: "input_value",
+                                name: "a",
+                                shadow: {
+                                    type: "vec3_reporter",
+                                },
+                            },
+                            {
+                                type: "input_value",
+                                name: "b",
+                                shadow: {
+                                    type: "vec3_reporter",
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        opcode: "length",
+                        type: "reporter",
+                        text: "length of %1",
+                        tooltip: "Makes the length of a vector 1",
+                        output: "float",
+                        arguments: [
+                            {
+                                type: "input_value",
+                                name: "a",
+                                shadow: {
+                                    type: "vec2_reporter",
+                                },
+                            },
+                        ],
+                    },
                 ],
             };
         }
@@ -161,6 +241,34 @@
                 `${generator.valueToCode("vector")}.${generator.valueToCode("coordinate")}`,
                 Order.ATOMIC
             ]
+        }
+
+        normalize(block, generator) {
+            return [
+                `normalize(${generator.valueToCode(block, "a", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+                Order.ATOMIC,
+            ];
+        }
+
+        dot(block, generator) {
+            return [
+                `dot(${generator.valueToCode(block, "a", Order.ATOMIC)}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+                Order.ATOMIC,
+            ];
+        }
+
+        cross(block, generator) {
+            return [
+                `cross(${generator.valueToCode(block, "a", Order.ATOMIC)}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+                Order.ATOMIC,
+            ];
+        }
+
+        length(block, generator) {
+            return [
+                `length(${generator.valueToCode(block, "a", Order.ATOMIC)})` + nextBlockToCode(block, generator),
+                Order.ATOMIC,
+            ];
         }
     }
 

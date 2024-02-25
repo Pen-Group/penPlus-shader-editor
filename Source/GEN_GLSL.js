@@ -23,7 +23,6 @@ varying highp float v_depth;
 //Pen+ Textures
 uniform sampler2D u_texture;
 uniform mediump vec2 u_res;
-uniform sampler2D u_depthTexture;
 
 //Base functions
 highp float log10(highp float a) {
@@ -151,7 +150,6 @@ varying highp float v_depth;
 //Pen+ Textures
 uniform sampler2D u_texture;
 uniform mediump vec2 u_res;
-uniform sampler2D u_depthTexture;
 
 //Base functions
 highp float log10(highp float a) {
@@ -173,11 +171,17 @@ highp float eulernum(highp float a) {
     if (type == "matrix_3x") type = "mat3"; 
     if (type == "matrix_4x") type = "mat4"; 
 
+    let scope = variable.name.split(" ")[0];
+    if (scope == "array") {
+      scope = "uniform";
+      type += "[]";
+    }
+
     if (!variable.name.split(" ")[1]) return;
 
     //Types that don't have precision
     if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${variable.type} ${variable.name.split(" ")[1]};\n`;
-    else window.Generated_GLSL += `\n${variable.name.split(" ")[0]} highp ${variable.type} ${variable.name.split(" ")[1]};\n`;
+    else window.Generated_GLSL += `\n${scope} highp ${variable.type} ${variable.name.split(" ")[1]};\n`;
   });
 
   //Add some spacing

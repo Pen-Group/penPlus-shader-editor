@@ -271,7 +271,7 @@
                 {
                   type: "input_value", 
                   name: "matrix",
-                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x', 'arithmatic'],
                   shadow: {
                     type: "matrix4_reporter",
                   },
@@ -298,7 +298,7 @@
                 {
                   type: "input_value", 
                   name: "matrix",
-                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x', 'arithmatic'],
                   shadow: {
                     type: "matrix4_reporter",
                   },
@@ -325,7 +325,7 @@
                 {
                   type: "input_value", 
                   name: "matrix",
-                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x'],
+                  check: ['matrix_2x', 'matrix_3x', 'matrix_4x', 'arithmatic'],
                   shadow: {
                     type: "matrix4_reporter",
                   },

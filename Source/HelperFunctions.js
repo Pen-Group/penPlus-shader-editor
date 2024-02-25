@@ -2,14 +2,14 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
   inline = inline || true;
   switch (type) {
     case "hat":
-      BlockJson.nextStatement = null;
+      BlockJson.nextStatement = BlockJson.nextStatement || "Action";
       break;
 
     case "hat_customBlock":
       break;
 
     case "reporter":
-      BlockJson.output |= "Number";
+      BlockJson.output = BlockJson.output || "Number";
       break;
 
     case "myBlockShadow":
@@ -21,17 +21,18 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
       break;
 
     case "command":
-      BlockJson.nextStatement |= "Action";
-      BlockJson.previousStatement |= "Action";
+      BlockJson.nextStatement = BlockJson.nextStatement || "Action";
+      BlockJson.previousStatement = BlockJson.previousStatement || "Action";
+      console.log(BlockJson)
       break;
 
     case "terminal":
-      BlockJson.previousStatement |= "Action";
+      BlockJson.previousStatement = BlockJson.previousStatement || "Action";
       break;
 
     default:
-      BlockJson.nextStatement = null;
-      BlockJson.previousStatement = null;
+      BlockJson.nextStatement = BlockJson.nextStatement || "Action";
+      BlockJson.previousStatement = BlockJson.previousStatement || "Action";
       break;
   }
   Blockly.Blocks[blockName] = {
@@ -271,14 +272,79 @@ window.penPlusExtension = class {
               message0: text,
               style: block.style || id + "blocks",
               args0: [],
+              lastDummyAlign0:"LEFT"
             };
+
+            //if our text is an array then we loop over all texts and arguments
+            if (typeof text == "object") {
+              for (let id = 0; id < text.length; id++) {
+                blockDef["message"+id] = text[id];
+                blockDef["args"+id] = [];
+                blockDef["lastDummyAlign"+id] = "LEFT";
+
+                if (block.arguments) {
+                  block.arguments[id].forEach((argument) => {
+                    //Check for shadow data if so add it to the toolbox definition and remove it from the block definition
+                    if (argument.shadow) {
+                      //Check for if the block has inputs if not add them
+                      if (!defArgs.inputs) {
+                        defArgs.inputs = {};
+                      }
+  
+                      defArgs.inputs[argument.name] = {
+                        shadow: argument.shadow,
+                      };
+                      delete argument.shadow;
+                    }
+
+                    if (argument.type == "input_statement") {
+                      argument.check = argument.check || "Action";
+                    }
+                    
+                    blockDef["args"+id].push(argument);
+                  });
+                }
+
+                if (block.alignment) {
+                  blockDef["lastDummyAlign"+id] = block.alignment[id];
+                }
+              }
+            }
+            //if not just treat it like normal
+            else {
+              //If it has arguments loop through those and add them to the args 0
+              //Should probably add something for multiline things.
+              //Maybe Arrays
+              if (block.arguments) {
+                block.arguments.forEach((argument) => {
+                  //Check for shadow data if so add it to the toolbox definition and remove it from the block definition
+                  if (argument.shadow) {
+                    //Check for if the block has inputs if not add them
+                    if (!defArgs.inputs) {
+                      defArgs.inputs = {};
+                    }
+
+                    defArgs.inputs[argument.name] = {
+                      shadow: argument.shadow,
+                    };
+                    delete argument.shadow;
+                  }
+
+                  if (argument.type == "input_statement") {
+                    argument.check = argument.check || "Action";
+                  }
+
+                  blockDef.args0.push(argument);
+                });
+              }
+
+              if (block.alignments) {
+                blockDef["lastDummyAlign0"] = block.alignment;
+              }
+            }
 
             //If there is an output or tooltop add them to the block definition
             //Note that output only determines what the block puts out.
-            if (block.output) {
-              blockDef.output = block.output;
-            }
-
             if (block.output) {
               blockDef.output = block.output;
             }
@@ -291,28 +357,7 @@ window.penPlusExtension = class {
               blockDef.previousStatement = block.previousStatement;
             }
 
-            //If it has arguments loop through those and add them to the args 0
-            //Should probably add something for multiline things.
-            //Maybe Arrays
-            if (block.arguments) {
-              block.arguments.forEach((argument) => {
-                //Check for shadow data if so add it to the toolbox definition and remove it from the block definition
-                if (argument.shadow) {
-                  //Check for if the block has inputs if not add them
-                  if (!defArgs.inputs) {
-                    defArgs.inputs = {};
-                  }
-
-                  defArgs.inputs[argument.name] = {
-                    shadow: argument.shadow,
-                  };
-                  delete argument.shadow;
-                }
-                blockDef.args0.push(argument);
-              });
-            }
             //Add the blockly block definition
-            if (dynamicBlock) delete Blockly.Blocks[id + opcode];
             addBlocklyBlock(id + opcode, type, blockDef);
             //Dynamic blocks don't like reinilization so we do this to spite them
 

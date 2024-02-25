@@ -127,13 +127,13 @@
           {
             opcode: "getX",
             type: "reporter",
-            text: "vertex X",
+            text: "vertex x",
             tooltip: "Get the vertex's X position",
           },
           {
             opcode: "getY",
             type: "reporter",
-            text: "vertex Y",
+            text: "vertex y",
             tooltip: "Get the vertex's Y position",
           },
           {

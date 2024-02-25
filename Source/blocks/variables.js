@@ -246,7 +246,7 @@
           <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
             <div style="position:absolute;left:0px;top:0px; width:100%; height:40%; background-color: var(--EditorTheme_Theme_4);">
               <input id="VarName" placeholder="Variable Name" style="position:absolute;left:50%;top:50%;Transform:Translate(-50%,-50%); width:50%; height:20%;" type="text"></input>
-              <p class="noSelect" style="position:absolute;left:50%;top:75%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Only use A-Z</p>
+              <p class="noSelect" style="position:absolute;left:50%;top:75%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Only use A-Z and _</p>
             </div>
             <div class="noSelect" style="background-color: var(--EditorTheme_Color_1); width:100%; height:1.1em; position:absolute;  color:var(--EditorTheme_Text_3); text-align: center; justify-content: center; align-items: center;font-size: 2em;">
               New Variable  
@@ -315,15 +315,19 @@
               </div>
               <div style="top:80%;height:20%;width:100%;position:absolute;">
                 <div style="display: flex;position:absolute;left:50%;width:50%;height:80%; font-size: 1.125em;  color:var(--EditorTheme_Text_1); transform: translate(-50%);">
-                  <div style="display: flex; width:33.3333%">
+                  <div style="display: flex; width:33.3333%" id="ArrayHolder">
+                    <input type="checkbox" id="Array"></input>
+                    <p style="transform:translate(0%,-1em);">Array</p>
+                  </div>
+                  <div style="display: flex; width:33.3333%" id="UniformHolder">
                     <input type="checkbox" checked id="Uniform"></input>
                     <p style="transform:translate(0%,-1em);">Uniform</p>
                   </div>
-                  <div style="display: flex; width:33.3333%">
+                  <div style="display: flex; width:33.3333%" id="VertexHolder">
                     <input type="checkbox" id="Attribute"></input>
                     <p style="transform:translate(0%,-1em);">Vertex</p>
                   </div>
-                  <div style="display: flex; width:33.3333%">
+                  <div style="display: flex; width:33.3333%" id="PixelHolder">
                     <input type="checkbox" id="Varying"></input>
                     <p style="transform:translate(0%,-1em);">Pixel</p>
                   </div>
@@ -373,50 +377,102 @@
       };
       cycleVariable("float");
 
-      variableTypeChangers.float.onclick = () => {
-        cycleVariable("float");
-      };
-      variableTypeChangers.int.onclick = () => {
-        cycleVariable("int");
-      };
-      variableTypeChangers.vec2.onclick = () => {
-        cycleVariable("vec2");
-      };
-      variableTypeChangers.vec3.onclick = () => {
-        cycleVariable("vec3");
-      };
-      variableTypeChangers.vec4.onclick = () => {
-        cycleVariable("vec4");
-      };
-      variableTypeChangers.texture.onclick = () => {
-        cycleVariable("texture");
-      };
-      variableTypeChangers.cubemap.onclick = () => {
-        cycleVariable("cubemap");
-      };
-      variableTypeChangers.matrix.onclick = () => {
-        cycleVariable("matrix");
-      };
-
+      const Array = document.getElementById("Array");
       const Uniform = document.getElementById("Uniform");
       const Attribute = document.getElementById("Attribute");
       const Varying = document.getElementById("Varying");
 
+      const ArrayHolder = document.getElementById("ArrayHolder");
+      const UniformHolder = document.getElementById("UniformHolder");
+      const AttributeHolder = document.getElementById("VertexHolder");
+      const VaryingHolder = document.getElementById("PixelHolder");
+
+      variableTypeChangers.float.onclick = () => {
+        cycleVariable("float");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+      variableTypeChangers.int.onclick = () => {
+        cycleVariable("int");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+      variableTypeChangers.vec2.onclick = () => {
+        cycleVariable("vec2");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+      variableTypeChangers.vec3.onclick = () => {
+        cycleVariable("vec3");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+      variableTypeChangers.vec4.onclick = () => {
+        cycleVariable("vec4");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+      variableTypeChangers.texture.onclick = () => {
+        cycleVariable("texture");
+        ArrayHolder.style.visibility = "hidden";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "hidden";
+        VaryingHolder.style.visibility = "hidden";
+
+        Uniform.onclick();
+      };
+      variableTypeChangers.cubemap.onclick = () => {
+        cycleVariable("cubemap");
+        ArrayHolder.style.visibility = "hidden";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "hidden";
+        VaryingHolder.style.visibility = "hidden";
+
+        Uniform.onclick();
+      };
+      variableTypeChangers.matrix.onclick = () => {
+        cycleVariable("matrix");
+        ArrayHolder.style.visibility = "visible";
+        UniformHolder.style.visibility = "visible";
+        AttributeHolder.style.visibility = "visible";
+        VaryingHolder.style.visibility = "visible";
+      };
+
+      Array.onclick = () => {
+        Attribute.checked = false;
+        Varying.checked = false;
+        Uniform.checked = false;
+        Array.checked = true;
+      };
+
       Uniform.onclick = () => {
         Attribute.checked = false;
         Varying.checked = false;
+        Array.checked = false;
         Uniform.checked = true;
       };
 
       Attribute.onclick = () => {
         Uniform.checked = false;
         Varying.checked = false;
+        Array.checked = false;
         Attribute.checked = true;
       };
 
       Varying.onclick = () => {
         Uniform.checked = false;
         Attribute.checked = false;
+        Array.checked = false;
         Varying.checked = true;
       };
 
@@ -425,7 +481,7 @@
 
       const doesVariableExist = (variablename) => {
         const variables = workspace.getAllVariables();
-        if (!variablename.match(/^[a-zA-Z]+$/)) return ["stringInvalid"];
+        if (!variablename.match(/^[a-zA-Z_]+$/)) return ["stringInvalid"];
         for (let varIndex = 0; varIndex < variables.length; varIndex++) {
           const curVar = variables[varIndex];
           if (curVar.name == variablename) {
@@ -502,6 +558,8 @@
           scope = "attribute";
         } else if (Varying.checked) {
           scope = "varying";
+        } else if (Array.checked) {
+          scope = "array";
         }
 
         if (typeName == "matrix") {
