@@ -94,6 +94,14 @@
           "---",
           "Sampling",
           {
+            opcode: "mainTex",
+            type: "reporter",
+            output:"texture",
+            text: "main texture",
+            style: "texture_blocks",
+            tooltip: "The main texture of the triangle",
+          },
+          {
             opcode: "sample_texture",
             type: "reporter",
             text: "color at %1 of texture %2",
@@ -113,6 +121,9 @@
                 type: "input_value",
                 name: "TEXTURE",
                 check: "texture",
+                shadow: {
+                  type: "looks_mainTex"
+                }
               },
             ],
           },
@@ -179,6 +190,10 @@
 
     resY() {
       return [`u_res.y`, Order.ATOMIC];
+    }
+
+    mainTex() {
+      return [`u_texture`, Order.ATOMIC];
     }
 
     sample_texture(block, generator) {

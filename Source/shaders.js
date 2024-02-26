@@ -1,8 +1,8 @@
 const gl = document.getElementById("shaderpreview").getContext("webgl");
 
 window.ShaderObject = {
-  uniforms:[],
-  attributes:[]
+  uniforms: [],
+  attributes: []
 };
 
 function shaderLog(reason) {
@@ -49,6 +49,51 @@ function replacementShader() {
     void fragment() {
     gl_FragColor = v_color;
     }`;
+
+  if (!window.Generated_GLSL.includes("void vertex")) {
+    window.Generated_GLSL += `
+      void vertex() {
+        gl_Position = a_position;
+      }\n`
+  }
+
+  if (!window.Generated_GLSL.includes("void fragment")) {
+    window.Generated_GLSL += `
+      void fragment() {
+        gl_FragColor = vec4(1,1,1,1);
+      }\n`
+  }
+
+  for (let letterID = window.Generated_GLSL.indexOf("void vertex"); letterID < window.Generated_GLSL.length; letterID++) {
+    const letter = window.Generated_GLSL.charAt(letterID);
+    vertFunction += letter;
+    if (letter == "{") {
+      inner += 1;
+    }
+    else if (letter == "}") {
+      inner -= 1;
+      if (inner == 0) {
+        break;
+      }
+    }
+  }
+
+  inner = 0;
+
+  for (let letterID = window.Generated_GLSL.indexOf("void fragment"); letterID < window.Generated_GLSL.length; letterID++) {
+    const letter = window.Generated_GLSL.charAt(letterID);
+    fragFunction += letter;
+    if (letter == "{") {
+      inner += 1;
+    }
+    else if (letter == "}") {
+      inner -= 1;
+      if (inner == 0) {
+        break;
+      }
+    }
+  }
+
   genProgram();
 }
 
@@ -76,16 +121,16 @@ function genProgram() {
   for (let i = 0; i < window.ShaderAttributes.length; i++) {
     const splitAttribute = window.ShaderAttributes[i][0].split(" ");
     window.ShaderAttributes[i] = {
-      scope:splitAttribute[0]
+      scope: splitAttribute[0]
     }
 
     if (splitAttribute.length >= 4) {
       window.ShaderAttributes[i].type = splitAttribute[2];
-      window.ShaderAttributes[i].name = splitAttribute[3].replace(";","");
+      window.ShaderAttributes[i].name = splitAttribute[3].replace(";", "");
     }
     else {
       window.ShaderAttributes[i].type = splitAttribute[1];
-      window.ShaderAttributes[i].name = splitAttribute[2].replace(";","");
+      window.ShaderAttributes[i].name = splitAttribute[2].replace(";", "");
     }
   }
 
@@ -94,7 +139,7 @@ function genProgram() {
   let frag = window.Generated_Frag;
 
   //? compile vertex Shader
-  window.webGLShaderManager.createAndCompile(gl,"editorShader",vert,frag,(error) => {
+  window.webGLShaderManager.createAndCompile(gl, "editorShader", vert, frag, (error) => {
     shaderLog(error);
     replacementShader();
   });
@@ -102,14 +147,14 @@ function genProgram() {
   window.ShaderAttributes.forEach(attribute => {
     if (attribute.type == "uniform") {
       try {
-        gl.shaders["editorShader"].setupUniform(attribute.name,attribute.type);
+        gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
       } catch (error) {
         shaderLog(error);
       }
     }
     else {
       try {
-        gl.shaders["editorShader"].setupAttribute(attribute.name,attribute.type);
+        gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
       } catch (error) {
         shaderLog(error);
       }

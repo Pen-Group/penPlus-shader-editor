@@ -195,7 +195,6 @@
           break;
 
         case "sampler2D":
-          GL.shaders[name].uniforms[uniformName].value = FAKE_CAST.UNUSED_TEXTURE;
           GL.shaders[name].uniforms[uniformName].textureID = Number(GL.shaders[name].textureID);
           GL.shaders[name].textureID += 1;
         
@@ -294,8 +293,6 @@
 
       return returnedDat.flat(4);
     }
-
-    FAKE_CAST.shaders = GL.shaders;
 
     return program;
   }

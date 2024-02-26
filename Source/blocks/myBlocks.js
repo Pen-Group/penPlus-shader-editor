@@ -7,6 +7,8 @@
 
   let getHatBlockVariables = undefined;
 
+  let argCount = 0
+
   function __colorCustomBlock(customBlockType) {
     switch (customBlockType) {
       case "highp float":
@@ -67,6 +69,10 @@
       default:
         return "number_reporter";
     }
+  }
+
+  function __glslifyName(Name) {
+    return Name.replaceAll(/([\W\s\h\v])+/g, "_")
   }
 
   class myBlocks_category extends window.penPlusExtension {
@@ -182,12 +188,16 @@
     customBlockDef(block, generator) {
       //Cheap hack
       const customBlockType = block.getFieldValue("type");
-      const name = generator.valueToCode(block, "name", Order.ATOMIC);
-      //If lily and or anybody else knows a better solution please commit. I fucking beg
+      let name = generator.valueToCode(block, "name", Order.ATOMIC);
+
+      if (name.length == 0) name = "no name!";
+
+      //If lily and or anybody else knows a better solution please commit. I freaking beg
       window.customBlockType = customBlockType;
       customBlockArguments = [];
 
       const innerCode = generator.statementToCode(block, "code");
+      argCount = 0
       const functionArguments = generator.statementToCode(block, "arguments");
 
       //Stupid Switch statement prob a way to do this without a switch
@@ -199,7 +209,7 @@
         arguments: customBlockArguments,
       });
 
-      return `${customBlockType} ${name}(${functionArguments}) {\n${getHatBlockVariables()}\n${innerCode}\n}\n`;
+      return `${customBlockType} ${__glslifyName(name)}(${functionArguments}) {\n${getHatBlockVariables()}\n${innerCode}\n}\n`;
     }
 
     customBlockArgument(block, generator) {
@@ -207,7 +217,11 @@
 
       block.setStyle(__colorCustomBlock(customBlockType));
 
-      const argumentName = generator.valueToCode(block, "name", Order.ATOMIC);
+      let argumentName = generator.valueToCode(block, "name", Order.ATOMIC);
+
+      argCount += 1;
+
+      if (argumentName.length == 0) argumentName = `arg${argCount}`;
 
       customBlockArguments.push({
         name: argumentName,
@@ -216,7 +230,7 @@
 
       let nextCode = nextBlockToCode(block, generator);
 
-      return `${customBlockType} ${argumentName} ${
+      return `${customBlockType} ${__glslifyName(argumentName)} ${
         nextCode ? `, ${nextCode}` : ``
       }`;
     }
@@ -308,8 +322,10 @@
           window.blockIterations[block.name] |= 0;
           window.blockIterations[block.name] += 1;
 
+          if (block.name.length == 0) block.name = "noBlockDefined";
+
           createdBlocks.push({
-            opcode: `customBlock_${block.name}_${
+            opcode: `customBlock_${__glslifyName(block.name)}_${
               window.blockIterations[block.name]
             }`,
             type: customBlockType == "void" ? "command" : "reporter",
@@ -330,8 +346,8 @@
               }
               //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
               return customBlockType == "void"
-                ? `${block.name}(${argString});\n`
-                : [`${block.name}(${argString})`, Order.ATOMIC];
+                ? `${__glslifyName(block.name)}(${argString});\n`
+                : [`${__glslifyName(block.name)}(${argString})`, Order.ATOMIC];
             },
           });
         });
