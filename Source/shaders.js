@@ -1,9 +1,8 @@
 const gl = document.getElementById("shaderpreview").getContext("webgl");
 
 window.ShaderObject = {
-  program: undefined,
-  vert: undefined,
-  frag: undefined,
+  uniforms:[],
+  attributes:[]
 };
 
 function shaderLog(reason) {
@@ -16,8 +15,7 @@ function shaderLog(reason) {
   document.getElementById("shaderLog").appendChild(logThing);
 }
 
-function replacementShader(reason) {
-  shaderLog(reason);
+function replacementShader() {
   window.Generated_GLSL = `//replacement shader
     //Base Variables
     attribute highp vec4 a_position;
@@ -58,52 +56,6 @@ window.compiling = false;
 
 function genProgram() {
   window.compiling = true;
-  //If we already have a shader delete it to hopefully save memory.
-  if (window.ShaderObject.program) {
-    gl.deleteProgram(window.ShaderObject.program);
-    gl.deleteShader(window.ShaderObject.vert);
-    gl.deleteShader(window.ShaderObject.frag);
-  }
-
-  //Split the shader code into fragment and vertice shaders
-  if (
-    window.Generated_GLSL.indexOf("//Fragment Shader") <=
-    window.Generated_GLSL.indexOf("//Vertex Shader")
-  ) {
-    window.Generated_Frag = window.Generated_GLSL.substring(
-      0,
-      window.Generated_GLSL.indexOf("//Vertex Shader")
-    );
-
-    window.Generated_Vert =
-      window.Generated_GLSL.substring(
-        0,
-        window.Generated_GLSL.indexOf("//Fragment Shader")
-      ) +
-      window.Generated_GLSL.substring(
-        window.Generated_GLSL.indexOf("//Vertex Shader"),
-        window.Generated_GLSL.length
-      );
-  } else {
-    window.Generated_Vert = window.Generated_GLSL.substring(
-      0,
-      window.Generated_GLSL.indexOf("//Fragment Shader")
-    );
-
-    window.Generated_Frag =
-      window.Generated_GLSL.substring(
-        0,
-        window.Generated_GLSL.indexOf("//Vertex Shader")
-      ) +
-      window.Generated_GLSL.substring(
-        window.Generated_GLSL.indexOf("//Fragment Shader"),
-        window.Generated_GLSL.length
-      );
-  }
-
-  //Replace their functions with main functions
-  window.Generated_Vert = window.Generated_Vert.replace(" vertex", " main");
-  window.Generated_Frag = window.Generated_Frag.replace(" fragment", " main");
 
   //Remove attributes from fragment
   window.Generated_Frag = window.Generated_Frag.replace(
@@ -122,7 +74,19 @@ function genProgram() {
 
   //Then only get the type, scope, and name
   for (let i = 0; i < window.ShaderAttributes.length; i++) {
-    window.ShaderAttributes[i] = window.ShaderAttributes[i][0];
+    const splitAttribute = window.ShaderAttributes[i][0].split(" ");
+    window.ShaderAttributes[i] = {
+      scope:splitAttribute[0]
+    }
+
+    if (splitAttribute.length >= 4) {
+      window.ShaderAttributes[i].type = splitAttribute[2];
+      window.ShaderAttributes[i].name = splitAttribute[3].replace(";","");
+    }
+    else {
+      window.ShaderAttributes[i].type = splitAttribute[1];
+      window.ShaderAttributes[i].name = splitAttribute[2].replace(";","");
+    }
   }
 
   //Get the variables for later use from the global window class
@@ -130,52 +94,29 @@ function genProgram() {
   let frag = window.Generated_Frag;
 
   //? compile vertex Shader
-  const vertShader = gl.createShader(gl.VERTEX_SHADER);
-  try {
-    gl.shaderSource(vertShader, vert.trim());
-    gl.compileShader(vertShader);
-    if (!gl.getShaderParameter(vertShader, gl.COMPILE_STATUS)) {
-      throw gl.getShaderInfoLog(vertShader);
-    }
-  } catch (error) {
-    replacementShader(error);
-  }
+  window.webGLShaderManager.createAndCompile(gl,"editorShader",vert,frag,(error) => {
+    shaderLog(error);
+    replacementShader();
+  });
 
-  //? compile fragment Shader
-  const fragShader = gl.createShader(gl.FRAGMENT_SHADER);
-  try {
-    gl.shaderSource(fragShader, frag.trim());
-    gl.compileShader(fragShader);
-    if (!gl.getShaderParameter(fragShader, gl.COMPILE_STATUS)) {
-      throw gl.getShaderInfoLog(fragShader);
+  window.ShaderAttributes.forEach(attribute => {
+    if (attribute.type == "uniform") {
+      try {
+        gl.shaders["editorShader"].setupUniform(attribute.name,attribute.type);
+      } catch (error) {
+        shaderLog(error);
+      }
     }
-  } catch (error) {
-    replacementShader(error);
-  }
-
-  //? compile program
-  const program = gl.createProgram();
-  try {
-    gl.attachShader(program, vertShader);
-    gl.attachShader(program, fragShader);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      throw gl.getProgramInfoLog(program);
+    else {
+      try {
+        gl.shaders["editorShader"].setupAttribute(attribute.name,attribute.type);
+      } catch (error) {
+        shaderLog(error);
+      }
     }
+  });
 
-    gl.validateProgram(program);
-    if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
-      throw gl.getProgramInfoLog(program);
-    }
-  } catch (error) {
-    replacementShader(error);
-  }
-
-  window.ShaderObject = {
-    program: program,
-    vert: vertShader,
-    frag: fragShader,
-  };
+  window.ShaderObject.uniforms.push()
 
   gl.useProgram(window.ShaderObject.program);
   window.compiling = false;
