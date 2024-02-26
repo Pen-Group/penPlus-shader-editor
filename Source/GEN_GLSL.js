@@ -195,11 +195,14 @@ highp float eulernum(highp float a) {
     if (type == "matrix_3x") type = "mat3";
     if (type == "matrix_4x") type = "mat4";
 
-    let scope = variable.name.split(" ")[0];
+    let appendance = "";
+
+    let scope = variable.name.split(" ")[0].split("[")[0];
     if (scope == "array") {
       scope = "uniform";
-      type += "[]";
+      appendance = `[${variable.name.split(" ")[0].split("[")[1].replace("]","")}]`;
     }
+    if (scope == "hat") return;
 
     if (!variable.name.split(" ")[1]) return;
 
@@ -210,11 +213,11 @@ highp float eulernum(highp float a) {
       variable.type == "int"
     )
       window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${
-        variable.type
-      } ${variable.name.split(" ")[1]};\n`;
+        type
+      } ${variable.name.split(" ")[1] + appendance};\n`;
     else
-      window.Generated_GLSL += `\n${scope} highp ${variable.type} ${
-        variable.name.split(" ")[1]
+      window.Generated_GLSL += `\n${scope} highp ${type} ${
+        variable.name.split(" ")[1] + appendance
       };\n`;
   });
 
@@ -256,7 +259,7 @@ highp float eulernum(highp float a) {
       }`;
     } else {
       shaderLog("Missing both shaders using generic set");
-      window.Generated_GLSL += `//Vertex Shader t
+      window.Generated_GLSL += `//Vertex Shader
       void vertex() {
       gl_Position = a_position;
       }`;

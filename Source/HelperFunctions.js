@@ -410,6 +410,36 @@ window.penPlusExtension = class {
     window.refreshTheme();
   }
 
+  getHatBlockVariables() {
+    let returnedGLSL = "";
+    workspace.getAllVariables().forEach((variable) => {
+      let type = variable.type;
+  
+      if (type == "texture") type = "sampler2D";
+      if (type == "cubemap") type = "samplerCube";
+      if (type == "matrix_2x") type = "mat2";
+      if (type == "matrix_3x") type = "mat3";
+      if (type == "matrix_4x") type = "mat4";
+  
+      let scope = variable.name.split(" ")[0];
+      if (scope != "hat") return;
+  
+      if (!variable.name.split(" ")[1]) return;
+  
+      //Types that don't have precision
+      if (
+        variable.type == "texture" ||
+        variable.type == "cubemap" ||
+        variable.type == "int"
+      )
+        returnedGLSL += `${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
+      else
+        returnedGLSL += `highp ${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
+    });
+
+    return returnedGLSL;
+  }
+
   getInfo() {
     console.log("Category has no info");
   }

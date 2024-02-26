@@ -11,6 +11,22 @@
         color3: "#3d79cc",
         blocks: [
           {
+            opcode: "gotoPosVec4",
+            type: "command",
+            text: "go to %1",
+            arguments: [
+              {
+                type: "input_value",
+                name: "X",
+                check:"vec4",
+                shadow: {
+                  type: "vec4_reporter",
+                },
+              }
+            ],
+            tooltip: "Set the vertex's screen position to this",
+          },
+          {
             opcode: "gotoPos",
             type: "command",
             text: "go to x:%1 y:%2",
@@ -150,6 +166,15 @@
           },
         ],
       };
+    }
+
+    gotoPosVec4(block, generator) {
+      const X = generator.valueToCode(block, "X", Order.ATOMIC);
+      const Y = generator.valueToCode(block, "Y", Order.ATOMIC);
+      return (
+        `gl_Position.xy = vec2(float(${X}),float(${Y}));` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     gotoPos(block, generator) {

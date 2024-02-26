@@ -5,6 +5,8 @@
 
   let customBlockArguments = [];
 
+  let getHatBlockVariables = undefined;
+
   function __colorCustomBlock(customBlockType) {
     switch (customBlockType) {
       case "highp float":
@@ -69,6 +71,7 @@
 
   class myBlocks_category extends window.penPlusExtension {
     getInfo() {
+      getHatBlockVariables = this.getHatBlockVariables;
       addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
       return {
         name: "My Blocks",
@@ -196,7 +199,7 @@
         arguments: customBlockArguments,
       });
 
-      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}\n`;
+      return `${customBlockType} ${name}(${functionArguments}) {\n${getHatBlockVariables()}\n${innerCode}\n}\n`;
     }
 
     customBlockArgument(block, generator) {

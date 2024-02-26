@@ -1,8 +1,11 @@
 {
   window.categories = window.categories || {};
 
+  let getHatBlockVariables = undefined;
+
   class events_category extends window.penPlusExtension {
     getInfo() {
+      getHatBlockVariables = this.getHatBlockVariables;
       return {
         name: "Events",
         id: "events",
@@ -27,14 +30,14 @@
     }
 
     vertex(block, generator) {
-      return `//Vertex Shader\nvoid vertex() {\ngl_Position = a_position;${nextBlockToCode(
+      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = a_position;${nextBlockToCode(
         block,
         generator
       )}\n}`;
     }
 
     pixel(block, generator) {
-      return `//Fragment Shader\nvoid fragment() {${nextBlockToCode(
+      return `//Fragment Shader\nvoid fragment() {\n${getHatBlockVariables()}\n${nextBlockToCode(
         block,
         generator
       )}\n}`;

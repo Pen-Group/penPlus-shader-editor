@@ -9,6 +9,12 @@
       case "matrix_2x" || "matrix_3x" || "matrix_4x":
         return "matrix_blocks";
 
+      case "matrix_3x":
+        return "matrix_blocks";
+
+      case "matrix_4x":
+        return "matrix_blocks";
+
       default:
         return `${variableType}_blocks`;
     }
@@ -64,176 +70,237 @@
       //if variables is more than 0 check for valid setters
       if (variables.length > 0) {
         let validVariables = [];
+        let hasArrayScope = false;
+        let hasNormalScope = false;
         variables.forEach((variable) => {
           if (variable.type != "texture" && variable.type != "cubemap") {
             validVariables.push(variable);
+          }
+          
+          if (variable.name.split(" ")[0] == "array") {
+            hasArrayScope = true;
+          }
+          else {
+            hasNormalScope = true;
           }
         });
 
         //Then check for if the valid setters length is more than 0
         if (validVariables.length > 0) {
-          //Add the set change multiply and divide blocks with the needed color for the most correctness
-          returnedBlocks.push({
-            opcode: "variable_set",
-            type: "command",
-            text: "set %1 to %2",
-            tooltip: "sets the desired variable to the value",
-            style: __colorVariableBlock(validVariables[0].type),
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: validVariables[0].name,
-                defaultType: validVariables[0].type,
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
-              },
-              {
-                type: "input_value",
-                name: "VALUE",
-                shadow: {
-                  type: "number_reporter",
+          if (hasNormalScope) {
+            //Add the set change multiply and divide blocks with the needed color for the most correctness
+            returnedBlocks.push({
+              opcode: "variable_set",
+              type: "command",
+              text: "set %1 to %2",
+              tooltip: "sets the desired variable to the value",
+              style: __colorVariableBlock(validVariables[0].type),
+              arguments: [
+                {
+                  type: "field_variable",
+                  name: "VAR",
+                  variable: validVariables[0].name,
+                  defaultType: validVariables[0].type,
+                  variableTypes: [
+                    "float",
+                    "int",
+                    "vec2",
+                    "vec3",
+                    "vec4",
+                    "matrix_2x",
+                    "matrix_3x",
+                    "matrix_4x",
+                  ],
                 },
-              },
-            ],
-            operation: (block, generator) => {
-              const variable = Blockly.Variables.getVariable(
-                window.workspace,
-                block.getFieldValue("VAR")
-              );
-
-              const variableName = variable.name;
-              const variableType = variable.type;
-
-              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-              block.setStyle(__colorVariableBlock(variableType));
-
-              return `${variableName.split(" ")[1]} = ${value};\n`;
-            },
-          });
-
-          returnedBlocks.push({
-            opcode: "variable_change",
-            type: "command",
-            text: "change %1 by %2",
-            tooltip: "changes the desired variable by the value",
-            style: __colorVariableBlock(validVariables[0].type),
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: validVariables[0].name,
-                defaultType: validVariables[0].type,
-              },
-              {
-                type: "input_value",
-                name: "VALUE",
-                shadow: {
-                  type: "number_reporter",
+                {
+                  type: "input_value",
+                  name: "VALUE",
+                  shadow: {
+                    type: "number_reporter",
+                  },
                 },
+              ],
+              operation: (block, generator) => {
+                const variable = Blockly.Variables.getVariable(
+                  window.workspace,
+                  block.getFieldValue("VAR")
+                );
+
+                const variableName = variable.name;
+                const variableType = variable.type;
+
+                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+                block.setStyle(__colorVariableBlock(variableType));
+
+                return `${variableName.split(" ")[1]} = ${value};\n`;
               },
-            ],
-            operation: (block, generator) => {
-              const variable = Blockly.Variables.getVariable(
-                window.workspace,
-                block.getFieldValue("VAR")
-              );
+            });
 
-              const variableName = variable.name;
-              const variableType = variable.type;
-
-              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-              block.setStyle(__colorVariableBlock(variableType));
-
-              return `${variableName.split(" ")[1]} += ${value};\n`;
-            },
-          });
-
-          returnedBlocks.push({
-            opcode: "variable_multiply",
-            type: "command",
-            text: "multiply %1 by %2",
-            tooltip: "multiplies the desired variable by the value",
-            style: __colorVariableBlock(validVariables[0].type),
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: validVariables[0].name,
-                defaultType: validVariables[0].type,
-              },
-              {
-                type: "input_value",
-                name: "VALUE",
-                shadow: {
-                  type: "number_reporter",
+            returnedBlocks.push({
+              opcode: "variable_change",
+              type: "command",
+              text: "change %1 by %2",
+              tooltip: "changes the desired variable by the value",
+              style: __colorVariableBlock(validVariables[0].type),
+              arguments: [
+                {
+                  type: "field_variable",
+                  name: "VAR",
+                  variable: validVariables[0].name,
+                  defaultType: validVariables[0].type,
                 },
-              },
-            ],
-            operation: (block, generator) => {
-              const variable = Blockly.Variables.getVariable(
-                window.workspace,
-                block.getFieldValue("VAR")
-              );
-
-              const variableName = variable.name;
-              const variableType = variable.type;
-
-              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
-
-              block.setStyle(__colorVariableBlock(variableType));
-
-              return `${variableName.split(" ")[1]} *= ${value};\n`;
-            },
-          });
-
-          returnedBlocks.push({
-            opcode: "variable_divide",
-            type: "command",
-            text: "divide %1 by %2",
-            tooltip: "divides the desired variable by the value",
-            style: __colorVariableBlock(validVariables[0].type),
-            arguments: [
-              {
-                type: "field_variable",
-                name: "VAR",
-                variable: validVariables[0].name,
-                defaultType: validVariables[0].type,
-              },
-              {
-                type: "input_value",
-                name: "VALUE",
-                shadow: {
-                  type: "number_reporter",
+                {
+                  type: "input_value",
+                  name: "VALUE",
+                  shadow: {
+                    type: "number_reporter",
+                  },
                 },
+              ],
+              operation: (block, generator) => {
+                const variable = Blockly.Variables.getVariable(
+                  window.workspace,
+                  block.getFieldValue("VAR")
+                );
+
+                const variableName = variable.name;
+                const variableType = variable.type;
+
+                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+                block.setStyle(__colorVariableBlock(variableType));
+
+                return `${variableName.split(" ")[1]} += ${value};\n`;
               },
-            ],
-            operation: (block, generator) => {
-              const variable = Blockly.Variables.getVariable(
-                window.workspace,
-                block.getFieldValue("VAR")
-              );
+            });
 
-              const variableName = variable.name;
-              const variableType = variable.type;
+            returnedBlocks.push({
+              opcode: "variable_multiply",
+              type: "command",
+              text: "multiply %1 by %2",
+              tooltip: "multiplies the desired variable by the value",
+              style: __colorVariableBlock(validVariables[0].type),
+              arguments: [
+                {
+                  type: "field_variable",
+                  name: "VAR",
+                  variable: validVariables[0].name,
+                  defaultType: validVariables[0].type,
+                },
+                {
+                  type: "input_value",
+                  name: "VALUE",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+              ],
+              operation: (block, generator) => {
+                const variable = Blockly.Variables.getVariable(
+                  window.workspace,
+                  block.getFieldValue("VAR")
+                );
 
-              const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                const variableName = variable.name;
+                const variableType = variable.type;
 
-              block.setStyle(__colorVariableBlock(variableType));
+                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-              return `${variableName.split(" ")[1]} /= ${value};\n`;
-            },
-          });
+                block.setStyle(__colorVariableBlock(variableType));
+
+                return `${variableName.split(" ")[1]} *= ${value};\n`;
+              },
+            });
+
+            returnedBlocks.push({
+              opcode: "variable_divide",
+              type: "command",
+              text: "divide %1 by %2",
+              tooltip: "divides the desired variable by the value",
+              style: __colorVariableBlock(validVariables[0].type),
+              arguments: [
+                {
+                  type: "field_variable",
+                  name: "VAR",
+                  variable: validVariables[0].name,
+                  defaultType: validVariables[0].type,
+                },
+                {
+                  type: "input_value",
+                  name: "VALUE",
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+              ],
+              operation: (block, generator) => {
+                const variable = Blockly.Variables.getVariable(
+                  window.workspace,
+                  block.getFieldValue("VAR")
+                );
+
+                const variableName = variable.name;
+                const variableType = variable.type;
+
+                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+                block.setStyle(__colorVariableBlock(variableType));
+
+                return `${variableName.split(" ")[1]} /= ${value};\n`;
+              },
+            });
+          }
+          if (hasArrayScope) {
+            returnedBlocks.push({
+              opcode: "variable_item",
+              type: "reporter",
+              text: "item %1 of %2",
+              tooltip: "get an item from an array",
+              style: __colorVariableBlock(validVariables[0].type),
+              arguments: [
+                {
+                  type: "input_value",
+                  name: "VALUE",
+                  check: ["int","float"],
+                  shadow: {
+                    type: "number_reporter",
+                  },
+                },
+                {
+                  type: "field_variable",
+                  name: "VAR",
+                  variable: validVariables[0].name,
+                  defaultType: validVariables[0].type,
+                  variableTypes: [
+                    "float",
+                    "int",
+                    "vec2",
+                    "vec3",
+                    "vec4",
+                    "matrix_2x",
+                    "matrix_3x",
+                    "matrix_4x",
+                  ],
+                },
+              ],
+              operation: (block, generator) => {
+                const variable = Blockly.Variables.getVariable(
+                  window.workspace,
+                  block.getFieldValue("VAR")
+                );
+
+                const variableName = variable.name;
+                const variableType = variable.type;
+
+                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+                block.setStyle(__colorVariableBlock(variableType));
+
+                return [`${variableName.split(" ")[1]}[${value}]`,Order.ATOMIC];
+              },
+            });
+          }
         }
       }
 
@@ -343,6 +410,7 @@
                   <option value="3x">3x3</option>
                   <option value="4x">4x4</option>
                 </select>
+                <input id="ArraySize" placeholder="10" style="visibility:hidden;position:absolute;left:50%;top:100%;Transform:Translate(-50%,-100%); width:50%; height:20%;" type="number" min="2" max="100" value="10"></input>
               </div>
             </div>
           </div>
@@ -360,6 +428,7 @@
       };
 
       const matrixSizeChanger = document.getElementById("matrixSizes");
+      const arraySizeChanger = document.getElementById("ArraySize");
 
       let currentType = variableTypeChangers.float;
       let typeName = "float";
@@ -444,6 +513,7 @@
         Uniform.checked = false;
         Hat.checked = false;
         Array.checked = true;
+        arraySizeChanger.style.visibility = "visible";
       };
 
       Uniform.onclick = () => {
@@ -452,6 +522,7 @@
         Array.checked = false;
         Hat.checked = false;
         Uniform.checked = true;
+        arraySizeChanger.style.visibility = "hidden";
       };
 
       Attribute.onclick = () => {
@@ -460,6 +531,7 @@
         Array.checked = false;
         Hat.checked = false;
         Attribute.checked = true;
+        arraySizeChanger.style.visibility = "hidden";
       };
 
       Varying.onclick = () => {
@@ -468,6 +540,7 @@
         Array.checked = false;
         Hat.checked = false;
         Varying.checked = true;
+        arraySizeChanger.style.visibility = "hidden";
       };
 
       Hat.onclick = () => {
@@ -476,6 +549,7 @@
         Array.checked = false;
         Varying.checked = false;
         Hat.checked = true;
+        arraySizeChanger.style.visibility = "hidden";
       };
 
       const createVariableButton = document.getElementById("createVariable");
@@ -555,13 +629,16 @@
         }
 
         //Close the modal
+        //Have to do some yandere dev type schieße for this.
         let scope = "uniform";
         if (Attribute.checked) {
           scope = "attribute";
         } else if (Varying.checked) {
           scope = "varying";
         } else if (Array.checked) {
-          scope = "array";
+          scope = `array[${arraySizeChanger.value}]`;
+        } else if (Hat.checked) {
+          scope = "hat";
         }
 
         if (typeName == "matrix") {
