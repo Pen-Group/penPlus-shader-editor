@@ -233,44 +233,59 @@ highp float eulernum(highp float a) {
 
   workspace.getToolbox().refreshSelection();
 
-  if (
-    !(
-      window.Generated_GLSL.includes("//Fragment Shader") &&
-      window.Generated_GLSL.includes("//Vertex Shader")
-    )
-  ) {
-    if (
-      !window.Generated_GLSL.includes("//Vertex Shader") &&
-      window.Generated_GLSL.includes("//Fragment Shader")
-    ) {
-      shaderLog("Missing Vertex Shader creating manual replacement");
-      window.Generated_GLSL += `//Vertex Shader
-      void vertex() {
+  let inner = 0;
+
+  let vertFunction = "";
+  let fragFunction = "";
+
+  if (!window.Generated_GLSL.includes("void vertex")) {
+    window.Generated_GLSL += `
+    void vertex() {
       gl_Position = a_position;
-      }`;
-    } else if (
-      !window.Generated_GLSL.includes("//Fragment Shader") &&
-      window.Generated_GLSL.includes("//Vertex Shader")
-    ) {
-      shaderLog("Missing Pixel/Fragment Shader creating manual replacement");
-      window.Generated_GLSL += `//Fragment Shader
-      void fragment() {
-      gl_FragColor = v_color;
-      }`;
-    } else {
-      shaderLog("Missing both shaders using generic set");
-      window.Generated_GLSL += `//Vertex Shader
-      void vertex() {
-      gl_Position = a_position;
-      }`;
-      window.Generated_GLSL += `\n//Fragment Shader
-      void fragment() {
-      gl_FragColor = v_color;
-      }`;
+    }\n`
+  }
+
+  if (!window.Generated_GLSL.includes("void fragment")) {
+    window.Generated_GLSL += `
+    void fragment() {
+      gl_FragColor = vec4(1,1,1,1);
+    }\n`
+  }
+
+  for (let letterID = window.Generated_GLSL.indexOf("void vertex"); letterID < window.Generated_GLSL.length; letterID++) {
+    const letter = window.Generated_GLSL.charAt(letterID);
+    vertFunction += letter;
+    if (letter == "{") {
+      inner += 1;
+    }
+    else if (letter == "}") {
+      inner -= 1;
+      if (inner == 0) {
+        break;
+      }
+    }
+  }
+
+  inner = 0;
+
+  for (let letterID = window.Generated_GLSL.indexOf("void fragment"); letterID < window.Generated_GLSL.length; letterID++) {
+    const letter = window.Generated_GLSL.charAt(letterID);
+    fragFunction += letter;
+    if (letter == "{") {
+      inner += 1;
+    }
+    else if (letter == "}") {
+      inner -= 1;
+      if (inner == 0) {
+        break;
+      }
     }
   }
 
   document.getElementById("myBlocklyCodeOutput").value = window.Generated_GLSL;
 
+  window.Generated_Vert = window.Generated_GLSL.replace(fragFunction,"").replace("void vertex","void main");
+  window.Generated_Frag = window.Generated_GLSL.replace(vertFunction,"").replace("void fragment","void main");
+  
   genProgram();
 }
