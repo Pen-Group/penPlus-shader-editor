@@ -77,7 +77,7 @@
             validVariables.push(variable);
           }
           
-          if (variable.name.split(" ")[0] == "array") {
+          if (variable.name.split(" ")[0].split("[")[0] == "array") {
             hasArrayScope = true;
           }
           else {
