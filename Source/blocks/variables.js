@@ -314,7 +314,7 @@
               </div>
               </div>
               <div style="top:80%;height:20%;width:100%;position:absolute;">
-                <div style="display: flex;position:absolute;left:50%;width:50%;height:80%; font-size: 1.125em;  color:var(--EditorTheme_Text_1); transform: translate(-50%);">
+                <div style="display: flex;position:absolute;left:50%;width:65%;height:80%; font-size: 1.125em;  color:var(--EditorTheme_Text_1); transform: translate(-50%);">
                   <div style="display: flex; width:33.3333%" id="ArrayHolder">
                     <input type="checkbox" id="Array"></input>
                     <p style="transform:translate(0%,-1em);">Array</p>
@@ -330,6 +330,10 @@
                   <div style="display: flex; width:33.3333%" id="PixelHolder">
                     <input type="checkbox" id="Varying"></input>
                     <p style="transform:translate(0%,-1em);">Pixel</p>
+                  </div>
+                  <div style="display: flex; width:33.3333%" id="HatHolder">
+                    <input type="checkbox" id="Hat"></input>
+                    <p style="transform:translate(0%,-1em);">Hat</p>
                   </div>
                 </div>
                 <p class="noSelect" style="position:absolute;left:50%;top:20%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Variable Scope</p>
@@ -381,77 +385,64 @@
       const Uniform = document.getElementById("Uniform");
       const Attribute = document.getElementById("Attribute");
       const Varying = document.getElementById("Varying");
+      const Hat = document.getElementById("Hat");
 
       const ArrayHolder = document.getElementById("ArrayHolder");
       const UniformHolder = document.getElementById("UniformHolder");
       const AttributeHolder = document.getElementById("VertexHolder");
       const VaryingHolder = document.getElementById("PixelHolder");
+      const HatHolder = document.getElementById("HatHolder");
+
+      const setScopeVisibilities = (Arr,Uni,Art,Vary,HatH) => {
+        ArrayHolder.style.visibility = (Arr) ? "visible" : "hidden";
+        UniformHolder.style.visibility = (Uni) ? "visible" : "hidden";
+        AttributeHolder.style.visibility = (Art) ? "visible" : "hidden";
+        VaryingHolder.style.visibility = (Vary) ? "visible" : "hidden";
+        HatHolder.style.visibility = (HatH) ? "visible" : "hidden";
+      }
 
       variableTypeChangers.float.onclick = () => {
         cycleVariable("float");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
       variableTypeChangers.int.onclick = () => {
         cycleVariable("int");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
       variableTypeChangers.vec2.onclick = () => {
         cycleVariable("vec2");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
       variableTypeChangers.vec3.onclick = () => {
         cycleVariable("vec3");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
       variableTypeChangers.vec4.onclick = () => {
         cycleVariable("vec4");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
       variableTypeChangers.texture.onclick = () => {
         cycleVariable("texture");
-        ArrayHolder.style.visibility = "hidden";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "hidden";
-        VaryingHolder.style.visibility = "hidden";
+        setScopeVisibilities(false,true,false,false,false);
 
         Uniform.onclick();
       };
       variableTypeChangers.cubemap.onclick = () => {
         cycleVariable("cubemap");
-        ArrayHolder.style.visibility = "hidden";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "hidden";
-        VaryingHolder.style.visibility = "hidden";
+        setScopeVisibilities(false,true,false,false,false);
 
         Uniform.onclick();
       };
       variableTypeChangers.matrix.onclick = () => {
         cycleVariable("matrix");
-        ArrayHolder.style.visibility = "visible";
-        UniformHolder.style.visibility = "visible";
-        AttributeHolder.style.visibility = "visible";
-        VaryingHolder.style.visibility = "visible";
+        setScopeVisibilities(true,true,true,true,true);
       };
 
       Array.onclick = () => {
         Attribute.checked = false;
         Varying.checked = false;
         Uniform.checked = false;
+        Hat.checked = false;
         Array.checked = true;
       };
 
@@ -459,6 +450,7 @@
         Attribute.checked = false;
         Varying.checked = false;
         Array.checked = false;
+        Hat.checked = false;
         Uniform.checked = true;
       };
 
@@ -466,6 +458,7 @@
         Uniform.checked = false;
         Varying.checked = false;
         Array.checked = false;
+        Hat.checked = false;
         Attribute.checked = true;
       };
 
@@ -473,7 +466,16 @@
         Uniform.checked = false;
         Attribute.checked = false;
         Array.checked = false;
+        Hat.checked = false;
         Varying.checked = true;
+      };
+
+      Hat.onclick = () => {
+        Uniform.checked = false;
+        Attribute.checked = false;
+        Array.checked = false;
+        Varying.checked = false;
+        Hat.checked = true;
       };
 
       const createVariableButton = document.getElementById("createVariable");

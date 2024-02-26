@@ -196,7 +196,7 @@
         arguments:customBlockArguments
       });
 
-      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}`
+      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}\n`
     }
 
     customBlockArgument(block, generator) {
@@ -273,7 +273,7 @@
           break;
       }
 
-      return `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});`
+      return (window.customBlockType == "void") ? `return;` : `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});\n`
     }
 
     createCustomBlocks(workspace) {
@@ -313,7 +313,8 @@
                   const argument = block_arguments[argID];
                   argString += `${(argID == 0) ? "" : ","}${generator.valueToCode(block_ref, argument.name, Order.ATOMIC)}`;
                 }
-                return `${block.name}(${argString});`;
+                //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
+                return (customBlockType == "void") ? `${block.name}(${argString});\n` : [`${block.name}(${argString})`,Order.ATOMIC];
               }
             });
         })

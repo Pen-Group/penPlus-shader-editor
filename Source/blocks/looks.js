@@ -33,6 +33,7 @@
             type: "reporter",
             text: "vertex colour",
             tooltip: "Vertex Color",
+            output: "vec4"
           },
           "---",
           {
@@ -56,6 +57,7 @@
             type: "reporter",
             text: "pixel colour",
             tooltip: "Pixel color",
+            output: "vec4"
           },
           "---",
           {
@@ -150,12 +152,12 @@
       return [`gl_FragColor`, Order.ATOMIC];
     }
 
-    setPixColor(block, generator) {
+    setVertColor(block, generator) {
       const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
       return `v_color = ${colour};` + nextBlockToCode(block, generator);
     }
 
-    getPixColor() {
+    getVertColor() {
       return [`v_color`, Order.ATOMIC];
     }
 
