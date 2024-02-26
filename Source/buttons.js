@@ -83,6 +83,8 @@
     </div>
     `);
 
-    document.getElementById("closeMenu").onclick = () => {varModal.close();}
-  }
+    document.getElementById("closeMenu").onclick = () => {
+      varModal.close();
+    };
+  };
 }

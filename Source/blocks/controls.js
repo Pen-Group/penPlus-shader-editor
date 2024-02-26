@@ -61,30 +61,32 @@
             opcode: "repeat",
             type: "command",
             text: ["repeat %1 %2", "%1"],
-            alignment: ["LEFT","RIGHT"],
+            alignment: ["LEFT", "RIGHT"],
             tooltip: "Repeats the specified amount of times.",
-            arguments: [[
-              {
-                type: "input_value",
-                name: "times",
-                shadow: {
-                  type: "int_reporter",
+            arguments: [
+              [
+                {
+                  type: "input_value",
+                  name: "times",
+                  shadow: {
+                    type: "int_reporter",
+                  },
                 },
-              },
-              {
-                type: "input_statement",
-                name: "code",
-              }
+                {
+                  type: "input_statement",
+                  name: "code",
+                },
+              ],
+              [
+                {
+                  type: "field_image",
+                  name: "times",
+                  src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAA+CAYAAABnVDalAAACkklEQVR4Xu3bYVLDIBAF4PYUegy9m55C76bH0FNY6QwZQoF9hLfLJhN/NmmAL7sLIfV62fnf18fTXzqE1/ffK3tI9AuyO1i7Xo6Tn8fE2iWSBBTBWFC7Q0KBmFC7QsqBXt5+Vln2/flczM7RiNoNkgQUdTSgdoGEAmlBuUfqBdKAco20FYgN5RZpFIgJ5RKJBcSCcofEBmJAuULSAhqFcoOkDTQC5QLJCmgr1HQka6AtUFORZgH1Qk1Dmg3UAzUFyQsQCmWO5A0IgTJF8grUggp7USdStk1X2o+ahpTvKlq9QJDacYUUOusR6kSSwuj/eI5kXpNCH3vfdsRxjURdbd8bMLucSIJSfMtiWrhjn7ZE04xImoq0BcsSKX9PNyWSkFqQ1y8mUu/LysMjlWYr9CbF804kQMwtEus579CRdCIBIZ4izSzaoasu081TFJ1IQES7RGJFURgco2gfGokF5A7JYxS5QvIKVEWy+AF5WjNLuwKzp/20f6slALKF0ftwKE0g2kCh/dE+L0gIUBzwaKOtHcqRCGLOaA+R1KoH0tZnL1jrZngEWmoS8gggYdWiDInQUZxSBDHSbLVVEgcidRaFkupQelxqE70Wc12Ut3lFoqjU0REwFkzslybQPd0Y6xMEjA1TA2KmWTHdwodag0HTpue80s3pnUiQ9u5LAEY0IY2xztH4J5tW34pI8Qseo8oaaFkCaC7uWNFTm+Y1atDD7JZ+oLnQG8FqTQwaNaiJFA/WsKzTT5o1LYBW6ZbrSStlTTAvOKslQCsVLLEkHIv6U7KA3pZIUPmF0ShDUOK1rVJrM5JUq0aKsvTdmThwutUG0RtdEkZ+3APOMBK6dOjB8QST9huqST0DRfC8YtTGeQNTCriege44bQAAAABJRU5ErkJggg==",
+                  width: 16,
+                  height: 16,
+                },
+              ],
             ],
-            [
-              {
-                type: "field_image",
-                name: "times",
-                src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAA+CAYAAABnVDalAAACkklEQVR4Xu3bYVLDIBAF4PYUegy9m55C76bH0FNY6QwZQoF9hLfLJhN/NmmAL7sLIfV62fnf18fTXzqE1/ffK3tI9AuyO1i7Xo6Tn8fE2iWSBBTBWFC7Q0KBmFC7QsqBXt5+Vln2/flczM7RiNoNkgQUdTSgdoGEAmlBuUfqBdKAco20FYgN5RZpFIgJ5RKJBcSCcofEBmJAuULSAhqFcoOkDTQC5QLJCmgr1HQka6AtUFORZgH1Qk1Dmg3UAzUFyQsQCmWO5A0IgTJF8grUggp7USdStk1X2o+ahpTvKlq9QJDacYUUOusR6kSSwuj/eI5kXpNCH3vfdsRxjURdbd8bMLucSIJSfMtiWrhjn7ZE04xImoq0BcsSKX9PNyWSkFqQ1y8mUu/LysMjlWYr9CbF804kQMwtEus579CRdCIBIZ4izSzaoasu081TFJ1IQES7RGJFURgco2gfGokF5A7JYxS5QvIKVEWy+AF5WjNLuwKzp/20f6slALKF0ftwKE0g2kCh/dE+L0gIUBzwaKOtHcqRCGLOaA+R1KoH0tZnL1jrZngEWmoS8gggYdWiDInQUZxSBDHSbLVVEgcidRaFkupQelxqE70Wc12Ut3lFoqjU0REwFkzslybQPd0Y6xMEjA1TA2KmWTHdwodag0HTpue80s3pnUiQ9u5LAEY0IY2xztH4J5tW34pI8Qseo8oaaFkCaC7uWNFTm+Y1atDD7JZ+oLnQG8FqTQwaNaiJFA/WsKzTT5o1LYBW6ZbrSStlTTAvOKslQCsVLLEkHIv6U7KA3pZIUPmF0ShDUOK1rVJrM5JUq0aKsvTdmThwutUG0RtdEkZ+3APOMBK6dOjB8QST9huqST0DRfC8YtTGeQNTCriege44bQAAAABJRU5ErkJggg==",
-                width: 16,
-                height: 16,
-              }
-            ]]
           },
           {
             opcode: "break",
@@ -98,7 +100,7 @@
                 src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAA+CAYAAABnVDalAAACkklEQVR4Xu3bYVLDIBAF4PYUegy9m55C76bH0FNY6QwZQoF9hLfLJhN/NmmAL7sLIfV62fnf18fTXzqE1/ffK3tI9AuyO1i7Xo6Tn8fE2iWSBBTBWFC7Q0KBmFC7QsqBXt5+Vln2/flczM7RiNoNkgQUdTSgdoGEAmlBuUfqBdKAco20FYgN5RZpFIgJ5RKJBcSCcofEBmJAuULSAhqFcoOkDTQC5QLJCmgr1HQka6AtUFORZgH1Qk1Dmg3UAzUFyQsQCmWO5A0IgTJF8grUggp7USdStk1X2o+ahpTvKlq9QJDacYUUOusR6kSSwuj/eI5kXpNCH3vfdsRxjURdbd8bMLucSIJSfMtiWrhjn7ZE04xImoq0BcsSKX9PNyWSkFqQ1y8mUu/LysMjlWYr9CbF804kQMwtEus579CRdCIBIZ4izSzaoasu081TFJ1IQES7RGJFURgco2gfGokF5A7JYxS5QvIKVEWy+AF5WjNLuwKzp/20f6slALKF0ftwKE0g2kCh/dE+L0gIUBzwaKOtHcqRCGLOaA+R1KoH0tZnL1jrZngEWmoS8gggYdWiDInQUZxSBDHSbLVVEgcidRaFkupQelxqE70Wc12Ut3lFoqjU0REwFkzslybQPd0Y6xMEjA1TA2KmWTHdwodag0HTpue80s3pnUiQ9u5LAEY0IY2xztH4J5tW34pI8Qseo8oaaFkCaC7uWNFTm+Y1atDD7JZ+oLnQG8FqTQwaNaiJFA/WsKzTT5o1LYBW6ZbrSStlTTAvOKslQCsVLLEkHIv6U7KA3pZIUPmF0ShDUOK1rVJrM5JUq0aKsvTdmThwutUG0RtdEkZ+3APOMBK6dOjB8QST9huqST0DRfC8YtTGeQNTCriege44bQAAAABJRU5ErkJggg==",
                 width: 16,
                 height: 16,
-              }
+              },
             ],
           },
         ],
@@ -126,7 +128,7 @@
     }
 
     break() {
-      return `break;`
+      return `break;`;
     }
   }
 

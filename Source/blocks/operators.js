@@ -387,7 +387,8 @@
             opcode: "smoothstep",
             type: "reporter",
             text: "smooth %1 and %2 by %3",
-            tooltip: "Uses the smooth step operator and steps by the third number",
+            tooltip:
+              "Uses the smooth step operator and steps by the third number",
             output: "arithmatic",
             arguments: [
               {
@@ -407,13 +408,13 @@
               {
                 type: "input_value",
                 name: "C",
-                check: ["float","arithmatic"],
+                check: ["float", "arithmatic"],
                 shadow: {
                   type: "number_reporter",
                 },
               },
             ],
-          }
+          },
         ],
       };
     }

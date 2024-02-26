@@ -32,7 +32,7 @@ function addImportantReporters() {
         type: "field_input",
         name: "STRING",
         value: "Text Here",
-        spellcheck: false  
+        spellcheck: false,
       },
     ],
   });

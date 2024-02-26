@@ -23,7 +23,7 @@ const addBlocklyBlock = (blockName, type, BlockJson, inline) => {
     case "command":
       BlockJson.nextStatement = BlockJson.nextStatement || "Action";
       BlockJson.previousStatement = BlockJson.previousStatement || "Action";
-      console.log(BlockJson)
+      console.log(BlockJson);
       break;
 
     case "terminal":
@@ -210,7 +210,7 @@ window.penPlusExtension = class {
     //Loop through each block deciding its fate!
     this.defaultBlockInfo = [];
 
-    const addBlock = (block,dynamicBlock) => {
+    const addBlock = (block, dynamicBlock) => {
       let blockData = {};
       //Seperator Shorthand
       if (block == "---") {
@@ -257,8 +257,7 @@ window.penPlusExtension = class {
             //Declare the function to convert to
             if (dynamicBlock) {
               window.GLSL_GEN.forBlock[id + opcode] = block.operation;
-            }
-            else {
+            } else {
               window.GLSL_GEN.forBlock[id + opcode] = this[opcode];
             }
             //Define the arguments used in block creation
@@ -272,15 +271,15 @@ window.penPlusExtension = class {
               message0: text,
               style: block.style || id + "blocks",
               args0: [],
-              lastDummyAlign0:"LEFT"
+              lastDummyAlign0: "LEFT",
             };
 
             //if our text is an array then we loop over all texts and arguments
             if (typeof text == "object") {
               for (let id = 0; id < text.length; id++) {
-                blockDef["message"+id] = text[id];
-                blockDef["args"+id] = [];
-                blockDef["lastDummyAlign"+id] = "LEFT";
+                blockDef["message" + id] = text[id];
+                blockDef["args" + id] = [];
+                blockDef["lastDummyAlign" + id] = "LEFT";
 
                 if (block.arguments) {
                   block.arguments[id].forEach((argument) => {
@@ -290,7 +289,7 @@ window.penPlusExtension = class {
                       if (!defArgs.inputs) {
                         defArgs.inputs = {};
                       }
-  
+
                       defArgs.inputs[argument.name] = {
                         shadow: argument.shadow,
                       };
@@ -300,13 +299,13 @@ window.penPlusExtension = class {
                     if (argument.type == "input_statement") {
                       argument.check = argument.check || "Action";
                     }
-                    
-                    blockDef["args"+id].push(argument);
+
+                    blockDef["args" + id].push(argument);
                   });
                 }
 
                 if (block.alignment) {
-                  blockDef["lastDummyAlign"+id] = block.alignment[id];
+                  blockDef["lastDummyAlign" + id] = block.alignment[id];
                 }
               }
             }
@@ -370,8 +369,8 @@ window.penPlusExtension = class {
         if (dynamicBlock) return blockData;
         createdContentData.contents.push(blockData);
       }
-    }
-    
+    };
+
     myInfo.blocks.forEach((block) => {
       addBlock(block);
     });
@@ -381,22 +380,25 @@ window.penPlusExtension = class {
     //Check for a dynamic function
     if (myInfo.dynamic) {
       //Create the custom function
-      createdContentData.custom = 'dynamic_'+myInfo.id;
+      createdContentData.custom = "dynamic_" + myInfo.id;
       //Add the callback
-      window.workspace.registerToolboxCategoryCallback('dynamic_'+myInfo.id, (workspace) => {
-        //create data holders
-        let createdBlockData = this[myInfo.dynamic](workspace);
-        let formattedDynamic = [];
+      window.workspace.registerToolboxCategoryCallback(
+        "dynamic_" + myInfo.id,
+        (workspace) => {
+          //create data holders
+          let createdBlockData = this[myInfo.dynamic](workspace);
+          let formattedDynamic = [];
 
-        //Loop through and gather compiled data
-        createdBlockData.forEach(block => {
-          formattedDynamic.push(addBlock(block,true));
-        })
+          //Loop through and gather compiled data
+          createdBlockData.forEach((block) => {
+            formattedDynamic.push(addBlock(block, true));
+          });
 
-        //Concatanate the blocks
-        //Did I spell that right?
-        return this.defaultBlockInfo.concat(formattedDynamic);
-      });  
+          //Concatanate the blocks
+          //Did I spell that right?
+          return this.defaultBlockInfo.concat(formattedDynamic);
+        }
+      );
     }
 
     window.toolbox.contents.push(createdContentData);

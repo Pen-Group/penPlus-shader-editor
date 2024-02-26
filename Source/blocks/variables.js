@@ -28,7 +28,7 @@
         color1: "#ff8c1a",
         color2: "#dd8126",
         color3: "#cc7015",
-        dynamic:"createVariableReporters",
+        dynamic: "createVariableReporters",
         blocks: [
           {
             opcode: "createVariable",
@@ -45,26 +45,26 @@
       const variables = workspace.getAllVariables();
 
       //iterate through variables adding the needed reporters
-      variables.forEach(variable => {
+      variables.forEach((variable) => {
         let type = variable.type;
 
         returnedBlocks.push({
           opcode: `variable_${variable.name.split(" ")[1]}`,
-          type: (type == "bool") ? "boolean" : "reporter",
+          type: type == "bool" ? "boolean" : "reporter",
           text: variable.name,
-          style:__colorVariableBlock(type),
-          output:type,
+          style: __colorVariableBlock(type),
+          output: type,
           tooltip: "A variable",
           operation: () => {
-            return [`${variable.name.split(" ")[1]}`,Order.ATOMIC];
-          }
-        })
+            return [`${variable.name.split(" ")[1]}`, Order.ATOMIC];
+          },
+        });
       });
 
       //if variables is more than 0 check for valid setters
       if (variables.length > 0) {
-        let validVariables = []
-        variables.forEach(variable => {
+        let validVariables = [];
+        variables.forEach((variable) => {
           if (variable.type != "texture" && variable.type != "cubemap") {
             validVariables.push(variable);
           }
@@ -78,7 +78,7 @@
             type: "command",
             text: "set %1 to %2",
             tooltip: "sets the desired variable to the value",
-            style:__colorVariableBlock(validVariables[0].type),
+            style: __colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
@@ -97,7 +97,7 @@
                 ],
               },
               {
-                type: "input_value", 
+                type: "input_value",
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
@@ -118,7 +118,7 @@
               block.setStyle(__colorVariableBlock(variableType));
 
               return `${variableName.split(" ")[1]} = ${value};\n`;
-            }
+            },
           });
 
           returnedBlocks.push({
@@ -126,7 +126,7 @@
             type: "command",
             text: "change %1 by %2",
             tooltip: "changes the desired variable by the value",
-            style:__colorVariableBlock(validVariables[0].type),
+            style: __colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
@@ -135,7 +135,7 @@
                 defaultType: validVariables[0].type,
               },
               {
-                type: "input_value", 
+                type: "input_value",
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
@@ -156,7 +156,7 @@
               block.setStyle(__colorVariableBlock(variableType));
 
               return `${variableName.split(" ")[1]} += ${value};\n`;
-            }
+            },
           });
 
           returnedBlocks.push({
@@ -164,7 +164,7 @@
             type: "command",
             text: "multiply %1 by %2",
             tooltip: "multiplies the desired variable by the value",
-            style:__colorVariableBlock(validVariables[0].type),
+            style: __colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
@@ -173,7 +173,7 @@
                 defaultType: validVariables[0].type,
               },
               {
-                type: "input_value", 
+                type: "input_value",
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
@@ -194,7 +194,7 @@
               block.setStyle(__colorVariableBlock(variableType));
 
               return `${variableName.split(" ")[1]} *= ${value};\n`;
-            }
+            },
           });
 
           returnedBlocks.push({
@@ -202,7 +202,7 @@
             type: "command",
             text: "divide %1 by %2",
             tooltip: "divides the desired variable by the value",
-            style:__colorVariableBlock(validVariables[0].type),
+            style: __colorVariableBlock(validVariables[0].type),
             arguments: [
               {
                 type: "field_variable",
@@ -211,7 +211,7 @@
                 defaultType: validVariables[0].type,
               },
               {
-                type: "input_value", 
+                type: "input_value",
                 name: "VALUE",
                 shadow: {
                   type: "number_reporter",
@@ -232,7 +232,7 @@
               block.setStyle(__colorVariableBlock(variableType));
 
               return `${variableName.split(" ")[1]} /= ${value};\n`;
-            }
+            },
           });
         }
       }
@@ -393,49 +393,49 @@
       const VaryingHolder = document.getElementById("PixelHolder");
       const HatHolder = document.getElementById("HatHolder");
 
-      const setScopeVisibilities = (Arr,Uni,Art,Vary,HatH) => {
-        ArrayHolder.style.visibility = (Arr) ? "visible" : "hidden";
-        UniformHolder.style.visibility = (Uni) ? "visible" : "hidden";
-        AttributeHolder.style.visibility = (Art) ? "visible" : "hidden";
-        VaryingHolder.style.visibility = (Vary) ? "visible" : "hidden";
-        HatHolder.style.visibility = (HatH) ? "visible" : "hidden";
-      }
+      const setScopeVisibilities = (Arr, Uni, Art, Vary, HatH) => {
+        ArrayHolder.style.visibility = Arr ? "visible" : "hidden";
+        UniformHolder.style.visibility = Uni ? "visible" : "hidden";
+        AttributeHolder.style.visibility = Art ? "visible" : "hidden";
+        VaryingHolder.style.visibility = Vary ? "visible" : "hidden";
+        HatHolder.style.visibility = HatH ? "visible" : "hidden";
+      };
 
       variableTypeChangers.float.onclick = () => {
         cycleVariable("float");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.int.onclick = () => {
         cycleVariable("int");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.vec2.onclick = () => {
         cycleVariable("vec2");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.vec3.onclick = () => {
         cycleVariable("vec3");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.vec4.onclick = () => {
         cycleVariable("vec4");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.texture.onclick = () => {
         cycleVariable("texture");
-        setScopeVisibilities(false,true,false,false,false);
+        setScopeVisibilities(false, true, false, false, false);
 
         Uniform.onclick();
       };
       variableTypeChangers.cubemap.onclick = () => {
         cycleVariable("cubemap");
-        setScopeVisibilities(false,true,false,false,false);
+        setScopeVisibilities(false, true, false, false, false);
 
         Uniform.onclick();
       };
       variableTypeChangers.matrix.onclick = () => {
         cycleVariable("matrix");
-        setScopeVisibilities(true,true,true,true,true);
+        setScopeVisibilities(true, true, true, true, true);
       };
 
       Array.onclick = () => {

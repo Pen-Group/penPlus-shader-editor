@@ -3,7 +3,7 @@
 
   window.blockIterations = {};
 
-  let customBlockArguments = []
+  let customBlockArguments = [];
 
   function __colorCustomBlock(customBlockType) {
     switch (customBlockType) {
@@ -76,7 +76,7 @@
         color1: "#FF6680",
         color2: "#FF4D6A",
         color3: "#FF3355",
-        dynamic:"createCustomBlocks",
+        dynamic: "createCustomBlocks",
         blocks: [
           {
             opcode: "customBlockDef",
@@ -95,11 +95,11 @@
               {
                 type: "input_statement",
                 name: "arguments",
-                check: "CustomBlockArgument"
+                check: "CustomBlockArgument",
               },
               {
                 type: "input_statement",
-                name: "code"
+                name: "code",
               },
               createMenu(
                 [
@@ -125,7 +125,7 @@
             text: "default Custom Block",
             tooltip: "A Custom Block!",
             output: "myBlock_Input",
-            hideFromPallete: true
+            hideFromPallete: true,
           },
           {
             opcode: "customBlockArgument",
@@ -156,7 +156,7 @@
                   ["mat4", "highp mat4"],
                 ],
                 "type"
-              )
+              ),
             ],
           },
           {
@@ -171,7 +171,7 @@
                 name: "return",
               },
             ],
-          }
+          },
         ],
       };
     }
@@ -191,12 +191,12 @@
       block.setStyle(__colorCustomBlock(customBlockType));
 
       window.customBlocks.push({
-        name:name,
-        type:customBlockType,
-        arguments:customBlockArguments
+        name: name,
+        type: customBlockType,
+        arguments: customBlockArguments,
       });
 
-      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}\n`
+      return `${customBlockType} ${name}(${functionArguments}) {\n${innerCode}\n}\n`;
     }
 
     customBlockArgument(block, generator) {
@@ -208,12 +208,14 @@
 
       customBlockArguments.push({
         name: argumentName,
-        type: customBlockType
-      })
+        type: customBlockType,
+      });
 
       let nextCode = nextBlockToCode(block, generator);
 
-      return `${customBlockType} ${argumentName} ${nextCode ? `, ${nextCode}` : ``}`;
+      return `${customBlockType} ${argumentName} ${
+        nextCode ? `, ${nextCode}` : ``
+      }`;
     }
 
     customBlockReturn(block, generator) {
@@ -263,29 +265,33 @@
           break;
 
         case "highp mat4":
-          block.setStyle("matrix_blocks")
+          block.setStyle("matrix_blocks");
           returnConversion = "mat3";
           break;
 
         default:
-          block.setStyle("myblocks_blocks")
+          block.setStyle("myblocks_blocks");
           block.inputList[0].setCheck("noInput");
           break;
       }
 
-      return (window.customBlockType == "void") ? `return;` : `return ${returnConversion}(${generator.valueToCode(block, "return", Order.ATOMIC) || 1});\n`
+      return window.customBlockType == "void"
+        ? `return;`
+        : `return ${returnConversion}(${
+            generator.valueToCode(block, "return", Order.ATOMIC) || 1
+          });\n`;
     }
 
     createCustomBlocks(workspace) {
       let createdBlocks = [];
       if (window.customBlocks) {
-        window.customBlocks.forEach(block => {
+        window.customBlocks.forEach((block) => {
           let block_arguments = [];
           let block_arg_count = 0;
           let block_arg_string = "";
-          block.arguments.forEach(argument => {
+          block.arguments.forEach((argument) => {
             block_arguments.push({
-              type: "input_value", 
+              type: "input_value",
               name: `${block_arg_count}`,
               shadow: {
                 type: __getShadowForArgumentType(argument.type),
@@ -296,28 +302,36 @@
           });
 
           //Dumb idea. Might work.
-          window.blockIterations[block.name] |= 0; 
-          window.blockIterations[block.name] += 1; 
+          window.blockIterations[block.name] |= 0;
+          window.blockIterations[block.name] += 1;
 
           createdBlocks.push({
-              opcode: `customBlock_${block.name}_${window.blockIterations[block.name]}`,
-              type: (customBlockType == "void") ? "command" : "reporter",
-              text: block.name + block_arg_string,
-              style:__colorCustomBlock(block.type),
-              tooltip: "Your custom block!",
-              arguments: block_arguments,
-              operation: (block_ref, generator) => {
-                let argString = "";
-                //Using a typical for loop for this one since we need the id somewhat.
-                for (let argID = 0; argID < block_arg_count; argID++) {
-                  const argument = block_arguments[argID];
-                  argString += `${(argID == 0) ? "" : ","}${generator.valueToCode(block_ref, argument.name, Order.ATOMIC)}`;
-                }
-                //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
-                return (customBlockType == "void") ? `${block.name}(${argString});\n` : [`${block.name}(${argString})`,Order.ATOMIC];
+            opcode: `customBlock_${block.name}_${
+              window.blockIterations[block.name]
+            }`,
+            type: customBlockType == "void" ? "command" : "reporter",
+            text: block.name + block_arg_string,
+            style: __colorCustomBlock(block.type),
+            tooltip: "Your custom block!",
+            arguments: block_arguments,
+            operation: (block_ref, generator) => {
+              let argString = "";
+              //Using a typical for loop for this one since we need the id somewhat.
+              for (let argID = 0; argID < block_arg_count; argID++) {
+                const argument = block_arguments[argID];
+                argString += `${argID == 0 ? "" : ","}${generator.valueToCode(
+                  block_ref,
+                  argument.name,
+                  Order.ATOMIC
+                )}`;
               }
-            });
-        })
+              //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
+              return customBlockType == "void"
+                ? `${block.name}(${argString});\n`
+                : [`${block.name}(${argString})`, Order.ATOMIC];
+            },
+          });
+        });
         return createdBlocks;
       }
       return [];

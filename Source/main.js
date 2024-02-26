@@ -5,7 +5,10 @@ function onAllAddonsLoaded() {
   };
 
   addImportantReporters();
-  Blockly.blockRendering.register('pen_plus_renderer', window.customZelosRenderer);
+  Blockly.blockRendering.register(
+    "pen_plus_renderer",
+    window.customZelosRenderer
+  );
   workspace = Blockly.inject("BlocklyDiv", {
     toolbox: window.toolbox,
     collapse: false,

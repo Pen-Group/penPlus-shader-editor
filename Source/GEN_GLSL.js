@@ -103,21 +103,45 @@ function createGLSLGen() {
 
   GLSL_GEN.forBlock["matrix2_reporter"] = function (block, generator) {
     return [
-      `mat2(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("10")},${block.getFieldValue("11")})`,
+      `mat2(${block.getFieldValue("00")},${block.getFieldValue(
+        "01"
+      )},${block.getFieldValue("10")},${block.getFieldValue("11")})`,
       Order.ATOMIC,
     ];
   };
 
   GLSL_GEN.forBlock["matrix3_reporter"] = function (block, generator) {
     return [
-      `mat3(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("02")},${block.getFieldValue("10")},${block.getFieldValue("11")},${block.getFieldValue("12")},${block.getFieldValue("20")},${block.getFieldValue("21")},${block.getFieldValue("22")})`,
+      `mat3(${block.getFieldValue("00")},${block.getFieldValue(
+        "01"
+      )},${block.getFieldValue("02")},${block.getFieldValue(
+        "10"
+      )},${block.getFieldValue("11")},${block.getFieldValue(
+        "12"
+      )},${block.getFieldValue("20")},${block.getFieldValue(
+        "21"
+      )},${block.getFieldValue("22")})`,
       Order.ATOMIC,
     ];
   };
 
   GLSL_GEN.forBlock["matrix4_reporter"] = function (block, generator) {
     return [
-      `mat4(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("02")},${block.getFieldValue("03")},${block.getFieldValue("10")},${block.getFieldValue("11")},${block.getFieldValue("12")},${block.getFieldValue("13")},${block.getFieldValue("20")},${block.getFieldValue("21")},${block.getFieldValue("22")},${block.getFieldValue("23")},${block.getFieldValue("30")},${block.getFieldValue("31")},${block.getFieldValue("32")},${block.getFieldValue("33")})`,
+      `mat4(${block.getFieldValue("00")},${block.getFieldValue(
+        "01"
+      )},${block.getFieldValue("02")},${block.getFieldValue(
+        "03"
+      )},${block.getFieldValue("10")},${block.getFieldValue(
+        "11"
+      )},${block.getFieldValue("12")},${block.getFieldValue(
+        "13"
+      )},${block.getFieldValue("20")},${block.getFieldValue(
+        "21"
+      )},${block.getFieldValue("22")},${block.getFieldValue(
+        "23"
+      )},${block.getFieldValue("30")},${block.getFieldValue(
+        "31"
+      )},${block.getFieldValue("32")},${block.getFieldValue("33")})`,
       Order.ATOMIC,
     ];
   };
@@ -131,7 +155,7 @@ function createGLSLGen() {
 function updateGLSL(event) {
   if (window.workspace.isDragging()) return; // Don't update while changes are happening.
   if (!window.supportedEvents.has(event.type)) return;
-  
+
   window.customBlocks = [];
 
   document.getElementById("shaderLog").innerHTML = "";
@@ -162,14 +186,14 @@ highp float eulernum(highp float a) {
 `;
 
   //Add Variables
-  workspace.getAllVariables().forEach(variable => {
+  workspace.getAllVariables().forEach((variable) => {
     let type = variable.type;
 
-    if (type == "texture") type = "sampler2D"; 
-    if (type == "cubemap") type = "samplerCube"; 
-    if (type == "matrix_2x") type = "mat2"; 
-    if (type == "matrix_3x") type = "mat3"; 
-    if (type == "matrix_4x") type = "mat4"; 
+    if (type == "texture") type = "sampler2D";
+    if (type == "cubemap") type = "samplerCube";
+    if (type == "matrix_2x") type = "mat2";
+    if (type == "matrix_3x") type = "mat3";
+    if (type == "matrix_4x") type = "mat4";
 
     let scope = variable.name.split(" ")[0];
     if (scope == "array") {
@@ -180,8 +204,18 @@ highp float eulernum(highp float a) {
     if (!variable.name.split(" ")[1]) return;
 
     //Types that don't have precision
-    if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${variable.type} ${variable.name.split(" ")[1]};\n`;
-    else window.Generated_GLSL += `\n${scope} highp ${variable.type} ${variable.name.split(" ")[1]};\n`;
+    if (
+      variable.type == "texture" ||
+      variable.type == "cubemap" ||
+      variable.type == "int"
+    )
+      window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${
+        variable.type
+      } ${variable.name.split(" ")[1]};\n`;
+    else
+      window.Generated_GLSL += `\n${scope} highp ${variable.type} ${
+        variable.name.split(" ")[1]
+      };\n`;
   });
 
   //Add some spacing
@@ -196,14 +230,25 @@ highp float eulernum(highp float a) {
 
   workspace.getToolbox().refreshSelection();
 
-  if (!(window.Generated_GLSL.includes("//Fragment Shader") && window.Generated_GLSL.includes("//Vertex Shader"))) {
-    if (!window.Generated_GLSL.includes("//Vertex Shader") && window.Generated_GLSL.includes("//Fragment Shader")) {
+  if (
+    !(
+      window.Generated_GLSL.includes("//Fragment Shader") &&
+      window.Generated_GLSL.includes("//Vertex Shader")
+    )
+  ) {
+    if (
+      !window.Generated_GLSL.includes("//Vertex Shader") &&
+      window.Generated_GLSL.includes("//Fragment Shader")
+    ) {
       shaderLog("Missing Vertex Shader creating manual replacement");
       window.Generated_GLSL += `//Vertex Shader
       void vertex() {
       gl_Position = a_position;
       }`;
-    } else if (!window.Generated_GLSL.includes("//Fragment Shader") && window.Generated_GLSL.includes("//Vertex Shader")) {
+    } else if (
+      !window.Generated_GLSL.includes("//Fragment Shader") &&
+      window.Generated_GLSL.includes("//Vertex Shader")
+    ) {
       shaderLog("Missing Pixel/Fragment Shader creating manual replacement");
       window.Generated_GLSL += `//Fragment Shader
       void fragment() {

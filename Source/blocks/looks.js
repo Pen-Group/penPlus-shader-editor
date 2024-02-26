@@ -33,7 +33,7 @@
             type: "reporter",
             text: "vertex colour",
             tooltip: "Vertex Color",
-            output: "vec4"
+            output: "vec4",
           },
           "---",
           {
@@ -57,7 +57,7 @@
             type: "reporter",
             text: "pixel colour",
             tooltip: "Pixel color",
-            output: "vec4"
+            output: "vec4",
           },
           "---",
           {
@@ -98,8 +98,8 @@
             type: "reporter",
             text: "color at %1 of texture %2",
             tooltip: "Sample the pixel at the UV coordinates desired",
-            style:"texture_blocks",
-            output:["vec4", "vector", "arithmatic"],
+            style: "texture_blocks",
+            output: ["vec4", "vector", "arithmatic"],
             arguments: [
               {
                 type: "input_value",
@@ -112,7 +112,7 @@
               {
                 type: "input_value",
                 name: "TEXTURE",
-                check: "texture"
+                check: "texture",
               },
             ],
           },
@@ -121,8 +121,8 @@
             type: "reporter",
             text: "color at %1 of cubemap %2",
             tooltip: "Sample the pixel at the UV coordinates desired",
-            style:"cubemap_blocks",
-            output:"vec4",
+            style: "cubemap_blocks",
+            output: "vec4",
             arguments: [
               {
                 type: "input_value",
@@ -135,10 +135,10 @@
               {
                 type: "input_value",
                 name: "TEXTURE",
-                check: "cubemap"
+                check: "cubemap",
               },
             ],
-          }
+          },
         ],
       };
     }
@@ -185,13 +185,14 @@
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
       return `texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator);
-
     }
 
     sample_cubemap(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
-      return `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator);
+      return (
+        `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator)
+      );
     }
   }
 
