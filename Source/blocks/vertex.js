@@ -172,7 +172,7 @@
       const X = generator.valueToCode(block, "X", Order.ATOMIC);
       const Y = generator.valueToCode(block, "Y", Order.ATOMIC);
       return (
-        `gl_Position.xy = vec2(float(${X}),float(${Y}));` +
+        `gl_Position = vec4(${X});` +
         nextBlockToCode(block, generator)
       );
     }
