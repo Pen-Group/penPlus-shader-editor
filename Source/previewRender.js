@@ -29,6 +29,29 @@
     },
   ];
 
+  window.textures = {};
+
+  window.shaderParams.sampleTextures.forEach(textureData => {
+    window.textures[textureData.name] = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
+
+    const image = new Image();
+    image.src = textureData.DATA;
+
+    image.onload = () => {
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        image
+      );
+      
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    }
+  });
+
   window.timer = 0;
 
   let lastTime = Date.now();

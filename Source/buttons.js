@@ -6,6 +6,10 @@
   const creditsButton = document.getElementById("CreditsButton");
   const blockly = document.getElementById("BlocklyDiv");
 
+  
+  const log_button = document.getElementById("ButtonLog");
+  const var_button = document.getElementById("ButtonVar");
+
   window.editorTheme =
     localStorage.getItem("penPlusEditorTheme") ||
     (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -88,4 +92,20 @@
       varModal.close();
     };
   };
+
+  log_button.onclick = () => {
+    document.getElementById("shaderLog").style.visibility = "visible";
+    document.getElementById("shaderVars").style.visibility = "hidden";
+
+    var_button.className = "buttonUnselected";
+    log_button.className = "buttonSelected";
+  }
+
+  var_button.onclick = () => {
+    document.getElementById("shaderLog").style.visibility = "hidden";
+    document.getElementById("shaderVars").style.visibility = "visible";
+
+    log_button.className = "buttonUnselected";
+    var_button.className = "buttonSelected";
+  }
 }

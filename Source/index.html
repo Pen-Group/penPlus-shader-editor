@@ -166,8 +166,8 @@
       .shaderLog {
         position: absolute;
         width: 30vw;
-        height: 50vh;
-        top: 50vh;
+        height: calc(50vh - var(--EditorTheme_TopBarSize));
+        top: calc(50vh + var(--EditorTheme_TopBarSize));
         left: 0px;
         background: var(--EditorTheme_Theme_1);
         overflow-y: scroll;
@@ -194,6 +194,14 @@
         background-color: var(--EditorTheme_Color_1);
         position: absolute;
         width: 100%;
+        height: var(--EditorTheme_TopBarSize);
+      }
+
+      .logVarSwitchBar {
+        background-color: var(--EditorTheme_Color_1);
+        position: absolute;
+        width: 30vw;
+        top: 50vh;
         height: var(--EditorTheme_TopBarSize);
       }
       
@@ -278,7 +286,14 @@
         </div>
         <div class="previewAndConsole">
           <canvas id="shaderpreview" class="shaderpreview"></canvas>
+          <div class="logVarSwitchBar">
+            <div class="BlocklyShaderButtons">
+              <button class="buttonSelected" id="ButtonLog">Log</button>
+              <button class="buttonUnselected" id="ButtonVar">Variables</button>
+            </div>
+          </div>
           <div id="shaderLog" class="shaderLog"></div>
+          <div id="shaderVars" style="visibility: hidden;" class="shaderLog"></div>
         </div>
         <div class="BlocklyShaderButtons">
           <button class="buttonSelected" id="ButtonBlockly">Scratch</button>
