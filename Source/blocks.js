@@ -371,6 +371,7 @@ function addBlocks() {
   new window.categories.events();
   new window.categories.vertex();
   new window.categories.looks();
+  new window.categories.color();
   new window.categories.controls();
   new window.categories.operators();
   new window.categories.sensing();

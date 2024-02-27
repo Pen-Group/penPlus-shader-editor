@@ -50,12 +50,6 @@
               text: "pixel y",
               tooltip: "The pixel's Y position",
             },
-            {
-              opcode: "pixZ",
-              type: "reporter",
-              text: "pixel depth",
-              tooltip: "The pixel's Y position",
-            },
             "---",
             {
               opcode: "timer",

@@ -187,6 +187,50 @@ highp float log10(highp float a) {
 highp float eulernum(highp float a) {
     return 2.718 * a;
 }
+
+highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, highp float a) {
+  highp float huePrime = mod(hue,360.0);
+
+  highp float c = (value/100.0) * (saturation/100.0);
+  highp float x = c * (1.0 - abs(mod(huePrime/60.0, 2.0) - 1.0));
+  highp float m = (value/100.0) - c;
+
+  highp float r = 0.0;
+  highp float g = 0.0;
+  highp float b = 0.0;
+  
+  if (huePrime >= 0.0 && huePrime < 60.0) {
+      r = c;
+      g = x;
+      b = 0.0;
+  } else if (huePrime >= 60.0 && huePrime < 120.0) {
+      r = x;
+      g = c;
+      b = 0.0;
+  } else if (huePrime >= 120.0 && huePrime < 180.0) {
+      r = 0.0;
+      g = c;
+      b = x;
+  } else if (huePrime >= 180.0 && huePrime < 240.0) {
+      r = 0.0;
+      g = x;
+      b = c;
+  } else if (huePrime >= 240.0 && huePrime < 300.0) {
+      r = x;
+      g = 0.0;
+      b = c;
+  } else if (huePrime >= 300.0 && huePrime < 360.0) {
+      r = c;
+      g = 0.0;
+      b = x;
+  }
+
+  r += m;
+  g += m;
+  b += m;
+
+  return vec4(r, g, b, a);
+}
 `;
 
   //Add Variables
