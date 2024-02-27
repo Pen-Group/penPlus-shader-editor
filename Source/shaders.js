@@ -94,7 +94,8 @@ function replacementShader() {
   genProgram();
 }
 
-function getTypedInput(type) {
+//inputs and their handlers.
+function getTypedInput(type,variableName) {
   switch (type) {
     case "sampler2D":
       const keys = Object.keys(window.textures);
@@ -102,10 +103,49 @@ function getTypedInput(type) {
       keys.forEach(key => {
         options += `<option value="${key}">texture ${key}</option>`;
       })
-      return `<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+      let selectionBox = document.createElement("select");
+      selectionBox.innerHTML = options;
+
+      //input handling
+      gl.shaders.editorShader.uniforms[variableName].value = window.textures[selectionBox.value];
+      selectionBox.addEventListener("change", () => {
+        gl.shaders.editorShader.uniforms[variableName].value = window.textures[selectionBox.value];
+      })
+
+      return selectionBox;
+
+    case "float":
+      //create our input.
+      let input = document.createElement("input");
+      input.type = "Number";
+      input.value = 0;
+
+      //set the uniform to our input's value
+      gl.shaders.editorShader.uniforms[variableName].value = input.value;
+      input.addEventListener("change", () => {
+        gl.shaders.editorShader.uniforms[variableName].value = input.value;
+      })
+
+      return input;
+
+    case "int":
+      //create our input.
+      let input = document.createElement("input");
+      input.type = "Number";
+      input.value = 0;
+
+      //set the uniform to our input's value
+      gl.shaders.editorShader.uniforms[variableName].value = input.value;
+      input.addEventListener("change", () => {
+        //Round cuz its an integer
+        input.value = Math.round(input.value);
+        gl.shaders.editorShader.uniforms[variableName].value = input.value;
+      })
+
+      return input;
   
     default:
-      return ``;
+      return document.createElement("div");
   }
 }
 
@@ -161,26 +201,27 @@ function genProgram() {
 
   window.shaderVars.innerHTML = "";
 
-  window.ShaderAttributes.forEach(attribute => {
-    if (attribute.scope == "uniform") {
-      gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
-      if (attribute.name != "u_timer" && attribute.name != "u_res") {
-        let divElement = document.createElement("div");
-        divElement.style.color = "var(--EditorTheme_Text_1)";
-        divElement.innerHTML = `${attribute.name}:${getTypedInput(attribute.type)}`;
-
-        gl.shaders.editorShader.uniforms[attribute.name].value = window.textures[divElement.children[0].value];
-        divElement.children[0].addEventListener("change", () => {
-          gl.shaders.editorShader.uniforms[attribute.name].value = window.textures[divElement.children[0].value];
-        })
-        
-        window.shaderVars.appendChild(divElement);
+  try {
+    window.ShaderAttributes.forEach(attribute => {
+      if (attribute.scope == "uniform") {
+        gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
+        if (attribute.name != "u_timer" && attribute.name != "u_res") {
+          let divElement = document.createElement("div");
+          divElement.style.color = "var(--EditorTheme_Text_1)";
+          divElement.innerHTML = `${attribute.name}:`;
+          divElement.appendChild(getTypedInput(attribute.type,attribute.name))
+          
+          window.shaderVars.appendChild(divElement);
+        }
       }
-    }
-    else {
-      gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
-      if (attribute.name != "a_position" && attribute.name != "a_color" && attribute.name != "a_texCoord") {}
-    }
-  });
+      else {
+        gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
+        if (attribute.name != "a_position" && attribute.name != "a_color" && attribute.name != "a_texCoord") {}
+      }
+    });
+  } catch (error) {
+    shaderLog(error);
+  }
+  
   window.compiling = false;
 }
