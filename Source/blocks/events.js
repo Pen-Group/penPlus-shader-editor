@@ -37,7 +37,7 @@
     }
 
     pixel(block, generator) {
-      return `//Fragment Shader\nvoid fragment() {\n${getHatBlockVariables()}\n${nextBlockToCode(
+      return `//Fragment Shader\nvoid fragment() {\ngl_FragColor = vec4(1);\n${getHatBlockVariables()}\n${nextBlockToCode(
         block,
         generator
       )}\n}`;

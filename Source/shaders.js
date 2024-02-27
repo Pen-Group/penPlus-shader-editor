@@ -96,6 +96,8 @@ function replacementShader() {
 
 //inputs and their handlers.
 function getTypedInput(type,variableName) {
+  let input = undefined;
+
   switch (type) {
     case "sampler2D":
       const keys = Object.keys(window.textures);
@@ -103,20 +105,20 @@ function getTypedInput(type,variableName) {
       keys.forEach(key => {
         options += `<option value="${key}">texture ${key}</option>`;
       })
-      let selectionBox = document.createElement("select");
-      selectionBox.innerHTML = options;
+      input = document.createElement("select");
+      input.innerHTML = options;
 
       //input handling
-      gl.shaders.editorShader.uniforms[variableName].value = window.textures[selectionBox.value];
-      selectionBox.addEventListener("change", () => {
-        gl.shaders.editorShader.uniforms[variableName].value = window.textures[selectionBox.value];
+      gl.shaders.editorShader.uniforms[variableName].value = window.textures[input.value];
+      input.addEventListener("change", () => {
+        gl.shaders.editorShader.uniforms[variableName].value = window.textures[input.value];
       })
 
-      return selectionBox;
+      return input;
 
     case "float":
       //create our input.
-      let input = document.createElement("input");
+      input = document.createElement("input");
       input.type = "Number";
       input.value = 0;
 
@@ -130,7 +132,7 @@ function getTypedInput(type,variableName) {
 
     case "int":
       //create our input.
-      let input = document.createElement("input");
+      input = document.createElement("input");
       input.type = "Number";
       input.value = 0;
 
@@ -190,9 +192,6 @@ function genProgram() {
   let vert = window.Generated_Vert;
   let frag = window.Generated_Frag;
 
-  console.log(vert)
-  console.log(frag)
-
   //? compile vertex Shader
   window.webGLShaderManager.createAndCompile(gl, "editorShader", vert, frag, (error) => {
     shaderLog(error);
@@ -201,27 +200,23 @@ function genProgram() {
 
   window.shaderVars.innerHTML = "";
 
-  try {
-    window.ShaderAttributes.forEach(attribute => {
-      if (attribute.scope == "uniform") {
-        gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
-        if (attribute.name != "u_timer" && attribute.name != "u_res") {
-          let divElement = document.createElement("div");
-          divElement.style.color = "var(--EditorTheme_Text_1)";
-          divElement.innerHTML = `${attribute.name}:`;
-          divElement.appendChild(getTypedInput(attribute.type,attribute.name))
-          
-          window.shaderVars.appendChild(divElement);
-        }
-      }
-      else {
-        gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
-        if (attribute.name != "a_position" && attribute.name != "a_color" && attribute.name != "a_texCoord") {}
-      }
-    });
-  } catch (error) {
-    shaderLog(error);
-  }
+  window.ShaderAttributes.forEach(attribute => {
+    if (attribute.scope == "uniform") {
+      gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
+      /*if (attribute.name != "u_timer" && attribute.name != "u_res" && gl.shaders.editorShader.uniforms[attribute.name]) {
+        let divElement = document.createElement("div");
+        divElement.style.color = "var(--EditorTheme_Text_1)";
+        divElement.innerHTML = `${attribute.name}:`;
+        divElement.appendChild(getTypedInput(attribute.type,attribute.name))
+        
+        window.shaderVars.appendChild(divElement);
+      }*/
+    }
+    else {
+      gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type && gl.shaders.editorShader.uniforms[attribute.name]);
+      if (attribute.name != "a_position" && attribute.name != "a_color" && attribute.name != "a_texCoord") {}
+    }
+  });
   
   window.compiling = false;
 }

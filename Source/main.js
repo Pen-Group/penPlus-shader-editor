@@ -61,6 +61,8 @@ function onAllAddonsLoaded() {
     Blockly.Events.BLOCK_MOVE,
   ]);
 
+  previewRender();
+
   // Add the disableOrphans event handler. This is not done automatically by
   // the plugin and should be handled by your application.
   workspace.addChangeListener(Blockly.Events.disableOrphans);

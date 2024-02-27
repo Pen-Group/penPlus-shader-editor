@@ -1,5 +1,5 @@
 //Isolating render preview variables and code just so we don't accidentally overrite them!
-{
+function previewRender () {
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
   let previewData_Pen = [
@@ -31,7 +31,7 @@
 
   window.textures = {};
 
-  window.shaderParams.sampleTextures.forEach(textureData => {
+  /*window.shaderParams.sampleTextures.forEach(textureData => {
     window.textures[textureData.name] = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
 
@@ -52,7 +52,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     }
-  });
+  });*/
 
   window.timer = 0;
 
@@ -66,11 +66,11 @@
       
       gl.useProgram(gl.shaders["editorShader"]);
       
-      if (gl.shaders.editorShader.uniforms.u_timer.location) {
+      if (gl.shaders.editorShader.uniforms.u_timer && gl.shaders.editorShader.uniforms.u_timer.location) {
         gl.shaders.editorShader.uniforms.u_timer.value = window.timer;
       }
 
-      if (gl.shaders.editorShader.uniforms.u_res.location) {
+      if (gl.shaders.editorShader.uniforms.u_res && gl.shaders.editorShader.uniforms.u_res.location) {
         gl.shaders.editorShader.uniforms.u_res.value = [gl.canvas.width,gl.canvas.height];
       }
 
