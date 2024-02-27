@@ -94,15 +94,19 @@ function replacementShader() {
   genProgram();
 }
 
+//* THIS FUNCTION IS GOING TO KILL ME */
 function getTypedInput(type,name) {
   let input = "";
   let inputFunction = () => {};
   switch (type) {
     case "sampler2D":
       const keys = Object.keys(window.textures);
+
       input = document.createElement("select");
       input.style.width = "75%";
       input.className = "scratchStyledInput";
+
+      //Loop through textures to add them to the list
       let options = ""
       keys.forEach(key => {
         options += `<option value="${key}">texture ${key}</option>`;
@@ -120,6 +124,7 @@ function getTypedInput(type,name) {
     case "float":
       input = document.createElement("input");
       input.style.width = "75%";
+
       input.type = "Number";
       input.value = 0;
       input.className = "scratchStyledInput";
@@ -134,6 +139,7 @@ function getTypedInput(type,name) {
     case "int":
       input = document.createElement("input");
       input.style.width = "75%";
+
       input.type = "Number";
       input.value = 0;
       input.className = "scratchStyledInput";
@@ -148,17 +154,21 @@ function getTypedInput(type,name) {
     case "vec2":
       input = document.createElement("div");
       input.style.maxWidth = "75%";
-      input.style.display = "flex";
+      input.style.display = "grid";
+      input.style.gridAutoColumns = "50% 50%";
+
+
       input.appendChild(document.createElement("input"));
       input.children[0].type = "Number"
       input.children[0].value = 0;
-      input.children[0].width = "30%";
       input.children[0].className = "scratchStyledInput";
+
+
       input.appendChild(document.createElement("input"));
       input.children[1].type = "Number"
       input.children[1].value = 0;
-      input.children[1].width = "30%";
       input.children[1].className = "scratchStyledInput";
+
 
       inputFunction = () => {
         gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value];
@@ -174,22 +184,27 @@ function getTypedInput(type,name) {
     case "vec3":
         input = document.createElement("div");
         input.style.maxWidth = "75%";
-        input.style.display = "flex";
+        input.style.display = "grid";
+        input.style.gridAutoColumns = "33.3% 33.3% 33.3%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[0].type = "Number"
         input.children[0].value = 0;
         input.children[0].className = "scratchStyledInput";
-        input.children[0].width = "20%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[1].type = "Number"
         input.children[1].value = 0;
         input.children[1].className = "scratchStyledInput";
-        input.children[1].width = "20%";
+
+
         input.appendChild(document.createElement("input"));
-        input.children[2].type = "Number"
+        input.children[2].type = "Number";
         input.children[2].value = 0;
         input.children[2].className = "scratchStyledInput";
-        input.children[2].width = "20%";
+
   
         inputFunction = () => {
           gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
@@ -207,27 +222,34 @@ function getTypedInput(type,name) {
       case "vec4":
         input = document.createElement("div");
         input.style.maxWidth = "75%";
-        input.style.display = "flex";
+        input.style.display = "grid";
+        input.style.gridAutoColumns = "25% 25% 25% 25%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[0].type = "Number"
         input.children[0].value = 0;
         input.children[0].className = "scratchStyledInput";
-        input.children[0].width = "15%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[1].type = "Number"
         input.children[1].value = 0;
         input.children[1].className = "scratchStyledInput";
-        input.children[1].width = "15%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[2].type = "Number"
         input.children[2].value = 0;
         input.children[2].className = "scratchStyledInput";
-        input.children[2].width = "15%";
+
+
         input.appendChild(document.createElement("input"));
         input.children[3].type = "Number"
         input.children[3].value = 0;
         input.children[3].className = "scratchStyledInput";
-        input.children[3].width = "15%";
+
+
   
         inputFunction = () => {
           gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
