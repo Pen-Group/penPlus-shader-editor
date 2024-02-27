@@ -147,7 +147,8 @@ function getTypedInput(type,name) {
     
     case "vec2":
       input = document.createElement("div");
-      input.style.width = "75%";
+      input.style.maxWidth = "75%";
+      input.style.display = "flex";
       input.appendChild(document.createElement("input"));
       input.children[0].type = "Number"
       input.children[0].value = 0;
@@ -172,7 +173,8 @@ function getTypedInput(type,name) {
     
     case "vec3":
         input = document.createElement("div");
-        input.style.width = "75%";
+        input.style.maxWidth = "75%";
+        input.style.display = "flex";
         input.appendChild(document.createElement("input"));
         input.children[0].type = "Number"
         input.children[0].value = 0;
@@ -204,7 +206,8 @@ function getTypedInput(type,name) {
 
       case "vec4":
         input = document.createElement("div");
-        input.style.width = "75%";
+        input.style.maxWidth = "75%";
+        input.style.display = "flex";
         input.appendChild(document.createElement("input"));
         input.children[0].type = "Number"
         input.children[0].value = 0;
@@ -303,8 +306,9 @@ function genProgram() {
         if (attribute.name != "u_timer" && attribute.name != "u_res") {
           let divElement = document.createElement("div");
           divElement.style.color = "var(--EditorTheme_Text_1)";
-          divElement.style.width = "100%";
           divElement.style.position = "relative";
+          divElement.style.maxWidth = "50%";
+          divElement.style.display = "flex";
 
           divElement.innerHTML = `${attribute.name}:`;
           divElement.appendChild(getTypedInput(attribute.type,attribute.name));
