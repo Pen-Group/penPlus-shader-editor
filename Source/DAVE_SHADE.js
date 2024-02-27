@@ -17,6 +17,7 @@
       }
     } catch (error) {
       onError(error);
+      console.error(error);
       return;
     }
 
@@ -30,6 +31,7 @@
       }
     } catch (error) {
       onError(error);
+      console.error(error);
       return;
     }
 
@@ -49,6 +51,7 @@
       }
     } catch (error) {
       onError(error);
+      console.error(error);
       return;
     }
 
@@ -203,7 +206,6 @@
           break;
       }
       if (returnObject) return GL.shaders[name].uniforms[uniformName];
-      console.log(`Uniform ${uniformName} set up as type ${uniformType}`);
     }
 
     GL.shaders[name].setupUniformArray = (uniformName,uniformType,size) => {
@@ -218,8 +220,6 @@
       for (let x = 0; x < size; x++) {
         GL.shaders[name].uniforms[uniformName].elements.push(GL.shaders[name].setupUniform(`${uniformName}[${x}]`,uniformType,true));
       }
-
-      console.log(`Uniform array ${uniformName} set up as type ${uniformType} with a length of ${size}`);
     }
 
     GL.shaders[name].updateAttributeStride = () => {
@@ -232,9 +232,7 @@
           GL.shaders[name].currentByte,
           GL.shaders[name].attributes[attributeName].offset
         );
-        console.log(`shader ${attributeName} at offset ${GL.shaders[name].attributes[attributeName].offset}`);
       });
-      console.log(`Shader stride is now ${GL.shaders[name].currentByte}`);
     }
 
     //Only supports floats and its derivitives.
@@ -246,6 +244,7 @@
       GL.shaders[name].attributes[attributeName].location = GL.getAttribLocation(program,attributeName);
 
       if (GL.shaders[name].attributes[attributeName].location === undefined) return;
+      if (GL.shaders[name].attributes[attributeName].location == -1) return;
       
       switch (attributeType) {
         case "float" || "double":
@@ -270,8 +269,6 @@
       GL.shaders[name].attributes[attributeName].offset = GL.shaders[name].currentByte;
       GL.shaders[name].attributes[attributeName].normalized = normalized;
       GL.shaders[name].attributes[attributeName].vectorSize = attributeLength;
-
-      console.log(`Attribute ${attributeName} set up as type ${attributeType} at byte ${GL.shaders[name].currentByte}`);
 
       GL.shaders[name].currentByte += Float32Array.BYTES_PER_ELEMENT * attributeLength;
 

@@ -237,7 +237,7 @@
           block,
           "y",
           Order.ATOMIC
-        )}),${generator.valueToCode(block, "z", Order.ATOMIC)})` +
+        )},${generator.valueToCode(block, "z", Order.ATOMIC)})` +
           nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
@@ -253,11 +253,11 @@
           block,
           "y",
           Order.ATOMIC
-        )}),${generator.valueToCode(
+        )},${generator.valueToCode(
           block,
           "z",
           Order.ATOMIC
-        )}),${generator.valueToCode(block, "w", Order.ATOMIC)})` +
+        )},${generator.valueToCode(block, "w", Order.ATOMIC)})` +
           nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];

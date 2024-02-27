@@ -61,35 +61,76 @@
           },
           "---",
           {
-            opcode: "pixX",
-            type: "reporter",
-            text: "pixel x",
-            tooltip: "The pixel's X position",
+            opcode: "setPixU",
+            type: "command",
+            text: "set u to %1",
+            tooltip: "Sets the current U position",
+            arguments: [
+              {
+                type: "input_value",
+                name: "U",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ]
           },
           {
-            opcode: "pixY",
-            type: "reporter",
-            text: "pixel y",
-            tooltip: "The pixel's Y position",
+            opcode: "setPixV",
+            type: "command",
+            text: "set v to %1",
+            tooltip: "Sets the current V coordinate",
+            arguments: [
+              {
+                type: "input_value",
+                name: "V",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ]
           },
           {
-            opcode: "pixZ",
-            type: "reporter",
-            text: "pixel depth",
-            tooltip: "The pixel's Y position",
+            opcode: "changePixU",
+            type: "command",
+            text: "change u by %1",
+            tooltip: "changes the current U coordinate by a value",
+            arguments: [
+              {
+                type: "input_value",
+                name: "U",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ]
           },
-          "---",
           {
-            opcode: "resX",
-            type: "reporter",
-            text: "resolution width",
-            tooltip: "The render's width",
+            opcode: "changePixV",
+            type: "command",
+            text: "change v by %1",
+            tooltip: "changes the current V coordinate by a value",
+            arguments: [
+              {
+                type: "input_value",
+                name: "V",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ]
           },
           {
-            opcode: "resY",
+            opcode: "pixU",
             type: "reporter",
-            text: "resolution height",
-            tooltip: "The render's height",
+            text: "u coordinate",
+            tooltip: "The current U position",
+          },
+          {
+            opcode: "pixV",
+            type: "reporter",
+            text: "v coordinate",
+            tooltip: "The current V coordinate",
           },
           "---",
           "Sampling",
@@ -172,24 +213,32 @@
       return [`v_color`, Order.ATOMIC];
     }
 
-    pixX() {
-      return [`gl_FragCoord.x`, Order.ATOMIC];
+    setPixU(block, generator) {
+      const U = generator.valueToCode(block, "U", Order.ATOMIC);
+      return `v_texCoord.x = float(${U});` + nextBlockToCode(block, generator);
     }
 
-    pixY() {
-      return [`gl_FragCoord.y`, Order.ATOMIC];
+    setPixV(block, generator) {
+      const V = generator.valueToCode(block, "V", Order.ATOMIC);
+      return `v_texCoord.y = float(${V});` + nextBlockToCode(block, generator);
     }
 
-    pixZ() {
-      return [`gl_FragCoord.z`, Order.ATOMIC];
+    changePixU(block, generator) {
+      const U = generator.valueToCode(block, "U", Order.ATOMIC);
+      return `v_texCoord.x += float(${U});` + nextBlockToCode(block, generator);
     }
 
-    resX() {
-      return [`u_res.x`, Order.ATOMIC];
+    changePixV(block, generator) {
+      const V = generator.valueToCode(block, "V", Order.ATOMIC);
+      return `v_texCoord.y += float(${V});` + nextBlockToCode(block, generator);
     }
 
-    resY() {
-      return [`u_res.y`, Order.ATOMIC];
+    pixU() {
+      return [`v_texCoord.x`, Order.ATOMIC];
+    }
+
+    pixV() {
+      return [`v_texCoord.y`, Order.ATOMIC];
     }
 
     mainTex() {

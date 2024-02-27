@@ -18,7 +18,7 @@
               {
                 type: "input_value",
                 name: "X",
-                check:"vec4",
+                check:["vec4", "arithmatic"],
                 shadow: {
                   type: "vec4_reporter",
                 },

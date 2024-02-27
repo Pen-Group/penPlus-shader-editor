@@ -169,6 +169,23 @@
             ],
           },
           {
+            opcode: "getArg",
+            type: "reporter",
+            text: "argument %1",
+            tooltip: "Get an argument from a custom block",
+            output: "arithmatic",
+            arguments: [
+              {
+                type: "input_value",
+                name: "name",
+                check: "string",
+                shadow: {
+                  type: "string_reporter",
+                },
+              }
+            ],
+          },
+          {
             opcode: "customBlockReturn",
             type: "terminal",
             text: "return %1",
@@ -233,6 +250,11 @@
       return `${customBlockType} ${__glslifyName(argumentName)} ${
         nextCode ? `, ${nextCode}` : ``
       }`;
+    }
+
+    getArg(block, generator) {
+      const name = generator.valueToCode(block, "name", Order.ATOMIC);
+      return [`${name}`, Order.ATOMIC];
     }
 
     customBlockReturn(block, generator) {

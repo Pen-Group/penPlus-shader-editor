@@ -373,6 +373,7 @@ function addBlocks() {
   new window.categories.looks();
   new window.categories.controls();
   new window.categories.operators();
+  new window.categories.sensing();
   new window.categories.vector();
   new window.categories.matrix();
   new window.categories.variables();

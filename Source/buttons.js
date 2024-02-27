@@ -73,13 +73,14 @@
         LilyMakesThings - Blockly Help<br>
         Jwklong - Custom Block Shapes<br>
         </span>
-        Testers<br>
+        Icons<br>
         <span style="font-size: 0.5em;">
-        Testi cle<br>
+        FeatherIcons.com<br>
+        Google Material Icons<br>
         </span>
         </p>
-        <button id="closeMenu" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">Close</button>
       </div>
+      <button id="closeMenu" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">Close</button>
     </div>
     `);
 

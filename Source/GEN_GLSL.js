@@ -156,6 +156,8 @@ function updateGLSL(event) {
   if (window.workspace.isDragging()) return; // Don't update while changes are happening.
   if (!window.supportedEvents.has(event.type)) return;
 
+  window.timer = 0;
+
   window.customBlocks = [];
 
   document.getElementById("shaderLog").innerHTML = "";
@@ -170,6 +172,8 @@ varying highp vec4 v_color;
 varying highp vec2 v_texCoord;
 
 varying highp float v_depth;
+
+uniform highp float u_timer;
 
 //Pen+ Textures
 uniform sampler2D u_texture;
@@ -242,6 +246,7 @@ highp float eulernum(highp float a) {
     window.Generated_GLSL += `
     void vertex() {
       gl_Position = a_position;
+      v_texCoord = a_texCoord;
     }\n`
   }
 

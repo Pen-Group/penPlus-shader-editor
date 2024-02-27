@@ -26,6 +26,8 @@ function replacementShader() {
     varying highp vec2 v_texCoord;
     
     varying highp float v_depth;
+
+    uniform highp float u_timer;
     
     //Pen+ Textures
     uniform sampler2D u_texture;
@@ -138,6 +140,9 @@ function genProgram() {
   let vert = window.Generated_Vert;
   let frag = window.Generated_Frag;
 
+  console.log(vert)
+  console.log(frag)
+
   //? compile vertex Shader
   window.webGLShaderManager.createAndCompile(gl, "editorShader", vert, frag, (error) => {
     shaderLog(error);
@@ -145,19 +150,11 @@ function genProgram() {
   });
 
   window.ShaderAttributes.forEach(attribute => {
-    if (attribute.type == "uniform") {
-      try {
-        gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
-      } catch (error) {
-        shaderLog(error);
-      }
+    if (attribute.scope == "uniform") {
+      gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
     }
     else {
-      try {
-        gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
-      } catch (error) {
-        shaderLog(error);
-      }
+      gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
     }
   });
 

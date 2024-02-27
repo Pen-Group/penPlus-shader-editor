@@ -29,7 +29,40 @@
     },
   ];
 
-  function renderFrame() {
+  window.timer = 0;
+
+  let lastTime = Date.now();
+  let now = Date.now();
+
+  function renderFrame(delta) {
+    now = Date.now();
+    if (gl && gl.shaders && gl.shaders["editorShader"]) {
+      window.timer += (now - lastTime) / 1000;
+      
+      if (gl.shaders.editorShader.uniforms.u_timer.location) {
+        gl.shaders.editorShader.uniforms.u_timer.value = window.timer;
+      }
+
+      if (gl.shaders.editorShader.uniforms.u_res.location) {
+        gl.shaders.editorShader.uniforms.u_res.value = [gl.canvas.width,gl.canvas.height];
+      }
+
+      gl.useProgram(gl.shaders["editorShader"]);
+      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(gl.shaders.editorShader.makeTriangle({
+        a_position:[
+          [-0.5,-0.5,0,1],
+          [0.5,-0.5,0,1],
+          [0.5,0.5,0,1]],
+        a_color:[[1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0]],
+        a_texCoord:[
+          [0,0],
+          [1,0],
+          [1,1]]
+      })),gl.STATIC_DRAW);
+
+      gl.drawArrays(gl.TRIANGLES,0,3);
+    };
+    lastTime = now;
     window.requestAnimationFrame(renderFrame);
   }
 
