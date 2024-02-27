@@ -39,6 +39,7 @@
     image.src = textureData.DATA;
 
     image.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
       gl.texImage2D(
         gl.TEXTURE_2D,
         0,
@@ -49,6 +50,7 @@
       );
       
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     }
   });
 
