@@ -62,6 +62,8 @@
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       window.timer += (now - lastTime) / 1000;
       
+      gl.useProgram(gl.shaders["editorShader"]);
+      
       if (gl.shaders.editorShader.uniforms.u_timer.location) {
         gl.shaders.editorShader.uniforms.u_timer.value = window.timer;
       }
@@ -70,7 +72,6 @@
         gl.shaders.editorShader.uniforms.u_res.value = [gl.canvas.width,gl.canvas.height];
       }
 
-      gl.useProgram(gl.shaders["editorShader"]);
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(gl.shaders.editorShader.makeTriangle({
         a_position:[
           [-0.5,-0.5,0,1],

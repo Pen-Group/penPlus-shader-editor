@@ -15,13 +15,13 @@
             {
               opcode: "resX",
               type: "reporter",
-              text: "resolution width",
+              text: "stage width",
               tooltip: "The render's width",
             },
             {
               opcode: "resY",
               type: "reporter",
-              text: "resolution height",
+              text: "stage height",
               tooltip: "The render's height",
             },
             "---",

@@ -6,6 +6,8 @@
   const creditsButton = document.getElementById("CreditsButton");
   const blockly = document.getElementById("BlocklyDiv");
 
+  window.shaderVars = document.getElementById("shaderVars");
+
   
   const log_button = document.getElementById("ButtonLog");
   const var_button = document.getElementById("ButtonVar");

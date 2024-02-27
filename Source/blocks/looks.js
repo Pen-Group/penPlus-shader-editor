@@ -248,15 +248,13 @@
     sample_texture(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
-      return `texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator);
+      return [`texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     sample_cubemap(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
-      return (
-        `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator)
-      );
+      return [`textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 

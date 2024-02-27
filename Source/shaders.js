@@ -1,10 +1,5 @@
 const gl = document.getElementById("shaderpreview").getContext("webgl");
 
-window.ShaderObject = {
-  uniforms: [],
-  attributes: []
-};
-
 function shaderLog(reason) {
   const logThing = document.createElement("div");
   logThing.innerHTML = Date.now() + "::" + reason;
@@ -99,6 +94,21 @@ function replacementShader() {
   genProgram();
 }
 
+function getTypedInput(type) {
+  switch (type) {
+    case "sampler2D":
+      const keys = Object.keys(window.textures);
+      let options = ""
+      keys.forEach(key => {
+        options += `<option value="${key}">texture ${key}</option>`;
+      })
+      return `<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+  
+    default:
+      return ``;
+  }
+}
+
 window.compiling = false;
 
 function genProgram() {
@@ -149,17 +159,28 @@ function genProgram() {
     replacementShader();
   });
 
+  window.shaderVars.innerHTML = "";
+
   window.ShaderAttributes.forEach(attribute => {
     if (attribute.scope == "uniform") {
       gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
+      if (attribute.name != "u_timer" && attribute.name != "u_res") {
+        let divElement = document.createElement("div");
+        divElement.style.color = "var(--EditorTheme_Text_1)";
+        divElement.innerHTML = `${attribute.name}:${getTypedInput(attribute.type)}`;
+
+        gl.shaders.editorShader.uniforms[attribute.name].value = window.textures[divElement.children[0].value];
+        divElement.children[0].addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[attribute.name].value = window.textures[divElement.children[0].value];
+        })
+        
+        window.shaderVars.appendChild(divElement);
+      }
     }
     else {
       gl.shaders["editorShader"].setupAttribute(attribute.name, attribute.type);
+      if (attribute.name != "a_position" && attribute.name != "a_color" && attribute.name != "a_texCoord") {}
     }
   });
-
-  window.ShaderObject.uniforms.push()
-
-  gl.useProgram(window.ShaderObject.program);
   window.compiling = false;
 }
