@@ -1,4 +1,4 @@
-const gl = document.getElementById("shaderpreview").getContext("webgl");
+const gl = document.getElementById("shaderpreview").getContext("webgl", {antialias:false});
 
 function shaderLog(reason) {
   const logThing = document.createElement("div");
@@ -96,10 +96,13 @@ function replacementShader() {
 
 function getTypedInput(type,name) {
   let input = "";
+  let inputFunction = () => {};
   switch (type) {
     case "sampler2D":
       const keys = Object.keys(window.textures);
       input = document.createElement("select");
+      input.style.width = "75%";
+      input.className = "scratchStyledInput";
       let options = ""
       keys.forEach(key => {
         options += `<option value="${key}">texture ${key}</option>`;
@@ -112,24 +115,28 @@ function getTypedInput(type,name) {
           gl.shaders.editorShader.uniforms[name].value = window.textures[input.value];
       })
       
-      return input;//`<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+      return input;
 
     case "float":
       input = document.createElement("input");
+      input.style.width = "75%";
       input.type = "Number";
       input.value = 0;
+      input.className = "scratchStyledInput";
 
       gl.shaders.editorShader.uniforms[name].value = input.value;
       input.addEventListener("change", () => {
           gl.shaders.editorShader.uniforms[name].value = input.value;
       })
       
-      return input;//`<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+      return input;
 
     case "int":
       input = document.createElement("input");
+      input.style.width = "75%";
       input.type = "Number";
       input.value = 0;
+      input.className = "scratchStyledInput";
 
       gl.shaders.editorShader.uniforms[name].value = Math.floor(input.value);
       input.addEventListener("change", () => {
@@ -140,50 +147,97 @@ function getTypedInput(type,name) {
     
     case "vec2":
       input = document.createElement("div");
+      input.style.width = "75%";
       input.appendChild(document.createElement("input"));
       input.children[0].type = "Number"
       input.children[0].value = 0;
+      input.children[0].width = "30%";
+      input.children[0].className = "scratchStyledInput";
       input.appendChild(document.createElement("input"));
       input.children[1].type = "Number"
       input.children[1].value = 0;
+      input.children[1].width = "30%";
+      input.children[1].className = "scratchStyledInput";
+
+      inputFunction = () => {
+        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value];
+      }
 
       gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value];
-      input.children[0].addEventListener("change", () => {
-          gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value];
-      })
+      input.children[0].addEventListener("change", inputFunction)
 
-      input.children[1].addEventListener("change", () => {
-        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value];
-      })
+      input.children[1].addEventListener("change", inputFunction)
       
-      return input;//`<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+      return input;
     
     case "vec3":
         input = document.createElement("div");
+        input.style.width = "75%";
         input.appendChild(document.createElement("input"));
         input.children[0].type = "Number"
         input.children[0].value = 0;
+        input.children[0].className = "scratchStyledInput";
+        input.children[0].width = "20%";
         input.appendChild(document.createElement("input"));
         input.children[1].type = "Number"
         input.children[1].value = 0;
+        input.children[1].className = "scratchStyledInput";
+        input.children[1].width = "20%";
         input.appendChild(document.createElement("input"));
         input.children[2].type = "Number"
         input.children[2].value = 0;
+        input.children[2].className = "scratchStyledInput";
+        input.children[2].width = "20%";
   
-        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
-        input.children[0].addEventListener("change", () => {
-            gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
-        })
-  
-        input.children[1].addEventListener("change", () => {
+        inputFunction = () => {
           gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
-        })
+        }
 
-        input.children[2].addEventListener("change", () => {
-          gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
-        })
+        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
+        input.children[0].addEventListener("change", inputFunction)
+  
+        input.children[1].addEventListener("change", inputFunction)
+
+        input.children[2].addEventListener("change", inputFunction)
         
-        return input;//`<select style="background-color:var(--EditorTheme_Theme_4); border-width: 0px; border-radius: 0.25rem; width:50%; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">${options}</select>`;
+        return input;
+
+      case "vec4":
+        input = document.createElement("div");
+        input.style.width = "75%";
+        input.appendChild(document.createElement("input"));
+        input.children[0].type = "Number"
+        input.children[0].value = 0;
+        input.children[0].className = "scratchStyledInput";
+        input.children[0].width = "15%";
+        input.appendChild(document.createElement("input"));
+        input.children[1].type = "Number"
+        input.children[1].value = 0;
+        input.children[1].className = "scratchStyledInput";
+        input.children[1].width = "15%";
+        input.appendChild(document.createElement("input"));
+        input.children[2].type = "Number"
+        input.children[2].value = 0;
+        input.children[2].className = "scratchStyledInput";
+        input.children[2].width = "15%";
+        input.appendChild(document.createElement("input"));
+        input.children[3].type = "Number"
+        input.children[3].value = 0;
+        input.children[3].className = "scratchStyledInput";
+        input.children[3].width = "15%";
+  
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
+        }
+
+        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
+        input.children[0].addEventListener("change", inputFunction)
+  
+        input.children[1].addEventListener("change", inputFunction)
+
+        input.children[2].addEventListener("change", inputFunction)
+        
+        return input;
   
     default:
       return ``;
@@ -249,6 +303,9 @@ function genProgram() {
         if (attribute.name != "u_timer" && attribute.name != "u_res") {
           let divElement = document.createElement("div");
           divElement.style.color = "var(--EditorTheme_Text_1)";
+          divElement.style.width = "100%";
+          divElement.style.position = "relative";
+
           divElement.innerHTML = `${attribute.name}:`;
           divElement.appendChild(getTypedInput(attribute.type,attribute.name));
           

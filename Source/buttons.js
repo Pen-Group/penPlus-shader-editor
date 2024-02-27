@@ -76,13 +76,21 @@
         <span style="font-size: 0.5em;">
         ObviousAlexC - JavaScript, Main UI, GLSL Code<br>
         Nameless Cat - CSS and HTML refactoring<br>
-        LilyMakesThings - Blockly Help<br>
         Jwklong - Custom Block Shapes<br>
         </span>
         Icons<br>
         <span style="font-size: 0.5em;">
         FeatherIcons.com<br>
         Google Material Icons<br>
+        </span>
+        Testers<br>
+        <span style="font-size: 0.5em;">
+        Alltrue<br>
+        Nameless Cat<br>
+        GodslayerAPK<br>
+        JeremyGamer<br>
+        The Shovel<br>
+        RealWorld<br>
         </span>
         </p>
       </div>

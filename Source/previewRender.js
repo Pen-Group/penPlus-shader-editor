@@ -63,6 +63,10 @@ function previewRender () {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       window.timer += (now - lastTime) / 1000;
+
+      gl.canvas.width = gl.canvas.clientWidth;
+      gl.canvas.height = gl.canvas.clientHeight;
+      gl.viewport(0,0,gl.canvas.width,gl.canvas.height)
       
       gl.useProgram(gl.shaders["editorShader"]);
       
