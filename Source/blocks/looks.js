@@ -59,6 +59,12 @@
             tooltip: "Pixel color",
             output: "vec4",
           },
+          {
+            opcode: "mulBlending",
+            type: "command",
+            text: "apply multiplicative blending",
+            tooltip: "Does the operation RGB * A"
+          },
           "---",
           {
             opcode: "setPixU",
@@ -121,6 +127,13 @@
             ]
           },
           {
+            opcode: "pixUV",
+            type: "reporter",
+            text: "current uv",
+            output: "vec2",
+            tooltip: "The current U position",
+          },
+          {
             opcode: "pixU",
             type: "reporter",
             text: "u coordinate",
@@ -155,7 +168,7 @@
                 name: "UV",
                 check: "vec2",
                 shadow: {
-                  type: "vec2_reporter",
+                  type: "looks_pixUV",
                 },
               },
               {
@@ -204,6 +217,10 @@
       return [`gl_FragColor`, Order.ATOMIC];
     }
 
+    mulBlending() {
+      return `gl_FragColor.rgb *= vec3(gl_FragColor.a);` + nextBlockToCode(block, generator);
+    }
+
     setVertColor(block, generator) {
       const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
       return `v_color = ${colour};` + nextBlockToCode(block, generator);
@@ -231,6 +248,10 @@
     changePixV(block, generator) {
       const V = generator.valueToCode(block, "V", Order.ATOMIC);
       return `v_texCoord.y += float(${V});` + nextBlockToCode(block, generator);
+    }
+
+    pixUV() {
+      return [`v_texCoord`, Order.ATOMIC];
     }
 
     pixU() {
