@@ -31,7 +31,7 @@ function previewRender () {
 
   window.textures = {};
 
-  /*window.shaderParams.sampleTextures.forEach(textureData => {
+  window.shaderParams.sampleTextures.forEach(textureData => {
     window.textures[textureData.name] = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
 
@@ -52,7 +52,7 @@ function previewRender () {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
     }
-  });*/
+  });
 
   window.timer = 0;
 
