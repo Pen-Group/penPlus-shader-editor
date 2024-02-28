@@ -133,7 +133,8 @@
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} = ${value};\n`;
+                return `${variableName.split(" ")[1]} = ${value};\n`+
+                nextBlockToCode(block, generator);
               },
             });
 
@@ -171,7 +172,8 @@
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} += ${value};\n`;
+                return `${variableName.split(" ")[1]} += ${value};\n`+
+                nextBlockToCode(block, generator);
               },
             });
 
@@ -209,7 +211,8 @@
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} *= ${value};\n`;
+                return `${variableName.split(" ")[1]} *= ${value};\n`+
+                nextBlockToCode(block, generator);
               },
             });
 
@@ -247,7 +250,8 @@
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} /= ${value};\n`;
+                return `${variableName.split(" ")[1]} /= ${value};\n`+
+                nextBlockToCode(block, generator);
               },
             });
           }

@@ -323,6 +323,19 @@
 
     createCustomBlocks(workspace) {
       let createdBlocks = [];
+
+      let customBlockTypeConversionTable = {
+        "void":undefined,
+        "highp float":"float",
+        "int":"int",
+        "highp vec2":"vec2",
+        "highp vec3":"vec3",
+        "highp vec4":"vec4",
+        "highp mat2":"matrix_2x",
+        "highp mat3":"matrix_3x",
+        "highp mat4":"matrix_4x"
+      }
+
       if (window.customBlocks) {
         window.customBlocks.forEach((block) => {
           let block_arguments = [];
@@ -344,6 +357,8 @@
           window.blockIterations[block.name] |= 0;
           window.blockIterations[block.name] += 1;
 
+          console.log(block.type.split(" ")[block.type.split(" ").length - 1])
+
           if (block.name.length == 0) block.name = "noBlockDefined";
 
           createdBlocks.push({
@@ -353,6 +368,8 @@
             type: customBlockType == "void" ? "command" : "reporter",
             text: block.name + block_arg_string,
             style: __colorCustomBlock(block.type),
+            //Probably could improve this line lol
+            output: customBlockTypeConversionTable[block.type],
             tooltip: "Your custom block!",
             arguments: block_arguments,
             operation: (block_ref, generator) => {
@@ -368,7 +385,7 @@
               }
               //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
               return customBlockType == "void"
-                ? `${__glslifyName(block.name)}(${argString});\n`
+                ? `${__glslifyName(block.name)}(${argString});\n` + nextBlockToCode(block, generator)
                 : [`${__glslifyName(block.name)}(${argString})`, Order.ATOMIC];
             },
           });

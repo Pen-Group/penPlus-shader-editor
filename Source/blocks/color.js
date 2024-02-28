@@ -162,14 +162,14 @@
         const sat = generator.valueToCode(block, "sat", Order.ATOMIC);
         const val = generator.valueToCode(block, "val", Order.ATOMIC);
         const a = generator.valueToCode(block, "a", Order.ATOMIC);
-        return [`HSVToRGB(${hue},${sat},${val},${a/255.0})`,Order.ATOMIC];
+        return [`HSVToRGB(${hue},${sat},${val},${a*0.00392156862})`,Order.ATOMIC];
       }
   
       rgb(block, generator) {
         const r = generator.valueToCode(block, "r", Order.ATOMIC);
         const g = generator.valueToCode(block, "g", Order.ATOMIC);
         const b = generator.valueToCode(block, "b", Order.ATOMIC);
-        return [`vec4(${r/255},${g/255},${b/255},1.0)`,Order.ATOMIC];
+        return [`vec4(${r*0.00392156862},${g*0.00392156862},${b*0.00392156862},1.0)`,Order.ATOMIC];
       }
 
       rgba(block, generator) {
@@ -177,7 +177,7 @@
         const g = generator.valueToCode(block, "g", Order.ATOMIC);
         const b = generator.valueToCode(block, "b", Order.ATOMIC);
         const a = generator.valueToCode(block, "a", Order.ATOMIC);
-        return [`vec4(${r/255.0},${g/255.0},${b/255.0},${a/255.0})`,Order.ATOMIC];
+        return [`vec4(${r*0.00392156862},${g*0.00392156862},${b*0.00392156862},${a*0.00392156862})`,Order.ATOMIC];
       }
     }
   
