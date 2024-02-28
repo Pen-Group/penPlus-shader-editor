@@ -1,5 +1,5 @@
 //Isolating render preview variables and code just so we don't accidentally overrite them!
-function previewRender () {
+function previewRender() {
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
   let previewData_Pen = [
@@ -31,7 +31,7 @@ function previewRender () {
 
   window.textures = {};
 
-  window.shaderParams.sampleTextures.forEach(textureData => {
+  window.shaderParams.sampleTextures.forEach((textureData) => {
     window.textures[textureData.name] = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
 
@@ -48,10 +48,10 @@ function previewRender () {
         gl.UNSIGNED_BYTE,
         image
       );
-      
+
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-    }
+    };
   });
 
   window.timer = 0;
@@ -66,32 +66,53 @@ function previewRender () {
 
       gl.canvas.width = gl.canvas.clientWidth;
       gl.canvas.height = gl.canvas.clientHeight;
-      gl.viewport(0,0,gl.canvas.width,gl.canvas.height)
-      
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
       gl.useProgram(gl.shaders["editorShader"]);
-      
-      if (gl.shaders.editorShader.uniforms.u_timer && gl.shaders.editorShader.uniforms.u_timer.location) {
+
+      if (
+        gl.shaders.editorShader.uniforms.u_timer &&
+        gl.shaders.editorShader.uniforms.u_timer.location
+      ) {
         gl.shaders.editorShader.uniforms.u_timer.value = window.timer;
       }
 
-      if (gl.shaders.editorShader.uniforms.u_res && gl.shaders.editorShader.uniforms.u_res.location) {
-        gl.shaders.editorShader.uniforms.u_res.value = [gl.canvas.width,gl.canvas.height];
+      if (
+        gl.shaders.editorShader.uniforms.u_res &&
+        gl.shaders.editorShader.uniforms.u_res.location
+      ) {
+        gl.shaders.editorShader.uniforms.u_res.value = [
+          gl.canvas.width,
+          gl.canvas.height,
+        ];
       }
 
-      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(gl.shaders.editorShader.makeTriangle({
-        a_position:[
-          [-0.5,-0.5,0,1],
-          [0.5,-0.5,0,1],
-          [0.5,0.5,0,1]],
-        a_color:[[1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0],[1.0,1.0,1.0,1.0]],
-        a_texCoord:[
-          [0,0],
-          [1,0],
-          [1,1]]
-      })),gl.STATIC_DRAW);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(
+          gl.shaders.editorShader.makeTriangle({
+            a_position: [
+              [-0.5, -0.5, 0, 1],
+              [0.5, -0.5, 0, 1],
+              [0.5, 0.5, 0, 1],
+            ],
+            a_color: [
+              [1.0, 1.0, 1.0, 1.0],
+              [1.0, 1.0, 1.0, 1.0],
+              [1.0, 1.0, 1.0, 1.0],
+            ],
+            a_texCoord: [
+              [0, 0],
+              [1, 0],
+              [1, 1],
+            ],
+          })
+        ),
+        gl.STATIC_DRAW
+      );
 
-      gl.drawArrays(gl.TRIANGLES,0,3);
-    };
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
     lastTime = now;
     window.requestAnimationFrame(renderFrame);
   }

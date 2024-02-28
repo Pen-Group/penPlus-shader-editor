@@ -354,7 +354,7 @@
           "10",
           Order.ATOMIC
         )},${generator.valueToCode(block, "11", Order.ATOMIC)})` +
-        nextBlockToCode(block, generator),
+          nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }
@@ -394,7 +394,7 @@
           "21",
           Order.ATOMIC
         )},${generator.valueToCode(block, "22", Order.ATOMIC)})` +
-        nextBlockToCode(block, generator),
+          nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }
@@ -462,14 +462,18 @@
           "32",
           Order.ATOMIC
         )},${generator.valueToCode(block, "33", Order.ATOMIC)})` +
-        nextBlockToCode(block, generator),
+          nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }
 
     getitem(block, generator) {
       return [
-        `${generator.valueToCode(block,"matrix", Order.ATOMIC)}[${block.getFieldValue("column")}][${block.getFieldValue("row")}]`,
+        `${generator.valueToCode(
+          block,
+          "matrix",
+          Order.ATOMIC
+        )}[${block.getFieldValue("column")}][${block.getFieldValue("row")}]`,
         Order.ATOMIC,
       ];
     }
@@ -494,7 +498,11 @@
       }
 
       return [
-        `vec${columnNumber}(${generator.valueToCode(block, "matrix", Order.ATOMIC)}[${block.getFieldValue("column")}])`,
+        `vec${columnNumber}(${generator.valueToCode(
+          block,
+          "matrix",
+          Order.ATOMIC
+        )}[${block.getFieldValue("column")}])`,
         Order.ATOMIC,
       ];
     }
@@ -520,8 +528,10 @@
 
       let getters = "";
       for (let column = 0; column < columnNumber; column++) {
-        getters += `${column == 0 ? "" : ","}${generator.valueToCode(block,
-          "matrix", Order.ATOMIC
+        getters += `${column == 0 ? "" : ","}${generator.valueToCode(
+          block,
+          "matrix",
+          Order.ATOMIC
         )}[${column}][${block.getFieldValue("row")}]`;
       }
 

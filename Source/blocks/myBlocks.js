@@ -7,7 +7,7 @@
 
   let getHatBlockVariables = undefined;
 
-  let argCount = 0
+  let argCount = 0;
 
   function __colorCustomBlock(customBlockType) {
     switch (customBlockType) {
@@ -72,7 +72,7 @@
   }
 
   function __glslifyName(Name) {
-    return Name.replaceAll(/([\W\s\h\v])+/g, "_")
+    return Name.replaceAll(/([\W\s\h\v])+/g, "_");
   }
 
   class myBlocks_category extends window.penPlusExtension {
@@ -182,7 +182,7 @@
                 shadow: {
                   type: "string_reporter",
                 },
-              }
+              },
             ],
           },
           {
@@ -214,7 +214,7 @@
       customBlockArguments = [];
 
       const innerCode = generator.statementToCode(block, "code");
-      argCount = 0
+      argCount = 0;
       const functionArguments = generator.statementToCode(block, "arguments");
 
       //Stupid Switch statement prob a way to do this without a switch
@@ -226,7 +226,9 @@
         arguments: customBlockArguments,
       });
 
-      return `${customBlockType} ${__glslifyName(name)}(${functionArguments}) {\n${getHatBlockVariables()}\n${innerCode}\n}\n`;
+      return `${customBlockType} ${__glslifyName(
+        name
+      )}(${functionArguments}) {\n${getHatBlockVariables()}\n${innerCode}\n}\n`;
     }
 
     customBlockArgument(block, generator) {
@@ -325,16 +327,16 @@
       let createdBlocks = [];
 
       let customBlockTypeConversionTable = {
-        "void":undefined,
-        "highp float":"float",
-        "int":"int",
-        "highp vec2":"vec2",
-        "highp vec3":"vec3",
-        "highp vec4":"vec4",
-        "highp mat2":"matrix_2x",
-        "highp mat3":"matrix_3x",
-        "highp mat4":"matrix_4x"
-      }
+        void: undefined,
+        "highp float": "float",
+        int: "int",
+        "highp vec2": "vec2",
+        "highp vec3": "vec3",
+        "highp vec4": "vec4",
+        "highp mat2": "matrix_2x",
+        "highp mat3": "matrix_3x",
+        "highp mat4": "matrix_4x",
+      };
 
       if (window.customBlocks) {
         window.customBlocks.forEach((block) => {
@@ -357,7 +359,7 @@
           window.blockIterations[block.name] |= 0;
           window.blockIterations[block.name] += 1;
 
-          console.log(block.type.split(" ")[block.type.split(" ").length - 1])
+          console.log(block.type.split(" ")[block.type.split(" ").length - 1]);
 
           if (block.name.length == 0) block.name = "noBlockDefined";
 
@@ -385,7 +387,8 @@
               }
               //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
               return customBlockType == "void"
-                ? `${__glslifyName(block.name)}(${argString});\n` + nextBlockToCode(block, generator)
+                ? `${__glslifyName(block.name)}(${argString});\n` +
+                    nextBlockToCode(block, generator)
                 : [`${__glslifyName(block.name)}(${argString})`, Order.ATOMIC];
             },
           });

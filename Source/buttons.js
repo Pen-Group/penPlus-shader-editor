@@ -8,7 +8,6 @@
 
   window.shaderVars = document.getElementById("shaderVars");
 
-  
   const log_button = document.getElementById("ButtonLog");
   const var_button = document.getElementById("ButtonVar");
 
@@ -109,7 +108,7 @@
 
     var_button.className = "buttonUnselected";
     log_button.className = "buttonSelected";
-  }
+  };
 
   var_button.onclick = () => {
     document.getElementById("shaderLog").style.visibility = "hidden";
@@ -117,5 +116,5 @@
 
     log_button.className = "buttonUnselected";
     var_button.className = "buttonSelected";
-  }
+  };
 }

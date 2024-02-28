@@ -140,21 +140,30 @@
     if(block, generator) {
       const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
       const trueExec = generator.statementToCode(block, "true");
-      return `if (${condition}) {\n${trueExec}\n}`;
+      return (
+        `if (${condition}) {\n${trueExec}\n}` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     ifelse(block, generator) {
       const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
       const trueExec = generator.statementToCode(block, "true");
       const falseExec = generator.statementToCode(block, "false");
-      return `if (${condition}) {\n${trueExec}\n}\nelse{\n${falseExec}\n}`;
+      return (
+        `if (${condition}) {\n${trueExec}\n}\nelse{\n${falseExec}\n}` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     repeat(block, generator) {
       const times = generator.valueToCode(block, "times", Order.ATOMIC);
       const code = generator.statementToCode(block, "code");
       window.loopID += 1;
-      return `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<int(${times});penPlusLoop_${loopID}++) {\n${code}\n}`;
+      return (
+        `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<int(${times});penPlusLoop_${loopID}++) {\n${code}\n}` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     continue() {

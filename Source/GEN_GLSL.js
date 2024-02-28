@@ -248,7 +248,10 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
     let scope = variable.name.split(" ")[0].split("[")[0];
     if (scope == "array") {
       scope = "uniform";
-      appendance = `[${variable.name.split(" ")[0].split("[")[1].replace("]","")}]`;
+      appendance = `[${variable.name
+        .split(" ")[0]
+        .split("[")[1]
+        .replace("]", "")}]`;
     }
     if (scope == "hat") return;
 
@@ -260,9 +263,9 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
       variable.type == "cubemap" ||
       variable.type == "int"
     )
-      window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${
-        type
-      } ${variable.name.split(" ")[1] + appendance};\n`;
+      window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
+        variable.name.split(" ")[1] + appendance
+      };\n`;
     else
       window.Generated_GLSL += `\n${scope} highp ${type} ${
         variable.name.split(" ")[1] + appendance
@@ -291,23 +294,26 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
     void vertex() {
       gl_Position = a_position;
       v_texCoord = a_texCoord;
-    }\n`
+    }\n`;
   }
 
   if (!window.Generated_GLSL.includes("void fragment")) {
     window.Generated_GLSL += `
     void fragment() {
       gl_FragColor = vec4(1,1,1,1);
-    }\n`
+    }\n`;
   }
 
-  for (let letterID = window.Generated_GLSL.indexOf("void vertex"); letterID < window.Generated_GLSL.length; letterID++) {
+  for (
+    let letterID = window.Generated_GLSL.indexOf("void vertex");
+    letterID < window.Generated_GLSL.length;
+    letterID++
+  ) {
     const letter = window.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
     if (letter == "{") {
       inner += 1;
-    }
-    else if (letter == "}") {
+    } else if (letter == "}") {
       inner -= 1;
       if (inner == 0) {
         break;
@@ -317,13 +323,16 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 
   inner = 0;
 
-  for (let letterID = window.Generated_GLSL.indexOf("void fragment"); letterID < window.Generated_GLSL.length; letterID++) {
+  for (
+    let letterID = window.Generated_GLSL.indexOf("void fragment");
+    letterID < window.Generated_GLSL.length;
+    letterID++
+  ) {
     const letter = window.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
     if (letter == "{") {
       inner += 1;
-    }
-    else if (letter == "}") {
+    } else if (letter == "}") {
       inner -= 1;
       if (inner == 0) {
         break;
@@ -333,8 +342,14 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 
   document.getElementById("myBlocklyCodeOutput").value = window.Generated_GLSL;
 
-  window.Generated_Vert = window.Generated_GLSL.replace(fragFunction,"").replace("void vertex","void main");
-  window.Generated_Frag = window.Generated_GLSL.replace(vertFunction,"").replace("void fragment","void main");
-  
+  window.Generated_Vert = window.Generated_GLSL.replace(
+    fragFunction,
+    ""
+  ).replace("void vertex", "void main");
+  window.Generated_Frag = window.Generated_GLSL.replace(
+    vertFunction,
+    ""
+  ).replace("void fragment", "void main");
+
   genProgram();
 }

@@ -265,7 +265,11 @@
 
     getitem(block, generator) {
       return [
-        `${generator.valueToCode(block,"vector",Order.ATOMIC)}.${block.getFieldValue("coordinate")}`,
+        `${generator.valueToCode(
+          block,
+          "vector",
+          Order.ATOMIC
+        )}.${block.getFieldValue("coordinate")}`,
         Order.ATOMIC,
       ];
     }

@@ -76,11 +76,10 @@
           if (variable.type != "texture" && variable.type != "cubemap") {
             validVariables.push(variable);
           }
-          
+
           if (variable.name.split(" ")[0].split("[")[0] == "array") {
             hasArrayScope = true;
-          }
-          else {
+          } else {
             hasNormalScope = true;
           }
         });
@@ -129,12 +128,24 @@
                 const variableName = variable.name;
                 const variableType = variable.type;
 
-                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                if (variableType == "matrix_2x") variableType = "mat2";
+                if (variableType == "matrix_3x") variableType = "mat3";
+                if (variableType == "matrix_4x") variableType = "mat4";
+
+                const value = generator.valueToCode(
+                  block,
+                  "VALUE",
+                  Order.ATOMIC
+                );
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} = ${value};\n`+
-                nextBlockToCode(block, generator);
+                return (
+                  `${
+                    variableName.split(" ")[1]
+                  } = ${variableType}(${value});\n` +
+                  nextBlockToCode(block, generator)
+                );
               },
             });
 
@@ -168,12 +179,18 @@
                 const variableName = variable.name;
                 const variableType = variable.type;
 
-                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                const value = generator.valueToCode(
+                  block,
+                  "VALUE",
+                  Order.ATOMIC
+                );
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} += ${value};\n`+
-                nextBlockToCode(block, generator);
+                return (
+                  `${variableName.split(" ")[1]} += ${value};\n` +
+                  nextBlockToCode(block, generator)
+                );
               },
             });
 
@@ -207,12 +224,18 @@
                 const variableName = variable.name;
                 const variableType = variable.type;
 
-                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                const value = generator.valueToCode(
+                  block,
+                  "VALUE",
+                  Order.ATOMIC
+                );
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} *= ${value};\n`+
-                nextBlockToCode(block, generator);
+                return (
+                  `${variableName.split(" ")[1]} *= ${value};\n` +
+                  nextBlockToCode(block, generator)
+                );
               },
             });
 
@@ -246,12 +269,18 @@
                 const variableName = variable.name;
                 const variableType = variable.type;
 
-                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                const value = generator.valueToCode(
+                  block,
+                  "VALUE",
+                  Order.ATOMIC
+                );
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return `${variableName.split(" ")[1]} /= ${value};\n`+
-                nextBlockToCode(block, generator);
+                return (
+                  `${variableName.split(" ")[1]} /= ${value};\n` +
+                  nextBlockToCode(block, generator)
+                );
               },
             });
           }
@@ -266,7 +295,7 @@
                 {
                   type: "input_value",
                   name: "VALUE",
-                  check: ["int","float"],
+                  check: ["int", "float"],
                   shadow: {
                     type: "number_reporter",
                   },
@@ -297,11 +326,18 @@
                 const variableName = variable.name;
                 const variableType = variable.type;
 
-                const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+                const value = generator.valueToCode(
+                  block,
+                  "VALUE",
+                  Order.ATOMIC
+                );
 
                 block.setStyle(__colorVariableBlock(variableType));
 
-                return [`${variableName.split(" ")[1]}[${value}]`,Order.ATOMIC];
+                return [
+                  `${variableName.split(" ")[1]}[${value}]`,
+                  Order.ATOMIC,
+                ];
               },
             });
           }

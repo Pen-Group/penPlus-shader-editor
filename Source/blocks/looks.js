@@ -12,6 +12,7 @@
         color2: "#855cd6",
         color3: "#774dcb",
         blocks: [
+          "---",
           {
             opcode: "setVertColor",
             type: "command",
@@ -63,7 +64,7 @@
             opcode: "mulBlending",
             type: "command",
             text: "apply multiplicative blending",
-            tooltip: "Does the operation RGB * A"
+            tooltip: "Does the operation RGB * A",
           },
           "---",
           {
@@ -79,7 +80,7 @@
                   type: "number_reporter",
                 },
               },
-            ]
+            ],
           },
           {
             opcode: "setPixV",
@@ -94,7 +95,7 @@
                   type: "number_reporter",
                 },
               },
-            ]
+            ],
           },
           {
             opcode: "changePixU",
@@ -109,7 +110,7 @@
                   type: "number_reporter",
                 },
               },
-            ]
+            ],
           },
           {
             opcode: "changePixV",
@@ -124,7 +125,7 @@
                   type: "number_reporter",
                 },
               },
-            ]
+            ],
           },
           {
             opcode: "pixUV",
@@ -150,7 +151,7 @@
           {
             opcode: "mainTex",
             type: "reporter",
-            output:"texture",
+            output: "texture",
             text: "main texture",
             style: "texture_blocks",
             tooltip: "The main texture of the triangle",
@@ -176,8 +177,8 @@
                 name: "TEXTURE",
                 check: "texture",
                 shadow: {
-                  type: "looks_mainTex"
-                }
+                  type: "looks_mainTex",
+                },
               },
             ],
           },
@@ -218,7 +219,10 @@
     }
 
     mulBlending() {
-      return `gl_FragColor.rgb *= vec3(gl_FragColor.a);` + nextBlockToCode(block, generator);
+      return (
+        `gl_FragColor.rgb *= vec3(gl_FragColor.a);` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     setVertColor(block, generator) {
@@ -269,13 +273,19 @@
     sample_texture(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
-      return [`texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
 
     sample_cubemap(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
-      return [`textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [
+        `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
     }
   }
 

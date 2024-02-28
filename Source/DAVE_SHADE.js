@@ -1,11 +1,18 @@
-(function(){
-  window.webGLShaderManager = {}
+(function () {
+  window.webGLShaderManager = {};
 
-  window.webGLShaderManager.createAndCompile = (GL, name, vert, frag, onError) => {
-
-    onError = onError || function(error) {
-      console.error(error);
-    };
+  window.webGLShaderManager.createAndCompile = (
+    GL,
+    name,
+    vert,
+    frag,
+    onError
+  ) => {
+    onError =
+      onError ||
+      function (error) {
+        console.error(error);
+      };
 
     //? compile vertex Shader
     const vertShader = GL.createShader(GL.VERTEX_SHADER);
@@ -77,19 +84,25 @@
     GL.shaders[name].currentByte = 0;
     GL.shaders[name].customTypes = {};
 
-    GL.shaders[name].setupStruct = (structName,data) => {
+    GL.shaders[name].setupStruct = (structName, data) => {
       GL.shaders[name].customTypes[structName] = data;
-    }
+    };
 
-    GL.shaders[name].setupUniform = (uniformName,uniformType,returnObject) => {
+    GL.shaders[name].setupUniform = (
+      uniformName,
+      uniformType,
+      returnObject
+    ) => {
       GL.useProgram(program);
       if (GL.shaders[name].customTypes[uniformType]) {
-        GL.shaders[name].uniforms[uniformName] = {}
+        GL.shaders[name].uniforms[uniformName] = {};
 
         const typeDEF = GL.shaders[name].customTypes[uniformType];
         const typeKEYS = Object.keys(typeDEF);
-        typeKEYS.forEach(KEY => {
-          GL.shaders[name].uniforms[uniformName][KEY] = GL.shaders[name].setupUniform(`${uniformName}.${KEY}`,typeDEF[KEY],true);
+        typeKEYS.forEach((KEY) => {
+          GL.shaders[name].uniforms[uniformName][KEY] = GL.shaders[
+            name
+          ].setupUniform(`${uniformName}.${KEY}`, typeDEF[KEY], true);
         });
 
         if (returnObject) return GL.shaders[name].uniforms[uniformName];
@@ -100,58 +113,94 @@
           GL.useProgram(program);
           switch (GL.shaders[name].uniforms[uniformName].type) {
             case "float" || "double":
-              GL.uniform1f(GL.shaders[name].uniforms[uniformName].location,val);
+              GL.uniform1f(
+                GL.shaders[name].uniforms[uniformName].location,
+                val
+              );
               break;
-  
+
             case "int":
-              GL.uniform1i(GL.shaders[name].uniforms[uniformName].location,Math.floor(val));
+              GL.uniform1i(
+                GL.shaders[name].uniforms[uniformName].location,
+                Math.floor(val)
+              );
               break;
-  
+
             case "uint":
-              GL.uniform1u(GL.shaders[name].uniforms[uniformName].location,Math.floor(val));
+              GL.uniform1u(
+                GL.shaders[name].uniforms[uniformName].location,
+                Math.floor(val)
+              );
               break;
-  
+
             case "vec2":
-              GL.uniform2fv(GL.shaders[name].uniforms[uniformName].location,new Float32Array(val));
+              GL.uniform2fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                new Float32Array(val)
+              );
               break;
-  
+
             case "vec3":
-              GL.uniform3fv(GL.shaders[name].uniforms[uniformName].location,new Float32Array(val));
+              GL.uniform3fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                new Float32Array(val)
+              );
               break;
-  
+
             case "vec4":
-              GL.uniform4fv(GL.shaders[name].uniforms[uniformName].location,new Float32Array(val));
+              GL.uniform4fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                new Float32Array(val)
+              );
               break;
-  
-            
-  
+
             case "mat2":
-              GL.uniformMatrix2fv(GL.shaders[name].uniforms[uniformName].location,false,new Float32Array(val));
+              GL.uniformMatrix2fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                false,
+                new Float32Array(val)
+              );
               break;
-    
+
             case "mat3":
-              GL.uniformMatrix3fv(GL.shaders[name].uniforms[uniformName].location,false,new Float32Array(val));
+              GL.uniformMatrix3fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                false,
+                new Float32Array(val)
+              );
               break;
-    
+
             case "mat4":
-              GL.uniformMatrix4fv(GL.shaders[name].uniforms[uniformName].location,false,new Float32Array(val));
+              GL.uniformMatrix4fv(
+                GL.shaders[name].uniforms[uniformName].location,
+                false,
+                new Float32Array(val)
+              );
               break;
-          
+
             default:
               if (!val) return;
-              GL.activeTexture(GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]);
+              GL.activeTexture(
+                GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
+              );
               GL.bindTexture(GL.TEXTURE_2D, val);
-              GL.uniform1i(GL.shaders[name].uniforms[uniformName].location, GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]);
+              GL.uniform1i(
+                GL.shaders[name].uniforms[uniformName].location,
+                GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
+              );
               break;
           }
 
           GL.shaders[name].uniforms[uniformName].current = val;
 
-          return val
-        }
+          return val;
+        },
       };
 
-      GL.shaders[name].uniforms[uniformName].location = GL.getUniformLocation(program,uniformName);
+      GL.shaders[name].uniforms[uniformName].location = GL.getUniformLocation(
+        program,
+        uniformName
+      );
 
       //if (GL.shaders[name].uniforms[uniformName].location) return;
 
@@ -162,68 +211,69 @@
           break;
 
         case "mat2":
-          GL.shaders[name].uniforms[uniformName].value = [
-            1.0,0.0,
-            0.0,1.0
-          ];
+          GL.shaders[name].uniforms[uniformName].value = [1.0, 0.0, 0.0, 1.0];
           break;
 
         case "mat3":
           GL.shaders[name].uniforms[uniformName].value = [
-            1.0,0.0,0.0,
-            0.0,1.0,0.0,
-            0.0,0.0,1.0
+            1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0,
           ];
           break;
 
         case "mat4":
           GL.shaders[name].uniforms[uniformName].value = [
-            1.0,0.0,0.0,0.0,
-            0.0,1.0,0.0,0.0,
-            0.0,0.0,1.0,0.0,
-            0.0,0.0,0.0,1.0
+            1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0,
           ];
           break;
 
         case "vec2":
-          GL.shaders[name].uniforms[uniformName].value = [0.0,0.0];
+          GL.shaders[name].uniforms[uniformName].value = [0.0, 0.0];
           break;
-  
+
         case "vec3":
-          GL.shaders[name].uniforms[uniformName].value = [0.0,0.0,0.0];
+          GL.shaders[name].uniforms[uniformName].value = [0.0, 0.0, 0.0];
           break;
-  
+
         case "vec4":
-          GL.shaders[name].uniforms[uniformName].value = [0.0,0.0,0.0,0.0];
+          GL.shaders[name].uniforms[uniformName].value = [0.0, 0.0, 0.0, 0.0];
           break;
 
         case "sampler2D":
-          GL.shaders[name].uniforms[uniformName].textureID = Number(GL.shaders[name].textureID);
+          GL.shaders[name].uniforms[uniformName].textureID = Number(
+            GL.shaders[name].textureID
+          );
           GL.shaders[name].textureID += 1;
-        
+
         default:
           GL.shaders[name].uniforms[uniformName].value = 0.0;
           break;
       }
       if (returnObject) return GL.shaders[name].uniforms[uniformName];
-    }
+    };
 
-    GL.shaders[name].setupUniformArray = (uniformName,uniformType,size) => {
+    GL.shaders[name].setupUniformArray = (uniformName, uniformType, size) => {
       GL.useProgram(program);
 
       GL.shaders[name].uniforms[uniformName] = {
-        maxLength:size,
-        elements:[],
-        type:uniformType
+        maxLength: size,
+        elements: [],
+        type: uniformType,
       };
 
       for (let x = 0; x < size; x++) {
-        GL.shaders[name].uniforms[uniformName].elements.push(GL.shaders[name].setupUniform(`${uniformName}[${x}]`,uniformType,true));
+        GL.shaders[name].uniforms[uniformName].elements.push(
+          GL.shaders[name].setupUniform(
+            `${uniformName}[${x}]`,
+            uniformType,
+            true
+          )
+        );
       }
-    }
+    };
 
     GL.shaders[name].updateAttributeStride = () => {
-      GL.shaders[name].attributeOrder.forEach(attributeName => {
+      GL.shaders[name].attributeOrder.forEach((attributeName) => {
         GL.vertexAttribPointer(
           GL.shaders[name].attributes[attributeName].location,
           GL.shaders[name].attributes[attributeName].vectorSize,
@@ -233,19 +283,25 @@
           GL.shaders[name].attributes[attributeName].offset
         );
       });
-    }
+    };
 
     //Only supports floats and its derivitives.
-    GL.shaders[name].setupAttribute = (attributeName, attributeType,normalized) => {
+    GL.shaders[name].setupAttribute = (
+      attributeName,
+      attributeType,
+      normalized
+    ) => {
       normalized = normalized || false;
 
       let attributeLength = 1;
-      GL.shaders[name].attributes[attributeName] = {}
-      GL.shaders[name].attributes[attributeName].location = GL.getAttribLocation(program,attributeName);
+      GL.shaders[name].attributes[attributeName] = {};
+      GL.shaders[name].attributes[attributeName].location =
+        GL.getAttribLocation(program, attributeName);
 
-      if (GL.shaders[name].attributes[attributeName].location === undefined) return;
+      if (GL.shaders[name].attributes[attributeName].location === undefined)
+        return;
       if (GL.shaders[name].attributes[attributeName].location == -1) return;
-      
+
       switch (attributeType) {
         case "float" || "double":
           break;
@@ -261,36 +317,39 @@
         case "vec4":
           attributeLength = 4;
           break;
-      
+
         default:
           break;
       }
 
-      GL.shaders[name].attributes[attributeName].offset = GL.shaders[name].currentByte;
+      GL.shaders[name].attributes[attributeName].offset =
+        GL.shaders[name].currentByte;
       GL.shaders[name].attributes[attributeName].normalized = normalized;
       GL.shaders[name].attributes[attributeName].vectorSize = attributeLength;
 
-      GL.shaders[name].currentByte += Float32Array.BYTES_PER_ELEMENT * attributeLength;
+      GL.shaders[name].currentByte +=
+        Float32Array.BYTES_PER_ELEMENT * attributeLength;
 
       GL.shaders[name].attributeOrder.push(attributeName);
 
-      GL.enableVertexAttribArray(GL.shaders[name].attributes[attributeName].location);
+      GL.enableVertexAttribArray(
+        GL.shaders[name].attributes[attributeName].location
+      );
 
       GL.shaders[name].updateAttributeStride();
-
-    }
+    };
 
     GL.shaders[name].makeTriangle = (triangleDat) => {
       let returnedDat = [];
       for (let point = 0; point < 3; point++) {
-        GL.shaders[name].attributeOrder.forEach(item => {
+        GL.shaders[name].attributeOrder.forEach((item) => {
           returnedDat.push(triangleDat[item][point]);
-        })
+        });
       }
 
       return returnedDat.flat(4);
-    }
+    };
 
     return program;
-  }
+  };
 })();

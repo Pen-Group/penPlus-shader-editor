@@ -18,11 +18,11 @@
               {
                 type: "input_value",
                 name: "X",
-                check:["vec4", "arithmatic"],
+                check: ["vec4", "arithmatic"],
                 shadow: {
                   type: "vec4_reporter",
                 },
-              }
+              },
             ],
             tooltip: "Set the vertex's screen position to this",
           },
@@ -171,10 +171,7 @@
     gotoPosVec4(block, generator) {
       const X = generator.valueToCode(block, "X", Order.ATOMIC);
       const Y = generator.valueToCode(block, "Y", Order.ATOMIC);
-      return (
-        `gl_Position = vec4(${X});` +
-        nextBlockToCode(block, generator)
-      );
+      return `gl_Position = vec4(${X});` + nextBlockToCode(block, generator);
     }
 
     gotoPos(block, generator) {

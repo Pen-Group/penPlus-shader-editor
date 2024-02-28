@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Lexend Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +15,7 @@
         overflow: hidden;
 
         /*Made this a body attribute since I find myself using it a whole hell of a lot*/
-        font-family: 'Helvetica Neue', 'helvetica', serif;
+        font-family: "Helvetica Neue", "helvetica", serif;
 
         --CodeVis: hidden;
         --BlocklyVis: visible;
@@ -35,29 +38,7 @@
         --EditorTheme_TopBarSize: 64px;
       }
 
-      input[type="text"]{
-          background-color: var(--EditorTheme_Theme_2);
-          font-size: 1rem;
-          font-weight: bold;
-          border-radius: 4px;
-          border-width: 1px;
-          border-style: solid;
-          border-color: var(--EditorTheme_Theme_3);
-          color: var(--EditorTheme_Text_1);
-      }
-
-      input[type="number"]{
-          background-color: var(--EditorTheme_Theme_2);
-          font-size: 1rem;
-          font-weight: bold;
-          border-radius: 4px;
-          border-width: 1px;
-          border-style: solid;
-          border-color: var(--EditorTheme_Theme_3);
-          color: var(--EditorTheme_Text_1);
-      }
-
-      .scratchStyledInput{
+      input[type="text"] {
         background-color: var(--EditorTheme_Theme_2);
         font-size: 1rem;
         font-weight: bold;
@@ -68,23 +49,45 @@
         color: var(--EditorTheme_Text_1);
       }
 
-      input[type="checkbox"]{
-          appearance: none;
-          -webkit-appearance: none;
-          width: 20px;
-          height: 20px;
-
-          background-color: #ffffff;
-          border-radius: 5px;
-          cursor: pointer;
+      input[type="number"] {
+        background-color: var(--EditorTheme_Theme_2);
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 4px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--EditorTheme_Theme_3);
+        color: var(--EditorTheme_Text_1);
       }
 
-      input[type="checkbox"]:checked{
-          background-color: var(--EditorTheme_Color_1);
-          /*As a data URL so that we don't have to load it from a url*/
-          background-image: url("data:image/svg+xml,%3C!-- https://akaricons.com/ --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M4 12l6 6L20 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
-          background-repeat: no-repeat;
-          background-position: center;
+      .scratchStyledInput {
+        background-color: var(--EditorTheme_Theme_2);
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 4px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--EditorTheme_Theme_3);
+        color: var(--EditorTheme_Text_1);
+      }
+
+      input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+
+        background-color: #ffffff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="checkbox"]:checked {
+        background-color: var(--EditorTheme_Color_1);
+        /*As a data URL so that we don't have to load it from a url*/
+        background-image: url("data:image/svg+xml,%3C!-- https://akaricons.com/ --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M4 12l6 6L20 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
       }
 
       .tempCodePreview {
@@ -104,7 +107,7 @@
       .BlocklyShaderButtons {
         top: 10px;
         position: absolute;
-        right:20px;
+        right: 20px;
         border-radius: 15px;
         background-color: var(--EditorTheme_Color_2);
       }
@@ -129,7 +132,7 @@
         z-index: 100;
 
         color: #fff;
-        font-family: 'Lexend', sans-serif;
+        font-family: "Lexend", sans-serif;
 
         transition: all 250ms;
       }
@@ -144,7 +147,7 @@
         z-index: 100;
 
         color: #fff;
-        font-family: 'Lexend', sans-serif;
+        font-family: "Lexend", sans-serif;
 
         transition: all 250ms;
       }
@@ -194,13 +197,13 @@
         visibility: var(--BlocklyVis);
       }
 
-      .logText{
+      .logText {
         width: 100%;
         height: auto;
         background: var(--EditorTheme_Theme_2);
         color: var(--EditorTheme_Text_1);
       }
-      
+
       .topBar {
         background-color: var(--EditorTheme_Color_1);
         position: absolute;
@@ -215,12 +218,12 @@
         top: 50vh;
         height: var(--EditorTheme_TopBarSize);
       }
-      
+
       .title {
         top: 12px;
         position: absolute;
         font-size: 32px;
-        font-family: 'Lexend', sans-serif;
+        font-family: "Lexend", sans-serif;
         font-weight: bold;
         color: #fff;
         width: 100%;
@@ -247,9 +250,13 @@
         color: #fff;
       }
 
-      .toggleButton:hover {background-color: var(--EditorTheme_Color_4)}
+      .toggleButton:hover {
+        background-color: var(--EditorTheme_Color_4);
+      }
 
-      .toggleButton:active {background-color: var(--EditorTheme_Color_3)}
+      .toggleButton:active {
+        background-color: var(--EditorTheme_Color_3);
+      }
 
       .buttonSVG {
         width: 100%;
@@ -264,7 +271,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         overflow: hidden;
       }
 
@@ -280,21 +287,86 @@
       <div class="topBar">
         <div class="optionsContainer">
           <button class="toggleButton" id="DarkToggle">
-            <svg src="icons/moon.svg" class="buttonSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg
+              src="icons/moon.svg"
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-moon"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
           </button>
           <button class="toggleButton" id="TerminalToggle">
-            <svg src="icons/terminal.svg" class="buttonSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            <svg
+              src="icons/terminal.svg"
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-terminal"
+            >
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
           </button>
           <button class="toggleButton" id="OptionsButton">
-            <svg src="icons/settings.svg" class="buttonSVG"xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <svg
+              src="icons/settings.svg"
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-settings"
+            >
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              ></path>
+            </svg>
           </button>
           <button class="toggleButton" id="CreditsButton">
-            <svg src="icons/credits.svg" class="buttonSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            <svg
+              src="icons/credits.svg"
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-award"
+            >
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline
+                points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+              ></polyline>
+            </svg>
           </button>
         </div>
-        <div class="title">
-          Pen+ Shader Editor
-        </div>
+        <div class="title">Pen+ Shader Editor</div>
         <div class="previewAndConsole">
           <canvas id="shaderpreview" class="shaderpreview"></canvas>
           <div class="logVarSwitchBar">
@@ -304,7 +376,11 @@
             </div>
           </div>
           <div id="shaderLog" class="shaderLog"></div>
-          <div id="shaderVars" style="visibility: hidden;" class="shaderLog"></div>
+          <div
+            id="shaderVars"
+            style="visibility: hidden"
+            class="shaderLog"
+          ></div>
         </div>
         <div class="BlocklyShaderButtons">
           <button class="buttonSelected" id="ButtonBlockly">Scratch</button>
@@ -312,7 +388,11 @@
         </div>
 
         <div id="BlocklyDiv" class="BlocklyDiv"></div>
-        <textarea id="myBlocklyCodeOutput" class="tempCodePreview" spellcheck="false"></textarea>
+        <textarea
+          id="myBlocklyCodeOutput"
+          class="tempCodePreview"
+          spellcheck="false"
+        ></textarea>
       </div>
     </div>
     <div id="popupModal"></div>
@@ -353,7 +433,7 @@
 
     <!--GLSL generator-->
     <script src="GEN_GLSL.js"></script>
-    
+
     <script src="main.js"></script>
     <!--neato-->
   </body>
