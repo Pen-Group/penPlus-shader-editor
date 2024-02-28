@@ -246,6 +246,7 @@
             type: "reporter",
             text: "row %1 of column %2 of %3",
             tooltip: "Gets one value from a matrix",
+            output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
               createGrid(
@@ -283,6 +284,7 @@
             type: "reporter",
             text: "row %1 of %2",
             tooltip: "Gets a row of a matrix",
+            output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
               createGrid(
@@ -310,6 +312,7 @@
             type: "reporter",
             text: "column %1 of %2",
             tooltip: "Gets a column of a matrix",
+            output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
               createGrid(
@@ -474,10 +477,28 @@
     }
 
     getrow(block, generator) {
+      let columnNumber = 4;
+      switch (block.getInputTargetBlock("matrix").type) {
+        default:
+          break;
+
+        case "matrix_mat2" || "matrix2_reporter":
+          columnNumber = 2;
+          break;
+
+        case "matrix_mat3" || "matrix3_reporter":
+          columnNumber = 3;
+          break;
+
+        case "matrix_mat4" || "matrix4_reporter":
+          columnNumber = 4;
+          break;
+      }
+
       return [
-        `${generator.valueToCode("matrix")}[${generator.valueToCode(
+        `vec${columnNumber}(${generator.valueToCode("matrix")}[${generator.valueToCode(
           "column"
-        )}]`,
+        )}])`,
         Order.ATOMIC,
       ];
     }
