@@ -166,7 +166,7 @@
               {
                 type: "input_value",
                 name: "UV",
-                check: "vec2",
+                check: ["vec2", "arithmatic"],
                 shadow: {
                   type: "looks_pixUV",
                 },

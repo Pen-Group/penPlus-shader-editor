@@ -153,9 +153,12 @@ function getTypedInput(type,name) {
     
     case "vec2":
       input = document.createElement("div");
-      input.style.maxWidth = "75%";
+      input.style.width = "75%";
+      input.style.position = "relative";
       input.style.display = "grid";
       input.style.gridAutoColumns = "50% 50%";
+      input.style.gridAutoRows = "100%";
+      input.style.gridAutoFlow = "column";
 
 
       input.appendChild(document.createElement("input"));
@@ -183,9 +186,12 @@ function getTypedInput(type,name) {
     
     case "vec3":
         input = document.createElement("div");
-        input.style.maxWidth = "75%";
+        input.style.width = "75%";
+        input.style.position = "relative";
         input.style.display = "grid";
         input.style.gridAutoColumns = "33.3% 33.3% 33.3%";
+        input.style.gridAutoRows = "100%";
+        input.style.gridAutoFlow = "column";
 
 
         input.appendChild(document.createElement("input"));
@@ -224,6 +230,8 @@ function getTypedInput(type,name) {
         input.style.maxWidth = "75%";
         input.style.display = "grid";
         input.style.gridAutoColumns = "25% 25% 25% 25%";
+        input.style.gridAutoRows = "100%";
+        input.style.gridAutoFlow = "column";
 
 
         input.appendChild(document.createElement("input"));
@@ -252,15 +260,301 @@ function getTypedInput(type,name) {
 
   
         inputFunction = () => {
-          gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
+          gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value,input.children[3].value];
         }
 
-        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value];
+        gl.shaders.editorShader.uniforms[name].value = [input.children[0].value,input.children[1].value,input.children[2].value,input.children[3].value];
         input.children[0].addEventListener("change", inputFunction)
   
         input.children[1].addEventListener("change", inputFunction)
 
         input.children[2].addEventListener("change", inputFunction)
+
+        input.children[3].addEventListener("change", inputFunction)
+        
+        return input;
+
+      case "mat2":
+        input = document.createElement("div");
+        input.style.maxWidth = "75%";
+        input.style.display = "grid";
+        input.style.gridTemplateColumns = "repeat(2, 50%)";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[0].type = "Number"
+        input.children[0].value = 0;
+        input.children[0].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[1].type = "Number"
+        input.children[1].value = 0;
+        input.children[1].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[2].type = "Number"
+        input.children[2].value = 0;
+        input.children[2].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[3].type = "Number"
+        input.children[3].value = 0;
+        input.children[3].className = "scratchStyledInput";
+
+
+  
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,input.children[1].value,
+            input.children[2].value,input.children[3].value
+          ];
+        }
+
+        gl.shaders.editorShader.uniforms[name].value = [
+          input.children[0].value,input.children[1].value,
+          input.children[2].value,input.children[3].value
+        ];
+        input.children[0].addEventListener("change", inputFunction)
+  
+        input.children[1].addEventListener("change", inputFunction)
+
+        input.children[2].addEventListener("change", inputFunction)
+
+        input.children[3].addEventListener("change", inputFunction)
+        
+        return input;
+
+      case "mat3":
+        input = document.createElement("div");
+        input.style.maxWidth = "75%";
+        input.style.display = "grid";
+        input.style.gridTemplateColumns = "repeat(3, 33.3%)";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[0].type = "Number"
+        input.children[0].value = 0;
+        input.children[0].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[1].type = "Number"
+        input.children[1].value = 0;
+        input.children[1].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[2].type = "Number"
+        input.children[2].value = 0;
+        input.children[2].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[3].type = "Number"
+        input.children[3].value = 0;
+        input.children[3].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[4].type = "Number"
+        input.children[4].value = 0;
+        input.children[4].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[5].type = "Number"
+        input.children[5].value = 0;
+        input.children[5].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[6].type = "Number"
+        input.children[6].value = 0;
+        input.children[6].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[7].type = "Number"
+        input.children[7].value = 0;
+        input.children[7].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[8].type = "Number"
+        input.children[8].value = 0;
+        input.children[8].className = "scratchStyledInput";
+
+
+  
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,input.children[1].value,input.children[2].value,
+            input.children[3].value,input.children[4].value,input.children[5].value,
+            input.children[6].value,input.children[7].value,input.children[8].value
+          ];
+        }
+
+        gl.shaders.editorShader.uniforms[name].value = [
+          input.children[0].value,input.children[1].value,input.children[2].value,
+          input.children[3].value,input.children[4].value,input.children[5].value,
+          input.children[6].value,input.children[7].value,input.children[8].value
+        ];
+        input.children[0].addEventListener("change", inputFunction)
+  
+        input.children[1].addEventListener("change", inputFunction)
+
+        input.children[2].addEventListener("change", inputFunction)
+
+        input.children[3].addEventListener("change", inputFunction)
+
+        input.children[4].addEventListener("change", inputFunction)
+
+        input.children[5].addEventListener("change", inputFunction)
+
+        input.children[6].addEventListener("change", inputFunction)
+
+        input.children[7].addEventListener("change", inputFunction)
+
+        input.children[8].addEventListener("change", inputFunction)
+        
+        return input;
+
+      case "mat4":
+        input = document.createElement("div");
+        input.style.maxWidth = "75%";
+        input.style.display = "grid";
+        input.style.gridTemplateColumns = "repeat(4, 25%)";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[0].type = "Number"
+        input.children[0].value = 0;
+        input.children[0].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[1].type = "Number"
+        input.children[1].value = 0;
+        input.children[1].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[2].type = "Number"
+        input.children[2].value = 0;
+        input.children[2].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[3].type = "Number"
+        input.children[3].value = 0;
+        input.children[3].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[4].type = "Number"
+        input.children[4].value = 0;
+        input.children[4].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[5].type = "Number"
+        input.children[5].value = 0;
+        input.children[5].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[6].type = "Number"
+        input.children[6].value = 0;
+        input.children[6].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[7].type = "Number"
+        input.children[7].value = 0;
+        input.children[7].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[8].type = "Number"
+        input.children[8].value = 0;
+        input.children[8].className = "scratchStyledInput";
+
+        input.appendChild(document.createElement("input"));
+        input.children[9].type = "Number"
+        input.children[9].value = 0;
+        input.children[9].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[10].type = "Number"
+        input.children[10].value = 0;
+        input.children[10].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[11].type = "Number"
+        input.children[11].value = 0;
+        input.children[11].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[12].type = "Number"
+        input.children[12].value = 0;
+        input.children[12].className = "scratchStyledInput";
+
+        
+        input.appendChild(document.createElement("input"));
+        input.children[13].type = "Number"
+        input.children[13].value = 0;
+        input.children[13].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[14].type = "Number"
+        input.children[14].value = 0;
+        input.children[14].className = "scratchStyledInput";
+
+
+        input.appendChild(document.createElement("input"));
+        input.children[15].type = "Number"
+        input.children[15].value = 0;
+        input.children[15].className = "scratchStyledInput";
+
+
+  
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,input.children[1].value,input.children[2].value,input.children[3].value,
+            input.children[4].value,input.children[5].value,input.children[6].value,input.children[7].value,
+            input.children[8].value,input.children[9].value,input.children[10].value,input.children[11].value,
+            input.children[12].value,input.children[13].value,input.children[14].value,input.children[15].value];
+        }
+
+        gl.shaders.editorShader.uniforms[name].value = [
+          input.children[0].value,input.children[1].value,input.children[2].value,input.children[3].value,
+          input.children[4].value,input.children[5].value,input.children[6].value,input.children[7].value,
+          input.children[8].value,input.children[9].value,input.children[10].value,input.children[11].value,
+          input.children[12].value,input.children[13].value,input.children[14].value,input.children[15].value];
+        input.children[0].addEventListener("change", inputFunction)
+  
+        input.children[1].addEventListener("change", inputFunction)
+
+        input.children[2].addEventListener("change", inputFunction)
+
+        input.children[3].addEventListener("change", inputFunction)
+
+        input.children[4].addEventListener("change", inputFunction)
+
+        input.children[5].addEventListener("change", inputFunction)
+
+        input.children[6].addEventListener("change", inputFunction)
+
+        input.children[7].addEventListener("change", inputFunction)
+
+        input.children[8].addEventListener("change", inputFunction)
         
         return input;
   
