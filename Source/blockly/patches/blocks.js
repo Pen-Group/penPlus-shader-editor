@@ -300,8 +300,6 @@ function addImportantReporters() {
   });
 }
 
-
-
 function addBlocks() {
   new window.categories.events();
   new window.categories.vertex();

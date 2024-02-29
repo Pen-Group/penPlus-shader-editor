@@ -3,8 +3,18 @@
 
   class looks_category extends window.penPlusExtension {
     getInfo() {
-      penPlus.addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
-      penPlus.addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
+      penPlus.addBlockColorSet(
+        "texture_blocks",
+        "#b464e7",
+        "#a755cf",
+        "#9a48c4"
+      );
+      penPlus.addBlockColorSet(
+        "cubemap_blocks",
+        "#8672ff",
+        "#7465d6",
+        "#6657cb"
+      );
       return {
         name: "Looks",
         id: "looks",

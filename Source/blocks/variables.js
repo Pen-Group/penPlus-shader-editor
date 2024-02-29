@@ -27,7 +27,12 @@
       penPlus.addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
       penPlus.addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");
       penPlus.addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
-      penPlus.addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
+      penPlus.addBlockColorSet(
+        "matrix_blocks",
+        "#737fff",
+        "#636ed6",
+        "#5560cb"
+      );
       return {
         name: "Variables",
         id: "variables",
