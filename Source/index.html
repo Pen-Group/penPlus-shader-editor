@@ -21,6 +21,8 @@
         --BlocklyVis: visible;
         --TerminalVis: visible;
 
+        --PreviewStylesPopout: -48px;
+
         --EditorTheme_Color_1: #0fbd8c;
         --EditorTheme_Color_2: #0eaa7e;
         --EditorTheme_Color_3: #0c9770;
@@ -36,6 +38,8 @@
         --EditorTheme_Text_3: #ffffff;
 
         --EditorTheme_TopBarSize: 64px;
+
+        --EditorTheme_ButtonSVGStyle: invert(100%);
       }
 
       input[type="text"] {
@@ -69,6 +73,36 @@
         border-style: solid;
         border-color: var(--EditorTheme_Theme_3);
         color: var(--EditorTheme_Text_1);
+      }
+
+      .previewStyle {
+        position: absolute;
+        left:var(--PreviewStylesPopout);
+        background-color: var(--EditorTheme_Theme_4);
+        transition: left 400ms;
+        z-index: 2000;
+        border-radius: 4px;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+      }
+
+      .previewStyleSVG {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        filter: var(--EditorTheme_ButtonSVGStyle);
+      }
+
+      .previewStyle:hover {
+        background-color: var(--EditorTheme_Theme_2);
+      }
+
+      .previewStyle:active {
+        background-color: var(--EditorTheme_Theme_1);
       }
 
       input[type="checkbox"] {
@@ -242,10 +276,10 @@
         height: calc(var(--EditorTheme_TopBarSize) - 20px);
         position: relative;
         border-radius: 15px;
-        background-color: var(--EditorTheme_Color_2);
         border: none;
         margin-left: 10px;
         cursor: pointer;
+        background-color: var(--EditorTheme_Color_2);
         z-index: 100;
         color: #fff;
       }
@@ -367,8 +401,14 @@
           </button>
         </div>
         <div class="title">Pen+ Shader Editor</div>
-        <div class="previewAndConsole">
-          <canvas id="shaderpreview" class="shaderpreview"></canvas>
+        <div class="previewAndConsole" id="prevAndConsole">
+          <canvas id="shaderpreview" class="shaderpreview">
+          </canvas>
+
+          <button id="FullScreen" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 8px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+          <button id="SquareButton" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 48px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg></button>
+          <button id="TriangleButton" class="previewStyle" style="top:calc(var(--EditorTheme_TopBarSize) + 88px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg></button>
+
           <div class="logVarSwitchBar">
             <div class="BlocklyShaderButtons">
               <button class="buttonSelected" id="ButtonLog">Log</button>
