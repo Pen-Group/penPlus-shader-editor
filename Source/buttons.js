@@ -6,6 +6,10 @@
   const creditsButton = document.getElementById("CreditsButton");
   const blockly = document.getElementById("BlocklyDiv");
 
+  const fullScreen = document.getElementById("FullScreen");
+  const squareButton = document.getElementById("SquareButton");
+  const triangleButton = document.getElementById("TriangleButton");
+
   window.shaderVars = document.getElementById("shaderVars");
 
   const log_button = document.getElementById("ButtonLog");
@@ -117,4 +121,16 @@
     log_button.className = "buttonUnselected";
     var_button.className = "buttonSelected";
   };
+
+  fullScreen.onclick = () => {
+    window.previewMode = "fullscreen";
+  }
+
+  squareButton.onclick = () => {
+    window.previewMode = "square";
+  }
+
+  triangleButton.onclick = () => {
+    window.previewMode = "triangle";
+  }
 }
