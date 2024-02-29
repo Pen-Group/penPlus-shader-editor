@@ -21,21 +21,21 @@
                 type: "input_value",
                 name: "hue",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "sat",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "val",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
             ],
@@ -51,21 +51,21 @@
                 type: "input_value",
                 name: "hue",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "sat",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "val",
                 shadow: {
-                  type: "number_NOFLOAT_reporter",
+                  type: "number_reporter",
                 },
               },
               {
@@ -161,7 +161,7 @@
       const hue = generator.valueToCode(block, "hue", Order.ATOMIC);
       const sat = generator.valueToCode(block, "sat", Order.ATOMIC);
       const val = generator.valueToCode(block, "val", Order.ATOMIC);
-      const a = generator.valueToCode(block, "a", Order.ATOMIC);
+      const a = Number(generator.valueToCode(block, "a", Order.ATOMIC));
       return [
         `HSVToRGB(${hue},${sat},${val},${a * 0.00392156862})`,
         Order.ATOMIC,
@@ -169,9 +169,9 @@
     }
 
     rgb(block, generator) {
-      const r = generator.valueToCode(block, "r", Order.ATOMIC);
-      const g = generator.valueToCode(block, "g", Order.ATOMIC);
-      const b = generator.valueToCode(block, "b", Order.ATOMIC);
+      const r = Number(generator.valueToCode(block, "r", Order.ATOMIC));
+      const g = Number(generator.valueToCode(block, "g", Order.ATOMIC));
+      const b = Number(generator.valueToCode(block, "b", Order.ATOMIC));
       console.log(r,g,b)
       return [
         `vec4(${r * 0.00392156862},${g * 0.00392156862},${
@@ -182,10 +182,10 @@
     }
 
     rgba(block, generator) {
-      const r = generator.valueToCode(block, "r", Order.ATOMIC);
-      const g = generator.valueToCode(block, "g", Order.ATOMIC);
-      const b = generator.valueToCode(block, "b", Order.ATOMIC);
-      const a = generator.valueToCode(block, "a", Order.ATOMIC);
+      const r = Number(generator.valueToCode(block, "r", Order.ATOMIC));
+      const g = Number(generator.valueToCode(block, "g", Order.ATOMIC));
+      const b = Number(generator.valueToCode(block, "b", Order.ATOMIC));
+      const a = Number(generator.valueToCode(block, "a", Order.ATOMIC));
       return [
         `vec4(${r * 0.00392156862},${g * 0.00392156862},${b * 0.00392156862},${
           a * 0.00392156862

@@ -218,7 +218,7 @@
       return [`gl_FragColor`, Order.ATOMIC];
     }
 
-    mulBlending() {
+    mulBlending(block, generator) {
       return (
         `gl_FragColor.rgb *= vec3(gl_FragColor.a);` +
         nextBlockToCode(block, generator)
