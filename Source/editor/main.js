@@ -39,9 +39,9 @@ function onAllAddonsLoaded() {
     },
     trashcan: false, // we don't want the recycling bin. Maybe it can be an option though?
     plugins: {
-      toolbox: window.ContinuousToolbox,
-      flyoutsVerticalToolbox: window.ContinuousFlyout,
-      metricsManager: window.ContinuousMetrics,
+      toolbox: penPlus.ContinuousToolbox,
+      flyoutsVerticalToolbox: penPlus.ContinuousFlyout,
+      metricsManager: penPlus.ContinuousMetrics,
     },
     theme: penPlusBlocklyTheme(),
   });
@@ -51,7 +51,7 @@ function onAllAddonsLoaded() {
   addVariableTypes();
   addBlocks();
 
-  const zoomToFit = new ZoomToFitControl(workspace);
+  const zoomToFit = new penPlus.ZoomToFitControl(workspace);
   zoomToFit.init();
 
   window.supportedEvents = new Set([
@@ -72,6 +72,6 @@ function onAllAddonsLoaded() {
   workspace.registerButtonCallback("createVariable", (button) => {});
 
   // The plugin must be initialized before it has any effect.
-  const disableTopBlocksPlugin = new window.DisableTopBlocks();
+  const disableTopBlocksPlugin = new penPlus.DisableTopBlocks();
   disableTopBlocksPlugin.init();
 }

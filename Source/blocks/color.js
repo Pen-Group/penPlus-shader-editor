@@ -172,7 +172,7 @@
       const r = Number(generator.valueToCode(block, "r", Order.ATOMIC));
       const g = Number(generator.valueToCode(block, "g", Order.ATOMIC));
       const b = Number(generator.valueToCode(block, "b", Order.ATOMIC));
-      console.log(r,g,b)
+      console.log(r, g, b);
       return [
         `vec4(${r * 0.00392156862},${g * 0.00392156862},${
           b * 0.00392156862

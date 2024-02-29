@@ -58,9 +58,11 @@ function previewRender() {
 
   window.previewMode = "triangle";
 
-  document.getElementById("prevAndConsole").addEventListener("mouseover", () => {
-    document.body.style.setProperty("--PreviewStylesPopout", "8px");
-  });
+  document
+    .getElementById("prevAndConsole")
+    .addEventListener("mouseover", () => {
+      document.body.style.setProperty("--PreviewStylesPopout", "8px");
+    });
 
   document.getElementById("prevAndConsole").addEventListener("mouseout", () => {
     document.body.style.setProperty("--PreviewStylesPopout", "-48px");
@@ -101,43 +103,47 @@ function previewRender() {
           gl.bufferData(
             gl.ARRAY_BUFFER,
             new Float32Array(
-              gl.shaders.editorShader.makeTriangle({
-                a_position: [
-                  [-1, -1, 0, 1],
-                  [1, -1, 0, 1],
-                  [1, 1, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              }).concat(gl.shaders.editorShader.makeTriangle({
-                a_position: [
-                  [-1, -1, 0, 1],
-                  [1, 1, 0, 1],
-                  [-1, 1, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 1],
-                  [0, 1],
-                ],
-              }))
+              gl.shaders.editorShader
+                .makeTriangle({
+                  a_position: [
+                    [-1, -1, 0, 1],
+                    [1, -1, 0, 1],
+                    [1, 1, 0, 1],
+                  ],
+                  a_color: [
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                  ],
+                  a_texCoord: [
+                    [0, 0],
+                    [1, 0],
+                    [1, 1],
+                  ],
+                })
+                .concat(
+                  gl.shaders.editorShader.makeTriangle({
+                    a_position: [
+                      [-1, -1, 0, 1],
+                      [1, 1, 0, 1],
+                      [-1, 1, 0, 1],
+                    ],
+                    a_color: [
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                    ],
+                    a_texCoord: [
+                      [0, 0],
+                      [1, 1],
+                      [0, 1],
+                    ],
+                  })
+                )
             ),
             gl.STATIC_DRAW
           );
-    
+
           gl.drawArrays(gl.TRIANGLES, 0, 6);
           break;
 
@@ -145,46 +151,50 @@ function previewRender() {
           gl.bufferData(
             gl.ARRAY_BUFFER,
             new Float32Array(
-              gl.shaders.editorShader.makeTriangle({
-                a_position: [
-                  [-0.5, -0.5, 0, 1],
-                  [0.5, -0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              }).concat(gl.shaders.editorShader.makeTriangle({
-                a_position: [
-                  [-0.5, -0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                  [-0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 1],
-                  [0, 1],
-                ],
-              }))
+              gl.shaders.editorShader
+                .makeTriangle({
+                  a_position: [
+                    [-0.5, -0.5, 0, 1],
+                    [0.5, -0.5, 0, 1],
+                    [0.5, 0.5, 0, 1],
+                  ],
+                  a_color: [
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                  ],
+                  a_texCoord: [
+                    [0, 0],
+                    [1, 0],
+                    [1, 1],
+                  ],
+                })
+                .concat(
+                  gl.shaders.editorShader.makeTriangle({
+                    a_position: [
+                      [-0.5, -0.5, 0, 1],
+                      [0.5, 0.5, 0, 1],
+                      [-0.5, 0.5, 0, 1],
+                    ],
+                    a_color: [
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                    ],
+                    a_texCoord: [
+                      [0, 0],
+                      [1, 1],
+                      [0, 1],
+                    ],
+                  })
+                )
             ),
             gl.STATIC_DRAW
           );
-    
+
           gl.drawArrays(gl.TRIANGLES, 0, 6);
           break;
-      
+
         default:
           gl.bufferData(
             gl.ARRAY_BUFFER,
@@ -209,7 +219,7 @@ function previewRender() {
             ),
             gl.STATIC_DRAW
           );
-    
+
           gl.drawArrays(gl.TRIANGLES, 0, 3);
           break;
       }

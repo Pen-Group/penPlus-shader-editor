@@ -1,23 +1,23 @@
 {
   function download(data, filename, type) {
-      var file = new Blob([data], { type: type });
+    var file = new Blob([data], { type: type });
 
-      if (window.navigator.msSaveOrOpenBlob) {
-          // For IE10+
-          window.navigator.msSaveOrOpenBlob(file, filename);
-      } else {
-          // For other browsers
-          var a = document.createElement("a");
-          var url = URL.createObjectURL(file);
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(function () {
-              document.body.removeChild(a);
-              window.URL.revokeObjectURL(url);
-          }, 0);
-      }
+    if (window.navigator.msSaveOrOpenBlob) {
+      // For IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    } else {
+      // For other browsers
+      var a = document.createElement("a");
+      var url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
   }
 
   function readSingleFile() {
@@ -26,18 +26,25 @@
 
     opener.click();
 
-    opener.addEventListener('change', () => {
-      let file = opener.files[0];
-      if (!file) {
-        return;
-      }
-      let reader = new FileReader();
-      reader.onload = function(e) {
-        let contents = e.target.result;
-        Blockly.serialization.workspaces.load(JSON.parse(contents),window.workspace);
-      };
-      reader.readAsText(file);
-    }, false);
+    opener.addEventListener(
+      "change",
+      () => {
+        let file = opener.files[0];
+        if (!file) {
+          return;
+        }
+        let reader = new FileReader();
+        reader.onload = function (e) {
+          let contents = e.target.result;
+          Blockly.serialization.workspaces.load(
+            JSON.parse(contents),
+            window.workspace
+          );
+        };
+        reader.readAsText(file);
+      },
+      false
+    );
   }
 
   const glsl_Button = document.getElementById("ButtonGLSL");
@@ -167,22 +174,28 @@
 
   fullScreen.onclick = () => {
     window.previewMode = "fullscreen";
-  }
+  };
 
   squareButton.onclick = () => {
     window.previewMode = "square";
-  }
+  };
 
   triangleButton.onclick = () => {
     window.previewMode = "triangle";
-  }
+  };
 
   saveButton.onclick = () => {
-    console.log(JSON.stringify(Blockly.serialization.workspaces.save(window.workspace)));
-    download(JSON.stringify(Blockly.serialization.workspaces.save(window.workspace)),"shader.pps","");
-  }
+    console.log(
+      JSON.stringify(Blockly.serialization.workspaces.save(window.workspace))
+    );
+    download(
+      JSON.stringify(Blockly.serialization.workspaces.save(window.workspace)),
+      "shader.pps",
+      ""
+    );
+  };
 
   loadButton.onclick = () => {
     let result = readSingleFile();
-  }
+  };
 }

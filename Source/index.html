@@ -77,7 +77,7 @@
 
       .previewStyle {
         position: absolute;
-        left:var(--PreviewStylesPopout);
+        left: var(--PreviewStylesPopout);
         background-color: var(--EditorTheme_Theme_4);
         transition: left 400ms;
         z-index: 2000;
@@ -93,7 +93,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         filter: var(--EditorTheme_ButtonSVGStyle);
       }
 
@@ -399,17 +399,118 @@
               ></polyline>
             </svg>
           </button>
-          <button class="toggleButton" id="saveButton"><svg class="buttonSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg></button>
-          <button class="toggleButton" id="loadButton"><svg class="buttonSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></button>
+          <button class="toggleButton" id="saveButton">
+            <svg
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-save"
+            >
+              <path
+                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+              ></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+          </button>
+          <button class="toggleButton" id="loadButton">
+            <svg
+              class="buttonSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-save"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </button>
         </div>
         <div class="title">Pen+ Shader Editor</div>
         <div class="previewAndConsole" id="prevAndConsole">
-          <canvas id="shaderpreview" class="shaderpreview">
-          </canvas>
+          <canvas id="shaderpreview" class="shaderpreview"> </canvas>
 
-          <button id="FullScreen" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 8px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
-          <button id="SquareButton" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 48px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg></button>
-          <button id="TriangleButton" class="previewStyle" style="top:calc(var(--EditorTheme_TopBarSize) + 88px);"><svg class="previewStyleSVG" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg></button>
+          <button
+            id="FullScreen"
+            class="previewStyle"
+            style="top: calc(var(--EditorTheme_TopBarSize) + 8px)"
+          >
+            <svg
+              class="previewStyleSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-maximize"
+            >
+              <path
+                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+              ></path>
+            </svg>
+          </button>
+          <button
+            id="SquareButton"
+            class="previewStyle"
+            style="top: calc(var(--EditorTheme_TopBarSize) + 48px)"
+          >
+            <svg
+              class="previewStyleSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-square"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            </svg>
+          </button>
+          <button
+            id="TriangleButton"
+            class="previewStyle"
+            style="top: calc(var(--EditorTheme_TopBarSize) + 88px)"
+          >
+            <svg
+              class="previewStyleSVG"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-triangle"
+            >
+              <path
+                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+              ></path>
+            </svg>
+          </button>
 
           <div class="logVarSwitchBar">
             <div class="BlocklyShaderButtons">
@@ -438,25 +539,43 @@
       </div>
     </div>
     <div id="popupModal"></div>
-    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+
+    <!--Editor Namespace-->
+    <script>
+      const penPlus = {};
+    </script>
+
+    <!--Blockly Itself-->
+    <script src="blockly/blockly.min.js"></script>
+
     <!--Blockly Addons-->
+    <script src="blockly/addons/continuousCategory.js"></script>
+    <script src="blockly/addons/continuousFlyout.js"></script>
+    <script src="blockly/addons/continuousFlyoutMetrics.js"></script>
+    <script src="blockly/addons/continuousMetrics.js"></script>
+    <script src="blockly/addons/continuousToolbox.js"></script>
+    <script src="blockly/addons/disableOrphans.js"></script>
+    <script src="blockly/addons/gridField.js"></script>
+    <script src="blockly/addons/hsvField.js"></script>
+    <script src="blockly/addons/zoomToFit.js"></script>
     <!--
     Color Fields, HSV color, continuous toolbox are used.
     Also predefined variables by Hendrik Diel on google groups https://groups.google.com/g/blockly/c/22B9CMXpJpc
-  -->
-    <script src="BlocklyAddons.js"></script>
+    -->
+    <script src="blockly/BlocklyAddons.js"></script>
 
     <!--helper functions-->
-    <script src="HelperFunctions.js"></script>
-    <!--Blockly Theme-->
-    <script src="penPlusTheme.js"></script>
-    <script src="zelosDrawOverride.js"></script>
-    <!--Adding Blocks to palletes-->
-    <script src="blocks.js"></script>
-    <script src="buttons.js"></script>
-    <script src="extensionFormat.js"></script>
+    <script src="util/Blockly_and_Color.js"></script>
 
-    <!--Block Categories-->
+    <!--Blockly Patches-->
+    <script src="blockly/render/penPlusTheme.js"></script>
+    <script src="blockly/render/zelosDrawOverride.js"></script>
+
+    <!--Default Reporters and Extension Format-->
+    <script src="blockly/patches/blocks.js"></script>
+    <script src="blockly/patches/extensionFormat.js"></script>
+
+    <!--Default Block Categories-->
     <script src="blocks/events.js"></script>
     <script src="blocks/vertex.js"></script>
     <script src="blocks/looks.js"></script>
@@ -469,15 +588,15 @@
     <script src="blocks/vector.js"></script>
     <script src="blocks/myBlocks.js"></script>
 
-    <!--Shader Preview and errors-->
-    <script src="shaders.js"></script>
-    <script src="DAVE_SHADE.js"></script>
-    <script src="previewRender.js"></script>
+    <!--Shader Stuff-->
+    <script src="blockly/patches/GEN_GLSL.js"></script>
+    <script src="render/shaders.js"></script>
+    <script src="render/DAVE_SHADE.js"></script>
+    <script src="render/previewRender.js"></script>
 
-    <!--GLSL generator-->
-    <script src="GEN_GLSL.js"></script>
-
-    <script src="main.js"></script>
+    <!--Editor-->
+    <script src="editor/buttons.js"></script>
+    <script src="editor/main.js"></script>
     <!--neato-->
   </body>
 </html>

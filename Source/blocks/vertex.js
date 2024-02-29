@@ -229,7 +229,7 @@
     }
 
     inputPosition(block, generator) {
-      return [`a_position`,Order.ATOMIC];
+      return [`a_position`, Order.ATOMIC];
     }
 
     getX(block, generator) {
