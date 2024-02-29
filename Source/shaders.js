@@ -632,9 +632,6 @@ function genProgram() {
   let vert = window.Generated_Vert;
   let frag = window.Generated_Frag;
 
-  console.log(vert);
-  console.log(frag);
-
   //? compile vertex Shader
   window.webGLShaderManager.createAndCompile(
     gl,
