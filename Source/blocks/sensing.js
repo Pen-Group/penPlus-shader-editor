@@ -3,8 +3,6 @@
 
   class sensing_category extends window.penPlusExtension {
     getInfo() {
-      addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
-      addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
       return {
         name: "Sensing",
         id: "sensing",

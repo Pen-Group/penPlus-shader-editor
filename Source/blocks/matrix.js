@@ -249,7 +249,7 @@
             output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
-              createGrid(
+              penPlus.createGrid(
                 [
                   ["1", "0"],
                   ["2", "1"],
@@ -259,7 +259,7 @@
                 "row",
                 4
               ),
-              createGrid(
+              penPlus.createGrid(
                 [
                   ["1", "0"],
                   ["2", "1"],
@@ -287,7 +287,7 @@
             output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
-              createGrid(
+              penPlus.createGrid(
                 [
                   ["1", "0"],
                   ["2", "1"],
@@ -315,7 +315,7 @@
             output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
-              createGrid(
+              penPlus.createGrid(
                 [
                   ["1", "0"],
                   ["2", "1"],

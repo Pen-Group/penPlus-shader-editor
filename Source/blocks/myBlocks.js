@@ -78,7 +78,7 @@
   class myBlocks_category extends window.penPlusExtension {
     getInfo() {
       getHatBlockVariables = this.getHatBlockVariables;
-      addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
+      penPlus.addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
       return {
         name: "My Blocks",
         id: "myblocks",
@@ -110,7 +110,7 @@
                 type: "input_statement",
                 name: "code",
               },
-              createMenu(
+              penPlus.createMenu(
                 [
                   ["nothing", "void"],
                   ["float", "highp float"],
@@ -153,7 +153,7 @@
                   type: "string_reporter",
                 },
               },
-              createMenu(
+              penPlus.createMenu(
                 [
                   ["float", "highp float"],
                   ["int", "int"],

@@ -48,7 +48,6 @@ function onAllAddonsLoaded() {
   window.workspace = workspace;
 
   createGLSLGen();
-  addVariableTypes();
   addBlocks();
 
   const zoomToFit = new penPlus.ZoomToFitControl(workspace);

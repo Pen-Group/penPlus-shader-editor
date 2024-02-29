@@ -22,12 +22,12 @@
 
   class variables_category extends window.penPlusExtension {
     getInfo() {
-      addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
-      addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
-      addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
-      addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");
-      addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
-      addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
+      penPlus.addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
+      penPlus.addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
+      penPlus.addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
+      penPlus.addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");
+      penPlus.addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
+      penPlus.addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
       return {
         name: "Variables",
         id: "variables",

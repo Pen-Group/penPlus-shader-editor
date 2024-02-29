@@ -358,7 +358,7 @@
             tooltip: "Performs the desired arithmatic operation",
             output: "arithmatic",
             arguments: [
-              createMenu(
+              penPlus.createMenu(
                 [
                   ["abs", "abs"],
                   ["floor", "floor"],

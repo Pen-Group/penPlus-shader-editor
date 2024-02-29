@@ -111,7 +111,7 @@
             tooltip: "A Custom Block!",
             //style: "return_block", I somewhat like this gray
             arguments: [
-              createGrid(
+              penPlus.createGrid(
                 [
                   ["x", "x"],
                   ["y", "y"],
