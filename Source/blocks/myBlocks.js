@@ -198,6 +198,13 @@
               },
             ],
           },
+          {
+            opcode: "customBlock_Execute_Command",
+            type: "command",
+            text: "",
+            tooltip: "Runs a custom block",
+            hideFromPallete: true,
+          },
         ],
       };
     }
