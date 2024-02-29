@@ -21,21 +21,21 @@
                 type: "input_value",
                 name: "hue",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "sat",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "val",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
             ],
@@ -51,28 +51,28 @@
                 type: "input_value",
                 name: "hue",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "sat",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "val",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "a",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
             ],
@@ -90,21 +90,21 @@
                 type: "input_value",
                 name: "r",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "g",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "b",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
             ],
@@ -120,28 +120,28 @@
                 type: "input_value",
                 name: "r",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "g",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "b",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
               {
                 type: "input_value",
                 name: "a",
                 shadow: {
-                  type: "number_reporter",
+                  type: "number_NOFLOAT_reporter",
                 },
               },
             ],
@@ -172,6 +172,7 @@
       const r = generator.valueToCode(block, "r", Order.ATOMIC);
       const g = generator.valueToCode(block, "g", Order.ATOMIC);
       const b = generator.valueToCode(block, "b", Order.ATOMIC);
+      console.log(r,g,b)
       return [
         `vec4(${r * 0.00392156862},${g * 0.00392156862},${
           b * 0.00392156862
