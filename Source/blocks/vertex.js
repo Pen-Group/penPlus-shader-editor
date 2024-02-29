@@ -141,6 +141,13 @@
           },
           "---",
           {
+            opcode: "inputPosition",
+            type: "reporter",
+            text: "input position",
+            output: "vec4",
+            tooltip: "Get the vertex's input position",
+          },
+          {
             opcode: "getX",
             type: "reporter",
             text: "vertex x",
@@ -219,6 +226,10 @@
       return (
         `gl_Position.w += float(${W});` + nextBlockToCode(block, generator)
       );
+    }
+
+    inputPosition(block, generator) {
+      return [`a_position`,Order.ATOMIC];
     }
 
     getX(block, generator) {
