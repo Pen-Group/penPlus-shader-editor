@@ -69,5 +69,5 @@
     return !parent && !!(block.outputConnection || block.previousConnection);
   }
 
-  penPlusBlocklyTheme.DisableTopBlocks = DisableTopBlocks;
+  penPlus.DisableTopBlocks = DisableTopBlocks;
 })();
