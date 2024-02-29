@@ -56,10 +56,20 @@ function previewRender() {
 
   window.timer = 0;
 
+  window.previewMode = "triangle";
+
+  document.getElementById("prevAndConsole").addEventListener("mouseover", () => {
+    document.body.style.setProperty("--PreviewStylesPopout", "8px");
+  });
+
+  document.getElementById("prevAndConsole").addEventListener("mouseout", () => {
+    document.body.style.setProperty("--PreviewStylesPopout", "-48px");
+  });
+
   let lastTime = Date.now();
   let now = Date.now();
 
-  function renderFrame(delta) {
+  function renderFrame() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       window.timer += (now - lastTime) / 1000;
@@ -86,32 +96,123 @@ function previewRender() {
           gl.canvas.height,
         ];
       }
+      switch (window.previewMode) {
+        case "fullscreen":
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array(
+              gl.shaders.editorShader.makeTriangle({
+                a_position: [
+                  [-1, -1, 0, 1],
+                  [1, -1, 0, 1],
+                  [1, 1, 0, 1],
+                ],
+                a_color: [
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                ],
+                a_texCoord: [
+                  [0, 0],
+                  [1, 0],
+                  [1, 1],
+                ],
+              }).concat(gl.shaders.editorShader.makeTriangle({
+                a_position: [
+                  [-1, -1, 0, 1],
+                  [1, 1, 0, 1],
+                  [-1, 1, 0, 1],
+                ],
+                a_color: [
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                ],
+                a_texCoord: [
+                  [0, 0],
+                  [1, 1],
+                  [0, 1],
+                ],
+              }))
+            ),
+            gl.STATIC_DRAW
+          );
+    
+          gl.drawArrays(gl.TRIANGLES, 0, 6);
+          break;
 
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array(
-          gl.shaders.editorShader.makeTriangle({
-            a_position: [
-              [-0.5, -0.5, 0, 1],
-              [0.5, -0.5, 0, 1],
-              [0.5, 0.5, 0, 1],
-            ],
-            a_color: [
-              [1.0, 1.0, 1.0, 1.0],
-              [1.0, 1.0, 1.0, 1.0],
-              [1.0, 1.0, 1.0, 1.0],
-            ],
-            a_texCoord: [
-              [0, 0],
-              [1, 0],
-              [1, 1],
-            ],
-          })
-        ),
-        gl.STATIC_DRAW
-      );
-
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
+        case "square":
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array(
+              gl.shaders.editorShader.makeTriangle({
+                a_position: [
+                  [-0.5, -0.5, 0, 1],
+                  [0.5, -0.5, 0, 1],
+                  [0.5, 0.5, 0, 1],
+                ],
+                a_color: [
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                ],
+                a_texCoord: [
+                  [0, 0],
+                  [1, 0],
+                  [1, 1],
+                ],
+              }).concat(gl.shaders.editorShader.makeTriangle({
+                a_position: [
+                  [-0.5, -0.5, 0, 1],
+                  [0.5, 0.5, 0, 1],
+                  [-0.5, 0.5, 0, 1],
+                ],
+                a_color: [
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                ],
+                a_texCoord: [
+                  [0, 0],
+                  [1, 1],
+                  [0, 1],
+                ],
+              }))
+            ),
+            gl.STATIC_DRAW
+          );
+    
+          gl.drawArrays(gl.TRIANGLES, 0, 6);
+          break;
+      
+        default:
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array(
+              gl.shaders.editorShader.makeTriangle({
+                a_position: [
+                  [-0.5, -0.5, 0, 1],
+                  [0.5, -0.5, 0, 1],
+                  [0.5, 0.5, 0, 1],
+                ],
+                a_color: [
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0, 1.0],
+                ],
+                a_texCoord: [
+                  [0, 0],
+                  [1, 0],
+                  [1, 1],
+                ],
+              })
+            ),
+            gl.STATIC_DRAW
+          );
+    
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+          break;
+      }
     }
     lastTime = now;
     window.requestAnimationFrame(renderFrame);

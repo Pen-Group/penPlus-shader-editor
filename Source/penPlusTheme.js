@@ -147,6 +147,11 @@ window.refreshTheme = () => {
   //Works
 
   document.body.style.setProperty(
+    "--EditorTheme_ButtonSVGStyle",
+    window.editorTheme == "dark" ? "invert(100%)" : "invert(0%)"
+  );
+
+  document.body.style.setProperty(
     "--EditorTheme_Theme_1",
     window.editorTheme == "dark" ? "#0f0f0f" : "#ffffff"
   );
