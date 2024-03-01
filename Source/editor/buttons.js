@@ -23,6 +23,7 @@
   function readSingleFile() {
     let opener = document.createElement("input");
     opener.type = "file";
+    opener.accept = ".pps";
 
     opener.click();
 
