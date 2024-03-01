@@ -47,7 +47,7 @@ gl_FragColor = v_color;
 function nextBlockToCode(block, generator) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   if (nextBlock) {
-    return "\n" + GLSL_GEN.blockToCode(nextBlock);
+    return "\n" + penPlus.GLSL_GEN.blockToCode(nextBlock);
   }
   return "";
 }

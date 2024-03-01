@@ -174,23 +174,23 @@
   };
 
   fullScreen.onclick = () => {
-    window.previewMode = "fullscreen";
+    penPlus.previewMode = "fullscreen";
   };
 
   squareButton.onclick = () => {
-    window.previewMode = "square";
+    penPlus.previewMode = "square";
   };
 
   triangleButton.onclick = () => {
-    window.previewMode = "triangle";
+    penPlus.previewMode = "triangle";
   };
 
   saveButton.onclick = () => {
     console.log(
-      JSON.stringify(Blockly.serialization.workspaces.save(window.workspace))
+      JSON.stringify(Blockly.serialization.workspaces.save(penPlus.workspace))
     );
     download(
-      JSON.stringify(Blockly.serialization.workspaces.save(window.workspace)),
+      JSON.stringify(Blockly.serialization.workspaces.save(penPlus.workspace)),
       "shader.pps",
       ""
     );
