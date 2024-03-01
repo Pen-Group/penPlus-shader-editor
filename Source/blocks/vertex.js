@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class vertex_category extends window.penPlusExtension {
+  class vertex_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Vertex",
@@ -261,5 +261,5 @@
     }
   }
 
-  window.categories.vertex = vertex_category;
+  penPlus.categories.vertex = vertex_category;
 }

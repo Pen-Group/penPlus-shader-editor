@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class sensing_category extends window.penPlusExtension {
+  class sensing_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Sensing",
@@ -92,5 +92,5 @@
     }
   }
 
-  window.categories.sensing = sensing_category;
+  penPlus.categories.sensing = sensing_category;
 }

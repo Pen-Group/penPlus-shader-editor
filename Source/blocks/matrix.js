@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class matrix_category extends window.penPlusExtension {
+  class matrix_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Matrix",
@@ -539,5 +539,5 @@
     }
   }
 
-  window.categories.matrix = matrix_category;
+  penPlus.categories.matrix = matrix_category;
 }

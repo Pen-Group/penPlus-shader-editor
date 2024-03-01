@@ -1,9 +1,9 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
   let getHatBlockVariables = undefined;
 
-  class events_category extends window.penPlusExtension {
+  class events_category extends penPlus.penPlusExtension {
     getInfo() {
       getHatBlockVariables = this.getHatBlockVariables;
       return {
@@ -44,5 +44,5 @@
     }
   }
 
-  window.categories.events = events_category;
+  penPlus.categories.events = events_category;
 }

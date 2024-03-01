@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class looks_category extends window.penPlusExtension {
+  class looks_category extends penPlus.penPlusExtension {
     getInfo() {
       penPlus.addBlockColorSet(
         "texture_blocks",
@@ -299,5 +299,5 @@
     }
   }
 
-  window.categories.looks = looks_category;
+  penPlus.categories.looks = looks_category;
 }

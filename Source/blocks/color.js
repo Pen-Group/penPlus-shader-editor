@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class color_category extends window.penPlusExtension {
+  class color_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Colors",
@@ -195,5 +195,5 @@
     }
   }
 
-  window.categories.color = color_category;
+  penPlus.categories.color = color_category;
 }

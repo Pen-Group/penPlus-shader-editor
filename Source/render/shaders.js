@@ -13,7 +13,7 @@ function shaderLog(reason) {
 }
 
 function replacementShader() {
-  window.Generated_GLSL = `//replacement shader
+  penPlus.Generated_GLSL = `//replacement shader
     //Base Variables
     attribute highp vec4 a_position;
     attribute highp vec4 a_color;
@@ -49,26 +49,26 @@ function replacementShader() {
     gl_FragColor = v_color;
     }`;
 
-  if (!window.Generated_GLSL.includes("void vertex")) {
-    window.Generated_GLSL += `
+  if (!penPlus.Generated_GLSL.includes("void vertex")) {
+    penPlus.Generated_GLSL += `
       void vertex() {
         gl_Position = a_position;
       }\n`;
   }
 
-  if (!window.Generated_GLSL.includes("void fragment")) {
-    window.Generated_GLSL += `
+  if (!penPlus.Generated_GLSL.includes("void fragment")) {
+    penPlus.Generated_GLSL += `
       void fragment() {
         gl_FragColor = vec4(1,1,1,1);
       }\n`;
   }
 
   for (
-    let letterID = window.Generated_GLSL.indexOf("void vertex");
-    letterID < window.Generated_GLSL.length;
+    let letterID = penPlus.Generated_GLSL.indexOf("void vertex");
+    letterID < penPlus.Generated_GLSL.length;
     letterID++
   ) {
-    const letter = window.Generated_GLSL.charAt(letterID);
+    const letter = penPlus.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
     if (letter == "{") {
       inner += 1;
@@ -83,11 +83,11 @@ function replacementShader() {
   inner = 0;
 
   for (
-    let letterID = window.Generated_GLSL.indexOf("void fragment");
-    letterID < window.Generated_GLSL.length;
+    let letterID = penPlus.Generated_GLSL.indexOf("void fragment");
+    letterID < penPlus.Generated_GLSL.length;
     letterID++
   ) {
-    const letter = window.Generated_GLSL.charAt(letterID);
+    const letter = penPlus.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
     if (letter == "{") {
       inner += 1;
@@ -108,7 +108,7 @@ function getTypedInput(type, name) {
   let inputFunction = () => {};
   switch (type) {
     case "sampler2D":
-      const keys = Object.keys(window.textures);
+      const keys = Object.keys(penPlus.textures);
 
       input = document.createElement("select");
       input.style.width = "75%";
@@ -123,10 +123,10 @@ function getTypedInput(type, name) {
       input.innerHTML = options;
 
       gl.shaders.editorShader.uniforms[name].value =
-        window.textures[input.value];
+        penPlus.textures[input.value];
       input.addEventListener("change", () => {
         gl.shaders.editorShader.uniforms[name].value =
-          window.textures[input.value];
+          penPlus.textures[input.value];
       });
 
       return input;
@@ -592,48 +592,48 @@ function getTypedInput(type, name) {
   }
 }
 
-window.compiling = false;
+penPlus.compiling = false;
 
 function genProgram() {
-  window.compiling = true;
+  penPlus.compiling = true;
 
   //Remove attributes from fragment
-  window.Generated_Frag = window.Generated_Frag.replace(
+  penPlus.Generated_Frag = penPlus.Generated_Frag.replace(
     /attribute (.*?);/g,
     ""
   );
 
   //Get attributes and add them into an array.
-  window.ShaderAttributes = [
-    ...window.Generated_GLSL.matchAll(/attribute (.*?);/g),
+  penPlus.ShaderAttributes = [
+    ...penPlus.Generated_GLSL.matchAll(/attribute (.*?);/g),
   ];
 
-  window.ShaderAttributes = window.ShaderAttributes.concat([
-    ...window.Generated_GLSL.matchAll(/uniform (.*?);/g),
+  penPlus.ShaderAttributes = penPlus.ShaderAttributes.concat([
+    ...penPlus.Generated_GLSL.matchAll(/uniform (.*?);/g),
   ]);
 
   //Then only get the type, scope, and name
-  for (let i = 0; i < window.ShaderAttributes.length; i++) {
-    const splitAttribute = window.ShaderAttributes[i][0].split(" ");
-    window.ShaderAttributes[i] = {
+  for (let i = 0; i < penPlus.ShaderAttributes.length; i++) {
+    const splitAttribute = penPlus.ShaderAttributes[i][0].split(" ");
+    penPlus.ShaderAttributes[i] = {
       scope: splitAttribute[0],
     };
 
     if (splitAttribute.length >= 4) {
-      window.ShaderAttributes[i].type = splitAttribute[2];
-      window.ShaderAttributes[i].name = splitAttribute[3].replace(";", "");
+      penPlus.ShaderAttributes[i].type = splitAttribute[2];
+      penPlus.ShaderAttributes[i].name = splitAttribute[3].replace(";", "");
     } else {
-      window.ShaderAttributes[i].type = splitAttribute[1];
-      window.ShaderAttributes[i].name = splitAttribute[2].replace(";", "");
+      penPlus.ShaderAttributes[i].type = splitAttribute[1];
+      penPlus.ShaderAttributes[i].name = splitAttribute[2].replace(";", "");
     }
   }
 
-  //Get the variables for later use from the global window class
-  let vert = window.Generated_Vert;
-  let frag = window.Generated_Frag;
+  //Get the variables for later use from the global penPlus class
+  let vert = penPlus.Generated_Vert;
+  let frag = penPlus.Generated_Frag;
 
   //? compile vertex Shader
-  window.webGLShaderManager.createAndCompile(
+  penPlus.webGLShaderManager.createAndCompile(
     gl,
     "editorShader",
     vert,
@@ -644,10 +644,10 @@ function genProgram() {
     }
   );
 
-  window.shaderVars.innerHTML = "";
+  penPlus.shaderVars.innerHTML = "";
 
   try {
-    window.ShaderAttributes.forEach((attribute) => {
+    penPlus.ShaderAttributes.forEach((attribute) => {
       if (attribute.scope == "uniform") {
         gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
         if (attribute.name != "u_timer" && attribute.name != "u_res") {
@@ -660,7 +660,7 @@ function genProgram() {
           divElement.innerHTML = `${attribute.name}:`;
           divElement.appendChild(getTypedInput(attribute.type, attribute.name));
 
-          window.shaderVars.appendChild(divElement);
+          penPlus.shaderVars.appendChild(divElement);
         }
       } else {
         gl.shaders["editorShader"].setupAttribute(
@@ -679,5 +679,5 @@ function genProgram() {
     shaderLog(error);
   }
 
-  window.compiling = false;
+  penPlus.compiling = false;
 }

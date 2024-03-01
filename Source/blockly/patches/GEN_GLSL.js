@@ -10,7 +10,7 @@ let functionsThatExist = {
 };
 
 //Base GLSL code
-window.Generated_GLSL = `//Base Variables
+penPlus.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;
 attribute highp vec2 a_texCoord;
@@ -54,8 +54,8 @@ function nextBlockToCode(block, generator) {
 
 function createGLSLGen() {
   //Create the default GLSL generator
-  window.GLSL_GEN = new Blockly.Generator("GLSL");
-  const GLSL_GEN = window.GLSL_GEN;
+  penPlus.GLSL_GEN = new Blockly.Generator("GLSL");
+  const GLSL_GEN = penPlus.GLSL_GEN;
 
   //Base reporters
   GLSL_GEN.forBlock["number_reporter"] = function (block, generator) {
@@ -158,17 +158,17 @@ function createGLSLGen() {
 }
 
 function updateGLSL(event) {
-  if (window.workspace.isDragging()) return; // Don't update while changes are happening.
-  if (!window.supportedEvents.has(event.type)) return;
+  if (penPlus.workspace.isDragging()) return; // Don't update while changes are happening.
+  if (!penPlus.supportedEvents.has(event.type)) return;
 
-  window.timer = 0;
+  penPlus.timer = 0;
 
-  window.customBlocks = [];
+  penPlus.customBlocks = [];
 
   document.getElementById("shaderLog").innerHTML = "";
 
   //Base GLSL code
-  window.Generated_GLSL = `//Base Variables
+  penPlus.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;
 attribute highp vec2 a_texCoord;
@@ -268,24 +268,24 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
       variable.type == "cubemap" ||
       variable.type == "int"
     )
-      window.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
+      penPlus.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
         variable.name.split(" ")[1] + appendance
       };\n`;
     else
-      window.Generated_GLSL += `\n${scope} highp ${type} ${
+      penPlus.Generated_GLSL += `\n${scope} highp ${type} ${
         variable.name.split(" ")[1] + appendance
       };\n`;
   });
 
   //Add some spacing
-  window.Generated_GLSL += `\n`;
+  penPlus.Generated_GLSL += `\n`;
 
-  window.Generated_GLSL += window.GLSL_GEN.workspaceToCode(window.workspace);
+  penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
 
-  window.Generated_Frag = "";
-  window.Generated_Vert = "";
+  penPlus.Generated_Frag = "";
+  penPlus.Generated_Vert = "";
 
-  window.loopID = 0;
+  penPlus.loopID = 0;
 
   workspace.getToolbox().refreshSelection();
 
@@ -294,27 +294,27 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   let vertFunction = "";
   let fragFunction = "";
 
-  if (!window.Generated_GLSL.includes("void vertex")) {
-    window.Generated_GLSL += `
+  if (!penPlus.Generated_GLSL.includes("void vertex")) {
+    penPlus.Generated_GLSL += `
     void vertex() {
       gl_Position = a_position;
       v_texCoord = a_texCoord;
     }\n`;
   }
 
-  if (!window.Generated_GLSL.includes("void fragment")) {
-    window.Generated_GLSL += `
+  if (!penPlus.Generated_GLSL.includes("void fragment")) {
+    penPlus.Generated_GLSL += `
     void fragment() {
       gl_FragColor = vec4(1,1,1,1);
     }\n`;
   }
 
   for (
-    let letterID = window.Generated_GLSL.indexOf("void vertex");
-    letterID < window.Generated_GLSL.length;
+    let letterID = penPlus.Generated_GLSL.indexOf("void vertex");
+    letterID < penPlus.Generated_GLSL.length;
     letterID++
   ) {
-    const letter = window.Generated_GLSL.charAt(letterID);
+    const letter = penPlus.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
     if (letter == "{") {
       inner += 1;
@@ -329,11 +329,11 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   inner = 0;
 
   for (
-    let letterID = window.Generated_GLSL.indexOf("void fragment");
-    letterID < window.Generated_GLSL.length;
+    let letterID = penPlus.Generated_GLSL.indexOf("void fragment");
+    letterID < penPlus.Generated_GLSL.length;
     letterID++
   ) {
-    const letter = window.Generated_GLSL.charAt(letterID);
+    const letter = penPlus.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
     if (letter == "{") {
       inner += 1;
@@ -345,13 +345,13 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
     }
   }
 
-  document.getElementById("myBlocklyCodeOutput").value = window.Generated_GLSL;
+  document.getElementById("myBlocklyCodeOutput").value = penPlus.Generated_GLSL;
 
-  window.Generated_Vert = window.Generated_GLSL.replace(
+  penPlus.Generated_Vert = penPlus.Generated_GLSL.replace(
     fragFunction,
     ""
   ).replace("void vertex", "void main");
-  window.Generated_Frag = window.Generated_GLSL.replace(
+  penPlus.Generated_Frag = penPlus.Generated_GLSL.replace(
     vertFunction,
     ""
   ).replace("void fragment", "void main");

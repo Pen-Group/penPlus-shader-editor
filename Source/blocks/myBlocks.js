@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  window.blockIterations = {};
+  penPlus.blockIterations = {};
 
   let customBlockArguments = [];
 
@@ -75,7 +75,7 @@
     return Name.replaceAll(/([\W\s\h\v])+/g, "_");
   }
 
-  class myBlocks_category extends window.penPlusExtension {
+  class myBlocks_category extends penPlus.penPlusExtension {
     getInfo() {
       getHatBlockVariables = this.getHatBlockVariables;
       penPlus.addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
@@ -203,7 +203,8 @@
             type: "command",
             text: "",
             tooltip: "Runs a custom block",
-            hideFromPallete: true,
+            mutators:"penPlusCustomBlock"
+            //hideFromPallete: true,
           },
         ],
       };
@@ -217,7 +218,7 @@
       if (name.length == 0) name = "no name!";
 
       //If lily and or anybody else knows a better solution please commit. I freaking beg
-      window.customBlockType = customBlockType;
+      penPlus.customBlockType = customBlockType;
       customBlockArguments = [];
 
       const innerCode = generator.statementToCode(block, "code");
@@ -227,7 +228,7 @@
       //Stupid Switch statement prob a way to do this without a switch
       block.setStyle(__colorCustomBlock(customBlockType));
 
-      window.customBlocks.push({
+      penPlus.customBlocks.push({
         name: name,
         type: customBlockType,
         arguments: customBlockArguments,
@@ -269,7 +270,7 @@
     customBlockReturn(block, generator) {
       let returnConversion = "";
 
-      switch (window.customBlockType) {
+      switch (penPlus.customBlockType) {
         case "highp float":
           block.setStyle("variables_blocks");
           block.inputList[0].setCheck();
@@ -323,7 +324,7 @@
           break;
       }
 
-      return window.customBlockType == "void"
+      return penPlus.customBlockType == "void"
         ? `return;`
         : `return ${returnConversion}(${
             generator.valueToCode(block, "return", Order.ATOMIC) || 1
@@ -345,8 +346,8 @@
         "highp mat4": "matrix_4x",
       };
 
-      if (window.customBlocks) {
-        window.customBlocks.forEach((block) => {
+      if (penPlus.customBlocks) {
+        penPlus.customBlocks.forEach((block) => {
           let block_arguments = [];
           let block_arg_count = 0;
           let block_arg_string = "";
@@ -363,8 +364,8 @@
           });
 
           //Dumb idea. Might work.
-          window.blockIterations[block.name] |= 0;
-          window.blockIterations[block.name] += 1;
+          penPlus.blockIterations[block.name] |= 0;
+          penPlus.blockIterations[block.name] += 1;
 
           console.log(block.type.split(" ")[block.type.split(" ").length - 1]);
 
@@ -372,7 +373,7 @@
 
           createdBlocks.push({
             opcode: `customBlock_${__glslifyName(block.name)}_${
-              window.blockIterations[block.name]
+              penPlus.blockIterations[block.name]
             }`,
             type: customBlockType == "void" ? "command" : "reporter",
             text: block.name + block_arg_string,
@@ -406,5 +407,5 @@
     }
   }
 
-  window.categories.myBlocks = myBlocks_category;
+  penPlus.categories.myBlocks = myBlocks_category;
 }

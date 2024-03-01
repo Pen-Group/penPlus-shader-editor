@@ -1,5 +1,5 @@
 function onAllAddonsLoaded() {
-  window.toolbox = {
+  penPlus.toolbox = {
     kind: "categoryToolbox",
     contents: [],
   };
@@ -7,10 +7,11 @@ function onAllAddonsLoaded() {
   addImportantReporters();
   Blockly.blockRendering.register(
     "pen_plus_renderer",
-    window.customZelosRenderer
+    penPlus.customZelosRenderer
   );
+
   workspace = Blockly.inject("BlocklyDiv", {
-    toolbox: window.toolbox,
+    toolbox: penPlus.toolbox,
     collapse: false,
     comments: true,
     renderer: "pen_plus_renderer",
@@ -45,7 +46,8 @@ function onAllAddonsLoaded() {
     },
     theme: penPlusBlocklyTheme(),
   });
-  window.workspace = workspace;
+
+  penPlus.workspace = workspace;
 
   createGLSLGen();
   addBlocks();
@@ -53,7 +55,7 @@ function onAllAddonsLoaded() {
   const zoomToFit = new penPlus.ZoomToFitControl(workspace);
   zoomToFit.init();
 
-  window.supportedEvents = new Set([
+  penPlus.supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
     Blockly.Events.BLOCK_CREATE,
     Blockly.Events.BLOCK_DELETE,
@@ -68,7 +70,7 @@ function onAllAddonsLoaded() {
 
   workspace.addChangeListener(updateGLSL);
 
-  workspace.registerButtonCallback("createVariable", (button) => {});
+  //workspace.registerButtonCallback("createVariable", (button) => {});
 
   // The plugin must be initialized before it has any effect.
   const disableTopBlocksPlugin = new penPlus.DisableTopBlocks();

@@ -1,5 +1,5 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
   function __colorVariableBlock(variableType) {
     switch (variableType) {
@@ -20,7 +20,7 @@
     }
   }
 
-  class variables_category extends window.penPlusExtension {
+  class variables_category extends penPlus.penPlusExtension {
     getInfo() {
       penPlus.addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
       penPlus.addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
@@ -126,7 +126,7 @@
               ],
               operation: (block, generator) => {
                 const variable = Blockly.Variables.getVariable(
-                  window.workspace,
+                  penPlus.workspace,
                   block.getFieldValue("VAR")
                 );
 
@@ -177,7 +177,7 @@
               ],
               operation: (block, generator) => {
                 const variable = Blockly.Variables.getVariable(
-                  window.workspace,
+                  penPlus.workspace,
                   block.getFieldValue("VAR")
                 );
 
@@ -222,7 +222,7 @@
               ],
               operation: (block, generator) => {
                 const variable = Blockly.Variables.getVariable(
-                  window.workspace,
+                  penPlus.workspace,
                   block.getFieldValue("VAR")
                 );
 
@@ -267,7 +267,7 @@
               ],
               operation: (block, generator) => {
                 const variable = Blockly.Variables.getVariable(
-                  window.workspace,
+                  penPlus.workspace,
                   block.getFieldValue("VAR")
                 );
 
@@ -324,7 +324,7 @@
               ],
               operation: (block, generator) => {
                 const variable = Blockly.Variables.getVariable(
-                  window.workspace,
+                  penPlus.workspace,
                   block.getFieldValue("VAR")
                 );
 
@@ -354,7 +354,7 @@
 
     createVariable(button) {
       //Html Modal Mess
-      const varModal = createModal(`
+      const varModal = penPlus.createModal(`
           <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
             <div style="position:absolute;left:0px;top:0px; width:100%; height:40%; background-color: var(--EditorTheme_Theme_4);">
               <input id="VarName" placeholder="Variable Name" style="position:absolute;left:50%;top:50%;Transform:Translate(-50%,-50%); width:50%; height:20%;" type="text"></input>
@@ -687,14 +687,14 @@
         }
 
         if (typeName == "matrix") {
-          window.workspace.createVariable(
+          penPlus.workspace.createVariable(
             scope + " " + variableNameInput.value,
             currentType.id + "_" + matrixSizeChanger.value,
             //This is going to be random anyways
             scope + "_" + variableNameInput.value
           );
         } else {
-          window.workspace.createVariable(
+          penPlus.workspace.createVariable(
             scope + " " + variableNameInput.value,
             currentType.id,
             //This is going to be random anyways
@@ -707,5 +707,5 @@
     }
   }
 
-  window.categories.variables = variables_category;
+  penPlus.categories.variables = variables_category;
 }

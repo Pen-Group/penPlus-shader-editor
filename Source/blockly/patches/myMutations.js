@@ -1,5 +1,5 @@
 (function() {
-    Blockly.Extensions.registerMixin('penPlusCustomBlock', {
+  Blockly.Extensions.registerMutator('penPlusCustomBlock', {
         someProperty: 'a cool value',
 
         saveExtraState: function() {

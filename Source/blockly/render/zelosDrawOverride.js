@@ -1,7 +1,7 @@
 //I'm to lazy to try and extract the zelos renderer so we are replacing it.
 
-window.customZelosConstant = class extends (
-  window.Blockly.zelos.ConstantProvider
+penPlus.customZelosConstant = class extends (
+  Blockly.zelos.ConstantProvider
 ) {
   init() {
     super.init();
@@ -85,9 +85,9 @@ window.customZelosConstant = class extends (
   }
 };
 
-window.customZelosRenderer = class extends Blockly.zelos.Renderer {
+penPlus.customZelosRenderer = class extends Blockly.zelos.Renderer {
   makeConstants_() {
-    return new window.customZelosConstant();
+    return new penPlus.customZelosConstant();
   }
 };
 

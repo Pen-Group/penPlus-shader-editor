@@ -1,4 +1,4 @@
-window.penPlusExtension = class {
+penPlus.penPlusExtension = class {
   constructor() {
     const myInfo = this.getInfo();
 
@@ -6,12 +6,12 @@ window.penPlusExtension = class {
     const id = myInfo.id + "_";
 
     //Check if style data exists.
-    if (!window.blockStyles) {
-      window.blockStyles = {};
+    if (!penPlus.blockStyles) {
+      penPlus.blockStyles = {};
     }
 
     //Add the block styles for this category. Each block can have its own override.
-    window.penPlusTheme.blockStyles[id + "blocks"] = {
+    penPlus.penPlusTheme.blockStyles[id + "blocks"] = {
       colourPrimary: myInfo.color1,
       colourSecondary: myInfo.color2,
       colourTertiary: myInfo.color3,
@@ -68,15 +68,15 @@ window.penPlusExtension = class {
             };
 
             //Register callback code for the button
-            window.workspace.registerButtonCallback(id + opcode, this[opcode]);
+            penPlus.workspace.registerButtonCallback(id + opcode, this[opcode]);
             break;
 
           default:
             //Declare the function to convert to
             if (dynamicBlock) {
-              window.GLSL_GEN.forBlock[id + opcode] = block.operation;
+              penPlus.GLSL_GEN.forBlock[id + opcode] = block.operation;
             } else {
-              window.GLSL_GEN.forBlock[id + opcode] = this[opcode];
+              penPlus.GLSL_GEN.forBlock[id + opcode] = this[opcode];
             }
             //Define the arguments used in block creation
             let defArgs = {
@@ -200,7 +200,7 @@ window.penPlusExtension = class {
       //Create the custom function
       createdContentData.custom = "dynamic_" + myInfo.id;
       //Add the callback
-      window.workspace.registerToolboxCategoryCallback(
+      penPlus.workspace.registerToolboxCategoryCallback(
         "dynamic_" + myInfo.id,
         (workspace) => {
           //create data holders
@@ -219,13 +219,13 @@ window.penPlusExtension = class {
       );
     }
 
-    window.toolbox.contents.push(createdContentData);
+    penPlus.toolbox.contents.push(createdContentData);
 
-    window.workspace.updateToolbox(window.toolbox);
+    penPlus.workspace.updateToolbox(penPlus.toolbox);
 
     workspace.getToolbox().refreshSelection();
 
-    window.refreshTheme();
+    penPlus.refreshTheme();
   }
 
   getHatBlockVariables() {

@@ -13,8 +13,8 @@ function previewRender() {
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer_Pen);
   gl.bufferData(gl.ARRAY_BUFFER, previewData_Pen, gl.STATIC_DRAW);
 
-  window.shaderParams = {};
-  window.shaderParams.sampleTextures = [
+  penPlus.shaderParams = {};
+  penPlus.shaderParams.sampleTextures = [
     {
       name: "CS:S",
       DATA: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHdJREFUOE9jnBC05z8DHtB+LBafNAMjyAC7CEOsig6tOM8AMsDJ3g6r/L6DhyAGCInyYyjQcVZigBkgLSWJIa+uqsowagBSGFAUjeISknjTQaXVYvzpAGQAvngGGYAvnTCCDMAXzyAD8KWTUQPOM4DDAF88EYpGAIX4fzFxhEZpAAAAAElFTkSuQmCC",
@@ -29,17 +29,17 @@ function previewRender() {
     },
   ];
 
-  window.textures = {};
+  penPlus.textures = {};
 
-  window.shaderParams.sampleTextures.forEach((textureData) => {
-    window.textures[textureData.name] = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
+  penPlus.shaderParams.sampleTextures.forEach((textureData) => {
+    penPlus.textures[textureData.name] = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, penPlus.textures[textureData.name]);
 
     const image = new Image();
     image.src = textureData.DATA;
 
     image.onload = () => {
-      gl.bindTexture(gl.TEXTURE_2D, window.textures[textureData.name]);
+      gl.bindTexture(gl.TEXTURE_2D, penPlus.textures[textureData.name]);
       gl.texImage2D(
         gl.TEXTURE_2D,
         0,
@@ -54,19 +54,9 @@ function previewRender() {
     };
   });
 
-  window.timer = 0;
+  penPlus.timer = 0;
 
-  window.previewMode = "triangle";
-
-  document
-    .getElementById("prevAndConsole")
-    .addEventListener("mouseover", () => {
-      document.body.style.setProperty("--PreviewStylesPopout", "8px");
-    });
-
-  document.getElementById("prevAndConsole").addEventListener("mouseout", () => {
-    document.body.style.setProperty("--PreviewStylesPopout", "-48px");
-  });
+  penPlus.previewMode = "triangle";
 
   let lastTime = Date.now();
   let now = Date.now();
@@ -74,7 +64,7 @@ function previewRender() {
   function renderFrame() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
-      window.timer += (now - lastTime) / 1000;
+      penPlus.timer += (now - lastTime) / 1000;
 
       gl.canvas.width = gl.canvas.clientWidth;
       gl.canvas.height = gl.canvas.clientHeight;
@@ -86,7 +76,7 @@ function previewRender() {
         gl.shaders.editorShader.uniforms.u_timer &&
         gl.shaders.editorShader.uniforms.u_timer.location
       ) {
-        gl.shaders.editorShader.uniforms.u_timer.value = window.timer;
+        gl.shaders.editorShader.uniforms.u_timer.value = penPlus.timer;
       }
 
       if (
@@ -98,7 +88,7 @@ function previewRender() {
           gl.canvas.height,
         ];
       }
-      switch (window.previewMode) {
+      switch (penPlus.previewMode) {
         case "fullscreen":
           gl.bufferData(
             gl.ARRAY_BUFFER,

@@ -1,7 +1,7 @@
 (function () {
-  window.webGLShaderManager = {};
+  penPlus.webGLShaderManager = {};
 
-  window.webGLShaderManager.createAndCompile = (
+  penPlus.webGLShaderManager.createAndCompile = (
     GL,
     name,
     vert,

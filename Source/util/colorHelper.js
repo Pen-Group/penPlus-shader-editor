@@ -41,7 +41,7 @@
   };
 
   penPlus.addBlockColorSet = (name, color1, color2, color3) => {
-    window.penPlusTheme.blockStyles[name] = {
+    penPlus.penPlusTheme.blockStyles[name] = {
       colourPrimary: color1,
       colourSecondary: color2,
       colourTertiary: color3,
@@ -49,6 +49,6 @@
 
     workspace.getToolbox().refreshSelection();
 
-    window.refreshTheme();
+    penPlus.refreshTheme();
   };
 })();

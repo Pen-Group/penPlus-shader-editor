@@ -301,15 +301,15 @@ function addImportantReporters() {
 }
 
 function addBlocks() {
-  new window.categories.events();
-  new window.categories.vertex();
-  new window.categories.looks();
-  new window.categories.color();
-  new window.categories.controls();
-  new window.categories.operators();
-  new window.categories.sensing();
-  new window.categories.vector();
-  new window.categories.matrix();
-  new window.categories.variables();
-  new window.categories.myBlocks();
+  new penPlus.categories.events();
+  new penPlus.categories.vertex();
+  new penPlus.categories.looks();
+  new penPlus.categories.color();
+  new penPlus.categories.controls();
+  new penPlus.categories.operators();
+  new penPlus.categories.sensing();
+  new penPlus.categories.vector();
+  new penPlus.categories.matrix();
+  new penPlus.categories.variables();
+  new penPlus.categories.myBlocks();
 }

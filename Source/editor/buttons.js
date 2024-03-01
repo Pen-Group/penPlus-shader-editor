@@ -61,12 +61,12 @@
   const squareButton = document.getElementById("SquareButton");
   const triangleButton = document.getElementById("TriangleButton");
 
-  window.shaderVars = document.getElementById("shaderVars");
+  penPlus.shaderVars = document.getElementById("shaderVars");
 
   const log_button = document.getElementById("ButtonLog");
   const var_button = document.getElementById("ButtonVar");
 
-  window.editorTheme =
+  penPlus.editorTheme =
     localStorage.getItem("penPlusEditorTheme") ||
     (window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -105,15 +105,15 @@
   };
 
   theme_Button.onclick = () => {
-    if (window.editorTheme == "dark") {
-      window.editorTheme = "light";
+    if (penPlus.editorTheme == "dark") {
+      penPlus.editorTheme = "light";
     } else {
-      window.editorTheme = "dark";
+      penPlus.editorTheme = "dark";
     }
 
-    localStorage.setItem("penPlusEditorTheme", window.editorTheme);
+    localStorage.setItem("penPlusEditorTheme", penPlus.editorTheme);
 
-    window.refreshTheme();
+    penPlus.refreshTheme();
   };
 
   creditsButton.onclick = () => {

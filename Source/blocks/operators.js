@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
   
-  class operators_category extends window.penPlusExtension {
+  class operators_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Operators",
@@ -561,5 +561,5 @@
     }
   }
 
-  window.categories.operators = operators_category;
+  penPlus.categories.operators = operators_category;
 }

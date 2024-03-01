@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class controls_category extends window.penPlusExtension {
+  class controls_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Controls",
@@ -159,7 +159,7 @@
     repeat(block, generator) {
       const times = generator.valueToCode(block, "times", Order.ATOMIC);
       const code = generator.statementToCode(block, "code");
-      window.loopID += 1;
+      penPlus.loopID += 1;
       return (
         `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<int(${times});penPlusLoop_${loopID}++) {\n${code}\n}` +
         nextBlockToCode(block, generator)
@@ -179,5 +179,5 @@
     }
   }
 
-  window.categories.controls = controls_category;
+  penPlus.categories.controls = controls_category;
 }

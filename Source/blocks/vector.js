@@ -1,7 +1,7 @@
 {
-  window.categories = window.categories || {};
+  penPlus.categories = penPlus.categories || {};
 
-  class vector_category extends window.penPlusExtension {
+  class vector_category extends penPlus.penPlusExtension {
     getInfo() {
       return {
         name: "Vector",
@@ -315,5 +315,5 @@
     }
   }
 
-  window.categories.vector = vector_category;
+  penPlus.categories.vector = vector_category;
 }
