@@ -75,7 +75,7 @@ function createGLSLGen() {
 
   GLSL_GEN.forBlock["color_reporter"] = function (block, generator) {
     const colour = block.getFieldValue("COLOUR");
-    let converted = hexToRgb(colour);
+    let converted = penPlus.hexToRgb(colour);
     converted.r /= 255;
     converted.g /= 255;
     converted.b /= 255;
