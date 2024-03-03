@@ -36,11 +36,21 @@
         }
         let reader = new FileReader();
         reader.onload = function (e) {
-          let contents = e.target.result;
-          Blockly.serialization.workspaces.load(
-            JSON.parse(contents),
-            window.workspace
-          );
+          let contents = JSON.parse(e.target.result);
+          if (contents.blockDat) {
+            Blockly.serialization.workspaces.load(
+              contents.blockDat,
+              window.workspace
+            );
+            penPlus.dynamicallyAdded = contents.dynamicDat;
+            penPlus.Generated_GLSL = contents.glsl;
+          }
+          else {
+            Blockly.serialization.workspaces.load(
+              contents,
+              window.workspace
+            );
+          }
         };
         reader.readAsText(file);
       },
@@ -186,11 +196,12 @@
   };
 
   saveButton.onclick = () => {
-    console.log(
-      JSON.stringify(Blockly.serialization.workspaces.save(penPlus.workspace))
-    );
     download(
-      JSON.stringify(Blockly.serialization.workspaces.save(penPlus.workspace)),
+      JSON.stringify(JSON.stringify({
+        blockDat:Blockly.serialization.workspaces.save(penPlus.workspace),
+        dynamicDat:penPlus.dynamicallyAdded,
+        glsl:penPlus.Generated_GLSL,
+      })),
       "shader.pps",
       ""
     );

@@ -10,5 +10,7 @@ window.addEventListener("load", () => {
    * window.FieldGridDropdown = FieldGridDropdown;
    */
 
+  document.body.removeChild(document.getElementById("loadingScreen"));
+
   onAllAddonsLoaded();
 });

@@ -197,15 +197,7 @@
                 name: "return",
               },
             ],
-          },
-          {
-            opcode: "customBlock_Execute_Command",
-            type: "command",
-            text: "",
-            tooltip: "Runs a custom block",
-            mutators:"penPlusCustomBlock"
-            //hideFromPallete: true,
-          },
+          }
         ],
       };
     }
@@ -335,7 +327,7 @@
       let createdBlocks = [];
 
       let customBlockTypeConversionTable = {
-        void: undefined,
+        void: "void",
         "highp float": "float",
         int: "int",
         "highp vec2": "vec2",
@@ -370,16 +362,15 @@
           console.log(block.type.split(" ")[block.type.split(" ").length - 1]);
 
           if (block.name.length == 0) block.name = "noBlockDefined";
-
-          createdBlocks.push({
+          
+          let blockJSON = {
             opcode: `customBlock_${__glslifyName(block.name)}_${
               penPlus.blockIterations[block.name]
             }`,
-            type: customBlockType == "void" ? "command" : "reporter",
+            type: customBlockTypeConversionTable[block.type] == "void" ? "command" : "reporter",
             text: block.name + block_arg_string,
             style: __colorCustomBlock(block.type),
             //Probably could improve this line lol
-            output: customBlockTypeConversionTable[block.type],
             tooltip: "Your custom block!",
             arguments: block_arguments,
             operation: (block_ref, generator) => {
@@ -399,7 +390,17 @@
                     nextBlockToCode(block, generator)
                 : [`${__glslifyName(block.name)}(${argString})`, Order.ATOMIC];
             },
-          });
+          }
+
+          if (blockJSON.type == "command") {
+            blockJSON.previousStatement = "Action";
+            blockJSON.nextStatement = "Action";
+          }
+          else {
+            blockJSON.output = customBlockTypeConversionTable[block.type];
+          }
+
+          createdBlocks.push(blockJSON);
         });
         return createdBlocks;
       }

@@ -199,6 +199,8 @@ penPlus.penPlusExtension = class {
     if (myInfo.dynamic) {
       //Create the custom function
       createdContentData.custom = "dynamic_" + myInfo.id;
+
+      penPlus.dynamicallyAdded = penPlus.dynamicallyAdded || {};
       //Add the callback
       penPlus.workspace.registerToolboxCategoryCallback(
         "dynamic_" + myInfo.id,
@@ -206,6 +208,8 @@ penPlus.penPlusExtension = class {
           //create data holders
           let createdBlockData = this[myInfo.dynamic](workspace);
           let formattedDynamic = [];
+
+          penPlus.dynamicallyAdded["dynamic_" + myInfo.id] = createdBlockData;
 
           //Loop through and gather compiled data
           createdBlockData.forEach((block) => {
@@ -226,6 +230,10 @@ penPlus.penPlusExtension = class {
     workspace.getToolbox().refreshSelection();
 
     penPlus.refreshTheme();
+  }
+
+  addDynamicBlocksPreLoad() {
+    
   }
 
   getHatBlockVariables() {
