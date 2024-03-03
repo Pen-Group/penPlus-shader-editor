@@ -198,11 +198,11 @@
 
   saveButton.onclick = () => {
     download(
-      JSON.stringify(JSON.stringify({
+      JSON.stringify({
         blockDat:Blockly.serialization.workspaces.save(penPlus.workspace),
         dynamicDat:penPlus.dynamicallyAdded,
         glsl:penPlus.Generated_GLSL,
-      })),
+      }),
       "shader.pps",
       ""
     );
