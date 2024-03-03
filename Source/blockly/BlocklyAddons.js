@@ -10,6 +10,7 @@ window.addEventListener("load", () => {
    * window.FieldGridDropdown = FieldGridDropdown;
    */
 
+  //Damn thing only runs on firefox?
   document.body.removeChild(document.getElementById("loadingScreen"));
 
   onAllAddonsLoaded();

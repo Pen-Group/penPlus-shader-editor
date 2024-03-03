@@ -325,23 +325,70 @@
         z-index: 10000;
       }
 
-      @property --yOffset {
-        syntax: percentage; /* <- defined as type number for the transition to work */
-        initial-value: 0;
-        inherits: false;
-      }
-
       .blocklyBlock {
         --yOffset: 0%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
-        animation-name: loading;
-        animation-duration: 4s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease;
+        -webkit-animation: loading 4s ease infinite;
+        -moz-animation: loading 4s ease infinite;
+        -ms-animation: loading 4s ease infinite;
+        -o-animation: loading 4s ease infinite;
+        animation-name: loading 4s ease infinite;
         opacity: 0%;
+      }
+
+      @-moz-keyframes loading {
+        0% {
+          --yOffset: 100%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 0%;
+        }
+
+        25% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 100%;
+        }
+
+        40% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 100%;
+        }
+
+        60% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 0%;
+        }
+      }
+
+      @-webkit-keyframes loading {
+        0% {
+          --yOffset: 100%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 0%;
+        }
+
+        25% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 100%;
+        }
+
+        40% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 100%;
+        }
+
+        60% {
+          --yOffset:0%;
+          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          opacity: 0%;
+        }
       }
 
       @keyframes loading {

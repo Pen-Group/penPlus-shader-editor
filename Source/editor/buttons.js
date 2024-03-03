@@ -37,6 +37,7 @@
         let reader = new FileReader();
         reader.onload = function (e) {
           let contents = JSON.parse(e.target.result);
+          console.log(JSON.parse(e.target.result));
           if (contents.blockDat) {
             Blockly.serialization.workspaces.load(
               contents.blockDat,
