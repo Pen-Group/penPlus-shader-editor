@@ -197,6 +197,13 @@
                 name: "return",
               },
             ],
+          },
+          {
+            opcode: "customBlockExecute",
+            type: "command",
+            text: "",
+            tooltip: "your custom block!",
+            mutator:"customBlockMutator"
           }
         ],
       };
@@ -359,14 +366,10 @@
           penPlus.blockIterations[block.name] |= 0;
           penPlus.blockIterations[block.name] += 1;
 
-          console.log(block.type.split(" ")[block.type.split(" ").length - 1]);
-
           if (block.name.length == 0) block.name = "noBlockDefined";
           
           let blockJSON = {
-            opcode: `customBlock_${__glslifyName(block.name)}_${
-              penPlus.blockIterations[block.name]
-            }`,
+            opcode: `customBlock_${__glslifyName(block.name)}`,
             type: customBlockTypeConversionTable[block.type] == "void" ? "command" : "reporter",
             text: block.name + block_arg_string,
             style: __colorCustomBlock(block.type),

@@ -165,6 +165,10 @@ penPlus.penPlusExtension = class {
             if (block.output) {
               blockDef.output = block.output;
             }
+            
+            if (block.mutator) {
+              blockDef.mutator = block.mutator;
+            }
 
             if (block.nextStatement) {
               blockDef.nextStatement = block.nextStatement;
