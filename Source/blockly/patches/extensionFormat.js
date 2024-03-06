@@ -71,6 +71,17 @@ penPlus.penPlusExtension = class {
             penPlus.workspace.registerButtonCallback(id + opcode, this[opcode]);
             break;
 
+          case "duplicate":
+            blockData = {
+              kind: "block",
+              type: (block.extensionID) ? block.extensionID + block.of : id + block.of,
+            };
+
+            if (block.extraData) {
+              blockData.extraState = block.extraData;
+            }
+            break;
+
           default:
             //Declare the function to convert to
             if (dynamicBlock) {

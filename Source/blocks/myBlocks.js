@@ -203,7 +203,19 @@
             type: "command",
             text: "",
             tooltip: "your custom block!",
-            mutator:"customBlockMutator"
+            mutator:"customBlockMutator",
+            hideFromPallete:true
+          },
+          {
+            type: "duplicate",
+            of: "customBlockExecute",
+            extraData:{
+              customBlockData:{
+                type:"void",
+                mainText:"hello",
+                arguments:[]
+              }
+            }
           }
         ],
       };
