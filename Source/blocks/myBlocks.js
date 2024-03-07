@@ -212,6 +212,7 @@
           {
             opcode: "customBlockExecute_Reporter",
             type: "reporter",
+            output: "arithmatic",
             text: "",
             tooltip: "your custom block!",
             mutator: "customBlockMutator",
@@ -282,14 +283,14 @@
 
       let nextCode = nextBlockToCode(block, generator);
 
-      return `${customBlockType} ${__glslifyName(argumentName)} ${
+      return `${customBlockType} ${__glslifyName("custom_block_arg_"+argumentName)} ${
         nextCode ? `, ${nextCode}` : ``
       }`;
     }
 
     getArg(block, generator) {
       const name = generator.valueToCode(block, "name", Order.ATOMIC);
-      return [`${name}`, Order.ATOMIC];
+      return [`custom_block_arg_${name}`, Order.ATOMIC];
     }
 
     customBlockReturn(block, generator) {
@@ -340,12 +341,13 @@
 
         case "highp mat4":
           block.setStyle("matrix_blocks");
-          returnConversion = "mat3";
+          block.inputList[0].setCheck();
+          returnConversion = "mat4";
           break;
 
         default:
           block.setStyle("myblocks_blocks");
-          block.inputList[0].setCheck("noInput");
+          block.inputList[0].setCheck();
           break;
       }
 
@@ -355,9 +357,8 @@
         )}"></shadow>`
       )
 
-          console.log(block.inputList[0].getShadowDom());
-
       if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) block.inputList[0].setShadowDom(shadowDeisred);
+      if (penPlus.customBlockType == "void") block.inputList[0].setCheck("noInput");
 
       return penPlus.customBlockType == "void"
         ? `return;`

@@ -20,6 +20,37 @@
     }
   }
 
+  function __getShadowForArgumentType(argumentType) {
+    switch (argumentType) {
+      case "float":
+        return "number_reporter";
+
+      case "int":
+        return "int_reporter";
+
+      case "vec2":
+        return "vec2_reporter";
+
+      case "vec3":
+        return "vec3_reporter";
+
+      case "vec4":
+        return "vec4_reporter";
+
+      case "matrix_2x":
+        return "matrix2_reporter";
+
+      case "matrix_3x":
+        return "matrix3_reporter";
+
+      case "matrix_4x":
+        return "matrix4_reporter";
+
+      default:
+        return "number_reporter";
+    }
+  }
+
   class variables_category extends penPlus.penPlusExtension {
     getInfo() {
       penPlus.addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
@@ -46,8 +77,342 @@
             type: "button",
             text: "Make a Variable",
           },
+          {
+            opcode: "variable_reporter",
+            type: "reporter",
+            text: "",
+            tooltip: "your variable!",
+            mutator: "variableMutator",
+            output: "arithmatic",
+            hideFromPallete: true,
+          },
+          {
+            opcode: "variable_set",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "sets the desired variable to the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "uniform u_default",
+                defaultType: "float",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_change",
+            type: "command",
+            text: "change %1 by %2",
+            tooltip: "changes the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "uniform u_default",
+                defaultType: "float",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_multiply",
+            type: "command",
+            text: "multiply %1 by %2",
+            tooltip: "multiplies the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "uniform u_default",
+                defaultType: "float",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_divide",
+            type: "command",
+            text: "divide %1 by %2",
+            tooltip: "divides the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_variable",
+                name: "VAR",
+                variable: "uniform u_default",
+                defaultType: "float",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_item",
+            type: "reporter",
+            text: "item %1 of %2",
+            tooltip: "get an item from an array",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "input_value",
+                name: "VALUE",
+                variable: "uniform u_default",
+                defaultType: "float",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+              {
+                type: "field_variable",
+                name: "VAR",
+                variableTypes: [
+                  "float",
+                  "int",
+                  "vec2",
+                  "vec3",
+                  "vec4",
+                  "matrix_2x",
+                  "matrix_3x",
+                  "matrix_4x",
+                ],
+              },
+            ],
+          }
         ],
       };
+    }
+
+    variable_reporter(block, generator) {
+      let argString = "";
+
+      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
+        const argument = block.customBlockData.arguments[argID];
+        argString +=
+          (argID > 0 ? "," : "") +
+          generator.valueToCode(block, argument.name, Order.ATOMIC);
+      }
+
+      return [`${block.customBlockData.mainText.split(" ")[1]}`,Order.ATOMIC];
+    }
+
+    variable_set(block, generator) {
+      const variable = Blockly.Variables.getVariable(
+        penPlus.workspace,
+        block.getFieldValue("VAR")
+      );
+
+      const variableName = variable.name;
+      const variableType = variable.type;
+
+      if (variableType == "matrix_2x") variableType = "mat2";
+      if (variableType == "matrix_3x") variableType = "mat3";
+      if (variableType == "matrix_4x") variableType = "mat4";
+
+      const value = generator.valueToCode(
+        block,
+        "VALUE",
+        Order.ATOMIC
+      );
+      
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
+        variableType
+      )}"></shadow>`);
+      
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return (
+        `${
+          variableName.split(" ")[1]
+        } = ${variableType}(${value});\n` +
+        nextBlockToCode(block, generator)
+      );
+    }
+
+    variable_change(block, generator) {
+      const variable = Blockly.Variables.getVariable(
+        penPlus.workspace,
+        block.getFieldValue("VAR")
+      );
+
+      const variableName = variable.name;
+      const variableType = variable.type;
+
+      const value = generator.valueToCode(
+        block,
+        "VALUE",
+        Order.ATOMIC
+      );
+      
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
+        variableType
+      )}"></shadow>`);
+      
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return (
+        `${variableName.split(" ")[1]} += ${value};\n` +
+        nextBlockToCode(block, generator)
+      );
+    }
+
+    variable_multiply(block, generator) {
+      const variable = Blockly.Variables.getVariable(
+        penPlus.workspace,
+        block.getFieldValue("VAR")
+      );
+
+      const variableName = variable.name;
+      const variableType = variable.type;
+
+      const value = generator.valueToCode(
+        block,
+        "VALUE",
+        Order.ATOMIC
+      );
+      
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
+        variableType
+      )}"></shadow>`);
+      
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return (
+        `${variableName.split(" ")[1]} *= ${value};\n` +
+        nextBlockToCode(block, generator)
+      );
+    }
+
+    variable_divide(block, generator) {
+      const variable = Blockly.Variables.getVariable(
+        penPlus.workspace,
+        block.getFieldValue("VAR")
+      );
+
+      const variableName = variable.name;
+      const variableType = variable.type;
+
+      const value = generator.valueToCode(
+        block,
+        "VALUE",
+        Order.ATOMIC
+      );
+      
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
+        variableType
+      )}"></shadow>`);
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return (
+        `${variableName.split(" ")[1]} /= ${value};\n` +
+        nextBlockToCode(block, generator)
+      );
+    }
+
+    variable_item(block, generator) {
+      const variable = Blockly.Variables.getVariable(
+        penPlus.workspace,
+        block.getFieldValue("VAR")
+      );
+
+      const variableName = variable.name;
+      const variableType = variable.type;
+
+      const value = generator.valueToCode(
+        block,
+        "VALUE",
+        Order.ATOMIC
+      );
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return [
+        `${variableName.split(" ")[1]}[${value}]`,
+        Order.ATOMIC,
+      ];
     }
 
     createVariableReporters(workspace) {
@@ -60,15 +425,14 @@
         let type = variable.type;
 
         returnedBlocks.push({
-          opcode: `variable_${variable.name.split(" ")[1]}`,
-          type: type == "bool" ? "boolean" : "reporter",
-          text: variable.name,
-          style: __colorVariableBlock(type),
-          output: type,
-          tooltip: "A variable",
-          operation: () => {
-            return [`${variable.name.split(" ")[1]}`, Order.ATOMIC];
-          },
+          type: "duplicate",
+          of: "variable_reporter",
+          extraData: {
+            variableData: {
+              type: type,
+              mainText: variable.name
+            },
+          }
         });
       });
 
@@ -94,256 +458,29 @@
           if (hasNormalScope) {
             //Add the set change multiply and divide blocks with the needed color for the most correctness
             returnedBlocks.push({
-              opcode: "variable_set",
-              type: "command",
-              text: "set %1 to %2",
-              tooltip: "sets the desired variable to the value",
-              style: __colorVariableBlock(validVariables[0].type),
-              arguments: [
-                {
-                  type: "field_variable",
-                  name: "VAR",
-                  variable: validVariables[0].name,
-                  defaultType: validVariables[0].type,
-                  variableTypes: [
-                    "float",
-                    "int",
-                    "vec2",
-                    "vec3",
-                    "vec4",
-                    "matrix_2x",
-                    "matrix_3x",
-                    "matrix_4x",
-                  ],
-                },
-                {
-                  type: "input_value",
-                  name: "VALUE",
-                  shadow: {
-                    type: "number_reporter",
-                  },
-                },
-              ],
-              operation: (block, generator) => {
-                const variable = Blockly.Variables.getVariable(
-                  penPlus.workspace,
-                  block.getFieldValue("VAR")
-                );
-
-                const variableName = variable.name;
-                const variableType = variable.type;
-
-                if (variableType == "matrix_2x") variableType = "mat2";
-                if (variableType == "matrix_3x") variableType = "mat3";
-                if (variableType == "matrix_4x") variableType = "mat4";
-
-                const value = generator.valueToCode(
-                  block,
-                  "VALUE",
-                  Order.ATOMIC
-                );
-
-                block.setStyle(__colorVariableBlock(variableType));
-
-                return (
-                  `${
-                    variableName.split(" ")[1]
-                  } = ${variableType}(${value});\n` +
-                  nextBlockToCode(block, generator)
-                );
-              },
+              type: "duplicate",
+              of: "variable_set"
             });
 
             returnedBlocks.push({
-              opcode: "variable_change",
-              type: "command",
-              text: "change %1 by %2",
-              tooltip: "changes the desired variable by the value",
-              style: __colorVariableBlock(validVariables[0].type),
-              arguments: [
-                {
-                  type: "field_variable",
-                  name: "VAR",
-                  variable: validVariables[0].name,
-                  defaultType: validVariables[0].type,
-                },
-                {
-                  type: "input_value",
-                  name: "VALUE",
-                  shadow: {
-                    type: "number_reporter",
-                  },
-                },
-              ],
-              operation: (block, generator) => {
-                const variable = Blockly.Variables.getVariable(
-                  penPlus.workspace,
-                  block.getFieldValue("VAR")
-                );
-
-                const variableName = variable.name;
-                const variableType = variable.type;
-
-                const value = generator.valueToCode(
-                  block,
-                  "VALUE",
-                  Order.ATOMIC
-                );
-
-                block.setStyle(__colorVariableBlock(variableType));
-
-                return (
-                  `${variableName.split(" ")[1]} += ${value};\n` +
-                  nextBlockToCode(block, generator)
-                );
-              },
+              type: "duplicate",
+              of: "variable_change"
             });
 
             returnedBlocks.push({
-              opcode: "variable_multiply",
-              type: "command",
-              text: "multiply %1 by %2",
-              tooltip: "multiplies the desired variable by the value",
-              style: __colorVariableBlock(validVariables[0].type),
-              arguments: [
-                {
-                  type: "field_variable",
-                  name: "VAR",
-                  variable: validVariables[0].name,
-                  defaultType: validVariables[0].type,
-                },
-                {
-                  type: "input_value",
-                  name: "VALUE",
-                  shadow: {
-                    type: "number_reporter",
-                  },
-                },
-              ],
-              operation: (block, generator) => {
-                const variable = Blockly.Variables.getVariable(
-                  penPlus.workspace,
-                  block.getFieldValue("VAR")
-                );
-
-                const variableName = variable.name;
-                const variableType = variable.type;
-
-                const value = generator.valueToCode(
-                  block,
-                  "VALUE",
-                  Order.ATOMIC
-                );
-
-                block.setStyle(__colorVariableBlock(variableType));
-
-                return (
-                  `${variableName.split(" ")[1]} *= ${value};\n` +
-                  nextBlockToCode(block, generator)
-                );
-              },
+              type: "duplicate",
+              of: "variable_multiply"
             });
 
             returnedBlocks.push({
-              opcode: "variable_divide",
-              type: "command",
-              text: "divide %1 by %2",
-              tooltip: "divides the desired variable by the value",
-              style: __colorVariableBlock(validVariables[0].type),
-              arguments: [
-                {
-                  type: "field_variable",
-                  name: "VAR",
-                  variable: validVariables[0].name,
-                  defaultType: validVariables[0].type,
-                },
-                {
-                  type: "input_value",
-                  name: "VALUE",
-                  shadow: {
-                    type: "number_reporter",
-                  },
-                },
-              ],
-              operation: (block, generator) => {
-                const variable = Blockly.Variables.getVariable(
-                  penPlus.workspace,
-                  block.getFieldValue("VAR")
-                );
-
-                const variableName = variable.name;
-                const variableType = variable.type;
-
-                const value = generator.valueToCode(
-                  block,
-                  "VALUE",
-                  Order.ATOMIC
-                );
-
-                block.setStyle(__colorVariableBlock(variableType));
-
-                return (
-                  `${variableName.split(" ")[1]} /= ${value};\n` +
-                  nextBlockToCode(block, generator)
-                );
-              },
+              type: "duplicate",
+              of: "variable_divide"
             });
           }
           if (hasArrayScope) {
             returnedBlocks.push({
-              opcode: "variable_item",
-              type: "reporter",
-              text: "item %1 of %2",
-              tooltip: "get an item from an array",
-              style: __colorVariableBlock(validVariables[0].type),
-              arguments: [
-                {
-                  type: "input_value",
-                  name: "VALUE",
-                  check: ["int", "float"],
-                  shadow: {
-                    type: "number_reporter",
-                  },
-                },
-                {
-                  type: "field_variable",
-                  name: "VAR",
-                  variable: validVariables[0].name,
-                  defaultType: validVariables[0].type,
-                  variableTypes: [
-                    "float",
-                    "int",
-                    "vec2",
-                    "vec3",
-                    "vec4",
-                    "matrix_2x",
-                    "matrix_3x",
-                    "matrix_4x",
-                  ],
-                },
-              ],
-              operation: (block, generator) => {
-                const variable = Blockly.Variables.getVariable(
-                  penPlus.workspace,
-                  block.getFieldValue("VAR")
-                );
-
-                const variableName = variable.name;
-                const variableType = variable.type;
-
-                const value = generator.valueToCode(
-                  block,
-                  "VALUE",
-                  Order.ATOMIC
-                );
-
-                block.setStyle(__colorVariableBlock(variableType));
-
-                return [
-                  `${variableName.split(" ")[1]}[${value}]`,
-                  Order.ATOMIC,
-                ];
-              },
+              type: "duplicate",
+              of: "variable_item"
             });
           }
         }

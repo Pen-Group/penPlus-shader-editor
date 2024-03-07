@@ -27,6 +27,7 @@ function addImportantReporters() {
   penPlus.addBlocklyBlock("blank_reporter", "reporter", {
     message0: "%1",
     output: "noInput",
+    style:"myblocks_blocks",
     args0: [
       {
         type: "input_dummy"
@@ -61,6 +62,7 @@ function addImportantReporters() {
 
   penPlus.addBlocklyBlock("int_reporter", "reporter", {
     message0: " %1 ",
+    output: "int",
     args0: [
       {
         type: "field_number",

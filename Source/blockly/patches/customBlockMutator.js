@@ -11,6 +11,37 @@
     "highp mat4": "matrix_4x",
   };
 
+  function __colorCustomBlock(customBlockType) {
+    switch (customBlockType) {
+      case "highp float":
+        return "variables_blocks";
+
+      case "int":
+        return "int_blocks";
+
+      case "highp vec2":
+        return "vec2_blocks";
+
+      case "highp vec3":
+        return "vec3_blocks";
+
+      case "highp vec4":
+        return "vec4_blocks";
+
+      case "highp mat2":
+        return "matrix_blocks";
+
+      case "highp mat3":
+        return "matrix_blocks";
+
+      case "highp mat4":
+        return "matrix_blocks";
+
+      default:
+        return "myblocks_blocks";
+    }
+  }
+
   function __getShadowForArgumentType(argumentType) {
     switch (argumentType) {
       case "highp float":
@@ -96,12 +127,11 @@
               type: "input_dummy",
               name: "blocklyBlockName",
             });
-
-            console.log(this);
+            
             this.inputList[this.inputList.length - 1].appendField(
               this.fieldFromJson_({
                 type: "field_label",
-                text: argument.name,
+                text: argument.name + ":",
               })
             );
 
@@ -125,6 +155,8 @@
             );
           });
         }
+
+        this.setStyle(__colorCustomBlock(this.customBlockData.type));
       },
     },
     undefined
