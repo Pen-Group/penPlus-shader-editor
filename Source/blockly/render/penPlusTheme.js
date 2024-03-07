@@ -208,5 +208,7 @@ penPlus.refreshTheme = () => {
           blackBackground: "#ccc",
         };
 
-  workspace.setTheme(Blockly.Theme.defineTheme("penPlus", penPlus.penPlusTheme));
+  workspace.setTheme(
+    Blockly.Theme.defineTheme("penPlus", penPlus.penPlusTheme)
+  );
 };

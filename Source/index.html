@@ -330,7 +330,10 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+        transform: translate(
+          -50%,
+          calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+        );
         -webkit-animation: loading 4s ease infinite;
         -moz-animation: loading 4s ease infinite;
         -ms-animation: loading 4s ease infinite;
@@ -342,25 +345,37 @@
       @-moz-keyframes loading {
         0% {
           --yOffset: 100%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
 
         25% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         40% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         60% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
       }
@@ -368,25 +383,37 @@
       @-webkit-keyframes loading {
         0% {
           --yOffset: 100%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
 
         25% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         40% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         60% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
       }
@@ -394,25 +421,37 @@
       @keyframes loading {
         0% {
           --yOffset: 100%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
 
         25% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         40% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 100%;
         }
 
         60% {
-          --yOffset:0%;
-          transform: translate(-50%,calc(-50% + (var(--BlockOffset) + var(--yOffset))));
+          --yOffset: 0%;
+          transform: translate(
+            -50%,
+            calc(-50% + (var(--BlockOffset) + var(--yOffset)))
+          );
           opacity: 0%;
         }
       }
@@ -422,7 +461,7 @@
         position: absolute;
         top: 65%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         font-family: "Helvetica Neue", "helvetica", serif;
         font-size: xx-large;
       }
@@ -654,13 +693,116 @@
 
     <div id="loadingScreen" class="loadingScreen">
       <div>
-        <svg class="blocklyBlock" style="--BlockOffset:-85%;" viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><g transform="translate(-164.30833,-151)"><g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data="{&quot;isPaintingLayer&quot;:true}"><path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path><path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path></g></g></svg>
-        <svg class="blocklyBlock" style="--BlockOffset:0%; animation-delay:1s;"  viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><g transform="translate(-164.30833,-151)"><g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data="{&quot;isPaintingLayer&quot;:true}"><path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path><path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path></g></g></svg>
-        <svg class="blocklyBlock" style="--BlockOffset:85%; animation-delay:2s;" viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><g transform="translate(-164.30833,-151)"><g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data="{&quot;isPaintingLayer&quot;:true}"><path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path><path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path></g></g></svg>
+        <svg
+          class="blocklyBlock"
+          style="--BlockOffset: -85%"
+          viewBox="0,0,150.38334,57"
+          height="57"
+          width="150.38334"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+        >
+          <g transform="translate(-164.30833,-151)">
+            <g
+              style="mix-blend-mode: normal"
+              stroke-dashoffset="0"
+              stroke-dasharray=""
+              stroke-miterlimit="10"
+              stroke-linejoin="miter"
+              stroke-linecap="butt"
+              stroke-width="1"
+              fill-rule="nonzero"
+              data-paper-data='{"isPaintingLayer":true}'
+            >
+              <path
+                stroke="#0c9770"
+                fill="#0fbd8c"
+                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
+              ></path>
+              <path
+                visibility="hidden"
+                stroke="none"
+                fill="#3d79cc"
+                d=""
+              ></path>
+            </g>
+          </g>
+        </svg>
+        <svg
+          class="blocklyBlock"
+          style="--BlockOffset: 0%; animation-delay: 1s"
+          viewBox="0,0,150.38334,57"
+          height="57"
+          width="150.38334"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+        >
+          <g transform="translate(-164.30833,-151)">
+            <g
+              style="mix-blend-mode: normal"
+              stroke-dashoffset="0"
+              stroke-dasharray=""
+              stroke-miterlimit="10"
+              stroke-linejoin="miter"
+              stroke-linecap="butt"
+              stroke-width="1"
+              fill-rule="nonzero"
+              data-paper-data='{"isPaintingLayer":true}'
+            >
+              <path
+                stroke="#0c9770"
+                fill="#0fbd8c"
+                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
+              ></path>
+              <path
+                visibility="hidden"
+                stroke="none"
+                fill="#3d79cc"
+                d=""
+              ></path>
+            </g>
+          </g>
+        </svg>
+        <svg
+          class="blocklyBlock"
+          style="--BlockOffset: 85%; animation-delay: 2s"
+          viewBox="0,0,150.38334,57"
+          height="57"
+          width="150.38334"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+        >
+          <g transform="translate(-164.30833,-151)">
+            <g
+              style="mix-blend-mode: normal"
+              stroke-dashoffset="0"
+              stroke-dasharray=""
+              stroke-miterlimit="10"
+              stroke-linejoin="miter"
+              stroke-linecap="butt"
+              stroke-width="1"
+              fill-rule="nonzero"
+              data-paper-data='{"isPaintingLayer":true}'
+            >
+              <path
+                stroke="#0c9770"
+                fill="#0fbd8c"
+                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
+              ></path>
+              <path
+                visibility="hidden"
+                stroke="none"
+                fill="#3d79cc"
+                d=""
+              ></path>
+            </g>
+          </g>
+        </svg>
       </div>
-      <p class="loadingText">
-        Loading  
-      </p>
+      <p class="loadingText">Loading</p>
     </div>
 
     <!--Editor Namespace-->

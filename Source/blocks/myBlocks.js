@@ -203,23 +203,23 @@
             type: "command",
             text: "",
             tooltip: "your custom block!",
-            mutator:"customBlockMutator",
-            hideFromPallete:true
+            mutator: "customBlockMutator",
+            hideFromPallete: true,
           },
           //Testing custom block do not use in production
           {
             type: "duplicate",
             of: "customBlockExecute",
-            hideFromPallete:true,
-            extraData:{
-              customBlockData:{
-                type:"void",
-                mainText:"hello",
-                scriptTarget:"noneInParticular",
-                arguments:[],
-              }
-            }
-          }
+            hideFromPallete: true,
+            extraData: {
+              customBlockData: {
+                type: "void",
+                mainText: "hello",
+                scriptTarget: "noneInParticular",
+                arguments: [],
+              },
+            },
+          },
         ],
       };
     }
@@ -346,12 +346,14 @@
     }
 
     customBlockExecute(block, generator) {
-      let argString = '';
-      console.log(block)
+      let argString = "";
+      console.log(block);
 
       for (let argID = 0; argID < argID.length; index++) {
         const argument = block.customBlockData.arguments[argID];
-        argString += ((argID > 0) ? "," : "") + generator.valueToCode(block, argument.name, Order.ATOMIC);
+        argString +=
+          (argID > 0 ? "," : "") +
+          generator.valueToCode(block, argument.name, Order.ATOMIC);
       }
 
       return `${block.customBlockData.scriptTarget}(${argString});`;
@@ -375,27 +377,26 @@
       if (penPlus.customBlocks) {
         penPlus.customBlocks.forEach((block) => {
           if (block.name.length == 0) block.name = "no name!";
-          
+
           let blockJSON = {
             type: "duplicate",
-            of:"customBlockExecute",
+            of: "customBlockExecute",
             //Probably could improve this line lol
             tooltip: "Your custom block!",
             extraData: {
-              customBlockData:{
-                type:block.type,
-                mainText:block.name,
-                scriptTarget:__glslifyName(block.name),
-                arguments:block.arguments
-              }
-            }
-          }
+              customBlockData: {
+                type: block.type,
+                mainText: block.name,
+                scriptTarget: __glslifyName(block.name),
+                arguments: block.arguments,
+              },
+            },
+          };
 
           if (blockJSON.type == "command") {
             blockJSON.previousStatement = "Action";
             blockJSON.nextStatement = "Action";
-          }
-          else {
+          } else {
             blockJSON.output = customBlockTypeConversionTable[block.type];
           }
 

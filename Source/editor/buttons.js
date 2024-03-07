@@ -45,14 +45,8 @@
             );
             penPlus.dynamicallyAdded = contents.dynamicDat;
             penPlus.Generated_GLSL = contents.glsl;
-
-            
-          }
-          else {
-            Blockly.serialization.workspaces.load(
-              contents,
-              window.workspace
-            );
+          } else {
+            Blockly.serialization.workspaces.load(contents, window.workspace);
           }
         };
         reader.readAsText(file);
@@ -201,9 +195,9 @@
   saveButton.onclick = () => {
     download(
       JSON.stringify({
-        blockDat:Blockly.serialization.workspaces.save(penPlus.workspace),
-        dynamicDat:penPlus.dynamicallyAdded,
-        glsl:penPlus.Generated_GLSL,
+        blockDat: Blockly.serialization.workspaces.save(penPlus.workspace),
+        dynamicDat: penPlus.dynamicallyAdded,
+        glsl: penPlus.Generated_GLSL,
       }),
       "shader.pps",
       ""

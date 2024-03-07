@@ -1,6 +1,6 @@
 {
   penPlus.categories = penPlus.categories || {};
-  
+
   class operators_category extends penPlus.penPlusExtension {
     getInfo() {
       return {

@@ -1,5 +1,5 @@
-(function() {
-    document
+(function () {
+  document
     .getElementById("prevAndConsole")
     .addEventListener("mouseover", () => {
       document.body.style.setProperty("--PreviewStylesPopout", "8px");

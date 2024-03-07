@@ -1,8 +1,6 @@
 //I'm to lazy to try and extract the zelos renderer so we are replacing it.
 
-penPlus.customZelosConstant = class extends (
-  Blockly.zelos.ConstantProvider
-) {
+penPlus.customZelosConstant = class extends Blockly.zelos.ConstantProvider {
   init() {
     super.init();
     this.FAKE_BLOCK = this.makeRoundel();

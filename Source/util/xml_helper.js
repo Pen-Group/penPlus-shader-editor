@@ -1,7 +1,7 @@
-(function() {
-    const parser = new DOMParser();
+(function () {
+  const parser = new DOMParser();
 
-    penPlus.stringToDOM = (xmlString) => {
-        return parser.parseFromString(xmlString,"text/xml").childNodes[0];
-    }
+  penPlus.stringToDOM = (xmlString) => {
+    return parser.parseFromString(xmlString, "text/xml").childNodes[0];
+  };
 })();

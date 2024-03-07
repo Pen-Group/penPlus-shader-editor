@@ -74,7 +74,9 @@ penPlus.penPlusExtension = class {
           case "duplicate":
             blockData = {
               kind: "block",
-              type: (block.extensionID) ? block.extensionID + block.of : id + block.of,
+              type: block.extensionID
+                ? block.extensionID + block.of
+                : id + block.of,
             };
 
             if (block.extraData) {
@@ -176,7 +178,7 @@ penPlus.penPlusExtension = class {
             if (block.output) {
               blockDef.output = block.output;
             }
-            
+
             if (block.mutator) {
               blockDef.mutator = block.mutator;
             }
@@ -245,9 +247,7 @@ penPlus.penPlusExtension = class {
     penPlus.refreshTheme();
   }
 
-  addDynamicBlocksPreLoad() {
-    
-  }
+  addDynamicBlocksPreLoad() {}
 
   getHatBlockVariables() {
     let returnedGLSL = "";
