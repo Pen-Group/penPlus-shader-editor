@@ -72,7 +72,7 @@
   }
 
   function __glslifyName(Name) {
-    return Name.replaceAll(/([\W\s\h\v])+/g, "_");
+    return Name.replaceAll(/([\W\s])+/g, "_");
   }
 
   class myBlocks_category extends penPlus.penPlusExtension {
@@ -206,14 +206,17 @@
             mutator:"customBlockMutator",
             hideFromPallete:true
           },
+          //Testing custom block do not use in production
           {
             type: "duplicate",
             of: "customBlockExecute",
+            hideFromPallete:true,
             extraData:{
               customBlockData:{
                 type:"void",
                 mainText:"hello",
-                arguments:[]
+                scriptTarget:"noneInParticular",
+                arguments:[],
               }
             }
           }
@@ -342,6 +345,18 @@
           });\n`;
     }
 
+    customBlockExecute(block, generator) {
+      let argString = '';
+      console.log(block)
+
+      for (let argID = 0; argID < argID.length; index++) {
+        const argument = block.customBlockData.arguments[argID];
+        argString += ((argID > 0) ? "," : "") + generator.valueToCode(block, argument.name, Order.ATOMIC);
+      }
+
+      return `${block.customBlockData.scriptTarget}(${argString});`;
+    }
+
     createCustomBlocks(workspace) {
       let createdBlocks = [];
 
@@ -359,52 +374,21 @@
 
       if (penPlus.customBlocks) {
         penPlus.customBlocks.forEach((block) => {
-          let block_arguments = [];
-          let block_arg_count = 0;
-          let block_arg_string = "";
-          block.arguments.forEach((argument) => {
-            block_arguments.push({
-              type: "input_value",
-              name: `${block_arg_count}`,
-              shadow: {
-                type: __getShadowForArgumentType(argument.type),
-              },
-            });
-            block_arg_count += 1;
-            block_arg_string += ` ${argument.name}:%${block_arg_count}`;
-          });
-
-          //Dumb idea. Might work.
-          penPlus.blockIterations[block.name] |= 0;
-          penPlus.blockIterations[block.name] += 1;
-
-          if (block.name.length == 0) block.name = "noBlockDefined";
+          if (block.name.length == 0) block.name = "no name!";
           
           let blockJSON = {
-            opcode: `customBlock_${__glslifyName(block.name)}`,
-            type: customBlockTypeConversionTable[block.type] == "void" ? "command" : "reporter",
-            text: block.name + block_arg_string,
-            style: __colorCustomBlock(block.type),
+            type: "duplicate",
+            of:"customBlockExecute",
             //Probably could improve this line lol
             tooltip: "Your custom block!",
-            arguments: block_arguments,
-            operation: (block_ref, generator) => {
-              let argString = "";
-              //Using a typical for loop for this one since we need the id somewhat.
-              for (let argID = 0; argID < block_arg_count; argID++) {
-                const argument = block_arguments[argID];
-                argString += `${argID == 0 ? "" : ","}${generator.valueToCode(
-                  block_ref,
-                  argument.name,
-                  Order.ATOMIC
-                )}`;
+            extraData: {
+              customBlockData:{
+                type:block.type,
+                mainText:block.name,
+                scriptTarget:__glslifyName(block.name),
+                arguments:block.arguments
               }
-              //If we are a void block we must return the function being executed if we are a reporter of some sort we must report!
-              return customBlockType == "void"
-                ? `${__glslifyName(block.name)}(${argString});\n` +
-                    nextBlockToCode(block, generator)
-                : [`${__glslifyName(block.name)}(${argString})`, Order.ATOMIC];
-            },
+            }
           }
 
           if (blockJSON.type == "command") {
