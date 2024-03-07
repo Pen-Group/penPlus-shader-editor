@@ -66,6 +66,9 @@
       case "highp mat4":
         return "matrix4_reporter";
 
+      case "void":
+        return "blank_reporter";
+
       default:
         return "number_reporter";
     }
@@ -206,6 +209,14 @@
             mutator: "customBlockMutator",
             hideFromPallete: true,
           },
+          {
+            opcode: "customBlockExecute_Reporter",
+            type: "reporter",
+            text: "",
+            tooltip: "your custom block!",
+            mutator: "customBlockMutator",
+            hideFromPallete: true,
+          },
           //Testing custom block do not use in production
           {
             type: "duplicate",
@@ -338,6 +349,16 @@
           break;
       }
 
+      const shadowDeisred = penPlus.stringToDOM(
+        `<shadow type="${__getShadowForArgumentType(
+          penPlus.customBlockType
+        )}"></shadow>`
+      )
+
+          console.log(block.inputList[0].getShadowDom());
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) block.inputList[0].setShadowDom(shadowDeisred);
+
       return penPlus.customBlockType == "void"
         ? `return;`
         : `return ${returnConversion}(${
@@ -347,9 +368,8 @@
 
     customBlockExecute(block, generator) {
       let argString = "";
-      console.log(block);
 
-      for (let argID = 0; argID < argID.length; index++) {
+      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
         const argument = block.customBlockData.arguments[argID];
         argString +=
           (argID > 0 ? "," : "") +
@@ -357,6 +377,19 @@
       }
 
       return `${block.customBlockData.scriptTarget}(${argString});`;
+    }
+
+    customBlockExecute_Reporter(block, generator) {
+      let argString = "";
+
+      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
+        const argument = block.customBlockData.arguments[argID];
+        argString +=
+          (argID > 0 ? "," : "") +
+          generator.valueToCode(block, argument.name, Order.ATOMIC);
+      }
+
+      return [`${block.customBlockData.scriptTarget}(${argString})`,Order.ATOMIC];
     }
 
     createCustomBlocks(workspace) {
@@ -380,7 +413,7 @@
 
           let blockJSON = {
             type: "duplicate",
-            of: "customBlockExecute",
+            of: (block.type == "void") ? "customBlockExecute" : "customBlockExecute_Reporter",
             //Probably could improve this line lol
             tooltip: "Your custom block!",
             extraData: {
@@ -392,13 +425,6 @@
               },
             },
           };
-
-          if (blockJSON.type == "command") {
-            blockJSON.previousStatement = "Action";
-            blockJSON.nextStatement = "Action";
-          } else {
-            blockJSON.output = customBlockTypeConversionTable[block.type];
-          }
 
           createdBlocks.push(blockJSON);
         });

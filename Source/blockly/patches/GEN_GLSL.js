@@ -63,6 +63,10 @@ function createGLSLGen() {
     return [`float(${numba})`, Order.ATOMIC];
   };
 
+  GLSL_GEN.forBlock["blank_reporter"] = function (block, generator) {
+    return [``, Order.ATOMIC];
+  };
+
   GLSL_GEN.forBlock["number_NOFLOAT_reporter"] = function (block, generator) {
     const numba = block.getFieldValue("NUMBER");
     return [numba, Order.ATOMIC];

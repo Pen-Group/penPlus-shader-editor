@@ -24,6 +24,16 @@ function addImportantReporters() {
     ],
   });
 
+  penPlus.addBlocklyBlock("blank_reporter", "reporter", {
+    message0: "%1",
+    output: "noInput",
+    args0: [
+      {
+        type: "input_dummy"
+      },
+    ],
+  });
+
   penPlus.addBlocklyBlock("number_NOFLOAT_reporter", "reporter", {
     message0: " %1 ",
     output: "float",

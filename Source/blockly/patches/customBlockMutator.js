@@ -89,8 +89,6 @@
             })
           );
 
-          console.log(this.customBlockData.arguments);
-
           //Add inputs
           this.customBlockData.arguments.forEach((argument) => {
             //dummy text
@@ -98,12 +96,18 @@
               type: "input_dummy",
               name: "blocklyBlockName",
             });
+
+            console.log(this);
             this.inputList[this.inputList.length - 1].appendField(
               this.fieldFromJson_({
                 type: "field_label",
                 text: argument.name,
               })
             );
+
+            if (this.output && argument.type != "void") {
+              this.output.check = [argument.type];
+            }
 
             //input thing
             this.inputFromJson_({
