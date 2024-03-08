@@ -16,7 +16,6 @@
             text: "x:%1 y:%2",
             tooltip: "A vector with 2 elements",
             output: "vec2",
-            style: "vec2_blocks",
             arguments: [
               {
                 type: "input_value",

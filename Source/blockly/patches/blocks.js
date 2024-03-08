@@ -75,7 +75,7 @@ function addImportantReporters() {
 
   penPlus.addBlocklyBlock("vec2_reporter", "reporter", {
     message0: "x:%1 y:%2",
-    style: "vec2_blocks",
+    style: "vector_blocks",
     output: "vec2",
     args0: [
       {

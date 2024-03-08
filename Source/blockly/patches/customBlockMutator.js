@@ -20,7 +20,7 @@
         return "int_blocks";
 
       case "highp vec2":
-        return "vec2_blocks";
+        return "vector_blocks";
 
       case "highp vec3":
         return "vec3_blocks";

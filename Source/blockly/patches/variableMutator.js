@@ -25,6 +25,9 @@
       case "matrix_4x":
         return "matrix_blocks";
 
+      case "vec2":
+        return "vector_blocks";
+
       default:
         return `${variableType}_blocks`;
     }

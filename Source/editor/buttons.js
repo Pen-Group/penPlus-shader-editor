@@ -90,6 +90,8 @@
       ? true
       : localStorage.getItem("AutoCompile") == "true";
 
+  penPlus.customBlockColors = JSON.parse(localStorage.getItem("customBlockColors")) || {}; 
+
   recompileButton.style.visibility = (penPlus.autoCompile) ? "hidden" : "visible";
 
   glsl_Button.onclick = () => {
@@ -198,6 +200,65 @@
             <input type="checkbox" id="AutoComp"></input>
             <p style="transform:translate(0%,-0.9em);">Automatic Compilation</p>
           </div>
+          <div style="width:75%; margin-left:12.5%; justify-content: center; background-color:var(--EditorTheme_Theme_3);">
+            <p>Block Colors<br>won't change until refreshed!<br>Has some bugs</p>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="eventsColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Events</p>
+
+              <input type="color" id="vertexColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Vertex</p>
+
+              <input type="color" id="looksColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Looks</p>
+            </div>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="colorsColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Colors</p>
+            
+              <input type="color" id="controlsColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Controls</p>
+
+              <input type="color" id="operatorsColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Operators</p>
+            </div>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="sensingColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Sensing</p>
+
+              <input type="color" id="myBlocksColor"></input>
+              <p style="transform:translate(0%,-0.9em);">My Blocks</p>
+            </div>
+
+            <p>Variable Types</p>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="floatColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Float</p>
+
+              <input type="color" id="intColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Int</p>
+            </div>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="vec2Color"></input>
+              <p style="transform:translate(0%,-0.9em);">Vector 2</p>
+
+              <input type="color" id="vec3Color"></input>
+              <p style="transform:translate(0%,-0.9em);">Vector 3</p>
+
+              <input type="color" id="vec4Color"></input>
+              <p style="transform:translate(0%,-0.9em);">Vector 4</p>
+            </div>
+            <div style="display:flex; height: 25%;">
+              <input type="color" id="matrixColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Matrix</p>
+              
+              <input type="color" id="textureColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Texture</p>
+              
+              <input type="color" id="cubemapColor"></input>
+              <p style="transform:translate(0%,-0.9em);">Cubemap</p>
+            </div>
+          </div>
           <div>Not much here now</div>
         </div>
       </div>
@@ -218,6 +279,43 @@
     document.getElementById("closeButton").onclick = () => {
       varModal.close();
     };
+
+    const categoryButtons = {
+      events:document.getElementById("eventsColor"),
+      vertex:document.getElementById("vertexColor"),
+      looks:document.getElementById("looksColor"),
+      colors:document.getElementById("colorsColor"),
+      controls:document.getElementById("controlsColor"),
+      operators:document.getElementById("operatorsColor"),
+      sensing:document.getElementById("sensingColor"),
+      myblocks:document.getElementById("myBlocksColor"),
+
+      variables:document.getElementById("floatColor"),
+      int:document.getElementById("intColor"),
+
+      vector:document.getElementById("vec2Color"),
+      vec3:document.getElementById("vec3Color"),
+      vec4:document.getElementById("vec4Color"),
+
+      matrix:document.getElementById("matrixColor"),
+      texture:document.getElementById("textureColor"),
+      cubemap:document.getElementById("cubemapColor"),
+    }
+
+    const keys = Object.keys(categoryButtons);
+
+    keys.forEach(key => {
+      categoryButtons[key].value = penPlus.penPlusTheme.blockStyles[`${key}_blocks`].colourPrimary;
+      categoryButtons[key].addEventListener("change",() => {
+        penPlus.customBlockColors[key] = penPlus.customBlockColors[key] || {}
+        penPlus.customBlockColors[key].colourPrimary = categoryButtons[key].value;
+        penPlus.customBlockColors[key].colourSecondary = categoryButtons[key].value;
+        penPlus.customBlockColors[key].colourTertiary = categoryButtons[key].value;
+        penPlus.customBlockColors[key].colorText = (penPlus.brightnessByColor(categoryButtons[key].value) >= 200) ? "#000000" : "#ffffff",
+        console.log(key)
+        localStorage.setItem("customBlockColors",JSON.stringify(penPlus.customBlockColors));
+      })
+    })
   };
 
   fileButton.onclick = () => {

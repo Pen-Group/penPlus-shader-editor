@@ -15,6 +15,9 @@
       case "matrix_4x":
         return "matrix_blocks";
 
+      case "vec2":
+        return "vector_blocks";
+
       default:
         return `${variableType}_blocks`;
     }
@@ -53,7 +56,6 @@
 
   class variables_category extends penPlus.penPlusExtension {
     getInfo() {
-      penPlus.addBlockColorSet("vec2_blocks", "#5AB897", "#47AA8C", "#339178");
       penPlus.addBlockColorSet("vec3_blocks", "#5BB4B7", "#47AAAF", "#319098");
       penPlus.addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
       penPlus.addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");

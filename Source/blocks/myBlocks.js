@@ -18,7 +18,7 @@
         return "int_blocks";
 
       case "highp vec2":
-        return "vec2_blocks";
+        return "vector_blocks";
 
       case "highp vec3":
         return "vec3_blocks";
@@ -81,7 +81,7 @@
   class myBlocks_category extends penPlus.penPlusExtension {
     getInfo() {
       getHatBlockVariables = this.getHatBlockVariables;
-      penPlus.addBlockColorSet("return_block", "#9CACD3", "#8592B5", "#7683A2");
+      penPlus.addBlockColorSet("struct_block", "#9CACD3", "#8592B5", "#7683A2");
       return {
         name: "My Blocks",
         id: "myblocks",
@@ -193,7 +193,7 @@
             type: "terminal",
             text: "return %1",
             tooltip: "A Custom Block!",
-            //style: "return_block", I somewhat like this gray
+            //style: "struct_block",
             arguments: [
               {
                 type: "input_value",
@@ -310,7 +310,7 @@
           break;
 
         case "highp vec2":
-          block.setStyle("vec2_blocks");
+          block.setStyle("vector_blocks");
           block.inputList[0].setCheck();
           returnConversion = "vec2";
           break;
