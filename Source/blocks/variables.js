@@ -260,20 +260,7 @@
     }
 
     variable_reporter(block, generator) {
-      let argString = "";
-
-      for (
-        let argID = 0;
-        argID < block.customBlockData.arguments.length;
-        argID++
-      ) {
-        const argument = block.customBlockData.arguments[argID];
-        argString +=
-          (argID > 0 ? "," : "") +
-          generator.valueToCode(block, argument.name, Order.ATOMIC);
-      }
-
-      return [`${block.customBlockData.mainText.split(" ")[1]}`, Order.ATOMIC];
+      return [`${block.variableData.mainText.split(" ")[1]}`, Order.ATOMIC];
     }
 
     variable_set(block, generator) {

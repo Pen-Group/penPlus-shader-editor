@@ -290,7 +290,7 @@
 
     getArg(block, generator) {
       const name = generator.valueToCode(block, "name", Order.ATOMIC);
-      return [`custom_block_arg_${name}`, Order.ATOMIC];
+      return [`custom_block_arg_${__glslifyName(name)}`, Order.ATOMIC];
     }
 
     customBlockReturn(block, generator) {
