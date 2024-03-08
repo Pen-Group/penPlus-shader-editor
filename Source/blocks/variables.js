@@ -252,7 +252,7 @@
                 ],
               },
             ],
-          }
+          },
         ],
       };
     }
@@ -260,14 +260,18 @@
     variable_reporter(block, generator) {
       let argString = "";
 
-      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
+      for (
+        let argID = 0;
+        argID < block.customBlockData.arguments.length;
+        argID++
+      ) {
         const argument = block.customBlockData.arguments[argID];
         argString +=
           (argID > 0 ? "," : "") +
           generator.valueToCode(block, argument.name, Order.ATOMIC);
       }
 
-      return [`${block.customBlockData.mainText.split(" ")[1]}`,Order.ATOMIC];
+      return [`${block.customBlockData.mainText.split(" ")[1]}`, Order.ATOMIC];
     }
 
     variable_set(block, generator) {
@@ -283,24 +287,23 @@
       if (variableType == "matrix_3x") variableType = "mat3";
       if (variableType == "matrix_4x") variableType = "mat4";
 
-      const value = generator.valueToCode(
-        block,
-        "VALUE",
-        Order.ATOMIC
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(
+        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
       );
-      
-      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
-        variableType
-      )}"></shadow>`);
-      
-      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      )
+        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
       return (
-        `${
-          variableName.split(" ")[1]
-        } = ${variableType}(${value});\n` +
+        `${variableName.split(" ")[1]} = ${variableType}(${value});\n` +
         nextBlockToCode(block, generator)
       );
     }
@@ -314,17 +317,18 @@
       const variableName = variable.name;
       const variableType = variable.type;
 
-      const value = generator.valueToCode(
-        block,
-        "VALUE",
-        Order.ATOMIC
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(
+        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
       );
-      
-      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
-        variableType
-      )}"></shadow>`);
-      
-      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      )
+        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
@@ -343,17 +347,18 @@
       const variableName = variable.name;
       const variableType = variable.type;
 
-      const value = generator.valueToCode(
-        block,
-        "VALUE",
-        Order.ATOMIC
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(
+        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
       );
-      
-      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
-        variableType
-      )}"></shadow>`);
-      
-      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      )
+        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
@@ -372,17 +377,18 @@
       const variableName = variable.name;
       const variableType = variable.type;
 
-      const value = generator.valueToCode(
-        block,
-        "VALUE",
-        Order.ATOMIC
-      );
-      
-      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(
-        variableType
-      )}"></shadow>`);
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+      let shadowDeisred = penPlus.stringToDOM(
+        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
+      );
+
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      )
+        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
@@ -401,18 +407,11 @@
       const variableName = variable.name;
       const variableType = variable.type;
 
-      const value = generator.valueToCode(
-        block,
-        "VALUE",
-        Order.ATOMIC
-      );
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return [
-        `${variableName.split(" ")[1]}[${value}]`,
-        Order.ATOMIC,
-      ];
+      return [`${variableName.split(" ")[1]}[${value}]`, Order.ATOMIC];
     }
 
     createVariableReporters(workspace) {
@@ -430,9 +429,9 @@
           extraData: {
             variableData: {
               type: type,
-              mainText: variable.name
+              mainText: variable.name,
             },
-          }
+          },
         });
       });
 
@@ -459,28 +458,28 @@
             //Add the set change multiply and divide blocks with the needed color for the most correctness
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_set"
+              of: "variable_set",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_change"
+              of: "variable_change",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_multiply"
+              of: "variable_multiply",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_divide"
+              of: "variable_divide",
             });
           }
           if (hasArrayScope) {
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_item"
+              of: "variable_item",
             });
           }
         }
@@ -847,7 +846,7 @@
 
       document.getElementById("closeButton").onclick = () => {
         varModal.close();
-      }
+      };
     }
   }
 

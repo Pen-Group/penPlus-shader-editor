@@ -27,10 +27,10 @@ function addImportantReporters() {
   penPlus.addBlocklyBlock("blank_reporter", "reporter", {
     message0: "%1",
     output: "noInput",
-    style:"myblocks_blocks",
+    style: "myblocks_blocks",
     args0: [
       {
-        type: "input_dummy"
+        type: "input_dummy",
       },
     ],
   });

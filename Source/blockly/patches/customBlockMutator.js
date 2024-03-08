@@ -127,7 +127,7 @@
               type: "input_dummy",
               name: "blocklyBlockName",
             });
-            
+
             this.inputList[this.inputList.length - 1].appendField(
               this.fieldFromJson_({
                 type: "field_label",

@@ -283,9 +283,9 @@
 
       let nextCode = nextBlockToCode(block, generator);
 
-      return `${customBlockType} ${__glslifyName("custom_block_arg_"+argumentName)} ${
-        nextCode ? `, ${nextCode}` : ``
-      }`;
+      return `${customBlockType} ${__glslifyName(
+        "custom_block_arg_" + argumentName
+      )} ${nextCode ? `, ${nextCode}` : ``}`;
     }
 
     getArg(block, generator) {
@@ -355,10 +355,16 @@
         `<shadow type="${__getShadowForArgumentType(
           penPlus.customBlockType
         )}"></shadow>`
-      )
+      );
 
-      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) block.inputList[0].setShadowDom(shadowDeisred);
-      if (penPlus.customBlockType == "void") block.inputList[0].setCheck("noInput");
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      )
+        block.inputList[0].setShadowDom(shadowDeisred);
+      if (penPlus.customBlockType == "void")
+        block.inputList[0].setCheck("noInput");
 
       return penPlus.customBlockType == "void"
         ? `return;`
@@ -370,7 +376,11 @@
     customBlockExecute(block, generator) {
       let argString = "";
 
-      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
+      for (
+        let argID = 0;
+        argID < block.customBlockData.arguments.length;
+        argID++
+      ) {
         const argument = block.customBlockData.arguments[argID];
         argString +=
           (argID > 0 ? "," : "") +
@@ -383,14 +393,21 @@
     customBlockExecute_Reporter(block, generator) {
       let argString = "";
 
-      for (let argID = 0; argID < block.customBlockData.arguments.length; argID++) {
+      for (
+        let argID = 0;
+        argID < block.customBlockData.arguments.length;
+        argID++
+      ) {
         const argument = block.customBlockData.arguments[argID];
         argString +=
           (argID > 0 ? "," : "") +
           generator.valueToCode(block, argument.name, Order.ATOMIC);
       }
 
-      return [`${block.customBlockData.scriptTarget}(${argString})`,Order.ATOMIC];
+      return [
+        `${block.customBlockData.scriptTarget}(${argString})`,
+        Order.ATOMIC,
+      ];
     }
 
     createCustomBlocks(workspace) {
@@ -414,7 +431,10 @@
 
           let blockJSON = {
             type: "duplicate",
-            of: (block.type == "void") ? "customBlockExecute" : "customBlockExecute_Reporter",
+            of:
+              block.type == "void"
+                ? "customBlockExecute"
+                : "customBlockExecute_Reporter",
             //Probably could improve this line lol
             tooltip: "Your custom block!",
             extraData: {

@@ -59,9 +59,15 @@
   const blockly_Button = document.getElementById("ButtonBlockly");
   const terminal_Button = document.getElementById("TerminalToggle");
   const theme_Button = document.getElementById("DarkToggle");
+  const settingsButton = document.getElementById("OptionsButton");
   const creditsButton = document.getElementById("CreditsButton");
+  const fileButton = document.getElementById("fileButton");
+  const recompileButton = document.getElementById("recompileButton");
+
+  const fileDropdown = document.getElementById("fileDropdown");
   const saveButton = document.getElementById("saveButton");
   const loadButton = document.getElementById("loadButton");
+  
   const blockly = document.getElementById("BlocklyDiv");
 
   const fullScreen = document.getElementById("FullScreen");
@@ -78,6 +84,13 @@
     (window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light");
+
+  penPlus.autoCompile =
+    localStorage.getItem("AutoCompile") === null
+      ? true
+      : localStorage.getItem("AutoCompile") == "true";
+
+  recompileButton.style.visibility = (penPlus.autoCompile) ? "hidden" : "visible";
 
   glsl_Button.onclick = () => {
     document.body.style.setProperty("--CodeVis", "visible");
@@ -156,6 +169,8 @@
         The Shovel<br>
         RealWorld<br>
         Drago Cuven<br>
+        SillyCubeGuy<br>
+        Dizzy Awe<br>
         Spong<br>
         </span>
         </p>
@@ -167,6 +182,59 @@
       varModal.close();
     };
   };
+
+  settingsButton.onclick = () => {
+    const varModal = penPlus.createModal(`
+    <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
+      <div class="noSelect" style="background-color: var(--EditorTheme_Color_1); width:100%; height:48px; position:absolute;  color:var(--EditorTheme_Text_3); text-align: center; justify-content: center; align-items: center;font-size: 32px;">
+        Options
+        <div id="closeButton" aria-label="Close" style="cursor:pointer; transform:translate(-110%,0%);aspect-ratio:1 / 1;background-color: var(--EditorTheme_Color_2); width:auto; height:80%; position:absolute; left:100%; top:10%; border-radius:100%;" role="button" tabindex="0">
+          <img style="top:25%; width:50%; height:50%; left:25%; position:absolute; transform:rotate(45deg)" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3LjQ4IDcuNDgiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6MnB4O308L3N0eWxlPjwvZGVmcz48dGl0bGU+aWNvbi0tYWRkPC90aXRsZT48bGluZSBjbGFzcz0iY2xzLTEiIHgxPSIzLjc0IiB5MT0iNi40OCIgeDI9IjMuNzQiIHkyPSIxIi8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iMSIgeTE9IjMuNzQiIHgyPSI2LjQ4IiB5Mj0iMy43NCIvPjwvc3ZnPg==" draggable="false">
+        </div>
+      </div>
+      <div style="text-align: center; position:absolute; top:48px; width:100%; height:80%; overflow-y:scroll; color:var(--EditorTheme_Text_1);">
+        <div>
+          <div style="display:flex; width:100%; justify-content: center;">
+            <input type="checkbox" id="AutoComp"></input>
+            <p style="transform:translate(0%,-0.9em);">Automatic Compilation</p>
+          </div>
+          <div>Not much here now</div>
+        </div>
+      </div>
+    </div>
+    `);
+
+    const autocompileButton = document.getElementById("AutoComp");
+
+    autocompileButton.checked = penPlus.autoCompile;
+
+    autocompileButton.onclick = () => {
+      penPlus.autoCompile = autocompileButton.checked;
+      localStorage.setItem("AutoCompile", autocompileButton.checked);
+
+      recompileButton.style.visibility = (penPlus.autoCompile) ? "hidden" : "visible";
+    };
+
+    document.getElementById("closeButton").onclick = () => {
+      varModal.close();
+    };
+  };
+
+  fileButton.onclick = () => {
+    fileDropdown.style.visibility = (fileDropdown.style.visibility == "hidden") ? "visible" : "hidden";
+  }
+
+  document.getElementById("prevAndConsole").onclick = () => {
+    fileDropdown.style.visibility = "hidden";
+  }
+
+  document.getElementById("BlocklyDiv").onclick = () => {
+    fileDropdown.style.visibility = "hidden";
+  }
+
+  document.getElementById("recompileButton").onclick = () => {
+    updateGLSL({type:Blockly.Events.BLOCK_CHANGE,isManualCompile:true})
+  }
 
   log_button.onclick = () => {
     document.getElementById("shaderLog").style.visibility = "visible";

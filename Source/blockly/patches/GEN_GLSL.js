@@ -164,6 +164,7 @@ function createGLSLGen() {
 function updateGLSL(event) {
   if (penPlus.workspace.isDragging()) return; // Don't update while changes are happening.
   if (!penPlus.supportedEvents.has(event.type)) return;
+  if (!penPlus.autoCompile && !event.isManualCompile) return;
 
   penPlus.timer = 0;
 
