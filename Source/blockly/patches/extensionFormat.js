@@ -12,11 +12,28 @@ penPlus.penPlusExtension = class {
 
     //Add the block styles for this category. Each block can have its own override.
     penPlus.penPlusTheme.blockStyles[id + "blocks"] = {
-      colourPrimary: (penPlus.customBlockColors[myInfo.id]) ? penPlus.customBlockColors[myInfo.id].colourPrimary : myInfo.color1,
-      colourSecondary: (penPlus.customBlockColors[myInfo.id]) ? penPlus.customBlockColors[myInfo.id].colourSecondary : myInfo.color2,
-      colourTertiary: (penPlus.customBlockColors[myInfo.id]) ? penPlus.customBlockColors[myInfo.id].colourTertiary : myInfo.color3,
-      colorText: (penPlus.customBlockColors[myInfo.id]) ? penPlus.customBlockColors[myInfo.id].colorText : myInfo.text || (penPlus.brightnessByColor(myInfo.color1) >= 200) ? "#000000" : "#ffffff",
+      colourPrimary: penPlus.customBlockColors[myInfo.id]
+        ? penPlus.customBlockColors[myInfo.id].colourPrimary
+        : myInfo.color1,
+      colourSecondary: penPlus.customBlockColors[myInfo.id]
+        ? penPlus.customBlockColors[myInfo.id].colourSecondary
+        : myInfo.color2,
+      colourTertiary: penPlus.customBlockColors[myInfo.id]
+        ? penPlus.customBlockColors[myInfo.id].colourTertiary
+        : myInfo.color3,
+      colorText: penPlus.customBlockColors[myInfo.id]
+        ? penPlus.customBlockColors[myInfo.id].colorText
+        : myInfo.text || penPlus.brightnessByColor(myInfo.color1) >= 200
+        ? "#000000"
+        : "#ffffff",
     };
+
+    document.body.style.setProperty(
+      `--${id}blocks`,
+      penPlus.customBlockColors[myInfo.id]
+        ? penPlus.customBlockColors[myInfo.id].colourPrimary
+        : myInfo.color1
+    );
 
     //Define the category definition here
     let createdContentData = {

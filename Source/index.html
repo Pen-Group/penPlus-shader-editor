@@ -144,6 +144,12 @@
         border-color: transparent;
       }
 
+      .codeUnhighlighted {
+        background-color: #00000000;
+        color: #00000000;
+        z-index: 100;
+      }
+
       .BlocklyShaderButtons {
         top: 10px;
         position: absolute;
@@ -472,6 +478,56 @@
         font-size: xx-large;
       }
     </style>
+    <!--Syntax Highlighting-->
+    <style>
+      .func_Highlight {
+        color: var(--myblocks_blocks);
+      }
+
+      .float_Highlight {
+        color: var(--variables_blocks);
+      }
+      .int_Highlight {
+        color: var(--int_blocks);
+      }
+
+      .vec2_Highlight {
+        color: var(--vector_blocks);
+      }
+      .vec3_Highlight {
+        color: var(--vec3_blocks);
+      }
+      .vec4_Highlight {
+        color: var(--vec4_blocks);
+      }
+
+      .matrix_Highlight {
+        color: var(--matrix_blocks);
+      }
+
+      .texture_Highlight {
+        color: var(--texture_blocks);
+      }
+      .cubemap_Highlight {
+        color: var(--cubemap_blocks);
+      }
+
+      .comment_Highlight {
+        color: var(--sensing_blocks);
+      }
+
+      .operator_Highlight {
+        color: var(--operators_blocks);
+      }
+
+      .precision_Highlight {
+        color: var(--colors_blocks);
+      }
+
+      .controls_Highlight {
+        color: var(--controls_blocks);
+      }
+    </style>
   </head>
   <body>
     <div class="shaderMenu">
@@ -577,11 +633,38 @@
               <polyline points="7 3 7 8 15 8"></polyline>
             </svg>
           </button>
-          <div style="visibility: hidden; width:128px; position: absolute; left: calc(var(--EditorTheme_TopBarSize) * 3.75); top: calc(var(--EditorTheme_TopBarSize) - 20px); margin-top: 0px; padding-top: 0px;" id="fileDropdown">
-            <button class="toggleButton" id="saveButton" style="width: 100%; border-bottom-left-radius: 0%; border-bottom-right-radius: 0%;">
+          <div
+            style="
+              visibility: hidden;
+              width: 128px;
+              position: absolute;
+              left: calc(var(--EditorTheme_TopBarSize) * 3.75);
+              top: calc(var(--EditorTheme_TopBarSize) - 20px);
+              margin-top: 0px;
+              padding-top: 0px;
+            "
+            id="fileDropdown"
+          >
+            <button
+              class="toggleButton"
+              id="saveButton"
+              style="
+                width: 100%;
+                border-bottom-left-radius: 0%;
+                border-bottom-right-radius: 0%;
+              "
+            >
               Save Project
             </button>
-            <button class="toggleButton" id="loadButton" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%;">
+            <button
+              class="toggleButton"
+              id="loadButton"
+              style="
+                width: 100%;
+                border-top-left-radius: 0%;
+                border-top-right-radius: 0%;
+              "
+            >
               Load Project
             </button>
           </div>
@@ -700,9 +783,11 @@
         <div id="BlocklyDiv" class="BlocklyDiv"></div>
         <textarea
           id="myBlocklyCodeOutput"
-          class="tempCodePreview"
+          class="tempCodePreview codeUnhighlighted"
           spellcheck="false"
+          style="margin-top: 0px; margin-left: 0px; padding-top: 0px; padding-left: 0px;"
         ></textarea>
+        <code id="blocklyHighlightedOutput" class="tempCodePreview" style="margin-top: 0px; margin-left: 0px; padding-top: 0px; padding-left: 0px;"></code>
       </div>
     </div>
     <div id="popupModal"></div>
@@ -872,6 +957,11 @@
     <script src="render/shaders.js"></script>
     <script src="render/DAVE_SHADE.js"></script>
     <script src="render/previewRender.js"></script>
+
+    <!--Text Editor-->
+    <script src="editor/lib/syntaxHighlight.js"></script>
+    <script src="editor/lib/glslHighlight.js"></script>
+    <script src="editor/codeHighlightFunction.js"></script>
 
     <!--Editor-->
     <script src="editor/buttons.js"></script>

@@ -185,7 +185,7 @@ varying highp float v_depth;
 
 uniform highp float u_timer;
 
-//Pen+ Textures
+//PenPlus Textures
 uniform sampler2D u_texture;
 uniform mediump vec2 u_res;
 
@@ -353,24 +353,19 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   }
 
   penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+  penPlus.doHighlight({ key: "" });
 
   //I know this isn't the best but it works
-  penPlus.Generated_Vert = (penPlus.Generated_GLSL.replace(
-    fragFunction,
-    ""
-  ).replace(
-    vertFunction,
-    ""
-  ) + vertFunction).replace("void vertex", "void main");
+  penPlus.Generated_Vert = (
+    penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") +
+    vertFunction
+  ).replace("void vertex", "void main");
 
   //This too
-  penPlus.Generated_Frag = (penPlus.Generated_GLSL.replace(
-    vertFunction,
-    ""
-  ).replace(
-    fragFunction,
-    ""
-  ) + fragFunction).replace("void fragment", "void main");
+  penPlus.Generated_Frag = (
+    penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") +
+    fragFunction
+  ).replace("void fragment", "void main");
 
   genProgram();
 }

@@ -159,11 +159,14 @@
     repeat(block, generator) {
       const times = generator.valueToCode(block, "times", Order.ATOMIC);
       const code = generator.statementToCode(block, "code");
+      penPlus.loopID = penPlus.loopID || 0;
       penPlus.loopID += 1;
-      return (
-        `for (int penPlusLoop_${loopID}=0;penPlusLoop_${loopID}<int(${times});penPlusLoop_${loopID}++) {\n${code}\n}` +
+      const text = (
+        `for (int penPlusLoop_${penPlus.loopID}=0;penPlusLoop_${penPlus.loopID}<int(${times});penPlusLoop_${penPlus.loopID}++) {\n${code}\n}` +
         nextBlockToCode(block, generator)
       );
+      penPlus.loopID -= 1;
+      return text;
     }
 
     continue() {

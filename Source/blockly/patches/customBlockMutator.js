@@ -143,7 +143,10 @@
             this.inputFromJson_({
               type: "input_value",
               name: argument.name,
-              check: [customBlockTypeConversionTable[argument.type],"arithmatic"],
+              check: [
+                customBlockTypeConversionTable[argument.type],
+                "arithmatic",
+              ],
             });
 
             this.inputList[this.inputList.length - 1].setShadowDom(

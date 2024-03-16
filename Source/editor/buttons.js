@@ -67,7 +67,7 @@
   const fileDropdown = document.getElementById("fileDropdown");
   const saveButton = document.getElementById("saveButton");
   const loadButton = document.getElementById("loadButton");
-  
+
   const blockly = document.getElementById("BlocklyDiv");
 
   const fullScreen = document.getElementById("FullScreen");
@@ -90,9 +90,10 @@
       ? true
       : localStorage.getItem("AutoCompile") == "true";
 
-  penPlus.customBlockColors = JSON.parse(localStorage.getItem("customBlockColors")) || {}; 
+  penPlus.customBlockColors =
+    JSON.parse(localStorage.getItem("customBlockColors")) || {};
 
-  recompileButton.style.visibility = (penPlus.autoCompile) ? "hidden" : "visible";
+  recompileButton.style.visibility = penPlus.autoCompile ? "hidden" : "visible";
 
   glsl_Button.onclick = () => {
     document.body.style.setProperty("--CodeVis", "visible");
@@ -273,7 +274,9 @@
       penPlus.autoCompile = autocompileButton.checked;
       localStorage.setItem("AutoCompile", autocompileButton.checked);
 
-      recompileButton.style.visibility = (penPlus.autoCompile) ? "hidden" : "visible";
+      recompileButton.style.visibility = penPlus.autoCompile
+        ? "hidden"
+        : "visible";
     };
 
     document.getElementById("closeButton").onclick = () => {
@@ -281,58 +284,69 @@
     };
 
     const categoryButtons = {
-      events:document.getElementById("eventsColor"),
-      vertex:document.getElementById("vertexColor"),
-      looks:document.getElementById("looksColor"),
-      colors:document.getElementById("colorsColor"),
-      controls:document.getElementById("controlsColor"),
-      operators:document.getElementById("operatorsColor"),
-      sensing:document.getElementById("sensingColor"),
-      myblocks:document.getElementById("myBlocksColor"),
+      events: document.getElementById("eventsColor"),
+      vertex: document.getElementById("vertexColor"),
+      looks: document.getElementById("looksColor"),
+      colors: document.getElementById("colorsColor"),
+      controls: document.getElementById("controlsColor"),
+      operators: document.getElementById("operatorsColor"),
+      sensing: document.getElementById("sensingColor"),
+      myblocks: document.getElementById("myBlocksColor"),
 
-      variables:document.getElementById("floatColor"),
-      int:document.getElementById("intColor"),
+      variables: document.getElementById("floatColor"),
+      int: document.getElementById("intColor"),
 
-      vector:document.getElementById("vec2Color"),
-      vec3:document.getElementById("vec3Color"),
-      vec4:document.getElementById("vec4Color"),
+      vector: document.getElementById("vec2Color"),
+      vec3: document.getElementById("vec3Color"),
+      vec4: document.getElementById("vec4Color"),
 
-      matrix:document.getElementById("matrixColor"),
-      texture:document.getElementById("textureColor"),
-      cubemap:document.getElementById("cubemapColor"),
-    }
+      matrix: document.getElementById("matrixColor"),
+      texture: document.getElementById("textureColor"),
+      cubemap: document.getElementById("cubemapColor"),
+    };
 
     const keys = Object.keys(categoryButtons);
 
-    keys.forEach(key => {
-      categoryButtons[key].value = penPlus.penPlusTheme.blockStyles[`${key}_blocks`].colourPrimary;
-      categoryButtons[key].addEventListener("change",() => {
-        penPlus.customBlockColors[key] = penPlus.customBlockColors[key] || {}
-        penPlus.customBlockColors[key].colourPrimary = categoryButtons[key].value;
-        penPlus.customBlockColors[key].colourSecondary = categoryButtons[key].value;
-        penPlus.customBlockColors[key].colourTertiary = categoryButtons[key].value;
-        penPlus.customBlockColors[key].colorText = (penPlus.brightnessByColor(categoryButtons[key].value) >= 200) ? "#000000" : "#ffffff",
-        console.log(key)
-        localStorage.setItem("customBlockColors",JSON.stringify(penPlus.customBlockColors));
-      })
-    })
+    keys.forEach((key) => {
+      categoryButtons[key].value =
+        penPlus.penPlusTheme.blockStyles[`${key}_blocks`].colourPrimary;
+      categoryButtons[key].addEventListener("change", () => {
+        penPlus.customBlockColors[key] = penPlus.customBlockColors[key] || {};
+        penPlus.customBlockColors[key].colourPrimary =
+          categoryButtons[key].value;
+        penPlus.customBlockColors[key].colourSecondary =
+          categoryButtons[key].value;
+        penPlus.customBlockColors[key].colourTertiary =
+          categoryButtons[key].value;
+        (penPlus.customBlockColors[key].colorText =
+          penPlus.brightnessByColor(categoryButtons[key].value) >= 200
+            ? "#000000"
+            : "#ffffff"),
+          console.log(key);
+        localStorage.setItem(
+          "customBlockColors",
+          JSON.stringify(penPlus.customBlockColors)
+        );
+      });
+    });
   };
 
   fileButton.onclick = () => {
-    fileDropdown.style.visibility = (fileDropdown.style.visibility == "hidden") ? "visible" : "hidden";
-  }
+    fileDropdown.style.visibility =
+      fileDropdown.style.visibility == "hidden" ? "visible" : "hidden";
+  };
 
   document.getElementById("prevAndConsole").onclick = () => {
     fileDropdown.style.visibility = "hidden";
-  }
+  };
 
   document.getElementById("BlocklyDiv").onclick = () => {
     fileDropdown.style.visibility = "hidden";
-  }
+  };
 
   document.getElementById("recompileButton").onclick = () => {
-    updateGLSL({type:Blockly.Events.BLOCK_CHANGE,isManualCompile:true})
-  }
+    updateGLSL({ type: Blockly.Events.BLOCK_CHANGE, isManualCompile: true });
+  };
 
   log_button.onclick = () => {
     document.getElementById("shaderLog").style.visibility = "visible";

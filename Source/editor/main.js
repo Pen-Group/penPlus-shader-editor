@@ -48,8 +48,21 @@ function onAllAddonsLoaded() {
   });
 
   penPlus.workspace = workspace;
+  penPlus.syntaxHighlighter = window.csHighlight;
 
   penPlus.GLSL_CODE_WINDOW = document.getElementById("myBlocklyCodeOutput");
+  penPlus.GLSL_CODE_HIGHLIGHTED = document.getElementById(
+    "blocklyHighlightedOutput"
+  );
+  penPlus.GLSL_CODE_HIGHLIGHTED.style.overflow = "scroll";
+
+  penPlus.GLSL_CODE_WINDOW.onscroll = () => {
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft = penPlus.GLSL_CODE_WINDOW.scrollLeft;
+  }
+
+  penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.doHighlight;
+  penPlus.GLSL_CODE_WINDOW.onkeyup = penPlus.doHighlight;
 
   createGLSLGen();
   addBlocks();
