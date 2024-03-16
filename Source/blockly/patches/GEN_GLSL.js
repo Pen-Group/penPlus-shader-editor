@@ -352,7 +352,7 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
     }
   }
 
-  document.getElementById("myBlocklyCodeOutput").value = penPlus.Generated_GLSL;
+  penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
 
   //I know this isn't the best but it works
   penPlus.Generated_Vert = (penPlus.Generated_GLSL.replace(

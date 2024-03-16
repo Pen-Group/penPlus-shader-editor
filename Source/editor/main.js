@@ -49,6 +49,8 @@ function onAllAddonsLoaded() {
 
   penPlus.workspace = workspace;
 
+  penPlus.GLSL_CODE_WINDOW = document.getElementById("myBlocklyCodeOutput");
+
   createGLSLGen();
   addBlocks();
 
