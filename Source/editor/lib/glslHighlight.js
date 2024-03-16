@@ -98,6 +98,43 @@
           name: 'operator_Highlight',
           match: /^(\/[=]+)/
         },
+        {
+          name: 'operator_Highlight',
+          match: /^(\|\|+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\&\&+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\^\^+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\![=]+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\>\>+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\<\<+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\&+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\^+)/
+        },
+        {
+          name: 'operator_Highlight',
+          match: /^(\|+)/
+        },
+
 
         //precisions
         {
