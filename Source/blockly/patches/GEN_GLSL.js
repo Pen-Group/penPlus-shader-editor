@@ -172,6 +172,7 @@ function updateGLSL(event) {
 
   document.getElementById("shaderLog").innerHTML = "";
 
+  if (!penPlus.isTextMode) {
   //Base GLSL code
   penPlus.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;
@@ -287,6 +288,12 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 
   penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
 
+  penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+  }
+  else {
+    penPlus.Generated_GLSL = penPlus.GLSL_CODE_WINDOW.value;
+  }
+
   penPlus.Generated_Frag = "";
   penPlus.Generated_Vert = "";
 
@@ -351,8 +358,6 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
       }
     }
   }
-
-  penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
   penPlus.doHighlight({ key: "" });
 
   //I know this isn't the best but it works

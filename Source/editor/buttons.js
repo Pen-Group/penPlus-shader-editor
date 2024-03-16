@@ -39,12 +39,29 @@
           let contents = JSON.parse(e.target.result);
           console.log(JSON.parse(e.target.result));
           if (contents.blockDat) {
-            Blockly.serialization.workspaces.load(
-              contents.blockDat,
-              window.workspace
-            );
+            //Load the blockly workspace
+            //
             penPlus.dynamicallyAdded = contents.dynamicDat;
+
             penPlus.Generated_GLSL = contents.glsl;
+            penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+
+            penPlus.isText = contents.isText;
+            penPlus.blockly_Button.disabled = contents.isText;
+
+            //if not blockly load the text
+            if (penPlus.isText) {
+              penPlus.glsl_Button.onclick();
+            }
+            //if blockly load the blockly workspace
+            else {
+              penPlus.blockly_Button.onclick();
+
+              Blockly.serialization.workspaces.load(
+                contents.blockDat,
+                window.workspace
+              );
+            }
           } else {
             Blockly.serialization.workspaces.load(contents, window.workspace);
           }
@@ -56,7 +73,9 @@
   }
 
   const glsl_Button = document.getElementById("ButtonGLSL");
+  penPlus.glsl_Button = glsl_Button;
   const blockly_Button = document.getElementById("ButtonBlockly");
+  penPlus.blockly_Button = blockly_Button;
   const terminal_Button = document.getElementById("TerminalToggle");
   const theme_Button = document.getElementById("DarkToggle");
   const settingsButton = document.getElementById("OptionsButton");
@@ -101,6 +120,8 @@
 
     glsl_Button.className = "buttonSelected";
     blockly_Button.className = "buttonUnselected";
+
+    penPlus.doHighlight({})
   };
 
   blockly_Button.onclick = () => {
@@ -274,7 +295,7 @@
       penPlus.autoCompile = autocompileButton.checked;
       localStorage.setItem("AutoCompile", autocompileButton.checked);
 
-      recompileButton.style.visibility = penPlus.autoCompile
+      recompileButton.style.visibility = (penPlus.autoCompile && (!penPlus.isTextMode))
         ? "hidden"
         : "visible";
     };
@@ -382,6 +403,7 @@
         blockDat: Blockly.serialization.workspaces.save(penPlus.workspace),
         dynamicDat: penPlus.dynamicallyAdded,
         glsl: penPlus.Generated_GLSL,
+        isText:penPlus.isTextMode
       }),
       "shader.pps",
       ""

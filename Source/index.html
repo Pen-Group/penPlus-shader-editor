@@ -27,6 +27,7 @@
         --EditorTheme_Color_2: #0eaa7e;
         --EditorTheme_Color_3: #0c9770;
         --EditorTheme_Color_4: #28d1a1;
+        --EditorTheme_Color_5: #067958;
 
         --EditorTheme_Theme_1: #0f0f0f;
         --EditorTheme_Theme_2: #141414;
@@ -148,6 +149,7 @@
         background-color: #00000000;
         color: #00000000;
         z-index: 100;
+        caret-color: #ffffff;
       }
 
       .BlocklyShaderButtons {
@@ -198,9 +200,8 @@
         transition: all 250ms;
       }
 
-      .buttonDisabled {
-        background-color: var(--EditorTheme_Theme_4);
-        border-radius: 0px;
+      .buttonUnselected:disabled {
+        background-color: var(--EditorTheme_Color_5);
         border-color: transparent;
         color: var(--EditorTheme_Text_2);
       }

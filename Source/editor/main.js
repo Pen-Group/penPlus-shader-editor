@@ -54,15 +54,15 @@ function onAllAddonsLoaded() {
   penPlus.GLSL_CODE_HIGHLIGHTED = document.getElementById(
     "blocklyHighlightedOutput"
   );
-  penPlus.GLSL_CODE_HIGHLIGHTED.style.overflow = "scroll";
+  penPlus.GLSL_CODE_HIGHLIGHTED.style.overflowY = "scroll";
 
   penPlus.GLSL_CODE_WINDOW.onscroll = () => {
     penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
     penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft = penPlus.GLSL_CODE_WINDOW.scrollLeft;
   }
 
-  penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.doHighlight;
-  penPlus.GLSL_CODE_WINDOW.onkeyup = penPlus.doHighlight;
+  penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.editGLSL;
+  penPlus.GLSL_CODE_WINDOW.onkeyup = penPlus.editGLSL;
 
   createGLSLGen();
   addBlocks();
