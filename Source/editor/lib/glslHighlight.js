@@ -3,7 +3,7 @@
         //Custom blocks and functions
         {
           name: 'func_Highlight',
-          match: [/^([A-z_]+)\(/, '', '(']
+          match: [/^([A-z_\d]+)\(/, '', '(']
         },
         {
           name: 'func_Highlight',
