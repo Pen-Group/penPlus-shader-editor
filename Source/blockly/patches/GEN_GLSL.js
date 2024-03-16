@@ -299,6 +299,7 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   let vertFunction = "";
   let fragFunction = "";
 
+  //If there is no vertex shader then add one.
   if (!penPlus.Generated_GLSL.includes("void vertex")) {
     penPlus.Generated_GLSL += `
     void vertex() {
@@ -307,6 +308,7 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
     }\n`;
   }
 
+  //If there is not fragment shader then add one
   if (!penPlus.Generated_GLSL.includes("void fragment")) {
     penPlus.Generated_GLSL += `
     void fragment() {
@@ -352,14 +354,23 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 
   document.getElementById("myBlocklyCodeOutput").value = penPlus.Generated_GLSL;
 
-  penPlus.Generated_Vert = penPlus.Generated_GLSL.replace(
+  //I know this isn't the best but it works
+  penPlus.Generated_Vert = (penPlus.Generated_GLSL.replace(
     fragFunction,
     ""
-  ).replace("void vertex", "void main");
-  penPlus.Generated_Frag = penPlus.Generated_GLSL.replace(
+  ).replace(
     vertFunction,
     ""
-  ).replace("void fragment", "void main");
+  ) + vertFunction).replace("void vertex", "void main");
+
+  //This too
+  penPlus.Generated_Frag = (penPlus.Generated_GLSL.replace(
+    vertFunction,
+    ""
+  ).replace(
+    fragFunction,
+    ""
+  ) + fragFunction).replace("void fragment", "void main");
 
   genProgram();
 }
