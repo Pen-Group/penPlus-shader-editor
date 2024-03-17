@@ -62,17 +62,25 @@
     //comment highlight
     {
       name: "comment_Highlight",
-      match: /^(\/\/[\w\d\s]+\n)/,
+      match: /^(\/\/[\w\d\s\+\-\*\?\/\\\.\,1-90\!\@\#\$\%\^\&\(\)\_\=\`\~\<\>\]\[\"\'\:]+\n)/,
     },
 
     //operators
     {
       name: "operator_Highlight",
-      match: /^(>[=]+)/,
+      match: /^(>=+)/,
     },
     {
       name: "operator_Highlight",
-      match: /^(<[=]+)/,
+      match: /^(<=+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(>+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(<+)/,
     },
     {
       name: "operator_Highlight",
@@ -84,19 +92,35 @@
     },
     {
       name: "operator_Highlight",
-      match: /^(\*[=]+)/,
+      match: /^(\*+)/,
     },
     {
       name: "operator_Highlight",
-      match: /^(\+[+=]+)/,
+      match: /^(\++)/,
     },
     {
       name: "operator_Highlight",
-      match: /^(\-[-=]+)/,
+      match: /^(\-+)/,
     },
     {
       name: "operator_Highlight",
-      match: /^(\/[=]+)/,
+      match: /^(\/+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(\*=+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(\+=+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(\-=+)/,
+    },
+    {
+      name: "operator_Highlight",
+      match: /^(\/=+)/,
     },
     {
       name: "operator_Highlight",

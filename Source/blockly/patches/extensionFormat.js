@@ -39,7 +39,9 @@ penPlus.penPlusExtension = class {
     let createdContentData = {
       kind: "category",
       name: myInfo.name,
-      colour: myInfo.color1,
+      colour: penPlus.customBlockColors[myInfo.id]
+      ? penPlus.customBlockColors[myInfo.id].colourPrimary
+      : myInfo.color1,
       contents: [],
     };
 

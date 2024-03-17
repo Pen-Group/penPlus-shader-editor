@@ -15,6 +15,18 @@
     };
   };
 
+  penPlus.RGBtoHex = (RGB) => {
+    let hexR = RGB.r.toString(16);
+    let hexG = RGB.g.toString(16);
+    let hexB = RGB.b.toString(16);
+
+    if (hexR.length == 1) hexR = "0" + hexR;
+    if (hexG.length == 1) hexG = "0" + hexG;
+    if (hexB.length == 1) hexB = "0" + hexB;
+
+    return hexR + hexG + hexB;
+  }
+
   penPlus.rgbToBrightest = (rgb) => {
     if (rgb.r > rgb.g && rgb.r > rgb.b) {
       return rgb.r;
@@ -62,31 +74,6 @@
           b = m[2];
     }
     if (typeof r != "undefined") return (r * 299 + g * 587 + b * 114) / 1000;
-  };
-
-  penPlus.createModal = (HTML) => {
-    const modal = {
-      background: document.createElement("div"),
-    };
-
-    modal.background.style.backgroundColor = "#00000066";
-    modal.background.style.width = "100%";
-    modal.background.style.height = "100%";
-    modal.background.style.position = "absolute";
-    modal.background.style.left = "0px";
-    modal.background.style.top = "0px";
-
-    modal.background.innerHTML = HTML;
-
-    modal.background.style.zIndex = "500";
-
-    document.body.appendChild(modal.background);
-
-    modal.close = () => {
-      document.body.removeChild(modal.background);
-    };
-
-    return modal;
   };
 
   penPlus.addBlockColorSet = (name, color1, color2, color3, text) => {

@@ -15,4 +15,31 @@
       options: contents,
     };
   };
+
+  
+
+  penPlus.createModal = (HTML) => {
+    const modal = {
+      background: document.createElement("div"),
+    };
+
+    modal.background.style.backgroundColor = "#00000066";
+    modal.background.style.width = "100%";
+    modal.background.style.height = "100%";
+    modal.background.style.position = "absolute";
+    modal.background.style.left = "0px";
+    modal.background.style.top = "0px";
+
+    modal.background.innerHTML = HTML;
+
+    modal.background.style.zIndex = "500";
+
+    document.body.appendChild(modal.background);
+
+    modal.close = () => {
+      document.body.removeChild(modal.background);
+    };
+
+    return modal;
+  };
 })();

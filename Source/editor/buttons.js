@@ -46,7 +46,7 @@
             penPlus.Generated_GLSL = contents.glsl;
             penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
 
-            penPlus.isText = contents.isText;
+            penPlus.isText = contents.isText || false;
             penPlus.blockly_Button.disabled = contents.isText;
 
             //if not blockly load the text
@@ -64,7 +64,11 @@
             }
           } else {
             Blockly.serialization.workspaces.load(contents, window.workspace);
+            penPlus.isTextMode = false;
           }
+
+          penPlus.recompileButton.style.visibility =
+              penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
         };
         reader.readAsText(file);
       },
@@ -82,6 +86,7 @@
   const creditsButton = document.getElementById("CreditsButton");
   const fileButton = document.getElementById("fileButton");
   const recompileButton = document.getElementById("recompileButton");
+  penPlus.recompileButton = recompileButton;
 
   const fileDropdown = document.getElementById("fileDropdown");
   const saveButton = document.getElementById("saveButton");
@@ -340,18 +345,55 @@
       categoryButtons[key].value =
         penPlus.penPlusTheme.blockStyles[`${key}_blocks`].colourPrimary;
       categoryButtons[key].addEventListener("change", () => {
+        //Create the color key
         penPlus.customBlockColors[key] = penPlus.customBlockColors[key] || {};
+
+        /*
+          ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
+          ░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
+          ░░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█░░░
+          ░░░█░░░░░░▄██▀▄▄░░░░░▄▄▄░░░░█░░
+          ░▄▀▒▄▄▄▒░█▀▀▀▀▄▄█░░░██▄▄█░░░░█░
+          █░▒█▒▄░▀▄▄▄▀░░░░░░░░█░░░▒▒▒▒▒░█
+          █░▒█░█▀▄▄░░░░░█▀░░░░▀▄░░▄▀▀▀▄▒█   Me when I use 2 spellings of Colour in the same script.
+          ░█░▀▄░█▄░█▀▄▄░▀░▀▀░▄▄▀░░░░█░░█░
+          ░░█░░░▀▄▀█▄▄░█▀▀▀▄▄▄▄▀▀█▀██░█░░
+          ░░░█░░░░██░░▀█▄▄▄█▄▄█▄████░█░░░
+          ░░░░█░░░░▀▀▄░█░░░█░█▀██████░█░░
+          ░░░░░▀▄░░░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█░░
+          ░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░▒░░░█░
+          ░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░
+          ░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░
+        */
+        //set the colours.
+
+        let primary = categoryButtons[key].value;
+
+        let secondary = penPlus.hexToRgb(primary);
+        secondary.r *= penPlus.brightnessByColor(primary) >= 128 ? 0.85 : 1.15;
+        secondary.g *= penPlus.brightnessByColor(primary) >= 128 ? 0.85 : 1.15;
+        secondary.b *= penPlus.brightnessByColor(primary) >= 128 ? 0.85 : 1.15;
+
+        let tertiary = penPlus.hexToRgb(primary);
+        tertiary.r *= penPlus.brightnessByColor(primary) >= 128 ? 0.65 : 1.35;
+        tertiary.g *= penPlus.brightnessByColor(primary) >= 128 ? 0.65 : 1.35;
+        tertiary.b *= penPlus.brightnessByColor(primary) >= 128 ? 0.65 : 1.35;
+
         penPlus.customBlockColors[key].colourPrimary =
-          categoryButtons[key].value;
+          primary;
+
         penPlus.customBlockColors[key].colourSecondary =
-          categoryButtons[key].value;
+          penPlus.RGBtoHex(secondary);
         penPlus.customBlockColors[key].colourTertiary =
-          categoryButtons[key].value;
+          penPlus.RGBtoHex(tertiary);
+
+        //The text is pain
         (penPlus.customBlockColors[key].colorText =
           penPlus.brightnessByColor(categoryButtons[key].value) >= 200
             ? "#000000"
             : "#ffffff"),
-          console.log(key);
+
+        //Add it to local storage
         localStorage.setItem(
           "customBlockColors",
           JSON.stringify(penPlus.customBlockColors)
