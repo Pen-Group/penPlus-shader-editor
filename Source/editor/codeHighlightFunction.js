@@ -2,18 +2,21 @@
     penPlus.isTextMode = false;
 
     penPlus.editGLSL = (event) => {
-        recompileButton.style.visibility = "visible";
-        penPlus.isTextMode = true;
-        penPlus.blockly_Button.disabled = true;
+        if (event.key == "Tab") {
+          event.preventDefault();
+          penPlus.GLSL_CODE_WINDOW.value += "    ";
+        }
+
+        if (penPlus.GLSL_CODE_WINDOW.value != penPlus.Generated_GLSL) {
+          recompileButton.style.visibility = "visible";
+          penPlus.isTextMode = true;
+          penPlus.blockly_Button.disabled = true;
+        }
+
         penPlus.doHighlight(event);
     }
 
   penPlus.doHighlight = (event) => {
-    if (event.key == "Tab") {
-      event.preventDefault();
-      penPlus.GLSL_CODE_WINDOW.value += "    ";
-    }
-
     penPlus.GLSL_CODE_HIGHLIGHTED.innerHTML =
       penPlus.GLSL_CODE_WINDOW.value.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;");
 

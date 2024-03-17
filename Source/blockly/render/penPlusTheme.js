@@ -58,11 +58,11 @@ function penPlusBlocklyTheme() {
 
   document.body.style.setProperty(
     "--EditorTheme_Text_1",
-    penPlus.editorTheme == "dark" ? "#ffffff" : "000000"
+    penPlus.editorTheme == "dark" ? "#ffffff" : "#000000"
   );
   document.body.style.setProperty(
     "--EditorTheme_Text_2",
-    penPlus.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f"
+    penPlus.editorTheme == "dark" ? "#bfbfbf" : "#4f4f4f"
   );
   //Bad theme thing
   /*penPlus.blockStyles = {
@@ -170,11 +170,11 @@ penPlus.refreshTheme = () => {
 
   document.body.style.setProperty(
     "--EditorTheme_Text_1",
-    penPlus.editorTheme == "dark" ? "#ffffff" : "000000"
+    penPlus.editorTheme == "dark" ? "#ffffff" : "#000000"
   );
   document.body.style.setProperty(
     "--EditorTheme_Text_2",
-    penPlus.editorTheme == "dark" ? "#bfbfbf" : "4f4f4f"
+    penPlus.editorTheme == "dark" ? "#bfbfbf" : "#4f4f4f"
   );
 
   penPlus.penPlusTheme.componentStyles =

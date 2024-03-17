@@ -143,13 +143,23 @@
         visibility: var(--CodeVis);
         border-radius: 0px;
         border-color: transparent;
+
+        overflow: hidden;
       }
 
       .codeUnhighlighted {
         background-color: #00000000;
         color: #00000000;
         z-index: 100;
-        caret-color: #ffffff;
+        caret-color: var(--EditorTheme_Text_1);
+        overflow-x: visible;
+        overflow-y: visible;
+        white-space: pre;
+      }
+
+      .codeUnhighlighted::selection {
+        color: var(--EditorTheme_Text_3);
+        background-color: var(--EditorTheme_Color_3);
       }
 
       .BlocklyShaderButtons {
