@@ -56,19 +56,44 @@ function onAllAddonsLoaded() {
   );
 
   penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
-  penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft = penPlus.GLSL_CODE_WINDOW.scrollLeft;
+  penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
+    penPlus.GLSL_CODE_WINDOW.scrollLeft;
   penPlus.GLSL_CODE_WINDOW.onscroll = () => {
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft = penPlus.GLSL_CODE_WINDOW.scrollLeft;
-    if (penPlus.GLSL_CODE_WINDOW.scrollTop > penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop) penPlus.GLSL_CODE_WINDOW.scrollTop = penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
-    if (penPlus.GLSL_CODE_WINDOW.scrollLeft > penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft) penPlus.GLSL_CODE_WINDOW.scrollLeft = penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
-  }
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop =
+      penPlus.GLSL_CODE_WINDOW.scrollTop;
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
+      penPlus.GLSL_CODE_WINDOW.scrollLeft;
+    if (
+      penPlus.GLSL_CODE_WINDOW.scrollTop >
+      penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop
+    )
+      penPlus.GLSL_CODE_WINDOW.scrollTop =
+        penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
+    if (
+      penPlus.GLSL_CODE_WINDOW.scrollLeft >
+      penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft
+    )
+      penPlus.GLSL_CODE_WINDOW.scrollLeft =
+        penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
+  };
 
   document.onscrollend = () => {
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft = penPlus.GLSL_CODE_WINDOW.scrollLeft;
-    if (penPlus.GLSL_CODE_WINDOW.scrollTop > penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop) penPlus.GLSL_CODE_WINDOW.scrollTop = penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
-    if (penPlus.GLSL_CODE_WINDOW.scrollLeft > penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft) penPlus.GLSL_CODE_WINDOW.scrollLeft = penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop =
+      penPlus.GLSL_CODE_WINDOW.scrollTop;
+    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
+      penPlus.GLSL_CODE_WINDOW.scrollLeft;
+    if (
+      penPlus.GLSL_CODE_WINDOW.scrollTop >
+      penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop
+    )
+      penPlus.GLSL_CODE_WINDOW.scrollTop =
+        penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
+    if (
+      penPlus.GLSL_CODE_WINDOW.scrollLeft >
+      penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft
+    )
+      penPlus.GLSL_CODE_WINDOW.scrollLeft =
+        penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
   };
 
   penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.editGLSL;

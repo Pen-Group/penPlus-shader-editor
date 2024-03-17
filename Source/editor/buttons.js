@@ -121,7 +121,7 @@
     glsl_Button.className = "buttonSelected";
     blockly_Button.className = "buttonUnselected";
 
-    penPlus.doHighlight({})
+    penPlus.doHighlight({});
   };
 
   blockly_Button.onclick = () => {
@@ -295,9 +295,8 @@
       penPlus.autoCompile = autocompileButton.checked;
       localStorage.setItem("AutoCompile", autocompileButton.checked);
 
-      recompileButton.style.visibility = (penPlus.autoCompile && (!penPlus.isTextMode))
-        ? "hidden"
-        : "visible";
+      recompileButton.style.visibility =
+        penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
     };
 
     document.getElementById("closeButton").onclick = () => {
@@ -403,7 +402,7 @@
         blockDat: Blockly.serialization.workspaces.save(penPlus.workspace),
         dynamicDat: penPlus.dynamicallyAdded,
         glsl: penPlus.Generated_GLSL,
-        isText:penPlus.isTextMode
+        isText: penPlus.isTextMode,
       }),
       "shader.pps",
       ""

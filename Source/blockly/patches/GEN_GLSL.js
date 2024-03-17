@@ -173,8 +173,8 @@ function updateGLSL(event) {
   document.getElementById("shaderLog").innerHTML = "";
 
   if (!penPlus.isTextMode) {
-  //Base GLSL code
-  penPlus.Generated_GLSL = `//Base Variables
+    //Base GLSL code
+    penPlus.Generated_GLSL = `//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;
 attribute highp vec2 a_texCoord;
@@ -244,53 +244,54 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 }
 `;
 
-  //Add Variables
-  workspace.getAllVariables().forEach((variable) => {
-    let type = variable.type;
+    //Add Variables
+    workspace.getAllVariables().forEach((variable) => {
+      let type = variable.type;
 
-    if (type == "texture") type = "sampler2D";
-    if (type == "cubemap") type = "samplerCube";
-    if (type == "matrix_2x") type = "mat2";
-    if (type == "matrix_3x") type = "mat3";
-    if (type == "matrix_4x") type = "mat4";
+      if (type == "texture") type = "sampler2D";
+      if (type == "cubemap") type = "samplerCube";
+      if (type == "matrix_2x") type = "mat2";
+      if (type == "matrix_3x") type = "mat3";
+      if (type == "matrix_4x") type = "mat4";
 
-    let appendance = "";
+      let appendance = "";
 
-    let scope = variable.name.split(" ")[0].split("[")[0];
-    if (scope == "array") {
-      scope = "uniform";
-      appendance = `[${variable.name
-        .split(" ")[0]
-        .split("[")[1]
-        .replace("]", "")}]`;
-    }
-    if (scope == "hat") return;
+      let scope = variable.name.split(" ")[0].split("[")[0];
+      if (scope == "array") {
+        scope = "uniform";
+        appendance = `[${variable.name
+          .split(" ")[0]
+          .split("[")[1]
+          .replace("]", "")}]`;
+      }
+      if (scope == "hat") return;
 
-    if (!variable.name.split(" ")[1]) return;
+      if (!variable.name.split(" ")[1]) return;
 
-    //Types that don't have precision
-    if (
-      variable.type == "texture" ||
-      variable.type == "cubemap" ||
-      variable.type == "int"
-    )
-      penPlus.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
-        variable.name.split(" ")[1] + appendance
-      };\n`;
-    else
-      penPlus.Generated_GLSL += `\n${scope} highp ${type} ${
-        variable.name.split(" ")[1] + appendance
-      };\n`;
-  });
+      //Types that don't have precision
+      if (
+        variable.type == "texture" ||
+        variable.type == "cubemap" ||
+        variable.type == "int"
+      )
+        penPlus.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
+          variable.name.split(" ")[1] + appendance
+        };\n`;
+      else
+        penPlus.Generated_GLSL += `\n${scope} highp ${type} ${
+          variable.name.split(" ")[1] + appendance
+        };\n`;
+    });
 
-  //Add some spacing
-  penPlus.Generated_GLSL += `\n`;
+    //Add some spacing
+    penPlus.Generated_GLSL += `\n`;
 
-  penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
+    penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(
+      penPlus.workspace
+    );
 
-  penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
-  }
-  else {
+    penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+  } else {
     penPlus.Generated_GLSL = penPlus.GLSL_CODE_WINDOW.value;
   }
 

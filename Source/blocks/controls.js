@@ -161,10 +161,9 @@
       const code = generator.statementToCode(block, "code");
       penPlus.loopID = penPlus.loopID || 0;
       penPlus.loopID += 1;
-      const text = (
+      const text =
         `for (int penPlusLoop_${penPlus.loopID}=0;penPlusLoop_${penPlus.loopID}<int(${times});penPlusLoop_${penPlus.loopID}++) {\n${code}\n}` +
-        nextBlockToCode(block, generator)
-      );
+        nextBlockToCode(block, generator);
       penPlus.loopID -= 1;
       return text;
     }
