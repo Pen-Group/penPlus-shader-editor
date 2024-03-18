@@ -16,9 +16,9 @@
   };
 
   penPlus.RGBtoHex = (RGB) => {
-    let hexR = RGB.r.toString(16);
-    let hexG = RGB.g.toString(16);
-    let hexB = RGB.b.toString(16);
+    let hexR = Math.floor(RGB.r).toString(16);
+    let hexG = Math.floor(RGB.g).toString(16);
+    let hexB = Math.floor(RGB.b).toString(16);
 
     if (hexR.length == 1) hexR = "0" + hexR;
     if (hexG.length == 1) hexG = "0" + hexG;
