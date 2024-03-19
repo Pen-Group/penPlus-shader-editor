@@ -49,6 +49,8 @@
             penPlus.isText = contents.isText || false;
             penPlus.blockly_Button.disabled = contents.isText;
 
+            penPlus.previousVariableStates = contents.savedVarState || {};
+
             //if not blockly load the text
             if (penPlus.isText) {
               penPlus.glsl_Button.onclick();
@@ -454,6 +456,7 @@
         dynamicDat: penPlus.dynamicallyAdded,
         glsl: penPlus.Generated_GLSL,
         isText: penPlus.isTextMode,
+        savedVarState: penPlus.previousVariableStates || {}
       }),
       "shader.pps",
       ""
