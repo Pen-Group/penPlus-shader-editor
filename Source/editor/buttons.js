@@ -91,8 +91,15 @@
   penPlus.recompileButton = recompileButton;
 
   const fileDropdown = document.getElementById("fileDropdown");
+  const newButton = document.getElementById("newButton");
   const saveButton = document.getElementById("saveButton");
+  const exportButton = document.getElementById("exportButton");
   const loadButton = document.getElementById("loadButton");
+
+  //Remove the export button if we are in an IFrame
+  if (window.location === window.parent.location) {
+    fileDropdown.removeChild(exportButton);
+  }
 
   const blockly = document.getElementById("BlocklyDiv");
 
@@ -448,6 +455,45 @@
   triangleButton.onclick = () => {
     penPlus.previewMode = "triangle";
   };
+
+  newButton.onclick = () => {
+    let emptyFile = {
+      "blockDat":{},
+      "dynamicDat":{
+        "dynamic_variables":[],
+        "dynamic_myblocks":[]
+      },
+      "glsl":"//Base Variables\nattribute highp vec4 a_position;\nattribute highp vec4 a_color;\nattribute highp vec2 a_texCoord;\n \nvarying highp vec4 v_color;\nvarying highp vec2 v_texCoord;\n\nvarying highp float v_depth;\n\nuniform highp float u_timer;\n\n//PenPlus Textures\nuniform sampler2D u_texture;\nuniform mediump vec2 u_res;\n\n//Base functions\nhighp float log10(highp float a) {\n  return log(a)/log(10.0);\n}\n\nhighp float eulernum(highp float a) {\n    return 2.718 * a;\n}\n\nhighp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, highp float a) {\n  highp float huePrime = mod(hue,360.0);\n\n  highp float c = (value/100.0) * (saturation/100.0);\n  highp float x = c * (1.0 - abs(mod(huePrime/60.0, 2.0) - 1.0));\n  highp float m = (value/100.0) - c;\n\n  highp float r = 0.0;\n  highp float g = 0.0;\n  highp float b = 0.0;\n  \n  if (huePrime >= 0.0 && huePrime < 60.0) {\n      r = c;\n      g = x;\n      b = 0.0;\n  } else if (huePrime >= 60.0 && huePrime < 120.0) {\n      r = x;\n      g = c;\n      b = 0.0;\n  } else if (huePrime >= 120.0 && huePrime < 180.0) {\n      r = 0.0;\n      g = c;\n      b = x;\n  } else if (huePrime >= 180.0 && huePrime < 240.0) {\n      r = 0.0;\n      g = x;\n      b = c;\n  } else if (huePrime >= 240.0 && huePrime < 300.0) {\n      r = x;\n      g = 0.0;\n      b = c;\n  } else if (huePrime >= 300.0 && huePrime < 360.0) {\n      r = c;\n      g = 0.0;\n      b = x;\n  }\n\n  r += m;\n  g += m;\n  b += m;\n\n  return vec4(r, g, b, a);\n}\n\n\n    void vertex() {\n      gl_Position = a_position;\n      v_texCoord = a_texCoord;\n    }\n\n    void fragment() {\n      gl_FragColor = vec4(1,1,1,1);\n    }\n",
+      "isText":false,
+      "savedVarState":{}
+    }
+
+    if (window.confirm("Do you want to make a new project?")) {
+      penPlus.dynamicallyAdded = emptyFile.dynamicDat;
+
+      penPlus.Generated_GLSL = emptyFile.glsl;
+      penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+
+      penPlus.isText = emptyFile.isText || false;
+      penPlus.blockly_Button.disabled = emptyFile.isText;
+
+      penPlus.previousVariableStates = emptyFile.savedVarState || {};
+
+      //if not blockly load the text
+      if (penPlus.isText) {
+        penPlus.glsl_Button.onclick();
+      }
+      //if blockly load the blockly workspace
+      else {
+        penPlus.blockly_Button.onclick();
+
+        Blockly.serialization.workspaces.load(
+          emptyFile.blockDat,
+          window.workspace
+        );
+      }
+    }
+  }
 
   saveButton.onclick = () => {
     download(
