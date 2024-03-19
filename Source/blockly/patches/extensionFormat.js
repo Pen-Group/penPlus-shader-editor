@@ -40,8 +40,8 @@ penPlus.penPlusExtension = class {
       kind: "category",
       name: myInfo.name,
       colour: penPlus.customBlockColors[myInfo.id]
-      ? penPlus.customBlockColors[myInfo.id].colourPrimary
-      : myInfo.color1,
+        ? penPlus.customBlockColors[myInfo.id].colourPrimary
+        : myInfo.color1,
       contents: [],
     };
 

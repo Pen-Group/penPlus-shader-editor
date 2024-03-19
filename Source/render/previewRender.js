@@ -56,8 +56,6 @@ function previewRender() {
 
   penPlus.timer = 0;
 
-  penPlus.previewMode = "triangle";
-
   let lastTime = Date.now();
   let now = Date.now();
 

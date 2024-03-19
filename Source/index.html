@@ -694,22 +694,14 @@
             <button
               class="toggleButton"
               id="saveButton"
-              style="
-                width: 100%;
-                border-radius: 0%;
-                border-radius: 0%;
-              "
+              style="width: 100%; border-radius: 0%; border-radius: 0%"
             >
               Save Project
             </button>
             <button
               class="toggleButton"
               id="exportButton"
-              style="
-                width: 100%;
-                border-radius: 0%;
-                border-radius: 0%;
-              "
+              style="width: 100%; border-radius: 0%; border-radius: 0%"
             >
               Export to Scratch
             </button>
@@ -982,6 +974,9 @@
       const penPlus = {};
     </script>
 
+    <!--Iframe API-->
+    <script src="iframe/iframeAPI.js"></script>
+
     <!--Blockly Itself-->
     <script src="blockly/blockly.min.js"></script>
 
@@ -1035,7 +1030,11 @@
     <script src="editor/codeHighlightFunction.js"></script>
 
     <!--Editor-->
-    <script src="editor/buttons.js"></script>
+    <script src="editor/buttons/general.js"></script>
+    <script src="editor/buttons/fileHandling.js"></script>
+    <script src="editor/buttons/settings.js"></script>
+    <script src="editor/buttons/credits.js"></script>
+    <script src="editor/buttons/previewButtons.js"></script>
     <script src="editor/main.js"></script>
     <script src="editor/previewPopout.js"></script>
     <!--neato-->

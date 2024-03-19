@@ -122,11 +122,16 @@ function getTypedInput(type, name) {
 
       input.innerHTML = options;
 
-      if (penPlus.previousVariableStates[name]) input.value = penPlus.previousVariableStates[name];
-      gl.shaders.editorShader.uniforms[name].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name] : penPlus.textures[input.value];
+      if (penPlus.previousVariableStates[name])
+        input.value = penPlus.previousVariableStates[name];
+      gl.shaders.editorShader.uniforms[name].value = penPlus
+        .previousVariableStates[name]
+        ? penPlus.previousVariableStates[name]
+        : penPlus.textures[input.value];
 
       input.addEventListener("change", () => {
-        gl.shaders.editorShader.uniforms[name].value = penPlus.textures[input.value];
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.textures[input.value];
         penPlus.previousVariableStates[name] = input.value;
       });
 
@@ -140,12 +145,17 @@ function getTypedInput(type, name) {
       input.value = 0;
       input.className = "scratchStyledInput";
 
-      input.value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name] : gl.shaders.editorShader.uniforms[name].current;
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name]
+        : gl.shaders.editorShader.uniforms[name].current;
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.addEventListener("change", () => {
         gl.shaders.editorShader.uniforms[name].value = input.value;
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       });
 
       return input;
@@ -158,11 +168,16 @@ function getTypedInput(type, name) {
       input.value = 0;
       input.className = "scratchStyledInput";
 
-      input.value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name] : gl.shaders.editorShader.uniforms[name].current;
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name]
+        : gl.shaders.editorShader.uniforms[name].current;
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
       input.addEventListener("change", () => {
         gl.shaders.editorShader.uniforms[name].value = Math.floor(input.value);
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       });
 
       return input;
@@ -191,12 +206,19 @@ function getTypedInput(type, name) {
           input.children[0].value,
           input.children[1].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
 
@@ -234,13 +256,22 @@ function getTypedInput(type, name) {
           input.children[1].value,
           input.children[2].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][2] : gl.shaders.editorShader.uniforms[name].current[2];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      input.children[2].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][2]
+        : gl.shaders.editorShader.uniforms[name].current[2];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
@@ -283,14 +314,25 @@ function getTypedInput(type, name) {
           input.children[2].value,
           input.children[3].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][2] : gl.shaders.editorShader.uniforms[name].current[2];
-      input.children[3].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][3] : gl.shaders.editorShader.uniforms[name].current[3];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      input.children[2].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][2]
+        : gl.shaders.editorShader.uniforms[name].current[2];
+      input.children[3].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][3]
+        : gl.shaders.editorShader.uniforms[name].current[3];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
@@ -332,14 +374,25 @@ function getTypedInput(type, name) {
           input.children[2].value,
           input.children[3].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][2] : gl.shaders.editorShader.uniforms[name].current[2];
-      input.children[3].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][3] : gl.shaders.editorShader.uniforms[name].current[3];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      input.children[2].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][2]
+        : gl.shaders.editorShader.uniforms[name].current[2];
+      input.children[3].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][3]
+        : gl.shaders.editorShader.uniforms[name].current[3];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
@@ -411,19 +464,40 @@ function getTypedInput(type, name) {
           input.children[7].value,
           input.children[8].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][2] : gl.shaders.editorShader.uniforms[name].current[2];
-      input.children[3].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][3] : gl.shaders.editorShader.uniforms[name].current[3];
-      input.children[4].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][4] : gl.shaders.editorShader.uniforms[name].current[4];
-      input.children[5].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][5] : gl.shaders.editorShader.uniforms[name].current[5];
-      input.children[6].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][6] : gl.shaders.editorShader.uniforms[name].current[6];
-      input.children[7].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][7] : gl.shaders.editorShader.uniforms[name].current[7];
-      input.children[8].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][8] : gl.shaders.editorShader.uniforms[name].current[8];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      input.children[2].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][2]
+        : gl.shaders.editorShader.uniforms[name].current[2];
+      input.children[3].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][3]
+        : gl.shaders.editorShader.uniforms[name].current[3];
+      input.children[4].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][4]
+        : gl.shaders.editorShader.uniforms[name].current[4];
+      input.children[5].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][5]
+        : gl.shaders.editorShader.uniforms[name].current[5];
+      input.children[6].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][6]
+        : gl.shaders.editorShader.uniforms[name].current[6];
+      input.children[7].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][7]
+        : gl.shaders.editorShader.uniforms[name].current[7];
+      input.children[8].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][8]
+        : gl.shaders.editorShader.uniforms[name].current[8];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
@@ -542,26 +616,61 @@ function getTypedInput(type, name) {
           input.children[14].value,
           input.children[15].value,
         ];
-        penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        penPlus.previousVariableStates[name] =
+          gl.shaders.editorShader.uniforms[name].current;
       };
 
-      input.children[0].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][0] : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][1] : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][2] : gl.shaders.editorShader.uniforms[name].current[2];
-      input.children[3].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][3] : gl.shaders.editorShader.uniforms[name].current[3];
-      input.children[4].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][4] : gl.shaders.editorShader.uniforms[name].current[4];
-      input.children[5].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][5] : gl.shaders.editorShader.uniforms[name].current[5];
-      input.children[6].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][6] : gl.shaders.editorShader.uniforms[name].current[6];
-      input.children[7].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][7] : gl.shaders.editorShader.uniforms[name].current[7];
-      input.children[8].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][8] : gl.shaders.editorShader.uniforms[name].current[8];
-      input.children[9].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][9] : gl.shaders.editorShader.uniforms[name].current[9];
-      input.children[10].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][10] : gl.shaders.editorShader.uniforms[name].current[10];
-      input.children[11].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][11] : gl.shaders.editorShader.uniforms[name].current[11];
-      input.children[12].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][12] : gl.shaders.editorShader.uniforms[name].current[12];
-      input.children[13].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][13] : gl.shaders.editorShader.uniforms[name].current[13];
-      input.children[14].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][14] : gl.shaders.editorShader.uniforms[name].current[14];
-      input.children[15].value = (penPlus.previousVariableStates[name]) ? penPlus.previousVariableStates[name][15] : gl.shaders.editorShader.uniforms[name].current[15];
-      if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+      input.children[0].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][0]
+        : gl.shaders.editorShader.uniforms[name].current[0];
+      input.children[1].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][1]
+        : gl.shaders.editorShader.uniforms[name].current[1];
+      input.children[2].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][2]
+        : gl.shaders.editorShader.uniforms[name].current[2];
+      input.children[3].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][3]
+        : gl.shaders.editorShader.uniforms[name].current[3];
+      input.children[4].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][4]
+        : gl.shaders.editorShader.uniforms[name].current[4];
+      input.children[5].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][5]
+        : gl.shaders.editorShader.uniforms[name].current[5];
+      input.children[6].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][6]
+        : gl.shaders.editorShader.uniforms[name].current[6];
+      input.children[7].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][7]
+        : gl.shaders.editorShader.uniforms[name].current[7];
+      input.children[8].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][8]
+        : gl.shaders.editorShader.uniforms[name].current[8];
+      input.children[9].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][9]
+        : gl.shaders.editorShader.uniforms[name].current[9];
+      input.children[10].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][10]
+        : gl.shaders.editorShader.uniforms[name].current[10];
+      input.children[11].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][11]
+        : gl.shaders.editorShader.uniforms[name].current[11];
+      input.children[12].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][12]
+        : gl.shaders.editorShader.uniforms[name].current[12];
+      input.children[13].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][13]
+        : gl.shaders.editorShader.uniforms[name].current[13];
+      input.children[14].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][14]
+        : gl.shaders.editorShader.uniforms[name].current[14];
+      input.children[15].value = penPlus.previousVariableStates[name]
+        ? penPlus.previousVariableStates[name][15]
+        : gl.shaders.editorShader.uniforms[name].current[15];
+      if (penPlus.previousVariableStates[name])
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.previousVariableStates[name];
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);

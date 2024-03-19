@@ -25,7 +25,7 @@
     if (hexB.length == 1) hexB = "0" + hexB;
 
     return hexR + hexG + hexB;
-  }
+  };
 
   penPlus.rgbToBrightest = (rgb) => {
     if (rgb.r > rgb.g && rgb.r > rgb.b) {

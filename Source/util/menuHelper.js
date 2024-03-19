@@ -16,8 +16,6 @@
     };
   };
 
-  
-
   penPlus.createModal = (HTML) => {
     const modal = {
       background: document.createElement("div"),
