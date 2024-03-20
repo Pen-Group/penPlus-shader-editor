@@ -33,7 +33,7 @@
         penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
 
         if (penPlus.IFRAME_API.exitButton == true) {
-          penPlus.IFRAME_API.closeButton.style.position = "inherited";
+          penPlus.IFRAME_API.closeButton.style.position = "relative";
           penPlus.IFRAME_API.closeButton.style.visibility = "visible";
         }
         else {
