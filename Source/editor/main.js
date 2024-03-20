@@ -126,7 +126,7 @@ function onAllAddonsLoaded() {
   const disableTopBlocksPlugin = new penPlus.DisableTopBlocks();
   disableTopBlocksPlugin.init();
 
-  if (window.location === window.parent.location) {
+  if (window.location !== window.parent.location) {
     penPlus.IFRAME_API.readyMessage();
   }
 }

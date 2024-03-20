@@ -35,6 +35,7 @@
   });
 
   penPlus.IFRAME_API.readyMessage = () => {
+    console.log("sending ready message");
     window.parent.postMessage({type: "READY"});
   }
 })();
