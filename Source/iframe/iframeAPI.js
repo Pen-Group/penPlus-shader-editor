@@ -11,7 +11,7 @@
   penPlus.IFRAME_API.closeButton.style.visibility = "hidden";
 
   penPlus.IFRAME_API.closeButton.onclick = () => {
-    event.source.postMessage(
+    penPlus.IFRAME_API.parent.postMessage(
       {
         type: "EDITOR_CLOSE",
       },
