@@ -3,8 +3,21 @@
     parent: {
       postMessage: () => {},
     },
+    closeButton: document.getElementById("CloseIFRAMEeditor"),
     isIFRAME: false,
   };
+
+  penPlus.IFRAME_API.closeButton.style.position = "absolute";
+  penPlus.IFRAME_API.closeButton.style.visibility = "hidden";
+
+  penPlus.IFRAME_API.closeButton.onclick = () => {
+    event.source.postMessage(
+      {
+        type: "EDITOR_CLOSE",
+      },
+      penPlus.IFRAME_API.parentURL
+    );
+  }
 
   window.addEventListener("message", (event) => {
     //Handle
@@ -18,6 +31,15 @@
         penPlus.IFRAME_API.isIFRAME = true;
 
         penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
+
+        if (penPlus.IFRAME_API.exitButton == true) {
+          penPlus.IFRAME_API.closeButton.style.position = "inherited";
+          penPlus.IFRAME_API.closeButton.style.visibility = "visible";
+        }
+        else {
+          penPlus.IFRAME_API.closeButton.style.position = "absolute";
+          penPlus.IFRAME_API.closeButton.style.visibility = "hidden";
+        }
 
         penPlus.IFRAME_API.parentURL = event.origin;
 
