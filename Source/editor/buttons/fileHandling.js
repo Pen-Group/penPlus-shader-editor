@@ -143,13 +143,13 @@
   loadButton.onclick = readSaveFile;
 
   exportButton.onclick = () => {
-    const projectData = JSON.stringify({
+    const projectData = {
       blockDat: Blockly.serialization.workspaces.save(penPlus.workspace),
       dynamicDat: penPlus.dynamicallyAdded,
       glsl: penPlus.Generated_GLSL,
       isText: penPlus.isTextMode,
       savedVarState: penPlus.previousVariableStates || {},
-    });
+    };
 
     updateGLSL({ type: Blockly.Events.BLOCK_CHANGE, isManualCompile: true });
 
