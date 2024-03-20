@@ -35,6 +35,6 @@
   });
 
   penPlus.IFRAME_API.readyMessage = () => {
-    event.source.postMessage({type: "READY"});
+    window.parent.postMessage({type: "READY"});
   }
 })();
