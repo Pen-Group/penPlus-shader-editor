@@ -21,7 +21,7 @@
         penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
         
         penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
-        document.getElementById("exportButton").innerHtml = penPlus.IFRAME_API.innerHTML;
+        document.getElementById("exportButton").innerHTML = penPlus.IFRAME_API.exportText;
 
         event.source.postMessage({
           type: "REGISTER_SUCCESS",
