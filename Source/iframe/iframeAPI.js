@@ -17,6 +17,11 @@
       case "REGISTER_PARENT":
         penPlus.IFRAME_API.parent = event.source;
         penPlus.IFRAME_API.isIFRAME = true;
+        
+        penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
+        
+        penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
+        document.getElementById("exportButton").innerHtml = penPlus.IFRAME_API.innerHTML;
 
         event.source.postMessage({
           type: "REGISTER_SUCCESS",
