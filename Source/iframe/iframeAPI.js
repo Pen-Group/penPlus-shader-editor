@@ -7,7 +7,6 @@
   };
 
   window.addEventListener("message", (event) => {
-    console.log(event);
     //Handle
     if (!event.data.type) {
       console.error("No event specified");
@@ -19,13 +18,15 @@
         penPlus.IFRAME_API.isIFRAME = true;
         
         penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
+
+        penPlus.IFRAME_API.parentURL = event.origin;
         
         penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
         document.getElementById("exportButton").innerHTML = penPlus.IFRAME_API.exportText;
 
         event.source.postMessage({
           type: "REGISTER_SUCCESS",
-        });
+        },penPlus.IFRAME_API.parentURL);
         break;
 
       default:
@@ -33,9 +34,4 @@
         break;
     }
   });
-
-  penPlus.IFRAME_API.readyMessage = () => {
-    console.log("sending ready message");
-    window.parent.postMessage({type: "READY"});
-  }
 })();

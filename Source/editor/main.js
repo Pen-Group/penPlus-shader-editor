@@ -125,8 +125,4 @@ function onAllAddonsLoaded() {
   // The plugin must be initialized before it has any effect.
   const disableTopBlocksPlugin = new penPlus.DisableTopBlocks();
   disableTopBlocksPlugin.init();
-
-  if (window.location !== window.parent.location) {
-    penPlus.IFRAME_API.readyMessage();
-  }
 }
