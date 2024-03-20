@@ -1,9 +1,9 @@
 (function () {
   penPlus.IFRAME_API = {
-    parent:{
-      postMessage: () => {}
+    parent: {
+      postMessage: () => {},
     },
-    isIFRAME:false,
+    isIFRAME: false,
   };
 
   window.addEventListener("message", (event) => {
@@ -16,17 +16,21 @@
       case "REGISTER_PARENT":
         penPlus.IFRAME_API.parent = event.source;
         penPlus.IFRAME_API.isIFRAME = true;
-        
+
         penPlus.IFRAME_API.exitButton = event.data.exitButton || false;
 
         penPlus.IFRAME_API.parentURL = event.origin;
-        
-        penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
-        document.getElementById("exportButton").innerHTML = penPlus.IFRAME_API.exportText;
 
-        event.source.postMessage({
-          type: "REGISTER_SUCCESS",
-        },penPlus.IFRAME_API.parentURL);
+        penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
+        document.getElementById("exportButton").innerHTML =
+          penPlus.IFRAME_API.exportText;
+
+        event.source.postMessage(
+          {
+            type: "REGISTER_SUCCESS",
+          },
+          penPlus.IFRAME_API.parentURL
+        );
         break;
 
       default:

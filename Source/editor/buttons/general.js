@@ -1,4 +1,4 @@
-(function(){
+(function () {
   const glsl_Button = document.getElementById("ButtonGLSL");
   penPlus.glsl_Button = glsl_Button;
   const blockly_Button = document.getElementById("ButtonBlockly");

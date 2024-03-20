@@ -153,12 +153,15 @@
 
     updateGLSL({ type: Blockly.Events.BLOCK_CHANGE, isManualCompile: true });
 
-    penPlus.IFRAME_API.parent.postMessage({
-      type: "DATA_SEND",
-      projectData: projectData,
-      mergedGLSL: penPlus.Generated_GLSL,
-      vertShader: penPlus.Generated_Vert,
-      fragShader: penPlus.Generated_Frag,
-    },penPlus.IFRAME_API.parentURL);
+    penPlus.IFRAME_API.parent.postMessage(
+      {
+        type: "DATA_SEND",
+        projectData: projectData,
+        mergedGLSL: penPlus.Generated_GLSL,
+        vertShader: penPlus.Generated_Vert,
+        fragShader: penPlus.Generated_Frag,
+      },
+      penPlus.IFRAME_API.parentURL
+    );
   };
 })();

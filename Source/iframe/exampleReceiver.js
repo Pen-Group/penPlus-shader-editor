@@ -10,7 +10,10 @@
   const onRegistered = () => {
     console.log("iframe registered");
     //register the parent window by posting a message to the IFrame.
-    IFrame.contentWindow.postMessage({ type: "REGISTER_PARENT" ,exportText:`Export to ${window.location.hostname}`});
+    IFrame.contentWindow.postMessage({
+      type: "REGISTER_PARENT",
+      exportText: `Export to ${window.location.hostname}`,
+    });
     //Check for incoming messages
     window.addEventListener(
       "message",
