@@ -33,4 +33,8 @@
         break;
     }
   });
+
+  penPlus.IFRAME_API.readyMessage = () => {
+    event.source.postMessage({type: "READY"});
+  }
 })();
