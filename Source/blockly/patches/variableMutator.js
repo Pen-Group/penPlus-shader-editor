@@ -79,6 +79,8 @@
             })
           );
 
+          this.outputConnection.check.push(this.variableData.type);
+
           this.setStyle(__colorVariableBlock(this.variableData.type));
         }
       },

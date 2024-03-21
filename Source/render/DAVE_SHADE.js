@@ -178,6 +178,18 @@
               );
               break;
 
+            case "samplerCube":
+              if (!val) return;
+              GL.activeTexture(
+                GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
+              );
+              GL.bindTexture(GL.TEXTURE_CUBE_MAP, val);
+              GL.uniform1i(
+                GL.shaders[name].uniforms[uniformName].location,
+                GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
+              );
+              break;
+
             default:
               if (!val) return;
               GL.activeTexture(
@@ -244,6 +256,14 @@
             GL.shaders[name].textureID
           );
           GL.shaders[name].textureID += 1;
+          break;
+        
+        case "samplerCube":
+          GL.shaders[name].uniforms[uniformName].textureID = Number(
+            GL.shaders[name].textureID
+          );
+          GL.shaders[name].textureID += 1;
+          break;
 
         default:
           GL.shaders[name].uniforms[uniformName].value = 0.0;

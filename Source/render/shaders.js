@@ -105,17 +105,48 @@ function replacementShader() {
 //* THIS FUNCTION IS GOING TO KILL ME */
 function getTypedInput(type, name) {
   let input = "";
+  let keys = {};
+  let options = "";
   let inputFunction = () => {};
   switch (type) {
-    case "sampler2D":
-      const keys = Object.keys(penPlus.textures);
+    case "samplerCube":
+      keys = Object.keys(penPlus.cubemaps);
 
       input = document.createElement("select");
       input.style.width = "75%";
       input.className = "scratchStyledInput";
 
       //Loop through textures to add them to the list
-      let options = "";
+      options = "";
+      keys.forEach((key) => {
+        options += `<option value="${key}">cubemap ${key}</option>`;
+      });
+
+      input.innerHTML = options;
+
+      if (penPlus.previousVariableStates[name])
+        input.value = penPlus.previousVariableStates[name];
+      gl.shaders.editorShader.uniforms[name].value = penPlus
+        .previousVariableStates[name]
+        ? penPlus.previousVariableStates[name]
+        : penPlus.cubemaps[input.value];
+
+      input.addEventListener("change", () => {
+        gl.shaders.editorShader.uniforms[name].value =
+          penPlus.cubemaps[input.value];
+        penPlus.previousVariableStates[name] = input.value;
+      });
+
+      return input;
+    case "sampler2D":
+      keys = Object.keys(penPlus.textures);
+
+      input = document.createElement("select");
+      input.style.width = "75%";
+      input.className = "scratchStyledInput";
+
+      //Loop through textures to add them to the list
+      options = "";
       keys.forEach((key) => {
         options += `<option value="${key}">texture ${key}</option>`;
       });
