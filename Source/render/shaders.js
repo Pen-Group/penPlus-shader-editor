@@ -103,7 +103,7 @@ function replacementShader() {
 }
 
 //* THIS FUNCTION IS GOING TO KILL ME */
-function getTypedInput(type, name) {
+function getTypedInput(type, name, point) {
   let input = "";
   let keys = {};
   let options = "";
@@ -175,19 +175,21 @@ function getTypedInput(type, name) {
       input.type = "Number";
       input.value = 0;
       input.className = "scratchStyledInput";
+      if (point) {
+      } else {
+        input.value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name]
+          : gl.shaders.editorShader.uniforms[name].current;
+        if (penPlus.previousVariableStates[name])
+          gl.shaders.editorShader.uniforms[name].value =
+            penPlus.previousVariableStates[name];
 
-      input.value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name]
-        : gl.shaders.editorShader.uniforms[name].current;
-      if (penPlus.previousVariableStates[name])
-        gl.shaders.editorShader.uniforms[name].value =
-          penPlus.previousVariableStates[name];
-
-      input.addEventListener("change", () => {
-        gl.shaders.editorShader.uniforms[name].value = input.value;
-        penPlus.previousVariableStates[name] =
-          gl.shaders.editorShader.uniforms[name].current;
-      });
+        input.addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[name].value = input.value;
+          penPlus.previousVariableStates[name] =
+            gl.shaders.editorShader.uniforms[name].current;
+        });
+      }
 
       return input;
 
@@ -198,18 +200,22 @@ function getTypedInput(type, name) {
       input.type = "Number";
       input.value = 0;
       input.className = "scratchStyledInput";
-
-      input.value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name]
-        : gl.shaders.editorShader.uniforms[name].current;
-      if (penPlus.previousVariableStates[name])
-        gl.shaders.editorShader.uniforms[name].value =
-          penPlus.previousVariableStates[name];
-      input.addEventListener("change", () => {
-        gl.shaders.editorShader.uniforms[name].value = Math.floor(input.value);
-        penPlus.previousVariableStates[name] =
-          gl.shaders.editorShader.uniforms[name].current;
-      });
+      if (point) {
+      } else {
+        input.value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name]
+          : gl.shaders.editorShader.uniforms[name].current;
+        if (penPlus.previousVariableStates[name])
+          gl.shaders.editorShader.uniforms[name].value =
+            penPlus.previousVariableStates[name];
+        input.addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[name].value = Math.floor(
+            input.value
+          );
+          penPlus.previousVariableStates[name] =
+            gl.shaders.editorShader.uniforms[name].current;
+        });
+      }
 
       return input;
 
@@ -231,25 +237,27 @@ function getTypedInput(type, name) {
       input.children[1].type = "Number";
       input.children[1].value = 0;
       input.children[1].className = "scratchStyledInput";
+      if (point) {
+      } else {
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,
+            input.children[1].value,
+          ];
+          penPlus.previousVariableStates[name] =
+            gl.shaders.editorShader.uniforms[name].current;
+        };
 
-      inputFunction = () => {
-        gl.shaders.editorShader.uniforms[name].value = [
-          input.children[0].value,
-          input.children[1].value,
-        ];
-        penPlus.previousVariableStates[name] =
-          gl.shaders.editorShader.uniforms[name].current;
-      };
-
-      input.children[0].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][0]
-        : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][1]
-        : gl.shaders.editorShader.uniforms[name].current[1];
-      if (penPlus.previousVariableStates[name])
-        gl.shaders.editorShader.uniforms[name].value =
-          penPlus.previousVariableStates[name];
+        input.children[0].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][0]
+          : gl.shaders.editorShader.uniforms[name].current[0];
+        input.children[1].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][1]
+          : gl.shaders.editorShader.uniforms[name].current[1];
+        if (penPlus.previousVariableStates[name])
+          gl.shaders.editorShader.uniforms[name].value =
+            penPlus.previousVariableStates[name];
+      }
 
       input.children[0].addEventListener("change", inputFunction);
 
@@ -280,29 +288,31 @@ function getTypedInput(type, name) {
       input.children[2].type = "Number";
       input.children[2].value = 0;
       input.children[2].className = "scratchStyledInput";
+      if (point) {
+      } else {
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,
+            input.children[1].value,
+            input.children[2].value,
+          ];
+          penPlus.previousVariableStates[name] =
+            gl.shaders.editorShader.uniforms[name].current;
+        };
 
-      inputFunction = () => {
-        gl.shaders.editorShader.uniforms[name].value = [
-          input.children[0].value,
-          input.children[1].value,
-          input.children[2].value,
-        ];
-        penPlus.previousVariableStates[name] =
-          gl.shaders.editorShader.uniforms[name].current;
-      };
-
-      input.children[0].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][0]
-        : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][1]
-        : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][2]
-        : gl.shaders.editorShader.uniforms[name].current[2];
-      if (penPlus.previousVariableStates[name])
-        gl.shaders.editorShader.uniforms[name].value =
-          penPlus.previousVariableStates[name];
+        input.children[0].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][0]
+          : gl.shaders.editorShader.uniforms[name].current[0];
+        input.children[1].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][1]
+          : gl.shaders.editorShader.uniforms[name].current[1];
+        input.children[2].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][2]
+          : gl.shaders.editorShader.uniforms[name].current[2];
+        if (penPlus.previousVariableStates[name])
+          gl.shaders.editorShader.uniforms[name].value =
+            penPlus.previousVariableStates[name];
+      }
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
@@ -337,39 +347,40 @@ function getTypedInput(type, name) {
       input.children[3].type = "Number";
       input.children[3].value = 0;
       input.children[3].className = "scratchStyledInput";
+      if (point) {
+      } else {
+        inputFunction = () => {
+          gl.shaders.editorShader.uniforms[name].value = [
+            input.children[0].value,
+            input.children[1].value,
+            input.children[2].value,
+            input.children[3].value,
+          ];
+          penPlus.previousVariableStates[name] =
+            gl.shaders.editorShader.uniforms[name].current;
+        };
 
-      inputFunction = () => {
-        gl.shaders.editorShader.uniforms[name].value = [
-          input.children[0].value,
-          input.children[1].value,
-          input.children[2].value,
-          input.children[3].value,
-        ];
-        penPlus.previousVariableStates[name] =
-          gl.shaders.editorShader.uniforms[name].current;
-      };
-
-      input.children[0].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][0]
-        : gl.shaders.editorShader.uniforms[name].current[0];
-      input.children[1].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][1]
-        : gl.shaders.editorShader.uniforms[name].current[1];
-      input.children[2].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][2]
-        : gl.shaders.editorShader.uniforms[name].current[2];
-      input.children[3].value = penPlus.previousVariableStates[name]
-        ? penPlus.previousVariableStates[name][3]
-        : gl.shaders.editorShader.uniforms[name].current[3];
-      if (penPlus.previousVariableStates[name])
-        gl.shaders.editorShader.uniforms[name].value =
-          penPlus.previousVariableStates[name];
+        input.children[0].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][0]
+          : gl.shaders.editorShader.uniforms[name].current[0];
+        input.children[1].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][1]
+          : gl.shaders.editorShader.uniforms[name].current[1];
+        input.children[2].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][2]
+          : gl.shaders.editorShader.uniforms[name].current[2];
+        input.children[3].value = penPlus.previousVariableStates[name]
+          ? penPlus.previousVariableStates[name][3]
+          : gl.shaders.editorShader.uniforms[name].current[3];
+        if (penPlus.previousVariableStates[name])
+          gl.shaders.editorShader.uniforms[name].value =
+            penPlus.previousVariableStates[name];
+      }
 
       input.children[0].addEventListener("change", inputFunction);
       input.children[1].addEventListener("change", inputFunction);
       input.children[2].addEventListener("change", inputFunction);
       input.children[3].addEventListener("change", inputFunction);
-
       return input;
 
     case "mat2":
@@ -781,37 +792,70 @@ function genProgram() {
     }
   );
 
-  penPlus.shaderVars.innerHTML = "";
-
   try {
-    penPlus.ShaderAttributes.forEach((attribute) => {
-      if (attribute.scope == "uniform") {
-        gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
-        if (attribute.name != "u_timer" && attribute.name != "u_res") {
-          let divElement = document.createElement("div");
-          divElement.style.color = "var(--EditorTheme_Text_1)";
-          divElement.style.position = "relative";
-          divElement.style.maxWidth = "50%";
-          divElement.style.display = "flex";
+    penPlus.refreshVariableMenu = (refreshedPoints) => {
+      penPlus.shaderVars.innerHTML = "";
 
-          divElement.innerHTML = `${attribute.name}:`;
-          divElement.appendChild(getTypedInput(attribute.type, attribute.name));
+      penPlus.ShaderAttributes.forEach((attribute) => {
+        if (attribute.scope == "uniform") {
+          if (!refreshedPoints) gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
 
-          penPlus.shaderVars.appendChild(divElement);
+          //Remove pen+ uniforms that are static
+          if (attribute.name != "u_timer" && attribute.name != "u_res") {
+            let divElement = document.createElement("div");
+            divElement.style.color = "var(--EditorTheme_Text_1)";
+            divElement.style.position = "relative";
+            divElement.style.maxWidth = "50%";
+            divElement.style.display = "flex";
+  
+            divElement.innerHTML = `${attribute.name}:`;
+            divElement.appendChild(getTypedInput(attribute.type, attribute.name));
+  
+            penPlus.shaderVars.appendChild(divElement);
+          }
+        } else {
+          if (!refreshedPoints) gl.shaders["editorShader"].setupAttribute(
+            attribute.name,
+            attribute.type
+          );
+
+          //Remove preset attributes
+          if (
+            attribute.name != "a_position" &&
+            attribute.name != "a_color" &&
+            attribute.name != "a_texCoord"
+          ) {
+            let divElement = document.createElement("div");
+            divElement.style.color = "var(--EditorTheme_Text_1)";
+            divElement.style.position = "relative";
+            divElement.style.maxWidth = "100%";
+            divElement.style.display = "flex";
+  
+            divElement.innerHTML = `${attribute.name}:`;
+            penPlus.shaderVars.appendChild(divElement);
+
+            //Loop through every point
+            for (let vertexID = 0; vertexID < penPlus.pointCount; vertexID++) {
+              divElement = document.createElement("div");
+              divElement.style.color = "var(--EditorTheme_Text_1)";
+              divElement.style.position = "relative";
+              divElement.style.maxWidth = "100%";
+              divElement.style.display = "flex";
+    
+              divElement.innerHTML = `${attribute.name.replaceAll(/([A-Za-z_])/g,"⠀").replace('⠀',vertexID + 1)}:`;
+              divElement.appendChild(
+                getTypedInput(attribute.type, attribute.name, vertexID + 1)
+              );
+              penPlus.shaderVars.appendChild(divElement);
+            }
+          }
         }
-      } else {
-        gl.shaders["editorShader"].setupAttribute(
-          attribute.name,
-          attribute.type
-        );
-        if (
-          attribute.name != "a_position" &&
-          attribute.name != "a_color" &&
-          attribute.name != "a_texCoord"
-        ) {
-        }
-      }
-    });
+      });
+
+    }
+
+    penPlus.refreshVariableMenu();
+    penPlus.refreshMesh();
   } catch (error) {
     shaderLog(error);
   }

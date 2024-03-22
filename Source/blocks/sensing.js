@@ -53,6 +53,7 @@
             opcode: "timer",
             type: "reporter",
             text: "timer",
+            output:["arithmatic","float"],
             tooltip: "Just a simple timer",
           },
         ],

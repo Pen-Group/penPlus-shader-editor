@@ -25,6 +25,10 @@
           FeatherIcons.com<br>
           Google Material Icons<br>
           </span>
+          Extra Cubemaps from<br>
+          <span style="font-size: 0.5em;">
+          Ambient CG<br>
+          </span>
           Testers<br>
           <span style="font-size: 0.5em;">
           Alltrue<br>

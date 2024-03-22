@@ -17,7 +17,7 @@
       },
       penPlus.IFRAME_API.parentURL
     );
-  }
+  };
 
   window.addEventListener("message", (event) => {
     //Handle
@@ -35,8 +35,7 @@
         if (penPlus.IFRAME_API.exitButton == true) {
           penPlus.IFRAME_API.closeButton.style.position = "relative";
           penPlus.IFRAME_API.closeButton.style.visibility = "visible";
-        }
-        else {
+        } else {
           penPlus.IFRAME_API.closeButton.style.position = "absolute";
           penPlus.IFRAME_API.closeButton.style.visibility = "hidden";
         }
