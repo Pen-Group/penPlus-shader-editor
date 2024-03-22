@@ -226,22 +226,15 @@
               {
                 type: "input_value",
                 name: "VALUE",
-                variable: "uniform u_default",
-                defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                shadow: {
+                  type: "number_reporter",
+                },
               },
               {
                 type: "field_variable",
                 name: "VAR",
+                variable: "array[1] a_default",
+                defaultType: "float",
                 variableTypes: [
                   "float",
                   "int",
@@ -395,12 +388,24 @@
 
       const variableName = variable.name;
       const variableType = variable.type;
+      
+      let shadowDeisred = penPlus.stringToDOM(
+        '<shadow type="number_reporter"></shadow>'
+      );
+
+      if (
+        block.inputList[0].getShadowDom() == null ||
+        block.inputList[0].getShadowDom().getAttribute("type") !=
+          shadowDeisred.getAttribute("type")
+      ) {
+        this.inputList[0].setShadowDom(shadowDeisred);
+      }
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return [`${variableName.split(" ")[1]}[${value}]`, Order.ATOMIC];
+      return [`${variableName.split(" ")[1]}[int(${value})]`, Order.ATOMIC];
     }
 
     createVariableReporters(workspace) {
@@ -565,11 +570,11 @@
                   </div>
                   <div style="display: flex; width:33.3333%" id="VertexHolder">
                     <input type="checkbox" id="Attribute"></input>
-                    <p style="transform:translate(0%,-1em);">Vertex</p>
+                    <p style="transform:translate(0%,-1em);">Attribute</p>
                   </div>
                   <div style="display: flex; width:33.3333%" id="PixelHolder">
                     <input type="checkbox" id="Varying"></input>
-                    <p style="transform:translate(0%,-1em);">Pixel</p>
+                    <p style="transform:translate(0%,-1em);">Varying</p>
                   </div>
                   <div style="display: flex; width:33.3333%" id="HatHolder">
                     <input type="checkbox" id="Hat"></input>
@@ -677,7 +682,8 @@
       };
       variableTypeChangers.matrix.onclick = () => {
         cycleVariable("matrix");
-        setScopeVisibilities(true, true, true, true, true);
+        //I don't want to handle arrays for this imma be honest
+        setScopeVisibilities(false, true, false, false, true);
       };
 
       Array.onclick = () => {

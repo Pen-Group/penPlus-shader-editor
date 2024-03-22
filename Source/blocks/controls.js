@@ -89,6 +89,13 @@
             ],
           },
           {
+            opcode: "upperIndex",
+            type: "reporter",
+            text: "loop index",
+            tooltip: "The loop above this block's index",
+          },
+          "---",
+          {
             opcode: "continue",
             type: "terminal",
             text: "continue %1",
@@ -158,14 +165,18 @@
 
     repeat(block, generator) {
       const times = generator.valueToCode(block, "times", Order.ATOMIC);
-      const code = generator.statementToCode(block, "code");
       penPlus.loopID = penPlus.loopID || 0;
       penPlus.loopID += 1;
+      const code = generator.statementToCode(block, "code");
       const text =
         `for (int penPlusLoop_${penPlus.loopID}=0;penPlusLoop_${penPlus.loopID}<int(${times});penPlusLoop_${penPlus.loopID}++) {\n${code}\n}` +
         nextBlockToCode(block, generator);
       penPlus.loopID -= 1;
       return text;
+    }
+
+    upperIndex(block, generator) {
+      return [`penPlusLoop_${penPlus.loopID}`,Order.ATOMIC];
     }
 
     continue() {

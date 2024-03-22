@@ -324,6 +324,8 @@
         return;
       if (GL.shaders[name].attributes[attributeName].location == -1) return;
 
+      GL.shaders[name].attributes[attributeName].type = attributeType;
+      
       switch (attributeType) {
         case "float" || "double":
           break;
@@ -365,6 +367,35 @@
       let returnedDat = [];
       for (let point = 0; point < 3; point++) {
         GL.shaders[name].attributeOrder.forEach((item) => {
+          //If it doesn't exist we shall add a default
+          if (!triangleDat[item]) {
+            switch (GL.shaders[name].attributes[item].type) {
+              case "float":
+                returnedDat.push(1.0);
+                break;
+
+              case "int":
+                returnedDat.push(1);
+                break;
+
+              case "vec2":
+                returnedDat.push(1.0,1.0);
+                break;
+
+              case "vec3":
+                returnedDat.push(1.0,1.0,1.0);
+                break;
+
+              case "vec4":
+                returnedDat.push(1.0,1.0,1.0,1.0);
+                break;
+            
+              default:
+                break;
+            }
+            return;
+          } 
+          //Then push the return dat;
           returnedDat.push(triangleDat[item][point]);
         });
       }

@@ -30,14 +30,14 @@
     }
 
     vertex(block, generator) {
-      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = a_position;\nv_texCoord = a_texCoord;${nextBlockToCode(
+      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = a_position;\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(
         block,
         generator
       )}\n}`;
     }
 
     pixel(block, generator) {
-      return `//Fragment Shader\nvoid fragment() {\ngl_FragColor = vec4(1);\n${getHatBlockVariables()}\n${nextBlockToCode(
+      return `//Fragment Shader\nvoid fragment() {\ngl_FragColor = v_color;\n${getHatBlockVariables()}\n${nextBlockToCode(
         block,
         generator
       )}\n}`;

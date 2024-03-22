@@ -6,6 +6,17 @@
 
   penPlus.pointCount = 3;
 
+  penPlus.attributeSetters = [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ]
+
   penPlus.previewMode =
     localStorage.getItem("preferredPreviewMode") === null
       ? "triangle"
