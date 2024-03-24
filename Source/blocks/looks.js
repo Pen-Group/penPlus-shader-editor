@@ -158,14 +158,14 @@
           },
           "---",
           "Sampling",
-          {
+          /*{
             opcode: "mainTex",
             type: "reporter",
             output: "texture",
             text: "main texture",
             style: "texture_blocks",
             tooltip: "The main texture of the triangle",
-          },
+          },*/
           {
             opcode: "sample_texture",
             type: "reporter",
@@ -186,9 +186,6 @@
                 type: "input_value",
                 name: "TEXTURE",
                 check: "texture",
-                shadow: {
-                  type: "looks_mainTex",
-                },
               },
             ],
           },

@@ -187,7 +187,6 @@ varying highp float v_depth;
 uniform highp float u_timer;
 
 //PenPlus Textures
-uniform sampler2D u_texture;
 uniform mediump vec2 u_res;
 
 //Base functions

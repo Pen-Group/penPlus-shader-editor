@@ -27,9 +27,7 @@ function replacementShader() {
     uniform highp float u_timer;
     
     //Pen+ Textures
-    uniform sampler2D u_texture;
     uniform mediump vec2 u_res;
-    uniform sampler2D u_depthTexture;
     
     //Base functions
     highp float log10(highp float a) {
