@@ -163,7 +163,7 @@
       const val = generator.valueToCode(block, "val", Order.ATOMIC);
       const a = Number(generator.valueToCode(block, "a", Order.ATOMIC));
       return [
-        `HSVToRGB(${hue},${sat},${val},${a * 0.00392156862})`,
+        `HSVToRGB(${hue},${sat},${val},float(${a * 0.00392156862}))`,
         Order.ATOMIC,
       ];
     }
