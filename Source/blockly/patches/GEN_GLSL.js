@@ -240,22 +240,15 @@ function updateGLSL(event) {
   let fragFunction = "";
 
   //If there is no vertex shader then add one.
+
   if (!penPlus.Generated_GLSL.includes("void vertex")) {
-    penPlus.Generated_GLSL += `
-    void vertex() {
-      gl_Position = a_position;
-      v_texCoord = a_texCoord;
-    }\n`;
+    penPlus.Generated_GLSL += penPlus.defaultVert;
   }
 
-  //If there is not fragment shader then add one
   if (!penPlus.Generated_GLSL.includes("void fragment")) {
-    penPlus.Generated_GLSL += `
-    void fragment() {
-      gl_FragColor = vec4(1,1,1,1);
-    }\n`;
+    penPlus.Generated_GLSL += penPlus.defaultFrag;
   }
-
+  
   for (
     let letterID = penPlus.Generated_GLSL.indexOf("void vertex");
     letterID < penPlus.Generated_GLSL.length;

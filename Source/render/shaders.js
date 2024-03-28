@@ -16,18 +16,11 @@ function replacementShader() {
   penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
 
   if (!penPlus.Generated_GLSL.includes("void vertex")) {
-    penPlus.Generated_GLSL += `
-      void vertex() {
-        gl_Position = a_position;
-        v_color = a_color;
-      }\n`;
+    penPlus.Generated_GLSL += penPlus.defaultVert;
   }
 
   if (!penPlus.Generated_GLSL.includes("void fragment")) {
-    penPlus.Generated_GLSL += `
-      void fragment() {
-        gl_FragColor = v_color;
-      }\n`;
+    penPlus.Generated_GLSL += penPlus.defaultFrag;
   }
 
   for (
