@@ -506,6 +506,18 @@ function previewRender() {
         ];
       }
 
+      if (
+        gl.shaders.editorShader.uniforms.u_transform &&
+        gl.shaders.editorShader.uniforms.u_transform.location
+      ) {
+        gl.shaders.editorShader.uniforms.u_transform.value = [
+          1,1,0,0,
+          0,0,0,0,
+          0,0,0,0,
+          0,0,0,0
+        ];
+      }
+
       gl.drawArrays(gl.TRIANGLES, 0, penPlus.meshPoints);
     }
     lastTime = now;

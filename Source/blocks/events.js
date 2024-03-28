@@ -30,7 +30,7 @@
     }
 
     vertex(block, generator) {
-      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = a_position;\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(
+      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = a_position * vec4(u_transform[0][0],u_transform[0][1],1,1);\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(
         block,
         generator
       )}\n}`;
