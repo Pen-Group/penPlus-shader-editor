@@ -13,6 +13,7 @@
     IFrame.contentWindow.postMessage({
       type: "REGISTER_PARENT",
       exportText: `Export to ${window.location.hostname}`,
+      exitButton:true
     });
     //Check for incoming messages
     window.addEventListener(

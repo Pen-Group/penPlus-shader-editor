@@ -11,12 +11,36 @@
   penPlus.IFRAME_API.closeButton.style.visibility = "hidden";
 
   penPlus.IFRAME_API.closeButton.onclick = () => {
-    penPlus.IFRAME_API.parent.postMessage(
-      {
-        type: "EDITOR_CLOSE",
-      },
-      penPlus.IFRAME_API.parentURL
-    );
+    const varModal = penPlus.createModal(`
+      <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:4/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
+        <div class="noSelect" style="background-color: var(--EditorTheme_Color_1); width:100%; height:48px; position:absolute;  color:var(--EditorTheme_Text_3); text-align: center; justify-content: center; align-items: center;font-size: 32px;">
+          Close without saving?
+        </div>
+        <div style="text-align: center; position:absolute; top:10%; width:100%; height:80%; overflow-y:hidden; color:var(--EditorTheme_Text_1);">
+          <p class="" style="flex: 1 2 auto; color:var(--EditorTheme_Text_2);font-size: 1.5em; width:100%;">You could lose your shader!<br>
+          </p>
+          <button class="generalThemedButton" style="font-size: 1.5em;" id="closeShaderEditor">
+            Close
+          </button>
+          <button class="generalThemedButton" style="font-size: 1.5em;" id="closeThisLittleModal">
+            Continue editing
+          </button>
+        </div>
+      </div>
+      `);
+
+    document.getElementById("closeShaderEditor").onclick = () => {
+      penPlus.IFRAME_API.parent.postMessage(
+        {
+          type: "EDITOR_CLOSE",
+        },
+        penPlus.IFRAME_API.parentURL
+      );
+    }
+
+    document.getElementById("closeThisLittleModal").onclick = () => {
+      varModal.close();
+    }
   };
 
   window.addEventListener("message", (event) => {
