@@ -78,6 +78,12 @@
             ],
             tooltip: "Set the vertex's corner pinch or W value to this",
           },
+          {
+            opcode: "makeOrthographic",
+            type: "command",
+            text: "make orthographic",
+            tooltip: "Makes the perspective 2D",
+          },
           "---",
           {
             opcode: "changeX",
@@ -226,6 +232,10 @@
       return (
         `gl_Position.w += float(${W});` + nextBlockToCode(block, generator)
       );
+    }
+
+    makeOrthographic(block, generator) {
+      return `gl_Position = gl_Position * vec4(gl_Position.w,gl_Position.w,1,1);` + nextBlockToCode(block,generator);
     }
 
     inputPosition(block, generator) {
