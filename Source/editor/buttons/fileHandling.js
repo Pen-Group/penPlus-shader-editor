@@ -32,6 +32,39 @@
     }
   };
 
+  penPlus.loadProjectFile = (contents) => {
+    if (contents.blockDat) {
+      //Load the blockly workspace
+      //
+      penPlus.dynamicallyAdded = contents.dynamicDat;
+
+      penPlus.Generated_GLSL = contents.glsl;
+      penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+
+      penPlus.isText = contents.isText || false;
+      penPlus.blockly_Button.disabled = contents.isText;
+
+      penPlus.previousVariableStates = contents.savedVarState || {};
+
+      //if not blockly load the text
+      if (penPlus.isText) {
+        penPlus.glsl_Button.onclick();
+      }
+      //if blockly load the blockly workspace
+      else {
+        penPlus.blockly_Button.onclick();
+
+        Blockly.serialization.workspaces.load(
+          contents.blockDat,
+          window.workspace
+        );
+      }
+    } else {
+      Blockly.serialization.workspaces.load(contents, window.workspace);
+      penPlus.isTextMode = false;
+    }
+  }
+
   const readSaveFile = () => {
     let opener = document.createElement("input");
     opener.type = "file";
@@ -49,37 +82,7 @@
         let reader = new FileReader();
         reader.onload = function (e) {
           let contents = JSON.parse(e.target.result);
-          console.log(JSON.parse(e.target.result));
-          if (contents.blockDat) {
-            //Load the blockly workspace
-            //
-            penPlus.dynamicallyAdded = contents.dynamicDat;
-
-            penPlus.Generated_GLSL = contents.glsl;
-            penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
-
-            penPlus.isText = contents.isText || false;
-            penPlus.blockly_Button.disabled = contents.isText;
-
-            penPlus.previousVariableStates = contents.savedVarState || {};
-
-            //if not blockly load the text
-            if (penPlus.isText) {
-              penPlus.glsl_Button.onclick();
-            }
-            //if blockly load the blockly workspace
-            else {
-              penPlus.blockly_Button.onclick();
-
-              Blockly.serialization.workspaces.load(
-                contents.blockDat,
-                window.workspace
-              );
-            }
-          } else {
-            Blockly.serialization.workspaces.load(contents, window.workspace);
-            penPlus.isTextMode = false;
-          }
+          penPlus.loadProjectFile(contents);
 
           penPlus.recompileButton.style.visibility =
             penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
@@ -94,12 +97,14 @@
   const fileDropdown = document.getElementById("fileDropdown");
   const newButton = document.getElementById("newButton");
   const saveButton = document.getElementById("saveButton");
+  const importButton = document.getElementById("importButton");
   const exportButton = document.getElementById("exportButton");
   const loadButton = document.getElementById("loadButton");
 
   //Remove the export button if we are in an IFrame
   if (window.location === window.parent.location) {
     penPlus.isIFrame = true;
+    fileDropdown.removeChild(importButton);
     fileDropdown.removeChild(exportButton);
   }
 
@@ -141,6 +146,15 @@
   };
 
   loadButton.onclick = readSaveFile;
+
+  importButton.onclick = () => {
+    penPlus.IFRAME_API.parent.postMessage(
+      {
+        type: "DATA_REQUEST"
+      },
+      penPlus.IFRAME_API.parentURL
+    );
+  };
 
   exportButton.onclick = () => {
     const projectData = {
