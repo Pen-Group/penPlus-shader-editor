@@ -43,7 +43,7 @@ function createGLSLGen() {
 
   GLSL_GEN.forBlock["int_reporter"] = function (block, generator) {
     const numba = block.getFieldValue("NUMBER");
-    return [`${numba}`, Order.ATOMIC];
+    return [`int(${numba})`, Order.ATOMIC];
   };
 
   GLSL_GEN.forBlock["color_reporter"] = function (block, generator) {
