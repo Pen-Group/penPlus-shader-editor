@@ -885,7 +885,7 @@ function genProgram() {
           if (!refreshedPoints) gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
 
           //Remove pen+ uniforms that are static
-          if (attribute.name != "u_timer" && attribute.name != "u_res") {
+          if (attribute.name != "u_timer" && attribute.name != "u_res" && attribute.name != "u_transform") {
             let divElement = document.createElement("div");
             divElement.style.color = "var(--EditorTheme_Text_1)";
             divElement.style.position = "relative";
