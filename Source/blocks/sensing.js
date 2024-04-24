@@ -56,6 +56,13 @@
             output:["arithmatic","float"],
             tooltip: "Just a simple timer",
           },
+          "---",
+          {
+            opcode: "isFrag",
+            type: "boolean",
+            text: "is pixel?",
+            tooltip: "Check if the operation is being done on a pixel or not.",
+          },
         ],
       };
     }
@@ -90,6 +97,10 @@
 
     timer() {
       return [`u_timer`, Order.ATOMIC];
+    }
+
+    isFrag() {
+      return [`penPlus_isFragment`, Order.ATOMIC];
     }
   }
 
