@@ -2,7 +2,7 @@ penPlus.setupMonacoEditor = () => {
   penPlus.isTextMode = false;
 
   penPlus.monacoEditor = monaco.editor.create(document.getElementById("myBlocklyCodeOutput"), {
-    value: ["function x() {", '\tconsole.log("Hello world!");', "}"].join("\n"),
+    value: penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag,
     language:"glsl"
   })
   monaco.editor.setTheme("myCoolTheme");
@@ -13,7 +13,7 @@ penPlus.setupMonacoEditor = () => {
 
   penPlus.editGLSL = (event) => {
     if (event.isFlush) return;
-    
+
     recompileButton.style.visibility = "visible";
     penPlus.isTextMode = true;
     penPlus.blockly_Button.disabled = true;
