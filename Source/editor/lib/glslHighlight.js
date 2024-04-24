@@ -1,211 +1,121 @@
-(function () {
-  penPlus.highlightREGEX = highlights = [
-    //Custom blocks and functions
-    {
-      name: "func_Highlight",
-      match: [/^([A-z_\d]+)\(/, "", "("],
-    },
-    {
-      name: "func_Highlight",
-      match: /^(return+)/,
-    },
+penPlus.setupMonacoTheme = () => {  
+  monaco.languages.register({ id: 'glsl' });
+  
+  monaco.languages.setMonarchTokensProvider("glsl", {
+    tokenizer: {
+      root: [
+        [/(\/\/.*)/, "comment"],
+        //lol for some reason it doesn't like this if anybody knows a monaco fix then pr it
+        [/(\/\*.*\*\/)/, "comment"],
 
-    //Variables
-    {
-      name: "float_Highlight",
-      match: /^(float+)/,
-    },
-    {
-      name: "int_Highlight",
-      match: /^(int+)/,
-    },
+        [/(float+)/, "variable"],
+        [/(int+)/, "int"],
 
-    {
-      name: "vec2_Highlight",
-      match: /^(vec2+)/,
-    },
-    {
-      name: "vec3_Highlight",
-      match: /^(vec3+)/,
-    },
-    {
-      name: "vec4_Highlight",
-      match: /^(vec4+)/,
-    },
+        [/(vec2+)/, "vec-two"],
+        [/(vec3+)/, "vec-three"],
+        [/(vec4+)/, "vec-four"],
+        
+        [/(mat2+)/, "matrix"],
+        [/(mat3+)/, "matrix"],
+        [/(mat4+)/, "matrix"],
 
-    {
-      name: "matrix_Highlight",
-      match: /^(mat2+)/,
-    },
-    {
-      name: "matrix_Highlight",
-      match: /^(mat3+)/,
-    },
-    {
-      name: "matrix_Highlight",
-      match: /^(mat4+)/,
-    },
+        [/(sampler2D+)/, "texture"],
+        [/(samplerCube+)/, "cubemap"],
+        
+        [/([\{\}])/, "controls"],
 
-    {
-      name: "texture_Highlight",
-      match: /^(sampler2D+)/,
-    },
-    {
-      name: "cubemap_Highlight",
-      match: /^(samplerCube+)/,
-    },
-    {
-      name: "func_Highlight",
-      match: /^(void+)/,
-    },
+        [/(>=+)/, "operator"],
+        [/(<=+)/, "operator"],
+        [/(>>+)/, "operator"],
+        [/(<<+)/, "operator"],
+        [/(<+)/, "operator"],
+        [/(>+)/, "operator"],
+        [/(==+)/, "operator"],
+        [/(!=+)/, "operator"],
+        [/(=+)/, "operator"],
 
-    //comment highlight
-    {
-      name: "comment_Highlight",
-      match:
-        /^(\/\/[\w\d\s\+\-\*\?\/\\\.\,1-90\!\@\#\$\%\^\&\(\)\_\=\`\~\<\>\]\[\"\'\:]+\n)/,
-    },
+        [/(\+=+)/, "operator"],
+        [/(\/=+)/, "operator"],
+        [/(\-=+)/, "operator"],
+        [/(\*=+)/, "operator"],
 
-    //operators
-    {
-      name: "operator_Highlight",
-      match: /^(>=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(<=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(>+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(<+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(==+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\*+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\++)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\-+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\/+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\*=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\+=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\-=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\/=+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\|\|+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\&\&+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\^\^+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\![=]+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\>\>+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\<\<+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\&+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\^+)/,
-    },
-    {
-      name: "operator_Highlight",
-      match: /^(\|+)/,
-    },
+        [/(\/+)/, "operator"],
+        [/(\*+)/, "operator"],
+        [/(\++)/, "operator"],
+        [/(\-+)/, "operator"],
 
-    //precisions
-    {
-      name: "precision_Highlight",
-      match: /^(lowp+)/,
-    },
-    {
-      name: "precision_Highlight",
-      match: /^(mediump+)/,
-    },
-    {
-      name: "precision_Highlight",
-      match: /^(highp+)/,
-    },
-    {
-      name: "precision_Highlight",
-      match: /^(varying+)/,
-    },
-    {
-      name: "precision_Highlight",
-      match: /^(attribute+)/,
-    },
-    {
-      name: "precision_Highlight",
-      match: /^(uniform+)/,
-    },
+        [/(\|\|+)/, "operator"],
+        [/(\&\&+)/, "operator"],
+        [/(\^\^+)/, "operator"],
 
-    //statements
-    {
-      name: "controls_Highlight",
-      match: /^((?:^|\W)if(?:$|\W))/,
+        [/(\|+)/, "operator"],
+        [/(\&+)/, "operator"],
+        [/(\^+)/, "operator"],
+
+        [/(\d+\.\d+)/, "operator"],
+        [/(\d+\.)/, "operator"],
+        [/(\.\d+)/, "operator"],
+        [/(\d+)/, "operator"],
+
+        [/(true+)/, "operator"],
+        [/(false+)/, "operator"],
+
+        [/(lowp+)/, "precision"],
+        [/(mediump+)/, "precision"],
+        [/(highp+)/, "precision"],
+
+        [/(varying+)/, "precision"],
+        [/(attribute+)/, "precision"],
+        [/(uniform+)/, "precision"],
+
+        [/((?:^|\W)if(?:$|\W))/, "controls"],
+        [/((?:^|\W)else(?:$|\W))/, "controls"],
+        [/((?:^|\W)switch(?:$|\W))/, "controls"],
+        [/((?:^|\W)case(?:$|\W))/, "controls"],
+        [/((?:^|\W)for(?:$|\W))/, "controls"],
+        [/((?:^|\W)while(?:$|\W))/, "controls"],
+        [/((?:^|\W)do(?:$|\W))/, "controls"],
+
+        [/([\w_]*\s*)\(/, "my-blocks"],
+        [/\)/, "my-blocks"],
+        [/(return+)/, "my-blocks"],
+        [/(discard+)/, "my-blocks"],
+        [/(break+)/, "my-blocks"],
+        [/(continue+)/, "my-blocks"],
+        [/(void+)/, "my-blocks"],
+      ],
     },
-    {
-      name: "controls_Highlight",
-      match: /^((?:^|\W)else(?:$|\W))/,
+  });
+  
+  // Define a new theme that contains only rules that match this language
+  monaco.editor.defineTheme("myCoolTheme", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "my-blocks", foreground: penPlus.penPlusTheme.blockStyles["myblocks_blocks"].colourPrimary, fontStyle: "bold"},
+
+      { token: "variable", foreground: penPlus.penPlusTheme.blockStyles["variables_blocks"].colourPrimary},
+      { token: "int", foreground: penPlus.penPlusTheme.blockStyles["int_blocks"].colourPrimary},
+
+      { token: "vec-two", foreground: penPlus.penPlusTheme.blockStyles["vector_blocks"].colourPrimary},
+      { token: "vec-three", foreground: penPlus.penPlusTheme.blockStyles["vec3_blocks"].colourPrimary},
+      { token: "vec-four", foreground: penPlus.penPlusTheme.blockStyles["vec4_blocks"].colourPrimary},
+
+      { token: "matrix", foreground: penPlus.penPlusTheme.blockStyles["matrix_blocks"].colourPrimary},
+
+      { token: "texture", foreground: penPlus.penPlusTheme.blockStyles["texture_blocks"].colourPrimary},
+      { token: "cubemap", foreground: penPlus.penPlusTheme.blockStyles["cubemap_blocks"].colourPrimary},
+
+      { token: "controls", foreground: penPlus.penPlusTheme.blockStyles["controls_blocks"].colourPrimary, fontStyle: "bold"},
+
+      { token: "comment", foreground: penPlus.penPlusTheme.blockStyles["sensing_blocks"].colourPrimary, fontStyle: "italic"},
+
+      { token: "operator", foreground: penPlus.penPlusTheme.blockStyles["operators_blocks"].colourPrimary},
+
+      { token: "precision", foreground: penPlus.penPlusTheme.blockStyles["colors_blocks"].colourPrimary},
+    ],
+    colors: {
+      "editor.foreground": "#efefef",
     },
-    {
-      name: "controls_Highlight",
-      match: /^((?:^|\W)switch(?:$|\W))/,
-    },
-    {
-      name: "controls_Highlight",
-      match: /^((?:^|\W)case(?:$|\W))/,
-    },
-    {
-      name: "controls_Highlight",
-      match: /^((?:^|\W)for(?:$|\W))/,
-    },
-  ];
-})();
+  });
+}

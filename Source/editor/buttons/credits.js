@@ -29,6 +29,10 @@
           <span style="font-size: 0.5em;">
           Ambient CG<br>
           </span>
+          Monaco by<br>
+          <span style="font-size: 0.5em;">
+          Microsoft<br>
+          </span>
           Testers<br>
           <span style="font-size: 0.5em;">
           Alltrue<br>

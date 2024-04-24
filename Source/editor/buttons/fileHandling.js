@@ -39,7 +39,7 @@
       penPlus.dynamicallyAdded = contents.dynamicDat;
 
       penPlus.Generated_GLSL = contents.glsl;
-      penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+      penPlus.monacoEditor.setValue(penPlus.Generated_GLSL);
 
       penPlus.isText = contents.isText || false;
       penPlus.blockly_Button.disabled = contents.isText;

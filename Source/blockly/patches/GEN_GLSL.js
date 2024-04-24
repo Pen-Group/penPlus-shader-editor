@@ -191,9 +191,9 @@ function updateGLSL(event) {
       penPlus.workspace
     );
 
-    penPlus.GLSL_CODE_WINDOW.value = penPlus.Generated_GLSL;
+    penPlus.monacoEditor.setValue(penPlus.Generated_GLSL);
   } else {
-    penPlus.Generated_GLSL = penPlus.GLSL_CODE_WINDOW.value;
+    penPlus.Generated_GLSL = penPlus.monacoEditor.getValue();
   }
 
   penPlus.Generated_Frag = "";
@@ -253,7 +253,6 @@ function updateGLSL(event) {
       }
     }
   }
-  penPlus.doHighlight({ key: "" });
 
   //I know this isn't the best but it works
   penPlus.Generated_Vert = (

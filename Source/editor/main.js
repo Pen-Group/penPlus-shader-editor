@@ -50,6 +50,7 @@ function onAllAddonsLoaded() {
   penPlus.workspace = workspace;
   penPlus.syntaxHighlighter = window.csHighlight;
 
+  /*
   penPlus.GLSL_CODE_WINDOW = document.getElementById("myBlocklyCodeOutput");
   penPlus.GLSL_CODE_HIGHLIGHTED = document.getElementById(
     "blocklyHighlightedOutput"
@@ -98,9 +99,13 @@ function onAllAddonsLoaded() {
 
   penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.editGLSL;
   penPlus.GLSL_CODE_WINDOW.onkeyup = penPlus.editGLSL;
+  */
 
   createGLSLGen();
   addBlocks();
+
+  penPlus.setupMonacoTheme();
+  penPlus.setupMonacoEditor();
 
   const zoomToFit = new penPlus.ZoomToFitControl(workspace);
   zoomToFit.init();

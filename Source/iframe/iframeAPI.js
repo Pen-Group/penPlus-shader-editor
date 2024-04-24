@@ -45,6 +45,9 @@
 
   window.addEventListener("message", (event) => {
     //Handle
+    //Make sure monaco doesn't interfere
+    if (event.data.vscodeScheduleAsyncWork) return;
+
     if (!event.data.type) {
       console.error("No event specified");
     }

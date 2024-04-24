@@ -29,7 +29,7 @@
     glsl_Button.className = "buttonSelected";
     blockly_Button.className = "buttonUnselected";
 
-    penPlus.doHighlight({});
+    //penPlus.doHighlight({});
   };
 
   blockly_Button.onclick = () => {

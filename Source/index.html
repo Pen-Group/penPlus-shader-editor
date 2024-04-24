@@ -7,6 +7,12 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      data-name="vs/editor/editor.main"
+      href="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.css"
+    />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pen+ Shader Editor</title>
@@ -992,7 +998,7 @@
         </div>
 
         <div id="BlocklyDiv" class="BlocklyDiv"></div>
-        <textarea
+        <div
           id="myBlocklyCodeOutput"
           class="tempCodePreview codeUnhighlighted"
           spellcheck="false"
@@ -1002,7 +1008,7 @@
             padding-top: 0px;
             padding-left: 0px;
           "
-        ></textarea>
+        ></div>
         <code
           id="blocklyHighlightedOutput"
           class="tempCodePreview"
@@ -1134,13 +1140,22 @@
     <!--Editor Namespace-->
     <script>
       const penPlus = {};
+      let require = {
+        paths: {
+          vs: "https://unpkg.com/monaco-editor@0.34.0/min/vs",
+        },
+      };
     </script>
-
-    <!--Iframe API-->
-    <script src="iframe/iframeAPI.js"></script>
 
     <!--Blockly Itself-->
     <script src="blockly/blockly.min.js"></script>
+
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/loader.js"></script>
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.nls.js"></script>
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.js"></script>
+
+    <!--Iframe API-->
+    <script src="iframe/iframeAPI.js"></script>
 
     <!--Blockly Addons-->
     <script src="blockly/addons/continuousToolbox.js"></script>
@@ -1192,7 +1207,6 @@
     <script src="render/previewRender.js"></script>
 
     <!--Text Editor-->
-    <script src="editor/lib/syntaxHighlight.js"></script>
     <script src="editor/lib/glslHighlight.js"></script>
     <script src="editor/codeHighlightFunction.js"></script>
 
