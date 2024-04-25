@@ -292,7 +292,7 @@ function getTypedInput(type, name, index) {
       input.children[2].type = "Number";
       input.children[2].value = 0;
       input.children[2].className = "scratchStyledInput";
-      if (point) {
+      if (index) {
         inputFunction = () => {
           gl.shaders.editorShader.uniforms[name].elements[index].value = [
             input.children[0].value,
@@ -373,7 +373,7 @@ function getTypedInput(type, name, index) {
       input.children[3].type = "Number";
       input.children[3].value = 0;
       input.children[3].className = "scratchStyledInput";
-      if (point) {
+      if (index) {
         inputFunction = () => {
           gl.shaders.editorShader.uniforms[name].elements[index].value = [
             input.children[0].value,
