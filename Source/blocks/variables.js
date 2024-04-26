@@ -85,7 +85,7 @@
             text: "",
             tooltip: "your variable!",
             mutator: "variableMutator",
-            output: "arithmatic",
+            output:"arithmatic",
             hideFromPallete: true,
           },
           {
@@ -221,6 +221,7 @@
             type: "reporter",
             text: "item %1 of %2",
             tooltip: "get an item from an array",
+            output:"arithmatic",
             hideFromPallete: true,
             arguments: [
               {
@@ -582,13 +583,13 @@
                   </div>
                 </div>
                 <p class="noSelect" style="position:absolute;left:50%;top:20%;Transform:Translate(-50%,-50%); color:var(--EditorTheme_Text_2);">Variable Scope</p>
-                <button id="createVariable" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">OK</button>
+                <button id="createVariable" style="position:absolute; left:95%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:1.5em;font-size: 1.125em; color:var(--EditorTheme_Text_1);">OK</button>
                 <select id="matrixSizes" name="Matrix Sizes" style="position:absolute; left:15%; top:90%; transform: translate(-100%,-100%); background-color:var(--EditorTheme_Color_1); border-width: 0px; border-radius: 0.25rem; width:4em; height:3em;font-size: 1.125em; color:var(--EditorTheme_Text_1); visibility:hidden;">
                   <option value="2x">2x2</option>
                   <option value="3x">3x3</option>
                   <option value="4x">4x4</option>
                 </select>
-                <input id="ArraySize" placeholder="10" style="visibility:hidden;position:absolute;left:50%;top:100%;Transform:Translate(-50%,-100%); width:50%; height:20%;" type="number" min="2" max="100" value="10"></input>
+                <input id="ArraySize" placeholder="10" style="visibility:hidden;position:absolute;left:50%;top:100%;Transform:Translate(-50%,-150%); width:50%; height:20%;" type="number" min="2" max="100" value="10"></input>
               </div>
             </div>
           </div>
