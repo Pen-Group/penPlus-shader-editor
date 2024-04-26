@@ -234,7 +234,7 @@ function getTypedInput(type, name, index) {
         };
 
         input.children[0].value = penPlus.previousVariableStates[name+index]
-          ? penPlus.previousVariableStates[name][0]
+          ? penPlus.previousVariableStates[name+index][0]
           : gl.shaders.editorShader.uniforms[name].elements[index].current[0];
         input.children[1].value = penPlus.previousVariableStates[name+index]
           ? penPlus.previousVariableStates[name+index][1]
@@ -304,7 +304,7 @@ function getTypedInput(type, name, index) {
         };
 
         input.children[0].value = penPlus.previousVariableStates[name+index]
-          ? penPlus.previousVariableStates[name][0]
+          ? penPlus.previousVariableStates[name+index][0]
           : gl.shaders.editorShader.uniforms[name].elements[index].current[0];
         input.children[1].value = penPlus.previousVariableStates[name+index]
           ? penPlus.previousVariableStates[name+index][1]
@@ -386,7 +386,7 @@ function getTypedInput(type, name, index) {
         };
 
         input.children[0].value = penPlus.previousVariableStates[name+index]
-          ? penPlus.previousVariableStates[name][0]
+          ? penPlus.previousVariableStates[name+index][0]
           : gl.shaders.editorShader.uniforms[name].elements[index].current[0];
         input.children[1].value = penPlus.previousVariableStates[name+index]
           ? penPlus.previousVariableStates[name+index][1]

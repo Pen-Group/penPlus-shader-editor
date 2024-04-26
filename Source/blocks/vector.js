@@ -15,7 +15,7 @@
             type: "reporter",
             text: "x:%1 y:%2",
             tooltip: "A vector with 2 elements",
-            output: "vec2",
+            output: "vec2 arithmatic",
             arguments: [
               {
                 type: "input_value",
@@ -38,7 +38,7 @@
             type: "reporter",
             text: "x:%1 y:%2 z:%3",
             tooltip: "A vector with 3 elements",
-            output: "vec3",
+            output: "vec3 arithmatic",
             style: "vec3_blocks",
             arguments: [
               {
@@ -69,7 +69,7 @@
             type: "reporter",
             text: "x:%1 y:%2 z:%3 w:%4",
             tooltip: "A vector with 4 elements",
-            output: "vec4",
+            output: "vec4 arithmatic",
             style: "vec4_blocks",
             arguments: [
               {
@@ -108,6 +108,7 @@
             type: "reporter",
             text: "%1 of %2",
             tooltip: "A Custom Block!",
+            output: "arithmatic",
             //style: "return_block", I somewhat like this gray
             arguments: [
               penPlus.createGrid(
@@ -137,7 +138,7 @@
             type: "reporter",
             text: "normalize %1",
             tooltip: "Makes the length of a vector 1",
-            output: "vector",
+            output: "vector arithmatic",
             arguments: [
               {
                 type: "input_value",
@@ -153,7 +154,7 @@
             type: "reporter",
             text: "dot product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            output: "float",
+            output: "float arithmatic",
             arguments: [
               {
                 type: "input_value",
@@ -176,7 +177,7 @@
             type: "reporter",
             text: "cross product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            output: "float",
+            output: "float arithmatic",
             arguments: [
               {
                 type: "input_value",
@@ -199,7 +200,7 @@
             type: "reporter",
             text: "length of %1",
             tooltip: "Makes the length of a vector 1",
-            output: "float",
+            output: "float arithmatic",
             arguments: [
               {
                 type: "input_value",
