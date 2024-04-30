@@ -63,12 +63,21 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   b += m;
   return vec4(r, g, b, a);
 }
+
+highp vec4 rotation(highp vec4 invec4) {
+    return vec4(
+      (invec4.y) * u_transform[1][0] + (invec4.x) * u_transform[1][1],
+      (invec4.y) * u_transform[1][1] - (invec4.x) * u_transform[1][0],
+      invec4.zw
+    );
+  }
     `
 
     penPlus.defaultVert = `//Vertex Shader
 void vertex() {
-gl_Position = a_position * vec4(u_transform[0][0],u_transform[0][1],1,1);
+gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * u_transform[0][1],0.001,1);
 v_color = a_color;
+v_texCoord = a_texCoord;
 }`;
 
     penPlus.defaultFrag = `//Fragment Shader
