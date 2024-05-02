@@ -511,7 +511,7 @@ function previewRender() {
         gl.shaders.editorShader.uniforms.u_transform.location
       ) {
         gl.shaders.editorShader.uniforms.u_transform.value = [
-          1,1,0,0,
+          1,1,0,1,
           0,0,0,0,
           0,0,0,0,
           0,0,0,0
