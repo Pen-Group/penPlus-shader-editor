@@ -124,7 +124,6 @@
               {
                 type: "input_value",
                 name: "vector",
-                check: ["vec2", "vec3", "vec4", "arithmatic", "vector"],
                 shadow: {
                   type: "vec4_reporter",
                 },
@@ -138,7 +137,7 @@
             type: "reporter",
             text: "normalize %1",
             tooltip: "Makes the length of a vector 1",
-            output: "vector arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -154,7 +153,7 @@
             type: "reporter",
             text: "dot product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            output: "float arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -177,7 +176,7 @@
             type: "reporter",
             text: "cross product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            output: "float arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -200,7 +199,7 @@
             type: "reporter",
             text: "length of %1",
             tooltip: "Makes the length of a vector 1",
-            output: "float arithmatic",
+            
             arguments: [
               {
                 type: "input_value",

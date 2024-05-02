@@ -99,7 +99,7 @@
               {
                 type: "input_value",
                 name: "name",
-                check: "string",
+                
                 shadow: {
                   type: "string_reporter",
                 },
@@ -151,7 +151,7 @@
               {
                 type: "input_value",
                 name: "name",
-                check: "string",
+                
                 shadow: {
                   type: "string_reporter",
                 },
@@ -176,12 +176,12 @@
             type: "reporter",
             text: "argument %1",
             tooltip: "Get an argument from a custom block",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
                 name: "name",
-                check: "string",
+                
                 shadow: {
                   type: "string_reporter",
                 },
@@ -212,7 +212,7 @@
           {
             opcode: "customBlockExecute_Reporter",
             type: "reporter",
-            output: "arithmatic",
+            
             text: "",
             tooltip: "your custom block!",
             mutator: "customBlockMutator",

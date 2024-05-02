@@ -32,7 +32,6 @@
               {
                 type: "input_value",
                 name: "COLOR",
-                check: ["vec4", "vector", "arithmatic"],
                 shadow: {
                   type: "color_reporter",
                 },
@@ -44,7 +43,7 @@
             type: "reporter",
             text: "vertex colour",
             tooltip: "Vertex Color",
-            output: "vec4",
+            
           },
           "---",
           {
@@ -56,7 +55,6 @@
               {
                 type: "input_value",
                 name: "COLOR",
-                check: ["vec4", "vector", "arithmatic"],
                 shadow: {
                   type: "color_reporter",
                 },
@@ -68,7 +66,7 @@
             type: "reporter",
             text: "pixel colour",
             tooltip: "Pixel color",
-            output: "vec4",
+            
           },
           {
             opcode: "mulBlending",
@@ -177,7 +175,7 @@
               {
                 type: "input_value",
                 name: "UV",
-                check: ["vec2", "arithmatic"],
+                
                 shadow: {
                   type: "looks_pixUV",
                 },
@@ -185,7 +183,6 @@
               {
                 type: "input_value",
                 name: "TEXTURE",
-                check: "texture",
               },
             ],
           },
@@ -195,12 +192,11 @@
             text: "color at %1 of cubemap %2",
             tooltip: "Sample the pixel at the UV coordinates desired",
             style: "cubemap_blocks",
-            output: "vec4",
+            
             arguments: [
               {
                 type: "input_value",
                 name: "UVW",
-                check: ["vec3", "vector", "arithmatic"],
                 shadow: {
                   type: "vec3_reporter",
                 },
@@ -208,7 +204,6 @@
               {
                 type: "input_value",
                 name: "TEXTURE",
-                check: "cubemap",
               },
             ],
           },

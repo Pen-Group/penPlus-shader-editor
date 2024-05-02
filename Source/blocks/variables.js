@@ -85,7 +85,7 @@
             text: "",
             tooltip: "your variable!",
             mutator: "variableMutator",
-            output:"arithmatic",
+            
             hideFromPallete: true,
           },
           {
@@ -221,7 +221,7 @@
             type: "reporter",
             text: "item %1 of %2",
             tooltip: "get an item from an array",
-            output:"arithmatic",
+            
             hideFromPallete: true,
             arguments: [
               {

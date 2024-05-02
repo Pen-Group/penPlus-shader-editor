@@ -15,7 +15,7 @@
             type: "reporter",
             text: "%1+%2",
             tooltip: "Add two numbers together",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -38,7 +38,7 @@
             type: "reporter",
             text: "%1-%2",
             tooltip: "Subtract 2 numbers from each other",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -61,7 +61,7 @@
             type: "reporter",
             text: "%1*%2",
             tooltip: "Multiplies two numbers together",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -84,7 +84,7 @@
             type: "reporter",
             text: "%1/%2",
             tooltip: "Divide 2 numbers from each other",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -107,7 +107,7 @@
             type: "reporter",
             text: "%1^%2",
             tooltip: "Puts the first number to the power of the second number",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -331,7 +331,7 @@
             type: "reporter",
             text: "%1mod%2",
             tooltip: "Get the remainder of the division of the two numbers",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -354,7 +354,7 @@
             type: "reporter",
             text: "%1 of %2",
             tooltip: "Performs the desired arithmatic operation",
-            output: "arithmatic",
+            
             arguments: [
               penPlus.createMenu(
                 [
@@ -390,7 +390,7 @@
             text: "smooth %1 and %2 by %3",
             tooltip:
               "Uses the smooth step operator and steps by the third number",
-            output: "arithmatic",
+            
             arguments: [
               {
                 type: "input_value",
@@ -409,7 +409,7 @@
               {
                 type: "input_value",
                 name: "C",
-                check: ["float", "arithmatic"],
+                
                 shadow: {
                   type: "number_reporter",
                 },

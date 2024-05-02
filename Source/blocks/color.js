@@ -15,7 +15,7 @@
             type: "reporter",
             text: "hue:%1 saturation:%2 value:%3",
             tooltip: "An HSV block simple",
-            output: "vec4",
+            
             arguments: [
               {
                 type: "input_value",
@@ -45,7 +45,7 @@
             type: "reporter",
             text: "hue:%1 saturation:%2 value:%3 alpha:%4",
             tooltip: "An HSV block simple",
-            output: "vec4",
+            
             arguments: [
               {
                 type: "input_value",
@@ -84,7 +84,7 @@
             type: "reporter",
             text: "red:%1 green:%2 blue:%3",
             tooltip: "An HSV block simple",
-            output: "vec4",
+            
             arguments: [
               {
                 type: "input_value",
@@ -114,7 +114,7 @@
             type: "reporter",
             text: "red:%1 green:%2 blue:%3 alpha:%4",
             tooltip: "An HSV block simple",
-            output: "vec4",
+            
             arguments: [
               {
                 type: "input_value",

@@ -150,7 +150,7 @@
             opcode: "inputPosition",
             type: "reporter",
             text: "input position",
-            output: "vec4",
+            
             tooltip: "Get the vertex's input position",
           },
           {
