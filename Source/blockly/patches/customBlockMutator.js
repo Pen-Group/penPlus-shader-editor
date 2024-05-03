@@ -135,18 +135,10 @@
               })
             );
 
-            if (this.output && argument.type != "void") {
-              this.output.check = [argument.type];
-            }
-
             //input thing
             this.inputFromJson_({
               type: "input_value",
               name: argument.name,
-              check: [
-                customBlockTypeConversionTable[argument.type],
-                "arithmatic",
-              ],
             });
 
             this.inputList[this.inputList.length - 1].setShadowDom(
