@@ -387,7 +387,7 @@
           generator.valueToCode(block, argument.name, Order.ATOMIC);
       }
 
-      return `${block.customBlockData.scriptTarget}(${argString});`;
+      return `${block.customBlockData.scriptTarget}(${argString});\n ${nextBlockToCode(block, generator)}`;
     }
 
     customBlockExecute_Reporter(block, generator) {
