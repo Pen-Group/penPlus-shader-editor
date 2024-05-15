@@ -81,7 +81,6 @@
   class myBlocks_category extends penPlus.penPlusExtension {
     getInfo() {
       getHatBlockVariables = this.getHatBlockVariables;
-      penPlus.addBlockColorSet("struct_block", "#9CACD3", "#8592B5", "#7683A2");
       return {
         name: "My Blocks",
         id: "myblocks",

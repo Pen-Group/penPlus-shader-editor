@@ -4,6 +4,7 @@ function onAllAddonsLoaded() {
     contents: [],
   };
 
+  //Custom zelos renderer.
   addImportantReporters();
   Blockly.blockRendering.register(
     "pen_plus_renderer",
@@ -48,68 +49,27 @@ function onAllAddonsLoaded() {
   });
 
   penPlus.workspace = workspace;
-  penPlus.syntaxHighlighter = window.csHighlight;
 
-  /*
-  penPlus.GLSL_CODE_WINDOW = document.getElementById("myBlocklyCodeOutput");
-  penPlus.GLSL_CODE_HIGHLIGHTED = document.getElementById(
-    "blocklyHighlightedOutput"
-  );
+  //Experimental features.
+  const urlParams = new URLSearchParams(document.location.search);
+  penPlus.experimental = urlParams.get("experimental") == "true";
+  if (penPlus.experimental) {
+    console.log("you are using experimental code! Be careful!")
+  }
 
-  penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop = penPlus.GLSL_CODE_WINDOW.scrollTop;
-  penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
-    penPlus.GLSL_CODE_WINDOW.scrollLeft;
-  penPlus.GLSL_CODE_WINDOW.onscroll = () => {
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop =
-      penPlus.GLSL_CODE_WINDOW.scrollTop;
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
-      penPlus.GLSL_CODE_WINDOW.scrollLeft;
-    if (
-      penPlus.GLSL_CODE_WINDOW.scrollTop >
-      penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop
-    )
-      penPlus.GLSL_CODE_WINDOW.scrollTop =
-        penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
-    if (
-      penPlus.GLSL_CODE_WINDOW.scrollLeft >
-      penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft
-    )
-      penPlus.GLSL_CODE_WINDOW.scrollLeft =
-        penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
-  };
-
-  document.onscrollend = () => {
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop =
-      penPlus.GLSL_CODE_WINDOW.scrollTop;
-    penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft =
-      penPlus.GLSL_CODE_WINDOW.scrollLeft;
-    if (
-      penPlus.GLSL_CODE_WINDOW.scrollTop >
-      penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop
-    )
-      penPlus.GLSL_CODE_WINDOW.scrollTop =
-        penPlus.GLSL_CODE_HIGHLIGHTED.scrollTop;
-    if (
-      penPlus.GLSL_CODE_WINDOW.scrollLeft >
-      penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft
-    )
-      penPlus.GLSL_CODE_WINDOW.scrollLeft =
-        penPlus.GLSL_CODE_HIGHLIGHTED.scrollLeft;
-  };
-
-  penPlus.GLSL_CODE_WINDOW.onkeydown = penPlus.editGLSL;
-  penPlus.GLSL_CODE_WINDOW.onkeyup = penPlus.editGLSL;
-  */
-
+  //Create the generator and add our blocks
   createGLSLGen();
   addBlocks();
 
+  //Setup monaco
   penPlus.setupMonacoTheme();
   penPlus.setupMonacoEditor();
 
+  //Zoom to fit addon
   const zoomToFit = new penPlus.ZoomToFitControl(workspace);
   zoomToFit.init();
 
+  //Our auto recompile events
   penPlus.supportedEvents = new Set([
     Blockly.Events.BLOCK_CHANGE,
     Blockly.Events.BLOCK_CREATE,
@@ -117,6 +77,7 @@ function onAllAddonsLoaded() {
     Blockly.Events.BLOCK_MOVE,
   ]);
 
+  //Init our preview render
   previewRender();
 
   // Add the disableOrphans event handler. This is not done automatically by
