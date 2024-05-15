@@ -30,7 +30,7 @@
     }
 
     vertex(block, generator) {
-      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\n(rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * u_transform[0][1],0.001,1);\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(
+      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\n(rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(
         block,
         generator
       )}\n}`;

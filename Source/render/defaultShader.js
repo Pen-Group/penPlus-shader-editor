@@ -75,7 +75,7 @@ highp vec4 rotation(highp vec4 invec4) {
 
     penPlus.defaultVert = `//Vertex Shader
 void vertex() {
-gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * u_transform[0][1],0.001,1);
+gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);
 v_color = a_color;
 v_texCoord = a_texCoord;
 }`;
