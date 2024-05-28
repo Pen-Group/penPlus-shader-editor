@@ -2,7 +2,7 @@ function penPlusBlocklyTheme() {
   penPlus.penPlusTheme = {
     blockStyles: {},
     fontStyle: {
-      family: "helvetica Neue, helvetica, serif",
+      family: "helvetica",
       weight: 500,
       size: 12,
     },
