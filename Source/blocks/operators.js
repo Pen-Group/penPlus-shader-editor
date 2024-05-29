@@ -327,6 +327,22 @@
           },
           "---",
           {
+            opcode: "fract",
+            type: "reporter",
+            text: "fractional %1",
+            tooltip: "get the decimal part of a number",
+            
+            arguments: [
+              {
+                type: "input_value",
+                name: "A",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
             opcode: "mod",
             type: "reporter",
             text: "%1mod%2",
@@ -410,6 +426,82 @@
                 type: "input_value",
                 name: "C",
                 
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
+          {
+            opcode: "min",
+            type: "reporter",
+            text: "%1min%2",
+            tooltip: "if A > B then B = A",
+            
+            arguments: [
+              {
+                type: "input_value",
+                name: "A",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "B",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "max",
+            type: "reporter",
+            text: "%1max%2",
+            tooltip: "if A > B then A = B",
+            
+            arguments: [
+              {
+                type: "input_value",
+                name: "A",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "B",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
+          {
+            opcode: "cast",
+            type: "reporter",
+            text: "cast %2 to %1",
+            tooltip: "Cast something to be another value",
+            arguments: [
+              penPlus.createMenu(
+                [
+                  ["float", "float"],
+                  ["integer", "int"],
+                  ["vector 2", "vec2"],
+                  ["vector 3", "vec3"],
+                  ["vector 4", "vec4"],
+                  ["matrix 2x2", "mat2"],
+                  ["matrix 3x3", "mat3"],
+                  ["matrix 4x4", "mat4"],
+                ],
+                "to"
+              ),
+              {
+                type: "input_value",
+                name: "A",
                 shadow: {
                   type: "number_reporter",
                 },
@@ -556,6 +648,41 @@
       const C = generator.valueToCode(block, "C", Order.ATOMIC);
       return [
         `smoothstep(${A}, ${B}, ${C})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
+    }
+
+    min(block, generator) {
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      const B = generator.valueToCode(block, "B", Order.ATOMIC);
+      return [
+        `min(${A},${B})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
+    }
+
+    max(block, generator) {
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      const B = generator.valueToCode(block, "B", Order.ATOMIC);
+      return [
+        `max(${A},${B})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
+    }
+
+    cast(block, generator) {
+      const to = block.getFieldValue("to");
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      return [
+        `${to}(${A})` + nextBlockToCode(block, generator),
+        Order.ATOMIC,
+      ];
+    }
+
+    fract(block, generator) {
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      return [
+        `fract(${A})` + nextBlockToCode(block, generator),
         Order.ATOMIC,
       ];
     }

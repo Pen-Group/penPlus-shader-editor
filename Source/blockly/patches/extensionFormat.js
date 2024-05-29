@@ -85,6 +85,7 @@ penPlus.penPlusExtension = class {
               kind: "button",
               text: text,
               callbackKey: id + opcode,
+              "web-class": "myButton"
             };
 
             //Register callback code for the button

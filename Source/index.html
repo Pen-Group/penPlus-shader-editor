@@ -43,6 +43,7 @@
         --EditorTheme_Text_1: #ffffff;
         --EditorTheme_Text_2: #bfbfbf;
         --EditorTheme_Text_3: #ffffff;
+        --EditorTheme_Text_4: #8b8b8b;
 
         --blocklyTextColor: var(--EditorTheme_Text_1);
 
@@ -567,6 +568,24 @@
 
       .controls_Highlight {
         color: var(--controls_blocks);
+      }
+    </style>
+    <!--Custom Blockly Style-->
+    <style>
+      .myButton>.blocklyFlyoutButtonBackground {
+        fill: none;
+
+        stroke: var(--EditorTheme_Text_4);
+        stroke-width: 2px;
+      }
+
+      .myButton>.blocklyFlyoutButtonShadow {
+        fill: none;
+      }
+
+      .myButton>.blocklyText {
+        stroke: var(--EditorTheme_Text_4);
+        fill: var(--EditorTheme_Text_4);
       }
     </style>
   </head>
