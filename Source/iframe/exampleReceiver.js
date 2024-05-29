@@ -1,3 +1,13 @@
+/* 
+  ! __        ___    ____  _   _ ___ _   _  ____   !
+  ! \ \      / / \  |  _ \| \ | |_ _| \ | |/ ___|  !
+  !  \ \ /\ / / _ \ | |_) |  \| || ||  \| | |  _   !
+  !   \ V  V / ___ \|  _ <| |\  || || |\  | |_| |  !
+  !    \_/\_/_/   \_\_| \_\_| \_|___|_| \_|\____|  !
+  THIS IS AN EXAMPLE FOR HOW YOU CAN INTEGRATE THE IFRAME API INTO YOUR OWN PROJECTS!
+  THIS DOES NOTHING. UNLESS YOU OPEN A LOCALHOST and navigate to http://localhost:[port]/source/iframeTest.html
+*/
+
 //This doesn't have to be stylized like this but I will do it for consistancy.
 (function () {
   const IFrame = document.getElementById("shaderEditor");
