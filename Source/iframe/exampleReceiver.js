@@ -2,9 +2,22 @@
 (function () {
   const IFrame = document.getElementById("shaderEditor");
   const output = document.getElementById("outputText");
+  let ScratchName;
 
   let loaded = false;
   let IFrameLoaded = false;
+
+  function hasSubDomain(domain) {
+    const subdomains = [".github.io", ".netlify.app", ".vercel.app", ".web.app", ".js.org"];
+    return subdomains.some(extension => domain.endsWith(extension));
+  }
+
+  if(hasSubDomain(window.location.hostname)) {
+    ScratchName = (window.location.hostname.split('.').length > 2 && window.location.hostname.split('.')[0] !== 'www') ? window.location.hostname.split('.')[0] : null;
+  } else {
+    ScratchName = window.location.hostname;
+  }
+  ScratchName = ScratchName.charAt(0).toUpperCase() + ScratchName.slice(1);
 
   //Execute once the Iframe and main document are loaded.
   const onRegistered = () => {
@@ -12,7 +25,7 @@
     //register the parent window by posting a message to the IFrame.
     IFrame.contentWindow.postMessage({
       type: "REGISTER_PARENT",
-      exportText: `Export to ${window.location.hostname}`,
+      exportText: `Export to ${ScratchName}`,
       exitButton:true
     });
     //Check for incoming messages
