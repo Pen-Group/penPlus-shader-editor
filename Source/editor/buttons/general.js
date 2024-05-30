@@ -41,18 +41,10 @@
   };
 
   terminal_Button.onclick = () => {
-    if (blockly_div.style.width === "100%") {
-      document.body.style.setProperty("--TerminalVis", "visible");
-
-      blockly_div.style.width = "70%";
-      blockly_div.style.left = "30%";
-      Blockly.svgResize(workspace);
+    if (penPlus.preview.widthTarget == 0) {
+      penPlus.preview.lerpWidth(30);
     } else {
-      document.body.style.setProperty("--TerminalVis", "hidden");
-
-      blockly_div.style.width = "100%";
-      blockly_div.style.left = "0px";
-      Blockly.svgResize(workspace);
+      penPlus.preview.lerpWidth(0);
     }
   };
 
@@ -68,6 +60,7 @@
     localStorage.setItem("penPlusEditorTheme", penPlus.editorTheme);
 
     penPlus.refreshTheme();
+    penPlus.updateMonacoTheme();
   };
 
   fileButton.onclick = () => {

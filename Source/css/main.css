@@ -1,3 +1,9 @@
+@property --previewWidth {
+  syntax: '<number>'; /* <- defined as type number for the transition to work */
+  initial-value: 0;
+  inherits: false;
+}
+
 body {
   overflow: hidden;
 
@@ -31,6 +37,8 @@ body {
   --blocklyTextColor: var(--EditorTheme_Text_1);
 
   --EditorTheme_TopBarSize: 64px;
+
+  --previewWidth: 30vw;
 
   --EditorTheme_ButtonSVGStyle: invert(100%);
 }
@@ -100,10 +108,10 @@ a:hover {
 .tempCodePreview {
   background: var(--EditorTheme_Theme_1);
   color: var(--EditorTheme_Text_1);
-  width: 70vw;
+  width: calc(100% - var(--previewWidth));
   height: calc(100vh - var(--EditorTheme_TopBarSize));
   position: absolute;
-  left: 30vw;
+  left: var(--previewWidth);
   top: var(--EditorTheme_TopBarSize);
   resize: none;
   visibility: var(--CodeVis);
@@ -216,7 +224,7 @@ a:hover {
 }
 
 .shaderpreview {
-  width: 100%;
+  width: var(--previewWidth);
   height: calc(50vh - var(--EditorTheme_TopBarSize));
   position: absolute;
   top: var(--EditorTheme_TopBarSize);
@@ -226,7 +234,7 @@ a:hover {
 
 .shaderLog {
   position: absolute;
-  width: 30vw;
+  width: var(--previewWidth);
   height: calc(50vh - var(--EditorTheme_TopBarSize));
   top: calc(50vh + var(--EditorTheme_TopBarSize));
   left: 0px;
@@ -235,9 +243,9 @@ a:hover {
 }
 
 .BlocklyDiv {
-  width: 70%;
+  width: calc(100% - var(--previewWidth));
   height: calc(100vh - var(--EditorTheme_TopBarSize));
-  left: 30%;
+  left: var(--previewWidth);
   top: var(--EditorTheme_TopBarSize);
   position: absolute;
   background-color: var(--EditorTheme_Theme_3);
@@ -261,7 +269,7 @@ a:hover {
 .logVarSwitchBar {
   background-color: var(--EditorTheme_Color_1);
   position: absolute;
-  width: 30vw;
+  width: var(--previewWidth);
   top: 50vh;
   height: var(--EditorTheme_TopBarSize);
 }
