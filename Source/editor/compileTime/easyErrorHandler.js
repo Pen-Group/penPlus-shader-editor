@@ -91,6 +91,9 @@
         else if (error.includes("void function cannot return a value")) {
             errorElement.textContent = `Unexpected return : At line ${lineNumber} in GLSL`;
         }
+        else if (error.includes("function does not return a value")) {
+            errorElement.textContent = `function ${error.split(":")[2]} has is missing a returning point : At line ${lineNumber} in GLSL`;
+        }
 
         return errorElement;
     }
