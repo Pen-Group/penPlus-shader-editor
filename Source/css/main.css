@@ -35,6 +35,23 @@ body {
   --EditorTheme_ButtonSVGStyle: invert(100%);
 }
 
+a {
+  color: var(--EditorTheme_Color_1);
+  text-shadow: 0px 0px 0px var(--EditorTheme_Color_1);
+  transition: all 125ms;
+  font-weight: bold;
+}
+
+a:visited {
+  color: var(--EditorTheme_Color_2);
+  text-shadow: 0px 0px 0px var(--EditorTheme_Color_2);
+}
+
+a:hover {
+  color: var(--EditorTheme_Color_4);
+  text-shadow: 0px 0px 4px var(--EditorTheme_Color_4);
+}
+
 .blocklyText {
   fill: var(--blocklyTextColor);
 }
