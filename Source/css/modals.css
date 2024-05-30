@@ -36,8 +36,8 @@
 .ModalHeaderFH {
   color: var(--EditorTheme_Text_3);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: normal;
+  font-size: 1.5rem;
+  font-weight: bold;
 
   box-sizing: border-box;
 
@@ -53,10 +53,6 @@
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   letter-spacing: 0.4px;
   cursor: default;
 
@@ -66,8 +62,8 @@
 .ModalHeaderFC {
   color: var(--EditorTheme_Text_3);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: normal;
+  font-size: 1.5rem;
+  font-weight: bold;
 
   box-sizing: border-box;
 
@@ -80,13 +76,6 @@
   -ms-user-select: none;
   user-select: none;
 
-  flex-grow: 1;
-  flex-shrink: 0;
-  justify-content: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   letter-spacing: 0.4px;
   cursor: default;
 
