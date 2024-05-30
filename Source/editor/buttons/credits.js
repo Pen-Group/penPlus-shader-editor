@@ -231,7 +231,7 @@
             <div>
               <label style="cursor:default;">
                 <img src="creditsImages/DizzyAwe.png" class="creditsImage"></img>
-                <span><a href="https://open.spotify.com/user/8c9ay5g2d60b0km2cllp22n9h">DizzyAwe</a></span>
+                <span><a href="https://www.youtube.com/channel/UCsY6bijIIaRvh6LsIruDT3g">DizzyAwe</a></span>
               </label>
             </div>
           </div>
