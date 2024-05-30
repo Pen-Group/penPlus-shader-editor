@@ -16,9 +16,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pen+ Shader Editor</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/syntaxHighlighting.css">
-    <link rel="stylesheet" href="css/blocklyButtons.css">
+    <link rel="stylesheet" href="css/loadingScreen.css" />
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/inputs.css" />
+    <link rel="stylesheet" href="css/modals.css" />
+    <link rel="stylesheet" href="css/syntaxHighlighting.css" />
+    <link rel="stylesheet" href="css/blocklyButtons.css" />
   </head>
   <body>
     <div class="shaderMenu">
@@ -381,7 +385,11 @@
               stroke-linejoin="round"
               class="feather feather-square"
             >
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+              ></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
             </svg>
           </button>
           <button
@@ -432,7 +440,9 @@
           <div class="logVarSwitchBar">
             <div class="BlocklyShaderButtons">
               <button class="buttonSelected" id="ButtonLog">Log</button>
-              <button class="buttonUnselected" id="ButtonVar">Uniforms/Arrays</button>
+              <button class="buttonUnselected" id="ButtonVar">
+                Uniforms/Arrays
+              </button>
             </div>
           </div>
           <div id="shaderLog" class="shaderLog"></div>
@@ -654,7 +664,7 @@
     <script src="editor/compileTime/logger.js"></script>
     <script src="editor/compileTime/shaders.js"></script>
     <script src="editor/compileTime/easyErrorHandler.js"></script>
-    
+
     <!--Replacing dave shade with twgl-->
     <script src="https://twgljs.org/dist/5.x/twgl-full.min.js"></script>
     <script src="render/DAVE_SHADE.js"></script>

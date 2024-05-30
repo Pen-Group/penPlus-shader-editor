@@ -1,15 +1,15 @@
-.myButton>.blocklyFlyoutButtonBackground {
-    fill: none;
+.myButton > .blocklyFlyoutButtonBackground {
+  fill: none;
 
-    stroke: var(--EditorTheme_Text_4);
-    stroke-width: 2px;
+  stroke: var(--EditorTheme_Text_4);
+  stroke-width: 2px;
 }
 
-.myButton>.blocklyFlyoutButtonShadow {
-    fill: none;
+.myButton > .blocklyFlyoutButtonShadow {
+  fill: none;
 }
 
-.myButton>.blocklyText {
-    stroke: var(--EditorTheme_Text_4);
-    fill: var(--EditorTheme_Text_4);
+.myButton > .blocklyText {
+  stroke: var(--EditorTheme_Text_4);
+  fill: var(--EditorTheme_Text_4);
 }

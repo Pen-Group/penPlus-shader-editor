@@ -1,15 +1,19 @@
 penPlus.setupMonacoEditor = () => {
   penPlus.isTextMode = false;
 
-  penPlus.monacoEditor = monaco.editor.create(document.getElementById("myBlocklyCodeOutput"), {
-    value: penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag,
-    language:"glsl"
-  })
+  penPlus.monacoEditor = monaco.editor.create(
+    document.getElementById("myBlocklyCodeOutput"),
+    {
+      value: penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag,
+      language: "glsl",
+    }
+  );
   monaco.editor.setTheme("myCoolTheme");
 
-  
   //This should work //?Right
-  penPlus.monacoEditor.getModel().onDidChangeContent((event) => {penPlus.editGLSL(event)});
+  penPlus.monacoEditor.getModel().onDidChangeContent((event) => {
+    penPlus.editGLSL(event);
+  });
 
   penPlus.editGLSL = (event) => {
     if (event.isFlush) return;
@@ -18,4 +22,4 @@ penPlus.setupMonacoEditor = () => {
     penPlus.isTextMode = true;
     penPlus.blockly_Button.disabled = true;
   };
-}
+};

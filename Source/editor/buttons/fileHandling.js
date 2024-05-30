@@ -44,7 +44,8 @@
       penPlus.isText = contents.isText || false;
       penPlus.isTextMode = contents.isText || false;
       penPlus.blockly_Button.disabled = contents.isText;
-      penPlus.recompileButton.style.visibility = penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
+      penPlus.recompileButton.style.visibility =
+        penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
 
       penPlus.previousVariableStates = contents.savedVarState || {};
 
@@ -66,7 +67,7 @@
       Blockly.serialization.workspaces.load(contents, window.workspace);
       penPlus.isTextMode = false;
     }
-  }
+  };
 
   const readSaveFile = () => {
     let opener = document.createElement("input");
@@ -139,7 +140,9 @@
       JSON.stringify({
         blockDat: Blockly.serialization.workspaces.save(penPlus.workspace),
         dynamicDat: penPlus.dynamicallyAdded,
-        glsl: (penPlus.isTextMode) ? penPlus.monacoEditor.getValue() : penPlus.Generated_GLSL,
+        glsl: penPlus.isTextMode
+          ? penPlus.monacoEditor.getValue()
+          : penPlus.Generated_GLSL,
         isText: penPlus.isTextMode,
         savedVarState: penPlus.previousVariableStates || {},
       }),
@@ -153,7 +156,7 @@
   importButton.onclick = () => {
     penPlus.IFRAME_API.parent.postMessage(
       {
-        type: "DATA_REQUEST"
+        type: "DATA_REQUEST",
       },
       penPlus.IFRAME_API.parentURL
     );

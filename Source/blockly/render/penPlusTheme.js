@@ -1,5 +1,3 @@
-
-
 penPlus.refreshTheme = (init) => {
   //Hacky fix
   //Works
@@ -120,6 +118,6 @@ function penPlusBlocklyTheme() {
   };
 
   penPlus.refreshTheme(true);
-  
+
   return penPlus.penPlusTheme;
 }

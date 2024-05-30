@@ -179,7 +179,7 @@
               break;
 
             case "samplerCube":
-              if ((!val) || (typeof val != "object")) return;
+              if (!val || typeof val != "object") return;
               GL.activeTexture(
                 GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
               );
@@ -191,7 +191,7 @@
               break;
 
             default:
-              if ((!val) || (typeof val != "object")) return;
+              if (!val || typeof val != "object") return;
 
               GL.activeTexture(
                 GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]
@@ -325,7 +325,7 @@
       if (GL.shaders[name].attributes[attributeName].location == -1) return;
 
       GL.shaders[name].attributes[attributeName].type = attributeType;
-      
+
       switch (attributeType) {
         case "float" || "double":
           break;
@@ -379,22 +379,22 @@
                 break;
 
               case "vec2":
-                returnedDat.push(1.0,1.0);
+                returnedDat.push(1.0, 1.0);
                 break;
 
               case "vec3":
-                returnedDat.push(1.0,1.0,1.0);
+                returnedDat.push(1.0, 1.0, 1.0);
                 break;
 
               case "vec4":
-                returnedDat.push(1.0,1.0,1.0,1.0);
+                returnedDat.push(1.0, 1.0, 1.0, 1.0);
                 break;
-            
+
               default:
                 break;
             }
             return;
-          } 
+          }
           //Then push the return dat;
           returnedDat.push(triangleDat[item][point]);
         });

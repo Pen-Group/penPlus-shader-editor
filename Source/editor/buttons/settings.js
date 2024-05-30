@@ -21,6 +21,11 @@
       ? true
       : localStorage.getItem("AutoCompile") == "true";
 
+  penPlus.fancyLogBG =
+    localStorage.getItem("fancyLogBG") === null
+      ? true
+      : localStorage.getItem("fancyLogBG") == "true";
+
   penPlus.customBlockColors =
     JSON.parse(localStorage.getItem("customBlockColors")) || {};
 
@@ -28,80 +33,201 @@
 
   settingsButton.onclick = () => {
     const varModal = penPlus.createModal(`
-    <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;background-color: var(--EditorTheme_Theme_1);border-radius:1rem; filter: drop-shadow(0px 0px 5px white);">
-      <div class="noSelect" style="background-color: var(--EditorTheme_Color_1); width:100%; height:48px; position:absolute;  color:var(--EditorTheme_Text_3); text-align: center; justify-content: center; align-items: center;font-size: 32px;">
-        Options
-        <div id="closeButton" aria-label="Close" style="cursor:pointer; transform:translate(-110%,0%);aspect-ratio:1 / 1;background-color: var(--EditorTheme_Color_2); width:auto; height:80%; position:absolute; left:100%; top:10%; border-radius:100%;" role="button" tabindex="0">
-          <img style="top:25%; width:50%; height:50%; left:25%; position:absolute; transform:rotate(45deg)" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3LjQ4IDcuNDgiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6MnB4O308L3N0eWxlPjwvZGVmcz48dGl0bGU+aWNvbi0tYWRkPC90aXRsZT48bGluZSBjbGFzcz0iY2xzLTEiIHgxPSIzLjc0IiB5MT0iNi40OCIgeDI9IjMuNzQiIHkyPSIxIi8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iMSIgeTE9IjMuNzQiIHgyPSI2LjQ4IiB5Mj0iMy43NCIvPjwvc3ZnPg==" draggable="false">
+    <div id="variableModal" class="Modal" style="--ModalWidth:40%; --ModalHeight:auto; aspect-ratio:3/2;">
+      <div class="ModalHeader">
+        <div class="ModalHeaderFH">
+          Options
         </div>
-      </div>
-      <div style="text-align: center; position:absolute; top:48px; width:100%; height:80%; overflow-y:scroll; color:var(--EditorTheme_Text_1);">
-        <div>
-          <div style="display:flex; width:100%; justify-content: center;">
-            <input type="checkbox" id="AutoComp"></input>
-            <p style="transform:translate(0%,-0.9em);">Automatic Compilation</p>
+
+        <div class="ModalHeaderFC">
+          <div id="closeButton" aria-label="Close" class="closeButton" role="button" tabindex="0">
+            <img class="closeButtonImage" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3LjQ4IDcuNDgiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6MnB4O308L3N0eWxlPjwvZGVmcz48dGl0bGU+aWNvbi0tYWRkPC90aXRsZT48bGluZSBjbGFzcz0iY2xzLTEiIHgxPSIzLjc0IiB5MT0iNi40OCIgeDI9IjMuNzQiIHkyPSIxIi8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iMSIgeTE9IjMuNzQiIHgyPSI2LjQ4IiB5Mj0iMy43NCIvPjwvc3ZnPg==" draggable="false">
           </div>
-          <div style="width:75%; margin-left:12.5%; justify-content: center; background-color:var(--EditorTheme_Theme_3);">
-            <p>Block Colors<br>won't change until refreshed!<br>Has some bugs</p>
-            <div style="display:flex; height: 25%;">
+        </div>
+      </div>  
+    
+      <div class="modalContents">
+        <div class="modalContentHeader">
+          <span>Compilation Settings</span>
+          <div class="modalContentHeaderDivider"></div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="checkbox" id="AutoComp"></input>
+              <span>Auto Compilation (Scratch Only)</span>
+            </label>
+          </div>
+        </div>
+
+
+
+        <div class="modalContentHeader">
+          <span>Visual Settings</span>
+          <div class="modalContentHeaderDivider"></div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="checkbox" id="ErrAWarnAnim"></input>
+              <span>Error and Warning Animations</span>
+            </label>
+          </div>
+        </div>
+
+
+
+        <div class="modalContentHeader">
+          <span>Category Colors</span>
+          <div class="modalContentHeaderDivider"></div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
               <input type="color" id="eventsColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Events</p>
-
-              <input type="color" id="vertexColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Vertex</p>
-
-              <input type="color" id="looksColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Looks</p>
-            </div>
-            <div style="display:flex; height: 25%;">
-              <input type="color" id="colorsColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Colors</p>
-            
-              <input type="color" id="controlsColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Controls</p>
-
-              <input type="color" id="operatorsColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Operators</p>
-            </div>
-            <div style="display:flex; height: 25%;">
-              <input type="color" id="sensingColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Sensing</p>
-
-              <input type="color" id="myBlocksColor"></input>
-              <p style="transform:translate(0%,-0.9em);">My Blocks</p>
-            </div>
-
-            <p>Variable Types</p>
-            <div style="display:flex; height: 25%;">
-              <input type="color" id="floatColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Float</p>
-
-              <input type="color" id="intColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Int</p>
-            </div>
-            <div style="display:flex; height: 25%;">
-              <input type="color" id="vec2Color"></input>
-              <p style="transform:translate(0%,-0.9em);">Vector 2</p>
-
-              <input type="color" id="vec3Color"></input>
-              <p style="transform:translate(0%,-0.9em);">Vector 3</p>
-
-              <input type="color" id="vec4Color"></input>
-              <p style="transform:translate(0%,-0.9em);">Vector 4</p>
-            </div>
-            <div style="display:flex; height: 25%;">
-              <input type="color" id="matrixColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Matrix</p>
-              
-              <input type="color" id="textureColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Texture</p>
-              
-              <input type="color" id="cubemapColor"></input>
-              <p style="transform:translate(0%,-0.9em);">Cubemap</p>
-            </div>
+              <span style="color:var(--EditorTheme_Text_1);">Events</span>
+            </label>
           </div>
-          <div>Not much here now</div>
         </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="vertexColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Vertex</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="looksColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Looks</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="colorsColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Colors</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="controlsColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Controls</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="operatorsColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Operators</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="sensingColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Sensing</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="myBlocksColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">My Blocks</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="floatColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Float</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="intColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Integer</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="vec2Color"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Vector 2</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="vec3Color"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Vector 3</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="vec4Color"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Vector 4</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="matrixColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Matrix</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="textureColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Texture</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="cubemapColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Cubemap</span>
+            </label>
+          </div>
+        </div>
+        
       </div>
     </div>
     `);
@@ -116,6 +242,15 @@
 
       recompileButton.style.visibility =
         penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
+    };
+
+    const fancyLogBG = document.getElementById("ErrAWarnAnim");
+
+    fancyLogBG.checked = penPlus.fancyLogBG;
+
+    fancyLogBG.onclick = () => {
+      penPlus.fancyLogBG = fancyLogBG.checked;
+      localStorage.setItem("fancyLogBG", fancyLogBG.checked);
     };
 
     document.getElementById("closeButton").onclick = () => {

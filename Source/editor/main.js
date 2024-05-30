@@ -54,7 +54,7 @@ function onAllAddonsLoaded() {
   const urlParams = new URLSearchParams(document.location.search);
   penPlus.experimental = urlParams.get("experimental") == "true";
   if (penPlus.experimental) {
-    console.log("you are using experimental code! Be careful!")
+    console.log("you are using experimental code! Be careful!");
   }
 
   //Create the generator and add our blocks

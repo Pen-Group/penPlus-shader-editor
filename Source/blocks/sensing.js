@@ -53,7 +53,7 @@
             opcode: "timer",
             type: "reporter",
             text: "timer",
-            
+
             tooltip: "Just a simple timer",
           },
           "---",

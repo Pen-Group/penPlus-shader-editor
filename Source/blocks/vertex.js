@@ -150,7 +150,7 @@
             opcode: "inputPosition",
             type: "reporter",
             text: "input position",
-            
+
             tooltip: "Get the vertex's input position",
           },
           {
@@ -235,7 +235,10 @@
     }
 
     makeOrthographic(block, generator) {
-      return `gl_Position = gl_Position * vec4(gl_Position.w,gl_Position.w,1,1);` + nextBlockToCode(block,generator);
+      return (
+        `gl_Position = gl_Position * vec4(gl_Position.w,gl_Position.w,1,1);` +
+        nextBlockToCode(block, generator)
+      );
     }
 
     inputPosition(block, generator) {

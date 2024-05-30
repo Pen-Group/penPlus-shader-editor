@@ -85,7 +85,7 @@
             text: "",
             tooltip: "your variable!",
             mutator: "variableMutator",
-            
+
             hideFromPallete: true,
           },
           {
@@ -221,7 +221,7 @@
             type: "reporter",
             text: "item %1 of %2",
             tooltip: "get an item from an array",
-            
+
             hideFromPallete: true,
             arguments: [
               {
@@ -389,7 +389,7 @@
 
       const variableName = variable.name;
       const variableType = variable.type;
-      
+
       let shadowDeisred = penPlus.stringToDOM(
         '<shadow type="number_reporter"></shadow>'
       );

@@ -246,7 +246,7 @@
             type: "reporter",
             text: "row %1 of column %2 of %3",
             tooltip: "Gets one value from a matrix",
-            
+
             //style: "return_block", I somewhat like this gray
             arguments: [
               penPlus.createGrid(
@@ -272,7 +272,7 @@
               {
                 type: "input_value",
                 name: "matrix",
-                
+
                 shadow: {
                   type: "matrix4_reporter",
                 },
@@ -284,7 +284,7 @@
             type: "reporter",
             text: "row %1 of %2",
             tooltip: "Gets a row of a matrix",
-            
+
             //style: "return_block", I somewhat like this gray
             arguments: [
               penPlus.createGrid(
@@ -300,7 +300,7 @@
               {
                 type: "input_value",
                 name: "matrix",
-                
+
                 shadow: {
                   type: "matrix4_reporter",
                 },
@@ -312,7 +312,7 @@
             type: "reporter",
             text: "column %1 of %2",
             tooltip: "Gets a column of a matrix",
-            
+
             //style: "return_block", I somewhat like this gray
             arguments: [
               penPlus.createGrid(
@@ -328,7 +328,7 @@
               {
                 type: "input_value",
                 name: "matrix",
-                
+
                 shadow: {
                   type: "matrix4_reporter",
                 },

@@ -1,0 +1,67 @@
+input[type="text"] {
+  background-color: var(--EditorTheme_Theme_2);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--EditorTheme_Theme_3);
+  color: var(--EditorTheme_Text_1);
+}
+
+input[type="number"] {
+  background-color: var(--EditorTheme_Theme_2);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--EditorTheme_Theme_3);
+  color: var(--EditorTheme_Text_1);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--EditorTheme_Theme_2);
+
+  border-color: var(--EditorTheme_Theme_3);
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  border-color: var(--EditorTheme_Color_1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--EditorTheme_Color_1);
+  border-color: var(--EditorTheme_Color_1);
+  /*As a data URL so that we don't have to load it from a url*/
+  background-image: url("data:image/svg+xml,%3C!-- https://akaricons.com/ --%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' focusable='false' width='1em' height='1em' style='-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);' preserveAspectRatio='xMidYMid meet' viewBox='0 0 24 24'%3E%3Cg fill='none'%3E%3Cpath d='M4 12l6 6L20 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+input[type="color"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
+
+  background-color: var(--EditorTheme_Theme_2);
+
+  border-color: var(--EditorTheme_Theme_3);
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+
+  cursor: pointer;
+}

@@ -36,11 +36,11 @@
         },
         penPlus.IFRAME_API.parentURL
       );
-    }
+    };
 
     document.getElementById("closeThisLittleModal").onclick = () => {
       varModal.close();
-    }
+    };
   };
 
   window.addEventListener("message", (event) => {
@@ -72,12 +72,11 @@
         penPlus.IFRAME_API.importText = event.data.importText || "Import";
         penPlus.IFRAME_API.exportText = event.data.exportText || "Export";
 
-        document.getElementById("importButton").innerHTML = 
+        document.getElementById("importButton").innerHTML =
           penPlus.IFRAME_API.importText;
 
         document.getElementById("exportButton").innerHTML =
           penPlus.IFRAME_API.exportText;
-
 
         event.source.postMessage(
           {
@@ -86,7 +85,7 @@
           penPlus.IFRAME_API.parentURL
         );
         break;
-      
+
       case "DATA_LOAD":
         penPlus.loadProjectFile(event.data.projectData);
         break;

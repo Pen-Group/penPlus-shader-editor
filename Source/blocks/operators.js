@@ -15,7 +15,7 @@
             type: "reporter",
             text: "%1+%2",
             tooltip: "Add two numbers together",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -38,7 +38,7 @@
             type: "reporter",
             text: "%1-%2",
             tooltip: "Subtract 2 numbers from each other",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -61,7 +61,7 @@
             type: "reporter",
             text: "%1*%2",
             tooltip: "Multiplies two numbers together",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -84,7 +84,7 @@
             type: "reporter",
             text: "%1/%2",
             tooltip: "Divide 2 numbers from each other",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -107,7 +107,7 @@
             type: "reporter",
             text: "%1^%2",
             tooltip: "Puts the first number to the power of the second number",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -331,7 +331,7 @@
             type: "reporter",
             text: "fractional %1",
             tooltip: "get the decimal part of a number",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -347,7 +347,7 @@
             type: "reporter",
             text: "%1mod%2",
             tooltip: "Get the remainder of the division of the two numbers",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -370,7 +370,7 @@
             type: "reporter",
             text: "%1 of %2",
             tooltip: "Performs the desired arithmatic operation",
-            
+
             arguments: [
               penPlus.createMenu(
                 [
@@ -406,7 +406,7 @@
             text: "smooth %1 and %2 by %3",
             tooltip:
               "Uses the smooth step operator and steps by the third number",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -425,7 +425,7 @@
               {
                 type: "input_value",
                 name: "C",
-                
+
                 shadow: {
                   type: "number_reporter",
                 },
@@ -438,7 +438,7 @@
             type: "reporter",
             text: "%1min%2",
             tooltip: "if A > B then B = A",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -461,7 +461,7 @@
             type: "reporter",
             text: "%1max%2",
             tooltip: "if A > B then A = B",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -673,18 +673,12 @@
     cast(block, generator) {
       const to = block.getFieldValue("to");
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
-      return [
-        `${to}(${A})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`${to}(${A})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     fract(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
-      return [
-        `fract(${A})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`fract(${A})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 

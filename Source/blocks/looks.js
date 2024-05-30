@@ -43,7 +43,6 @@
             type: "reporter",
             text: "vertex colour",
             tooltip: "Vertex Color",
-            
           },
           "---",
           {
@@ -66,7 +65,6 @@
             type: "reporter",
             text: "pixel colour",
             tooltip: "Pixel color",
-            
           },
           {
             opcode: "mulBlending",
@@ -175,7 +173,7 @@
               {
                 type: "input_value",
                 name: "UV",
-                
+
                 shadow: {
                   type: "looks_pixUV",
                 },
@@ -192,7 +190,7 @@
             text: "color at %1 of cubemap %2",
             tooltip: "Sample the pixel at the UV coordinates desired",
             style: "cubemap_blocks",
-            
+
             arguments: [
               {
                 type: "input_value",

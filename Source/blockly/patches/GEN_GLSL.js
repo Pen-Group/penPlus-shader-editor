@@ -10,7 +10,8 @@ let functionsThatExist = {
 };
 
 //Base GLSL code
-penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
+penPlus.Generated_GLSL =
+  penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
 
 //Helper function to convert the next block
 function nextBlockToCode(block, generator) {
@@ -217,7 +218,7 @@ function updateGLSL(event) {
   if (!penPlus.Generated_GLSL.includes("void fragment")) {
     penPlus.Generated_GLSL += penPlus.defaultFrag;
   }
-  
+
   for (
     let letterID = penPlus.Generated_GLSL.indexOf("void vertex");
     letterID < penPlus.Generated_GLSL.length;
@@ -255,16 +256,24 @@ function updateGLSL(event) {
   }
 
   //I know this isn't the best but it works
-  penPlus.Generated_Vert = penPlus.makeVertexSafe((
-    penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") +
-    vertFunction
-  ).replace("void vertex", "void main"));
+  penPlus.Generated_Vert = penPlus.makeVertexSafe(
+    (
+      penPlus.Generated_GLSL.replace(fragFunction, "").replace(
+        vertFunction,
+        ""
+      ) + vertFunction
+    ).replace("void vertex", "void main")
+  );
 
   //This too
-  penPlus.Generated_Frag = penPlus.makeFragmentSafe((
-    penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") +
-    fragFunction
-  ).replace("void fragment", "void main"));
+  penPlus.Generated_Frag = penPlus.makeFragmentSafe(
+    (
+      penPlus.Generated_GLSL.replace(vertFunction, "").replace(
+        fragFunction,
+        ""
+      ) + fragFunction
+    ).replace("void fragment", "void main")
+  );
 
   genProgram();
 }

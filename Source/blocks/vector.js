@@ -137,7 +137,7 @@
             type: "reporter",
             text: "normalize %1",
             tooltip: "Makes the length of a vector 1",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -153,7 +153,7 @@
             type: "reporter",
             text: "dot product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -176,7 +176,7 @@
             type: "reporter",
             text: "cross product of %1 and %2",
             tooltip: "Makes the length of a vector 1",
-            
+
             arguments: [
               {
                 type: "input_value",
@@ -199,7 +199,7 @@
             type: "reporter",
             text: "length of %1",
             tooltip: "Makes the length of a vector 1",
-            
+
             arguments: [
               {
                 type: "input_value",

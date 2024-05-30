@@ -176,7 +176,7 @@
     }
 
     upperIndex(block, generator) {
-      return [`penPlusLoop_${penPlus.loopID}`,Order.ATOMIC];
+      return [`penPlusLoop_${penPlus.loopID}`, Order.ATOMIC];
     }
 
     continue() {

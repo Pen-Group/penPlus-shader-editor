@@ -19,9 +19,9 @@ function previewRender() {
   penPlus.cubemaps = {};
 
   const powerOfTwo = (x) => {
-    console.log((Math.log(x)/Math.log(2)) % 1 === 0)
-    return (Math.log(x)/Math.log(2)) % 1 === 0;
-  }
+    console.log((Math.log(x) / Math.log(2)) % 1 === 0);
+    return (Math.log(x) / Math.log(2)) % 1 === 0;
+  };
 
   //Load Textures
   const textureKeys = Object.keys(penPlus.shaderParams.sampleTextures);
@@ -48,7 +48,7 @@ function previewRender() {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
 
-      if ((!powerOfTwo(image.width)) || (!powerOfTwo(image.height))) {
+      if (!powerOfTwo(image.width) || !powerOfTwo(image.height)) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       }
@@ -94,13 +94,21 @@ function previewRender() {
   let now = Date.now();
 
   penPlus.refreshMesh = () => {
-    let attributes = {}
+    let attributes = {};
     switch (penPlus.previewMode) {
       case "fullscreen":
-        attributes = [{},{}]
-        Object.keys(penPlus.attributeSetters[0]).forEach(element => {
-          attributes[0][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[1],penPlus.attributeSetters[2]]
-          attributes[1][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[2],penPlus.attributeSetters[3]]
+        attributes = [{}, {}];
+        Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
+          attributes[0][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[1],
+            penPlus.attributeSetters[2],
+          ];
+          attributes[1][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[2],
+            penPlus.attributeSetters[3],
+          ];
         });
 
         gl.bufferData(
@@ -152,238 +160,324 @@ function previewRender() {
 
       case "cube":
         //I cannot think of how to do this lol
-        attributes = [{},{},{},{}]
-        Object.keys(penPlus.attributeSetters[0]).forEach(element => {
-          attributes[0][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[1],penPlus.attributeSetters[2]]
-          attributes[1][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[2],penPlus.attributeSetters[3]]
-          attributes[2][element] = [penPlus.attributeSetters[4],penPlus.attributeSetters[5],penPlus.attributeSetters[6]]
-          attributes[3][element] = [penPlus.attributeSetters[4],penPlus.attributeSetters[6],penPlus.attributeSetters[7]]
+        attributes = [{}, {}, {}, {}];
+        Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
+          attributes[0][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[1],
+            penPlus.attributeSetters[2],
+          ];
+          attributes[1][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[2],
+            penPlus.attributeSetters[3],
+          ];
+          attributes[2][element] = [
+            penPlus.attributeSetters[4],
+            penPlus.attributeSetters[5],
+            penPlus.attributeSetters[6],
+          ];
+          attributes[3][element] = [
+            penPlus.attributeSetters[4],
+            penPlus.attributeSetters[6],
+            penPlus.attributeSetters[7],
+          ];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
           new Float32Array(
             gl.shaders.editorShader
               //Front
-              .makeTriangle(Object.assign({
-                a_position: [
-                  [-0.5, -0.5, 0, 1],
-                  [0.5, -0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              },attributes[0]))
+              .makeTriangle(
+                Object.assign(
+                  {
+                    a_position: [
+                      [-0.5, -0.5, 0, 1],
+                      [0.5, -0.5, 0, 1],
+                      [0.5, 0.5, 0, 1],
+                    ],
+                    a_color: [
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                    ],
+                    a_texCoord: [
+                      [0, 0],
+                      [1, 0],
+                      [1, 1],
+                    ],
+                  },
+                  attributes[0]
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, -0.5, 0, 1],
-                    [0.5, 0.5, 0, 1],
-                    [-0.5, 0.5, 0, 1],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [0, 0],
-                    [1, 1],
-                    [0, 1],
-                  ],
-                },attributes[1]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 1],
+                        [0.5, 0.5, 0, 1],
+                        [-0.5, 0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 1],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[1]
+                  )
+                )
               )
               //Back
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({a_position: [
-                  [-0.5, -0.5, 0, 2],
-                  [0.5, -0.5, 0, 2],
-                  [0.5, 0.5, 0, 2],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [1, 0],
-                  [0, 0],
-                  [0, 1],
-                ],
-              },attributes[2])))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [0.5, -0.5, 0, 2],
+                        [0.5, 0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 0],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[2]
+                  )
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, -0.5, 0, 2],
-                    [0.5, 0.5, 0, 2],
-                    [-0.5, 0.5, 0, 2],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [1, 0],
-                    [0, 1],
-                    [1, 1],
-                  ],
-                },attributes[3]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [0.5, 0.5, 0, 2],
+                        [-0.5, 0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 1],
+                        [1, 1],
+                      ],
+                    },
+                    attributes[3]
+                  )
+                )
               )
               //Left
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({a_position: [
-                  [-0.5, -0.5, 0, 2],
-                  [-0.5, -0.5, 0, 1],
-                  [-0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [1, 0],
-                  [0, 0],
-                  [0, 1],
-                ],
-              },attributes[0])))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [-0.5, -0.5, 0, 1],
+                        [-0.5, 0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 0],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[0]
+                  )
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, -0.5, 0, 2],
-                    [-0.5, 0.5, 0, 1],
-                    [-0.5, 0.5, 0, 2],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [1, 0],
-                    [0, 1],
-                    [1, 1],
-                  ],
-                },attributes[1]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [-0.5, 0.5, 0, 1],
+                        [-0.5, 0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 1],
+                        [1, 1],
+                      ],
+                    },
+                    attributes[1]
+                  )
+                )
               )
               //right
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({a_position: [
-                  [0.5, -0.5, 0, 2],
-                  [0.5, -0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              },attributes[2])))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [0.5, -0.5, 0, 2],
+                        [0.5, -0.5, 0, 1],
+                        [0.5, 0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                      ],
+                    },
+                    attributes[2]
+                  )
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [0.5, -0.5, 0, 2],
-                    [0.5, 0.5, 0, 1],
-                    [0.5, 0.5, 0, 2],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [0, 0],
-                    [1, 1],
-                    [0, 1],
-                  ],
-                },attributes[3]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [0.5, -0.5, 0, 2],
+                        [0.5, 0.5, 0, 1],
+                        [0.5, 0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 1],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[3]
+                  )
+                )
               )
               //top
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({a_position: [
-                  [-0.5, 0.5, 0, 2],
-                  [-0.5, 0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              },attributes[0])))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, 0.5, 0, 2],
+                        [-0.5, 0.5, 0, 1],
+                        [0.5, 0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 0],
+                        [1, 1],
+                      ],
+                    },
+                    attributes[0]
+                  )
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, 0.5, 0, 2],
-                    [0.5, 0.5, 0, 1],
-                    [0.5, 0.5, 0, 2],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [0, 0],
-                    [1, 1],
-                    [0, 1],
-                  ],
-                },attributes[1]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, 0.5, 0, 2],
+                        [0.5, 0.5, 0, 1],
+                        [0.5, 0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 1],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[1]
+                  )
+                )
               )
               //top
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({a_position: [
-                  [-0.5, -0.5, 0, 2],
-                  [-0.5, -0.5, 0, 1],
-                  [0.5, -0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [1, 0],
-                  [0, 0],
-                  [0, 1],
-                ],
-              },attributes[2])))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [-0.5, -0.5, 0, 1],
+                        [0.5, -0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 0],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[2]
+                  )
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, -0.5, 0, 2],
-                    [0.5, -0.5, 0, 1],
-                    [0.5, -0.5, 0, 2],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [1, 0],
-                    [0, 1],
-                    [1, 1],
-                  ],
-                },attributes[3]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 2],
+                        [0.5, -0.5, 0, 1],
+                        [0.5, -0.5, 0, 2],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [1, 0],
+                        [0, 1],
+                        [1, 1],
+                      ],
+                    },
+                    attributes[3]
+                  )
+                )
               )
           ),
           gl.STATIC_DRAW
@@ -393,50 +487,68 @@ function previewRender() {
         break;
 
       case "square":
-        attributes = [{},{}]
-        Object.keys(penPlus.attributeSetters[0]).forEach(element => {
-          attributes[0][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[1],penPlus.attributeSetters[2]]
-          attributes[1][element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[2],penPlus.attributeSetters[3]]
+        attributes = [{}, {}];
+        Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
+          attributes[0][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[1],
+            penPlus.attributeSetters[2],
+          ];
+          attributes[1][element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[2],
+            penPlus.attributeSetters[3],
+          ];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
           new Float32Array(
             gl.shaders.editorShader
-              .makeTriangle(Object.assign({
-                a_position: [
-                  [-0.5, -0.5, 0, 1],
-                  [0.5, -0.5, 0, 1],
-                  [0.5, 0.5, 0, 1],
-                ],
-                a_color: [
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                  [1.0, 1.0, 1.0, 1.0],
-                ],
-                a_texCoord: [
-                  [0, 0],
-                  [1, 0],
-                  [1, 1],
-                ],
-              },attributes[0]))
+              .makeTriangle(
+                Object.assign(
+                  {
+                    a_position: [
+                      [-0.5, -0.5, 0, 1],
+                      [0.5, -0.5, 0, 1],
+                      [0.5, 0.5, 0, 1],
+                    ],
+                    a_color: [
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0],
+                    ],
+                    a_texCoord: [
+                      [0, 0],
+                      [1, 0],
+                      [1, 1],
+                    ],
+                  },
+                  attributes[0]
+                )
+              )
               .concat(
-                gl.shaders.editorShader.makeTriangle(Object.assign({
-                  a_position: [
-                    [-0.5, -0.5, 0, 1],
-                    [0.5, 0.5, 0, 1],
-                    [-0.5, 0.5, 0, 1],
-                  ],
-                  a_color: [
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                    [1.0, 1.0, 1.0, 1.0],
-                  ],
-                  a_texCoord: [
-                    [0, 0],
-                    [1, 1],
-                    [0, 1],
-                  ],
-                },attributes[1]))
+                gl.shaders.editorShader.makeTriangle(
+                  Object.assign(
+                    {
+                      a_position: [
+                        [-0.5, -0.5, 0, 1],
+                        [0.5, 0.5, 0, 1],
+                        [-0.5, 0.5, 0, 1],
+                      ],
+                      a_color: [
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                        [1.0, 1.0, 1.0, 1.0],
+                      ],
+                      a_texCoord: [
+                        [0, 0],
+                        [1, 1],
+                        [0, 1],
+                      ],
+                    },
+                    attributes[1]
+                  )
+                )
               )
           ),
           gl.STATIC_DRAW
@@ -446,29 +558,38 @@ function previewRender() {
         break;
 
       default:
-        Object.keys(penPlus.attributeSetters[0]).forEach(element => {
-          attributes[element] = [penPlus.attributeSetters[0],penPlus.attributeSetters[1],penPlus.attributeSetters[2]]
+        Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
+          attributes[element] = [
+            penPlus.attributeSetters[0],
+            penPlus.attributeSetters[1],
+            penPlus.attributeSetters[2],
+          ];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
           new Float32Array(
-            gl.shaders.editorShader.makeTriangle(Object.assign({
-              a_position: [
-                [-0.5, -0.5, 0, 1],
-                [0.5, -0.5, 0, 1],
-                [0.5, 0.5, 0, 1],
-              ],
-              a_color: [
-                [1.0, 1.0, 1.0, 1.0],
-                [1.0, 1.0, 1.0, 1.0],
-                [1.0, 1.0, 1.0, 1.0],
-              ],
-              a_texCoord: [
-                [0, 0],
-                [1, 0],
-                [1, 1],
-              ],
-            },attributes))
+            gl.shaders.editorShader.makeTriangle(
+              Object.assign(
+                {
+                  a_position: [
+                    [-0.5, -0.5, 0, 1],
+                    [0.5, -0.5, 0, 1],
+                    [0.5, 0.5, 0, 1],
+                  ],
+                  a_color: [
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                    [1.0, 1.0, 1.0, 1.0],
+                  ],
+                  a_texCoord: [
+                    [0, 0],
+                    [1, 0],
+                    [1, 1],
+                  ],
+                },
+                attributes
+              )
+            )
           ),
           gl.STATIC_DRAW
         );
@@ -476,14 +597,17 @@ function previewRender() {
         penPlus.meshPoints = 3;
         break;
     }
-  }
+  };
 
   function renderFrame() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       penPlus.timer += (now - lastTime) / 1000;
       document.body.style.setProperty("--U_TIMER", penPlus.timer + "px");
-      document.body.style.setProperty("--U_TIMER_SIN", Math.sin(penPlus.timer * 0.5) + "px");
+      document.body.style.setProperty(
+        "--U_TIMER_SIN",
+        Math.sin(penPlus.timer * 0.5) + "px"
+      );
 
       gl.canvas.width = gl.canvas.clientWidth;
       gl.canvas.height = gl.canvas.clientHeight;
@@ -513,10 +637,7 @@ function previewRender() {
         gl.shaders.editorShader.uniforms.u_transform.location
       ) {
         gl.shaders.editorShader.uniforms.u_transform.value = [
-          1,1,0,0,
-          0,1,0,0,
-          0,0,0,0,
-          0,0,0,0
+          1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         ];
       }
 

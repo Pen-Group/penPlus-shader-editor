@@ -98,7 +98,7 @@
               {
                 type: "input_value",
                 name: "name",
-                
+
                 shadow: {
                   type: "string_reporter",
                 },
@@ -150,7 +150,7 @@
               {
                 type: "input_value",
                 name: "name",
-                
+
                 shadow: {
                   type: "string_reporter",
                 },
@@ -175,12 +175,12 @@
             type: "reporter",
             text: "argument %1",
             tooltip: "Get an argument from a custom block",
-            
+
             arguments: [
               {
                 type: "input_value",
                 name: "name",
-                
+
                 shadow: {
                   type: "string_reporter",
                 },
@@ -211,7 +211,7 @@
           {
             opcode: "customBlockExecute_Reporter",
             type: "reporter",
-            
+
             text: "",
             tooltip: "your custom block!",
             mutator: "customBlockMutator",
@@ -386,7 +386,9 @@
           generator.valueToCode(block, argument.name, Order.ATOMIC);
       }
 
-      return `${block.customBlockData.scriptTarget}(${argString});\n ${nextBlockToCode(block, generator)}`;
+      return `${
+        block.customBlockData.scriptTarget
+      }(${argString});\n ${nextBlockToCode(block, generator)}`;
     }
 
     customBlockExecute_Reporter(block, generator) {

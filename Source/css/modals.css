@@ -1,0 +1,211 @@
+.Modal {
+    position: absolute;
+    width: var(--ModalWidth);
+    height: var(--ModalHeight);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+
+    flex-direction: column; 
+    flex-grow: 1;
+
+    background-color: var(--EditorTheme_Theme_1);
+
+    border-style: solid;
+    border-radius:1rem; 
+    border-width:2px; 
+    border-color:#ffffff42;
+}
+
+.ModalHeader {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    height: 3.125rem;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--EditorTheme_Color_1);
+    color: var(--EditorTheme_Text_3);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.ModalHeaderFH {
+    color: var(--EditorTheme_Text_3);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 0.4px;
+    cursor: default;
+
+    margin: 0 -20rem 0 0;
+}
+
+.ModalHeaderFC {
+    color: var(--EditorTheme_Text_3);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 0.4px;
+    cursor: default;
+
+    flex-basis: 20rem;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+.closeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--EditorTheme_Color_2);
+    border-radius: 50%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+
+    width: 1.75rem;
+    height: 1.75rem;
+    box-shadow: 0 0 0 2px var(--EditorTheme_Color_3);
+
+    box-sizing: border-box;
+}
+
+.closeButtonImage {
+    border: 0;
+
+    position: relative;
+    margin: 0.25rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transform-origin: 50%;
+    transform: rotate(45deg);
+
+    box-sizing: border-box;
+
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+.modalContents {
+    box-sizing: border-box;
+
+    background: var(--EditorTheme_Theme_1);
+    padding: 1.5rem 2.25rem;
+    min-height: 150px;
+    max-height: calc(100% - 3.125rem);
+    overflow-y: auto;
+}
+
+.modalContentHeader {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.5rem 0 0 0;
+    font-weight: bold;
+}
+
+.modalContentHeader>span {
+    color: var(--EditorTheme_Text_1);
+}
+
+.modalContentHeader>div {
+    box-sizing: border-box;
+
+    flex-grow: 1;
+    margin-left: 1rem;
+    border-top: 1px dashed var(--EditorTheme_Theme_4);
+}
+
+.modalContentSetting {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+}
+
+.modalContentSetting>div {
+    box-sizing: border-box;
+
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.modalContentSetting>div>label {
+    box-sizing: border-box;
+
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modalContentSettingEmergancyLabel {
+    box-sizing: border-box;
+
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modalContentSetting>div>label>span {
+    color: var(--EditorTheme_Text_1);
+}

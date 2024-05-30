@@ -30,7 +30,7 @@
 
     modal.background.innerHTML = HTML;
 
-    modal.background.style.zIndex = "500";
+    modal.background.style.zIndex = "50000";
 
     document.body.appendChild(modal.background);
 
