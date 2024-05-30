@@ -159,12 +159,20 @@
     color: var(--EditorTheme_Text_1);
 }
 
-.modalContentHeader>div {
+.modalContentHeader>.modalContentHeaderDivider {
     box-sizing: border-box;
 
     flex-grow: 1;
     margin-left: 1rem;
     border-top: 1px dashed var(--EditorTheme_Theme_4);
+}
+
+.noModalDivider {
+    border: none;
+
+    flex-grow: 1;
+    margin-left: 0rem;
+
 }
 
 .modalContentSetting {

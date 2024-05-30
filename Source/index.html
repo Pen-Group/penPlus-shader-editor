@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/inputs.css" />
     <link rel="stylesheet" href="css/modals.css" />
+    <link rel="stylesheet" href="css/credits.css" />
     <link rel="stylesheet" href="css/syntaxHighlighting.css" />
     <link rel="stylesheet" href="css/blocklyButtons.css" />
   </head>
@@ -50,216 +51,26 @@
                 border-bottom-right-radius: 0%;
               "
             >
-              <svg
-                class=""
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-moon"
-                style="transform: translate(0%, 25%)"
-                id="themeIcon"
-              ></svg
-              >Theme
+              <svg class="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon" style="transform: translate(0%, 25%)" id="themeIcon"></svg>Theme
             </button>
-            <button
-              class="toggleButton"
-              id="OptionsButton"
-              style="
-                width: 100%;
-                border-top-left-radius: 0%;
-                border-top-right-radius: 0%;
-              "
-            >
+            <button class="toggleButton" id="OptionsButton" style="   width: 100%;   border-top-left-radius: 0%;   border-top-right-radius: 0%; ">
               Settings
             </button>
           </div>
           <button class="toggleButton" id="CloseIFRAMEeditor">
-            <svg
-              src="icons/settings.svg"
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0,0,84.8,61.12211"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-settings"
-            >
-              <g transform="translate(-197.6,-149.08234)">
-                <g
-                  data-paper-data='{"isPaintingLayer":true}'
-                  fill-rule="evenodd"
-                  stroke-miterlimit="10"
-                  stroke-dasharray=""
-                  stroke-dashoffset="0"
-                  style="mix-blend-mode: normal"
-                >
-                  <path
-                    d="M246.95,150.95445c0.3,-0.2 0.8,-0.1 0.9,0.3l2.6,10.7c0,0 6.4,4.7 8.3,8c3.2,5.5 3.3,10 3.3,10c0,0 7.1,2.1 8.3,7.8c1.2,5.7 -3.2,16.5 -22,20.2c-18.8,3.7 -33.9,-1.4 -41,-12.8c-7.1,-11.4 4.1,-25 3.5,-24.2l-2.1,-17.9c-0.1,-0.4 0.4,-0.7 0.8,-0.5l12.1,7.9c0,0 4.5,-1.7 9.2,-1.9c2.8,-0.2 5.2,0 7.5,0.4z"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-width="4.5"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                  />
-                  <path
-                    d="M261.75,180.35445c0,0 6.9,1.8 8.1,7.5c1.2,5.7 -3.6,16 -22.2,19.6c-24.2,5 -35.7,-9.4 -29,-20c6.7,-10.7 18.2,-1.6 26.6,-2.2c7.2,-0.5 8,-6.8 16.5,-4.9z"
-                    fill="#ffffff"
-                    stroke="none"
-                    stroke-width="1"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                  />
-                  <path
-                    d="M280.15,181.45445c-4.7,3.8 -11.9,3.9 -11.9,3.9"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-width="4.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M278.85,192.65445c-6.3,0.5 -10.2,-1.4 -10.2,-1.4"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-width="4.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M244.85,182.45259c2.1,0 4.3,0.2 4.4,0.9c0.1,1.4 -1.4,4.2 -3,4.3c-1.8,0.2 -6,-2.3 -6,-3.9c-0.1,-1.2 2.6,-1.3 4.6,-1.3z"
-                    fill="#ffffff"
-                    stroke="#ffffff"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M199.85,181.15445c0,0 8.6,2.8 12.1,5.9"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-width="4.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M212.25,190.55445c-4.3,1.7 -11.7,0.6 -11.7,0.6"
-                    fill="none"
-                    stroke="#ffffff"
-                    stroke-width="4.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M257.5012,176.65445c0,1.86462 -1.35609,3.39022 -3.0512,3.39022c-1.69511,0 -3.05119,-1.5256 -3.05119,-3.39022c0,-1.86462 1.35608,-3.39021 3.05119,-3.39021c1.69511,0 3.0512,1.52559 3.0512,3.39021"
-                    fill="#ffffff"
-                    stroke="none"
-                    stroke-width="1"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                  />
-                  <path
-                    d="M232.9704,179.55445c0,2.15135 -1.56462,3.91155 -3.5204,3.91155c-1.95577,0 -3.52039,-1.7602 -3.52039,-3.91155c0,-2.15135 1.56462,-3.91155 3.52039,-3.91155c1.95577,0.19557 3.5204,1.7602 3.5204,3.91155"
-                    fill="#ffffff"
-                    stroke="none"
-                    stroke-width="1"
-                    stroke-linecap="butt"
-                    stroke-linejoin="miter"
-                  />
-                </g>
-              </g>
-            </svg>
+            <img src="icons/ScratchCat.svg" class="buttonSVG" alt="">
           </button>
           <button class="toggleButton" id="SettingsButton">
-            <svg
-              src="icons/settings.svg"
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-settings"
-            >
-              <circle cx="12" cy="12" r="3"></circle>
-              <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-              ></path>
-            </svg>
+            <img src="icons/settings.svg" class="buttonSVG"></img>
           </button>
           <button class="toggleButton" id="TerminalToggle">
-            <svg
-              src="icons/terminal.svg"
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-terminal"
-            >
-              <polyline points="4 17 10 11 4 5"></polyline>
-              <line x1="12" y1="19" x2="20" y2="19"></line>
-            </svg>
+            <img src="icons/terminal.svg" class="buttonSVG"></img>
           </button>
           <button class="toggleButton" id="CreditsButton">
-            <svg
-              src="icons/credits.svg"
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-award"
-            >
-              <circle cx="12" cy="8" r="7"></circle>
-              <polyline
-                points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
-              ></polyline>
-            </svg>
+            <img src="icons/credits.svg" class="buttonSVG"></img>
           </button>
           <button class="toggleButton" id="fileButton">
-            <svg
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-save"
-            >
-              <path
-                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
-              ></path>
-              <polyline points="17 21 17 13 7 13 7 21"></polyline>
-              <polyline points="7 3 7 8 15 8"></polyline>
-            </svg>
+            <img src="icons/save.svg" class="buttonSVG"></img>
           </button>
           <div
             style="
@@ -320,24 +131,7 @@
           </div>
           <!--Put load and save buttons under here! loadButton -->
           <button class="toggleButton" id="recompileButton">
-            <svg
-              class="buttonSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-repeat"
-            >
-              <polyline points="17 1 21 5 17 9"></polyline>
-              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-              <polyline points="7 23 3 19 7 15"></polyline>
-              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-            </svg>
+            <img src="icons/repeat.svg" class="buttonSVG"></img>
           </button>
         </div>
         <div class="title">Pen+ Shader Editor</div>
@@ -349,92 +143,28 @@
             class="previewStyle"
             style="top: calc(var(--EditorTheme_TopBarSize) + 8px)"
           >
-            <svg
-              class="previewStyleSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-maximize"
-            >
-              <path
-                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
-              ></path>
-            </svg>
+            <img src="icons/maximize.svg" class="previewStyleSVG"></img>
           </button>
           <button
             id="CubeButton"
             class="previewStyle"
             style="top: calc(var(--EditorTheme_TopBarSize) + 48px)"
           >
-            <svg
-              class="previewStyleSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-square"
-            >
-              <path
-                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-              ></path>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-              <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
+            <img src="icons/box.svg" class="previewStyleSVG"></img>
           </button>
           <button
             id="SquareButton"
             class="previewStyle"
             style="top: calc(var(--EditorTheme_TopBarSize) + 88px)"
           >
-            <svg
-              class="previewStyleSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-square"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            </svg>
+            <img src="icons/square.svg" class="previewStyleSVG"></img>
           </button>
           <button
             id="TriangleButton"
             class="previewStyle"
             style="top: calc(var(--EditorTheme_TopBarSize) + 128px)"
           >
-            <svg
-              class="previewStyleSVG"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-triangle"
-            >
-              <path
-                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
-              ></path>
-            </svg>
+            <img src="icons/triangle.svg" class="previewStyleSVG"></img>
           </button>
 
           <div class="logVarSwitchBar">

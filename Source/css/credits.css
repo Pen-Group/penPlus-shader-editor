@@ -1,0 +1,9 @@
+.creditsImage {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--EditorTheme_Theme_3);
+}
