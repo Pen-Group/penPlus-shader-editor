@@ -1,0 +1,51 @@
+.func_Highlight {
+    color: var(--myblocks_blocks);
+}
+
+.float_Highlight {
+    color: var(--variables_blocks);
+}
+
+.int_Highlight {
+    color: var(--int_blocks);
+}
+
+.vec2_Highlight {
+    color: var(--vector_blocks);
+}
+
+.vec3_Highlight {
+    color: var(--vec3_blocks);
+}
+
+.vec4_Highlight {
+    color: var(--vec4_blocks);
+}
+
+.matrix_Highlight {
+    color: var(--matrix_blocks);
+}
+
+.texture_Highlight {
+    color: var(--texture_blocks);
+}
+
+.cubemap_Highlight {
+    color: var(--cubemap_blocks);
+}
+
+.comment_Highlight {
+    color: var(--sensing_blocks);
+}
+
+.operator_Highlight {
+    color: var(--operators_blocks);
+}
+
+.precision_Highlight {
+    color: var(--colors_blocks);
+}
+
+.controls_Highlight {
+    color: var(--controls_blocks);
+}
