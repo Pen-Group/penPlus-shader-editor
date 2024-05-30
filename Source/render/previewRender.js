@@ -482,6 +482,7 @@ function previewRender() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       penPlus.timer += (now - lastTime) / 1000;
+      document.body.style.setProperty("--U_TIMER", penPlus.timer + "px");
 
       gl.canvas.width = gl.canvas.clientWidth;
       gl.canvas.height = gl.canvas.clientHeight;

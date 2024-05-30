@@ -45,6 +45,8 @@
         --EditorTheme_Text_3: #ffffff;
         --EditorTheme_Text_4: #8b8b8b;
 
+        --U_TIMER: 0px;
+
         --blocklyTextColor: var(--EditorTheme_Text_1);
 
         --EditorTheme_TopBarSize: 64px;
@@ -1220,7 +1222,8 @@
     <script src="blockly/patches/vertexSafeifier.js"></script>
     <script src="blockly/patches/fragmentSafeifier.js"></script>
     <script src="blockly/patches/GEN_GLSL.js"></script>
-    <script src="render/shaders.js"></script>
+    <script src="editor/compileTime/shaders.js"></script>
+    <script src="editor/compileTime/easyErrorHandler.js"></script>
     
     <!--Replacing dave shade with twgl-->
     <script src="https://twgljs.org/dist/5.x/twgl-full.min.js"></script>
