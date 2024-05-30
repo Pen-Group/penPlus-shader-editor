@@ -12,36 +12,19 @@ penPlus.penPlusExtension = class {
 
     //Add the block styles for this category. Each block can have its own override.
     penPlus.penPlusTheme.blockStyles[id + "blocks"] = {
-      colourPrimary: penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colourPrimary
-        : myInfo.color1,
-      colourSecondary: penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colourSecondary
-        : myInfo.color2,
-      colourTertiary: penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colourTertiary
-        : myInfo.color3,
-      colorText: penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colorText
-        : myInfo.text || penPlus.brightnessByColor(myInfo.color1) >= 200
-        ? "#000000"
-        : "#ffffff",
+      colourPrimary: penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colourPrimary : myInfo.color1,
+      colourSecondary: penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colourSecondary : myInfo.color2,
+      colourTertiary: penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colourTertiary : myInfo.color3,
+      colorText: penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colorText : myInfo.text || penPlus.brightnessByColor(myInfo.color1) >= 200 ? "#000000" : "#ffffff",
     };
 
-    document.body.style.setProperty(
-      `--${id}blocks`,
-      penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colourPrimary
-        : myInfo.color1
-    );
+    document.body.style.setProperty(`--${id}blocks`, penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colourPrimary : myInfo.color1);
 
     //Define the category definition here
     let createdContentData = {
       kind: "category",
       name: myInfo.name,
-      colour: penPlus.customBlockColors[myInfo.id]
-        ? penPlus.customBlockColors[myInfo.id].colourPrimary
-        : myInfo.color1,
+      colour: penPlus.customBlockColors[myInfo.id] ? penPlus.customBlockColors[myInfo.id].colourPrimary : myInfo.color1,
       contents: [],
     };
 
@@ -95,9 +78,7 @@ penPlus.penPlusExtension = class {
           case "duplicate":
             blockData = {
               kind: "block",
-              type: block.extensionID
-                ? block.extensionID + block.of
-                : id + block.of,
+              type: block.extensionID ? block.extensionID + block.of : id + block.of,
             };
 
             if (block.extraData) {
@@ -238,25 +219,22 @@ penPlus.penPlusExtension = class {
 
       penPlus.dynamicallyAdded = penPlus.dynamicallyAdded || {};
       //Add the callback
-      penPlus.workspace.registerToolboxCategoryCallback(
-        "dynamic_" + myInfo.id,
-        (workspace) => {
-          //create data holders
-          let createdBlockData = this[myInfo.dynamic](workspace);
-          let formattedDynamic = [];
+      penPlus.workspace.registerToolboxCategoryCallback("dynamic_" + myInfo.id, (workspace) => {
+        //create data holders
+        let createdBlockData = this[myInfo.dynamic](workspace);
+        let formattedDynamic = [];
 
-          penPlus.dynamicallyAdded["dynamic_" + myInfo.id] = createdBlockData;
+        penPlus.dynamicallyAdded["dynamic_" + myInfo.id] = createdBlockData;
 
-          //Loop through and gather compiled data
-          createdBlockData.forEach((block) => {
-            formattedDynamic.push(addBlock(block, true));
-          });
+        //Loop through and gather compiled data
+        createdBlockData.forEach((block) => {
+          formattedDynamic.push(addBlock(block, true));
+        });
 
-          //Concatanate the blocks
-          //Did I spell that right?
-          return this.defaultBlockInfo.concat(formattedDynamic);
-        }
-      );
+        //Concatanate the blocks
+        //Did I spell that right?
+        return this.defaultBlockInfo.concat(formattedDynamic);
+      });
     }
 
     penPlus.toolbox.contents.push(createdContentData);
@@ -287,18 +265,8 @@ penPlus.penPlusExtension = class {
       if (!variable.name.split(" ")[1]) return;
 
       //Types that don't have precision
-      if (
-        variable.type == "texture" ||
-        variable.type == "cubemap" ||
-        variable.type == "int"
-      )
-        returnedGLSL += `${type} ${
-          variable.name.split(" ")[1]
-        } = ${type}(1);\n`;
-      else
-        returnedGLSL += `highp ${type} ${
-          variable.name.split(" ")[1]
-        } = ${type}(1);\n`;
+      if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") returnedGLSL += `${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
+      else returnedGLSL += `highp ${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
     });
 
     return returnedGLSL;

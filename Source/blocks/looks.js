@@ -3,18 +3,8 @@
 
   class looks_category extends penPlus.penPlusExtension {
     getInfo() {
-      penPlus.addBlockColorSet(
-        "texture_blocks",
-        "#b464e7",
-        "#a755cf",
-        "#9a48c4"
-      );
-      penPlus.addBlockColorSet(
-        "cubemap_blocks",
-        "#8672ff",
-        "#7465d6",
-        "#6657cb"
-      );
+      penPlus.addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
+      penPlus.addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
       return {
         name: "Looks",
         id: "looks",
@@ -219,10 +209,7 @@
     }
 
     mulBlending(block, generator) {
-      return (
-        `gl_FragColor.rgb *= vec3(gl_FragColor.a);` +
-        nextBlockToCode(block, generator)
-      );
+      return `gl_FragColor.rgb *= vec3(gl_FragColor.a);` + nextBlockToCode(block, generator);
     }
 
     setVertColor(block, generator) {
@@ -273,19 +260,13 @@
     sample_texture(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
-      return [
-        `texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     sample_cubemap(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
-      return [
-        `textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 

@@ -190,10 +190,7 @@
     gotoPos(block, generator) {
       const X = generator.valueToCode(block, "X", Order.ATOMIC);
       const Y = generator.valueToCode(block, "Y", Order.ATOMIC);
-      return (
-        `gl_Position.xy = vec2(float(${X}),float(${Y}));` +
-        nextBlockToCode(block, generator)
-      );
+      return `gl_Position.xy = vec2(float(${X}),float(${Y}));` + nextBlockToCode(block, generator);
     }
 
     setZ(block, generator) {
@@ -208,37 +205,26 @@
 
     changeX(block, generator) {
       const X = generator.valueToCode(block, "X", Order.ATOMIC);
-      return (
-        `gl_Position.x += float(${X});` + nextBlockToCode(block, generator)
-      );
+      return `gl_Position.x += float(${X});` + nextBlockToCode(block, generator);
     }
 
     changeY(block, generator) {
       const Y = generator.valueToCode(block, "Y", Order.ATOMIC);
-      return (
-        `gl_Position.y += float(${Y});` + nextBlockToCode(block, generator)
-      );
+      return `gl_Position.y += float(${Y});` + nextBlockToCode(block, generator);
     }
 
     changeZ(block, generator) {
       const Z = generator.valueToCode(block, "Z", Order.ATOMIC);
-      return (
-        `gl_Position.z += float(${Z});` + nextBlockToCode(block, generator)
-      );
+      return `gl_Position.z += float(${Z});` + nextBlockToCode(block, generator);
     }
 
     changeW(block, generator) {
       const W = generator.valueToCode(block, "W", Order.ATOMIC);
-      return (
-        `gl_Position.w += float(${W});` + nextBlockToCode(block, generator)
-      );
+      return `gl_Position.w += float(${W});` + nextBlockToCode(block, generator);
     }
 
     makeOrthographic(block, generator) {
-      return (
-        `gl_Position = gl_Position * vec4(gl_Position.w,gl_Position.w,1,1);` +
-        nextBlockToCode(block, generator)
-      );
+      return `gl_Position = gl_Position * vec4(gl_Position.w,gl_Position.w,1,1);` + nextBlockToCode(block, generator);
     }
 
     inputPosition(block, generator) {
@@ -246,31 +232,19 @@
     }
 
     getX(block, generator) {
-      return [
-        `gl_Position.x` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`gl_Position.x` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getY(block, generator) {
-      return [
-        `gl_Position.y` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`gl_Position.y` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getZ(block, generator) {
-      return [
-        `gl_Position.z` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`gl_Position.z` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getW(block, generator) {
-      return [
-        `gl_Position.w` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`gl_Position.w` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 

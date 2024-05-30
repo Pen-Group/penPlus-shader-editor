@@ -52,10 +52,7 @@
         // You *must* create a <mutation></mutation> element.
         // This element can have children.
         const container = Blockly.utils.xml.createElement("mutation");
-        container.setAttribute(
-          "variableData",
-          JSON.stringify(this.variableData)
-        );
+        container.setAttribute("variableData", JSON.stringify(this.variableData));
         return container;
       },
 

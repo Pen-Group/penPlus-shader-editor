@@ -14,19 +14,7 @@ penPlus.customZelosConstant = class extends Blockly.zelos.ConstantProvider {
 
     function makeMainPath(height, up, right) {
       const halfHeight = height / 2;
-      return (
-        Blockly.utils.svgPaths.lineTo(0, 0) +
-        Blockly.utils.svgPaths.lineTo(0, -height) +
-        Blockly.utils.svgPaths.lineTo(notchOffset, 0) +
-        Blockly.utils.svgPaths.lineTo(notchWidth, notchHeight) +
-        Blockly.utils.svgPaths.lineTo(notchWidth, 0) +
-        Blockly.utils.svgPaths.lineTo(notchWidth, -notchHeight) +
-        Blockly.utils.svgPaths.moveBy(0, height) +
-        Blockly.utils.svgPaths.lineTo(-notchWidth, notchHeight) +
-        Blockly.utils.svgPaths.lineTo(-notchWidth, 0) +
-        Blockly.utils.svgPaths.lineTo(-notchWidth, -notchHeight) +
-        Blockly.utils.svgPaths.lineTo(-notchOffset, 0)
-      );
+      return Blockly.utils.svgPaths.lineTo(0, 0) + Blockly.utils.svgPaths.lineTo(0, -height) + Blockly.utils.svgPaths.lineTo(notchOffset, 0) + Blockly.utils.svgPaths.lineTo(notchWidth, notchHeight) + Blockly.utils.svgPaths.lineTo(notchWidth, 0) + Blockly.utils.svgPaths.lineTo(notchWidth, -notchHeight) + Blockly.utils.svgPaths.moveBy(0, height) + Blockly.utils.svgPaths.lineTo(-notchWidth, notchHeight) + Blockly.utils.svgPaths.lineTo(-notchWidth, 0) + Blockly.utils.svgPaths.lineTo(-notchWidth, -notchHeight) + Blockly.utils.svgPaths.lineTo(-notchOffset, 0);
     }
 
     function makeRightPath(height, up, right) {
@@ -69,13 +57,10 @@ penPlus.customZelosConstant = class extends Blockly.zelos.ConstantProvider {
 
   shapeFor(connection) {
     let check = connection.getCheck();
-    !check &&
-      connection.targetConnection &&
-      (check = connection.targetConnection.getCheck());
+    !check && connection.targetConnection && (check = connection.targetConnection.getCheck());
     switch (connection.type) {
       case Blockly.connectionTypes.OUTPUT_VALUE:
-        if (check && -1 !== check.indexOf("myBlock_Input"))
-          return this.FAKE_BLOCK;
+        if (check && -1 !== check.indexOf("myBlock_Input")) return this.FAKE_BLOCK;
         return super.shapeFor(connection);
       default:
         return super.shapeFor(connection);

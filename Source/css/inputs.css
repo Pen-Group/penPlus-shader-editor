@@ -49,7 +49,6 @@ input[type="checkbox"]:checked {
   background-position: center;
 }
 
-
 input[type="color"] {
   appearance: none;
   -webkit-appearance: none;

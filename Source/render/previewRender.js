@@ -6,8 +6,7 @@ function previewRender() {
 
   let previewData_Pen = [
     //X    Y   Z    w    R    G    B    transparency U    V
-    -0.5, 0.5, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, -0.5, -0.5, 0, 1.0, 1.0,
-    1.0, 1.0, 1.0, 1.0, 0.0, 0.5, -0.5, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
+    -0.5, 0.5, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, -0.5, -0.5, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.5, -0.5, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
   ];
 
   //our buffer we will be pumping 90% of default data through.
@@ -36,14 +35,7 @@ function previewRender() {
 
     image.onload = () => {
       gl.bindTexture(gl.TEXTURE_2D, penPlus.textures[textureData.name]);
-      gl.texImage2D(
-        gl.TEXTURE_2D,
-        0,
-        gl.RGBA,
-        gl.RGBA,
-        gl.UNSIGNED_BYTE,
-        image
-      );
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
@@ -74,16 +66,8 @@ function previewRender() {
         gl.bindTexture(gl.TEXTURE_CUBE_MAP, penPlus.cubemaps[textureData.name]);
         gl.texImage2D(gl[side], 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
-        gl.texParameteri(
-          gl.TEXTURE_CUBE_MAP,
-          gl.TEXTURE_MIN_FILTER,
-          gl.NEAREST
-        );
-        gl.texParameteri(
-          gl.TEXTURE_CUBE_MAP,
-          gl.TEXTURE_MAG_FILTER,
-          gl.NEAREST
-        );
+        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
       };
     }
   }
@@ -99,16 +83,8 @@ function previewRender() {
       case "fullscreen":
         attributes = [{}, {}];
         Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
-          attributes[0][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[1],
-            penPlus.attributeSetters[2],
-          ];
-          attributes[1][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[2],
-            penPlus.attributeSetters[3],
-          ];
+          attributes[0][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[1], penPlus.attributeSetters[2]];
+          attributes[1][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[2], penPlus.attributeSetters[3]];
         });
 
         gl.bufferData(
@@ -162,26 +138,10 @@ function previewRender() {
         //I cannot think of how to do this lol
         attributes = [{}, {}, {}, {}];
         Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
-          attributes[0][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[1],
-            penPlus.attributeSetters[2],
-          ];
-          attributes[1][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[2],
-            penPlus.attributeSetters[3],
-          ];
-          attributes[2][element] = [
-            penPlus.attributeSetters[4],
-            penPlus.attributeSetters[5],
-            penPlus.attributeSetters[6],
-          ];
-          attributes[3][element] = [
-            penPlus.attributeSetters[4],
-            penPlus.attributeSetters[6],
-            penPlus.attributeSetters[7],
-          ];
+          attributes[0][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[1], penPlus.attributeSetters[2]];
+          attributes[1][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[2], penPlus.attributeSetters[3]];
+          attributes[2][element] = [penPlus.attributeSetters[4], penPlus.attributeSetters[5], penPlus.attributeSetters[6]];
+          attributes[3][element] = [penPlus.attributeSetters[4], penPlus.attributeSetters[6], penPlus.attributeSetters[7]];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
@@ -489,16 +449,8 @@ function previewRender() {
       case "square":
         attributes = [{}, {}];
         Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
-          attributes[0][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[1],
-            penPlus.attributeSetters[2],
-          ];
-          attributes[1][element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[2],
-            penPlus.attributeSetters[3],
-          ];
+          attributes[0][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[1], penPlus.attributeSetters[2]];
+          attributes[1][element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[2], penPlus.attributeSetters[3]];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
@@ -559,11 +511,7 @@ function previewRender() {
 
       default:
         Object.keys(penPlus.attributeSetters[0]).forEach((element) => {
-          attributes[element] = [
-            penPlus.attributeSetters[0],
-            penPlus.attributeSetters[1],
-            penPlus.attributeSetters[2],
-          ];
+          attributes[element] = [penPlus.attributeSetters[0], penPlus.attributeSetters[1], penPlus.attributeSetters[2]];
         });
         gl.bufferData(
           gl.ARRAY_BUFFER,
@@ -604,10 +552,7 @@ function previewRender() {
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       penPlus.timer += (now - lastTime) / 1000;
       document.body.style.setProperty("--U_TIMER", penPlus.timer + "px");
-      document.body.style.setProperty(
-        "--U_TIMER_SIN",
-        Math.sin(penPlus.timer * 0.5) + "px"
-      );
+      document.body.style.setProperty("--U_TIMER_SIN", Math.sin(penPlus.timer * 0.5) + "px");
 
       gl.canvas.width = gl.canvas.clientWidth;
       gl.canvas.height = gl.canvas.clientHeight;
@@ -615,30 +560,16 @@ function previewRender() {
 
       gl.useProgram(gl.shaders["editorShader"]);
 
-      if (
-        gl.shaders.editorShader.uniforms.u_timer &&
-        gl.shaders.editorShader.uniforms.u_timer.location
-      ) {
+      if (gl.shaders.editorShader.uniforms.u_timer && gl.shaders.editorShader.uniforms.u_timer.location) {
         gl.shaders.editorShader.uniforms.u_timer.value = penPlus.timer;
       }
 
-      if (
-        gl.shaders.editorShader.uniforms.u_res &&
-        gl.shaders.editorShader.uniforms.u_res.location
-      ) {
-        gl.shaders.editorShader.uniforms.u_res.value = [
-          gl.canvas.width,
-          gl.canvas.height,
-        ];
+      if (gl.shaders.editorShader.uniforms.u_res && gl.shaders.editorShader.uniforms.u_res.location) {
+        gl.shaders.editorShader.uniforms.u_res.value = [gl.canvas.width, gl.canvas.height];
       }
 
-      if (
-        gl.shaders.editorShader.uniforms.u_transform &&
-        gl.shaders.editorShader.uniforms.u_transform.location
-      ) {
-        gl.shaders.editorShader.uniforms.u_transform.value = [
-          1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        ];
+      if (gl.shaders.editorShader.uniforms.u_transform && gl.shaders.editorShader.uniforms.u_transform.location) {
+        gl.shaders.editorShader.uniforms.u_transform.value = [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       }
 
       gl.drawArrays(gl.TRIANGLES, 0, penPlus.meshPoints);

@@ -340,142 +340,19 @@
     }
 
     mat2(block, generator) {
-      return [
-        `mat2(${generator.valueToCode(
-          block,
-          "00",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "01",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "10",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "11", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`mat2(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     mat3(block, generator) {
-      return [
-        `mat3(${generator.valueToCode(
-          block,
-          "00",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "01",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "02",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "10",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "11",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "12",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "20",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "21",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "22", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`mat3(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "02", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)},${generator.valueToCode(block, "12", Order.ATOMIC)},${generator.valueToCode(block, "20", Order.ATOMIC)},${generator.valueToCode(block, "21", Order.ATOMIC)},${generator.valueToCode(block, "22", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     mat4(block, generator) {
-      return [
-        `mat4(${generator.valueToCode(
-          block,
-          "00",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "01",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "02",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "03",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "10",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "11",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "12",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "13",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "20",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "21",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "22",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "23",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "30",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "31",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "32",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "33", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`mat4(${generator.valueToCode(block, "00", Order.ATOMIC)},${generator.valueToCode(block, "01", Order.ATOMIC)},${generator.valueToCode(block, "02", Order.ATOMIC)},${generator.valueToCode(block, "03", Order.ATOMIC)},${generator.valueToCode(block, "10", Order.ATOMIC)},${generator.valueToCode(block, "11", Order.ATOMIC)},${generator.valueToCode(block, "12", Order.ATOMIC)},${generator.valueToCode(block, "13", Order.ATOMIC)},${generator.valueToCode(block, "20", Order.ATOMIC)},${generator.valueToCode(block, "21", Order.ATOMIC)},${generator.valueToCode(block, "22", Order.ATOMIC)},${generator.valueToCode(block, "23", Order.ATOMIC)},${generator.valueToCode(block, "30", Order.ATOMIC)},${generator.valueToCode(block, "31", Order.ATOMIC)},${generator.valueToCode(block, "32", Order.ATOMIC)},${generator.valueToCode(block, "33", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getitem(block, generator) {
-      return [
-        `${generator.valueToCode(
-          block,
-          "matrix",
-          Order.ATOMIC
-        )}[${block.getFieldValue("column")}][${block.getFieldValue("row")}]`,
-        Order.ATOMIC,
-      ];
+      return [`${generator.valueToCode(block, "matrix", Order.ATOMIC)}[${block.getFieldValue("column")}][${block.getFieldValue("row")}]`, Order.ATOMIC];
     }
 
     getrow(block, generator) {
@@ -497,14 +374,7 @@
           break;
       }
 
-      return [
-        `vec${columnNumber}(${generator.valueToCode(
-          block,
-          "matrix",
-          Order.ATOMIC
-        )}[${block.getFieldValue("column")}])`,
-        Order.ATOMIC,
-      ];
+      return [`vec${columnNumber}(${generator.valueToCode(block, "matrix", Order.ATOMIC)}[${block.getFieldValue("column")}])`, Order.ATOMIC];
     }
 
     getcolumn(block, generator) {
@@ -528,11 +398,7 @@
 
       let getters = "";
       for (let column = 0; column < columnNumber; column++) {
-        getters += `${column == 0 ? "" : ","}${generator.valueToCode(
-          block,
-          "matrix",
-          Order.ATOMIC
-        )}[${column}][${block.getFieldValue("row")}]`;
+        getters += `${column == 0 ? "" : ","}${generator.valueToCode(block, "matrix", Order.ATOMIC)}[${column}][${block.getFieldValue("row")}]`;
       }
 
       return [`vec${columnNumber}(${getters})`, Order.ATOMIC];

@@ -266,9 +266,7 @@
     };
 
     document.getElementById("githubLink").onclick = () => {
-      window
-        .open("https://github.com/Pen-Group/penPlus-shader-editor", "_blank")
-        .focus();
+      window.open("https://github.com/Pen-Group/penPlus-shader-editor", "_blank").focus();
     };
   };
 })();

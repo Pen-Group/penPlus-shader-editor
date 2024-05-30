@@ -56,11 +56,7 @@
      */
     static fromJson(config) {
       if (!config.options) {
-        throw new Error(
-          "options are required for the dropdown field. The " +
-            "options property must be assigned an array of " +
-            "[humanReadableValue, languageNeutralValue] tuples."
-        );
+        throw new Error("options are required for the dropdown field. The " + "options property must be assigned an array of " + "[humanReadableValue, languageNeutralValue] tuples.");
       }
       // `this` might be a subclass of FieldDropdown if that class doesn't
       // override the static fromJson method.
@@ -103,21 +99,12 @@
       if (colours && colours.border) {
         Blockly.DropDownDiv.setColour(colours.primary, colours.border);
       }
-      const menuElement =
-        (_b =
-          (_a = this.menu_) === null || _a === void 0
-            ? void 0
-            : _a.getElement()) !== null && _b !== void 0
-          ? _b
-          : null;
+      const menuElement = (_b = (_a = this.menu_) === null || _a === void 0 ? void 0 : _a.getElement()) !== null && _b !== void 0 ? _b : null;
       if (menuElement) {
         Blockly.utils.dom.addClass(menuElement, "fieldGridDropDownContainer");
       }
       this.updateColumnsStyling_();
-      Blockly.DropDownDiv.showPositionedByField(
-        this,
-        this.dropdownDispose_.bind(this)
-      );
+      Blockly.DropDownDiv.showPositionedByField(this, this.dropdownDispose_.bind(this));
     }
     /**
      * Updates the styling for number of columns on the dropdown.
@@ -144,19 +131,11 @@
       }
       const sourceBlock = this.getSourceBlock();
       if (!(sourceBlock instanceof Blockly.BlockSvg)) return;
-      const colourSource = sourceBlock.isShadow()
-        ? sourceBlock.getParent()
-        : sourceBlock;
+      const colourSource = sourceBlock.isShadow() ? sourceBlock.getParent() : sourceBlock;
       if (!colourSource) return;
       return {
-        primary:
-          (_a = this.primaryColour) !== null && _a !== void 0
-            ? _a
-            : colourSource.getColour(),
-        border:
-          (_b = this.borderColour) !== null && _b !== void 0
-            ? _b
-            : colourSource.getColourTertiary(),
+        primary: (_a = this.primaryColour) !== null && _a !== void 0 ? _a : colourSource.getColour(),
+        border: (_b = this.borderColour) !== null && _b !== void 0 ? _b : colourSource.getColourTertiary(),
       };
     }
   }

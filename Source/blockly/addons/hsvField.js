@@ -176,10 +176,7 @@
       const constants = this.getConstants();
       // This can't happen, but TypeScript thinks it can and lint forbids `!.`.
       if (!constants) throw Error("Constants not found");
-      this.size_ = new Blockly.utils.Size(
-        constants.FIELD_COLOUR_DEFAULT_WIDTH,
-        constants.FIELD_COLOUR_DEFAULT_HEIGHT
-      );
+      this.size_ = new Blockly.utils.Size(constants.FIELD_COLOUR_DEFAULT_WIDTH, constants.FIELD_COLOUR_DEFAULT_HEIGHT);
       if (!constants.FIELD_COLOUR_FULL_BLOCK) {
         this.createBorderRect_();
         this.getBorderRect().style["fillOpacity"] = "1";
@@ -201,10 +198,7 @@
           this.borderRect_.style.fill = this.getValue();
         }
       } else if (this.sourceBlock_ instanceof Blockly.BlockSvg) {
-        this.sourceBlock_.pathObject.svgPath.setAttribute(
-          "fill",
-          this.getValue()
-        );
+        this.sourceBlock_.pathObject.svgPath.setAttribute("fill", this.getValue());
         this.sourceBlock_.pathObject.svgPath.setAttribute("stroke", "#fff");
       }
     }
@@ -232,11 +226,7 @@
       this.value_ = newValue;
       if (this.borderRect_) {
         this.borderRect_.style.fill = newValue;
-      } else if (
-        this.sourceBlock_ &&
-        this.sourceBlock_.rendered &&
-        this.sourceBlock_ instanceof Blockly.BlockSvg
-      ) {
+      } else if (this.sourceBlock_ && this.sourceBlock_.rendered && this.sourceBlock_ instanceof Blockly.BlockSvg) {
         this.sourceBlock_.pathObject.svgPath.setAttribute("fill", newValue);
         this.sourceBlock_.pathObject.svgPath.setAttribute("stroke", "#fff");
       }
@@ -288,10 +278,7 @@
       // This can't happen, but TypeScript thinks it can and lint forbids `!.`.
       if (!this.picker) throw Error("Picker not found");
       Blockly.DropDownDiv.getContentDiv().appendChild(this.picker);
-      Blockly.DropDownDiv.showPositionedByField(
-        this,
-        this.dropdownDispose.bind(this)
-      );
+      Blockly.DropDownDiv.showPositionedByField(this, this.dropdownDispose.bind(this));
       // Focus so we can start receiving keyboard events.
       this.picker.focus({ preventScroll: true });
     }
@@ -415,9 +402,7 @@
     /** Handle a mouse enter event.  Focus the picker. */
     onMouseEnter() {
       var _a;
-      (_a = this.picker) === null || _a === void 0
-        ? void 0
-        : _a.focus({ preventScroll: true });
+      (_a = this.picker) === null || _a === void 0 ? void 0 : _a.focus({ preventScroll: true });
     }
     /**
      * Handle a mouse leave event.  Blur the picker and unhighlight
@@ -443,10 +428,7 @@
       }
       const x = this.highlightedIndex % this.columns;
       const y = Math.floor(this.highlightedIndex / this.columns);
-      const row =
-        (_a = this.picker) === null || _a === void 0
-          ? void 0
-          : _a.childNodes[y];
+      const row = (_a = this.picker) === null || _a === void 0 ? void 0 : _a.childNodes[y];
       if (!row) {
         return null;
       }
@@ -471,11 +453,7 @@
       // Update accessibility roles.
       const cellId = cell.getAttribute("id");
       if (cellId && this.picker) {
-        Blockly.utils.aria.setState(
-          this.picker,
-          Blockly.utils.aria.State.ACTIVEDESCENDANT,
-          cellId
-        );
+        Blockly.utils.aria.setState(this.picker, Blockly.utils.aria.State.ACTIVEDESCENDANT, cellId);
       }
     }
     /** Create a colour picker dropdown editor. */
@@ -489,21 +467,9 @@
       table.tabIndex = 0;
       table.dir = "ltr";
       Blockly.utils.aria.setRole(table, Blockly.utils.aria.Role.GRID);
-      Blockly.utils.aria.setState(
-        table,
-        Blockly.utils.aria.State.EXPANDED,
-        true
-      );
-      Blockly.utils.aria.setState(
-        table,
-        Blockly.utils.aria.State.ROWCOUNT,
-        Math.floor(colours.length / columns)
-      );
-      Blockly.utils.aria.setState(
-        table,
-        Blockly.utils.aria.State.COLCOUNT,
-        columns
-      );
+      Blockly.utils.aria.setState(table, Blockly.utils.aria.State.EXPANDED, true);
+      Blockly.utils.aria.setState(table, Blockly.utils.aria.State.ROWCOUNT, Math.floor(colours.length / columns));
+      Blockly.utils.aria.setState(table, Blockly.utils.aria.State.COLCOUNT, columns);
       let row = null;
       for (let i = 0; i < colours.length; i++) {
         if (i % columns === 0) {
@@ -519,16 +485,8 @@
         cell.id = Blockly.utils.idGenerator.getNextUniqueId();
         cell.setAttribute("data-index", `${i}`);
         Blockly.utils.aria.setRole(cell, Blockly.utils.aria.Role.GRIDCELL);
-        Blockly.utils.aria.setState(
-          cell,
-          Blockly.utils.aria.State.LABEL,
-          colours[i]
-        );
-        Blockly.utils.aria.setState(
-          cell,
-          Blockly.utils.aria.State.SELECTED,
-          colours[i] === selectedColour
-        );
+        Blockly.utils.aria.setState(cell, Blockly.utils.aria.State.LABEL, colours[i]);
+        Blockly.utils.aria.setState(cell, Blockly.utils.aria.State.SELECTED, colours[i] === selectedColour);
         cell.style.backgroundColor = colours[i];
         if (colours[i] === selectedColour) {
           cell.className = "blocklyColourSelected";
@@ -536,51 +494,11 @@
         }
       }
       // Configure event handler on the table to listen for any event in a cell.
-      this.boundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          table,
-          "pointerdown",
-          this,
-          this.onClick,
-          true
-        )
-      );
-      this.boundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          table,
-          "pointermove",
-          this,
-          this.onMouseMove,
-          true
-        )
-      );
-      this.boundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          table,
-          "pointerenter",
-          this,
-          this.onMouseEnter,
-          true
-        )
-      );
-      this.boundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          table,
-          "pointerleave",
-          this,
-          this.onMouseLeave,
-          true
-        )
-      );
-      this.boundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          table,
-          "keydown",
-          this,
-          this.onKeyDown,
-          false
-        )
-      );
+      this.boundEvents.push(Blockly.browserEvents.conditionalBind(table, "pointerdown", this, this.onClick, true));
+      this.boundEvents.push(Blockly.browserEvents.conditionalBind(table, "pointermove", this, this.onMouseMove, true));
+      this.boundEvents.push(Blockly.browserEvents.conditionalBind(table, "pointerenter", this, this.onMouseEnter, true));
+      this.boundEvents.push(Blockly.browserEvents.conditionalBind(table, "pointerleave", this, this.onMouseLeave, true));
+      this.boundEvents.push(Blockly.browserEvents.conditionalBind(table, "keydown", this, this.onKeyDown, false));
       this.picker = table;
     }
     /** Disposes of events and DOM-references belonging to the colour editor. */
@@ -682,12 +600,7 @@
      * @returns A hexadecimal representation of this colour.
      */
     toHex() {
-      return (
-        "#" +
-        RgbColour.componentToHex(this.r) +
-        RgbColour.componentToHex(this.g) +
-        RgbColour.componentToHex(this.b)
-      );
+      return "#" + RgbColour.componentToHex(this.r) + RgbColour.componentToHex(this.g) + RgbColour.componentToHex(this.b);
     }
 
     /**
@@ -711,12 +624,9 @@
      */
     loadFromHsv(hsv) {
       const hue = (hsv.h - Math.floor(hsv.h)) * 6;
-      this.r =
-        hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, 2 - Math.abs(hue - 3))));
-      this.g =
-        hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, Math.abs(hue - 2) - 1)));
-      this.b =
-        hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, Math.abs(hue - 4) - 1)));
+      this.r = hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, 2 - Math.abs(hue - 3))));
+      this.g = hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, Math.abs(hue - 2) - 1)));
+      this.b = hsv.v * (1 - hsv.s * Math.max(0, Math.min(1, Math.abs(hue - 4) - 1)));
       return this;
     }
   }
@@ -851,10 +761,7 @@
       }
       Blockly.DropDownDiv.getContentDiv().appendChild(this.dropdownContainer);
 
-      Blockly.DropDownDiv.showPositionedByField(
-        this,
-        this.dropdownDisposeSliders.bind(this)
-      );
+      Blockly.DropDownDiv.showPositionedByField(this, this.dropdownDisposeSliders.bind(this));
 
       // Focus so we can start receiving keyboard events.
       this.hueSlider.focus({ preventScroll: true });
@@ -902,58 +809,16 @@
       const container = document.createElement("div");
       container.classList.add("fieldColourSliderContainer");
 
-      this.hueReadout = FieldColourHsvSliders.createLabelInContainer(
-        "Hue",
-        container
-      );
-      this.hueSlider = FieldColourHsvSliders.createSliderInContainer(
-        FieldColourHsvSliders.HUE_SLIDER_MAX,
-        2,
-        container
-      );
-      this.saturationReadout = FieldColourHsvSliders.createLabelInContainer(
-        "Saturation",
-        container
-      );
-      this.saturationSlider = FieldColourHsvSliders.createSliderInContainer(
-        FieldColourHsvSliders.SATURATION_SLIDER_MAX,
-        1,
-        container
-      );
-      this.brightnessReadout = FieldColourHsvSliders.createLabelInContainer(
-        "Brightness",
-        container
-      );
-      this.brightnessSlider = FieldColourHsvSliders.createSliderInContainer(
-        FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX,
-        1,
-        container
-      );
+      this.hueReadout = FieldColourHsvSliders.createLabelInContainer("Hue", container);
+      this.hueSlider = FieldColourHsvSliders.createSliderInContainer(FieldColourHsvSliders.HUE_SLIDER_MAX, 2, container);
+      this.saturationReadout = FieldColourHsvSliders.createLabelInContainer("Saturation", container);
+      this.saturationSlider = FieldColourHsvSliders.createSliderInContainer(FieldColourHsvSliders.SATURATION_SLIDER_MAX, 1, container);
+      this.brightnessReadout = FieldColourHsvSliders.createLabelInContainer("Brightness", container);
+      this.brightnessSlider = FieldColourHsvSliders.createSliderInContainer(FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX, 1, container);
 
-      this.hsvBoundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          this.hueSlider,
-          "input",
-          this,
-          this.onSliderChange
-        )
-      );
-      this.hsvBoundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          this.saturationSlider,
-          "input",
-          this,
-          this.onSliderChange
-        )
-      );
-      this.hsvBoundEvents.push(
-        Blockly.browserEvents.conditionalBind(
-          this.brightnessSlider,
-          "input",
-          this,
-          this.onSliderChange
-        )
-      );
+      this.hsvBoundEvents.push(Blockly.browserEvents.conditionalBind(this.hueSlider, "input", this, this.onSliderChange));
+      this.hsvBoundEvents.push(Blockly.browserEvents.conditionalBind(this.saturationSlider, "input", this, this.onSliderChange));
+      this.hsvBoundEvents.push(Blockly.browserEvents.conditionalBind(this.brightnessSlider, "input", this, this.onSliderChange));
 
       if (window.EyeDropper) {
         // If the browser supports the eyedropper API, create a button for it.
@@ -961,14 +826,7 @@
         button.classList.add("fieldColourEyedropper");
         container.appendChild(document.createElement("hr"));
         container.appendChild(button);
-        this.hsvBoundEvents.push(
-          Blockly.browserEvents.conditionalBind(
-            button,
-            "click",
-            this,
-            this.onEyedropperEvent
-          )
-        );
+        this.hsvBoundEvents.push(Blockly.browserEvents.conditionalBind(button, "click", this, this.onEyedropperEvent));
       }
 
       this.dropdownContainer = container;
@@ -1004,9 +862,7 @@
       FieldColourHsvSliders.helperHsv.h = hue;
       FieldColourHsvSliders.helperHsv.s = saturation;
       FieldColourHsvSliders.helperHsv.v = brightness;
-      return FieldColourHsvSliders.helperRgb
-        .loadFromHsv(FieldColourHsvSliders.helperHsv)
-        .toHex();
+      return FieldColourHsvSliders.helperRgb.loadFromHsv(FieldColourHsvSliders.helperHsv).toHex();
     }
 
     /**
@@ -1017,17 +873,10 @@
       if (!this.hueSlider || !this.saturationSlider || !this.brightnessSlider) {
         throw new Error("The HSV sliders are missing.");
       }
-      const hue =
-        parseFloat(this.hueSlider.value) / FieldColourHsvSliders.HUE_SLIDER_MAX;
-      const saturation =
-        parseFloat(this.saturationSlider.value) /
-        FieldColourHsvSliders.SATURATION_SLIDER_MAX;
-      const brightness =
-        parseFloat(this.brightnessSlider.value) /
-        FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX;
-      this.setValue(
-        FieldColourHsvSliders.hsvToHex(hue, saturation, brightness)
-      );
+      const hue = parseFloat(this.hueSlider.value) / FieldColourHsvSliders.HUE_SLIDER_MAX;
+      const saturation = parseFloat(this.saturationSlider.value) / FieldColourHsvSliders.SATURATION_SLIDER_MAX;
+      const brightness = parseFloat(this.brightnessSlider.value) / FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX;
+      this.setValue(FieldColourHsvSliders.hsvToHex(hue, saturation, brightness));
       this.renderSliders();
     }
 
@@ -1050,73 +899,40 @@
      * on the slider values.
      */
     renderSliders() {
-      if (
-        !this.hueSlider ||
-        !this.hueReadout ||
-        !this.saturationSlider ||
-        !this.saturationReadout ||
-        !this.brightnessSlider ||
-        !this.brightnessReadout
-      ) {
+      if (!this.hueSlider || !this.hueReadout || !this.saturationSlider || !this.saturationReadout || !this.brightnessSlider || !this.brightnessReadout) {
         throw new Error("The HSV sliders are missing.");
       }
       this.hueReadout.textContent = this.hueSlider.value;
       this.saturationReadout.textContent = this.saturationSlider.value;
       this.brightnessReadout.textContent = this.brightnessSlider.value;
 
-      const h =
-        parseFloat(this.hueSlider.value) / FieldColourHsvSliders.HUE_SLIDER_MAX;
-      const s =
-        parseFloat(this.saturationSlider.value) /
-        FieldColourHsvSliders.SATURATION_SLIDER_MAX;
-      const v =
-        parseFloat(this.brightnessSlider.value) /
-        FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX;
+      const h = parseFloat(this.hueSlider.value) / FieldColourHsvSliders.HUE_SLIDER_MAX;
+      const s = parseFloat(this.saturationSlider.value) / FieldColourHsvSliders.SATURATION_SLIDER_MAX;
+      const v = parseFloat(this.brightnessSlider.value) / FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX;
 
       // The hue slider needs intermediate gradient control points to include all
       // colours of the rainbow.
       let hueGradient = "linear-gradient(to right, ";
-      hueGradient +=
-        FieldColourHsvSliders.hsvToHex(0 / 6, s, v) +
-        ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
+      hueGradient += FieldColourHsvSliders.hsvToHex(0 / 6, s, v) + ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
       hueGradient += FieldColourHsvSliders.hsvToHex(1 / 6, s, v) + ", ";
       hueGradient += FieldColourHsvSliders.hsvToHex(2 / 6, s, v) + ", ";
       hueGradient += FieldColourHsvSliders.hsvToHex(3 / 6, s, v) + ", ";
       hueGradient += FieldColourHsvSliders.hsvToHex(4 / 6, s, v) + ", ";
       hueGradient += FieldColourHsvSliders.hsvToHex(5 / 6, s, v) + ", ";
-      hueGradient +=
-        FieldColourHsvSliders.hsvToHex(6 / 6, s, v) +
-        ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
-      this.hueSlider.style.setProperty(
-        "--slider-track-background",
-        hueGradient
-      );
+      hueGradient += FieldColourHsvSliders.hsvToHex(6 / 6, s, v) + ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
+      this.hueSlider.style.setProperty("--slider-track-background", hueGradient);
 
       // The saturation slider only needs gradient control points at each end.
       let saturationGradient = "linear-gradient(to right, ";
-      saturationGradient +=
-        FieldColourHsvSliders.hsvToHex(h, 0, v) +
-        ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
-      saturationGradient +=
-        FieldColourHsvSliders.hsvToHex(h, 1, v) +
-        ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
-      this.saturationSlider.style.setProperty(
-        "--slider-track-background",
-        saturationGradient
-      );
+      saturationGradient += FieldColourHsvSliders.hsvToHex(h, 0, v) + ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
+      saturationGradient += FieldColourHsvSliders.hsvToHex(h, 1, v) + ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
+      this.saturationSlider.style.setProperty("--slider-track-background", saturationGradient);
 
       // The brightness slider only needs gradient control points at each end.
       let brightnessGradient = "linear-gradient(to right, ";
-      brightnessGradient +=
-        FieldColourHsvSliders.hsvToHex(h, s, 0) +
-        ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
-      brightnessGradient +=
-        FieldColourHsvSliders.hsvToHex(h, s, 1) +
-        ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
-      this.brightnessSlider.style.setProperty(
-        "--slider-track-background",
-        brightnessGradient
-      );
+      brightnessGradient += FieldColourHsvSliders.hsvToHex(h, s, 0) + ` ${FieldColourHsvSliders.THUMB_RADIUS}px, `;
+      brightnessGradient += FieldColourHsvSliders.hsvToHex(h, s, 1) + ` calc(100% - ${FieldColourHsvSliders.THUMB_RADIUS}px))`;
+      this.brightnessSlider.style.setProperty("--slider-track-background", brightnessGradient);
     }
 
     /** Updates slider values based on the current value of the field. */
@@ -1125,28 +941,17 @@
         return;
       }
 
-      const hsv = FieldColourHsvSliders.helperHsv.loadFromRgb(
-        FieldColourHsvSliders.helperRgb.loadFromHex(this.getValue() ?? "")
-      );
+      const hsv = FieldColourHsvSliders.helperHsv.loadFromRgb(FieldColourHsvSliders.helperRgb.loadFromHex(this.getValue() ?? ""));
 
-      this.hueSlider.value = String(
-        hsv.h * FieldColourHsvSliders.HUE_SLIDER_MAX
-      );
-      this.saturationSlider.value = String(
-        hsv.s * FieldColourHsvSliders.SATURATION_SLIDER_MAX
-      );
-      this.brightnessSlider.value = String(
-        hsv.v * FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX
-      );
+      this.hueSlider.value = String(hsv.h * FieldColourHsvSliders.HUE_SLIDER_MAX);
+      this.saturationSlider.value = String(hsv.s * FieldColourHsvSliders.SATURATION_SLIDER_MAX);
+      this.brightnessSlider.value = String(hsv.v * FieldColourHsvSliders.BRIGHTNESS_SLIDER_MAX);
 
       this.renderSliders();
     }
   }
 
-  Blockly.fieldRegistry.register(
-    "field_colour_hsv_sliders",
-    FieldColourHsvSliders
-  );
+  Blockly.fieldRegistry.register("field_colour_hsv_sliders", FieldColourHsvSliders);
 
   // CSS for colour slider fields.
   Blockly.Css.register(`

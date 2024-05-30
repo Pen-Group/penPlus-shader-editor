@@ -92,17 +92,12 @@
         // You *must* create a <mutation></mutation> element.
         // This element can have children.
         const container = Blockly.utils.xml.createElement("mutation");
-        container.setAttribute(
-          "customBlockData",
-          JSON.stringify(this.customBlockData)
-        );
+        container.setAttribute("customBlockData", JSON.stringify(this.customBlockData));
         return container;
       },
 
       domToMutation: function (xmlElement) {
-        this.customBlockData = JSON.parse(
-          xmlElement.getAttribute("customBlockData")
-        );
+        this.customBlockData = JSON.parse(xmlElement.getAttribute("customBlockData"));
         this.updateShape_();
       },
 
@@ -141,13 +136,7 @@
               name: argument.name,
             });
 
-            this.inputList[this.inputList.length - 1].setShadowDom(
-              penPlus.stringToDOM(
-                `<shadow type="${__getShadowForArgumentType(
-                  argument.type
-                )}"></shadow>`
-              )
-            );
+            this.inputList[this.inputList.length - 1].setShadowDom(penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(argument.type)}"></shadow>`));
           });
         }
 

@@ -78,28 +78,13 @@
 
   penPlus.addBlockColorSet = (name, color1, color2, color3, text) => {
     penPlus.penPlusTheme.blockStyles[name] = {
-      colourPrimary: penPlus.customBlockColors[name]
-        ? penPlus.customBlockColors[name].colourPrimary
-        : color1,
-      colourSecondary: penPlus.customBlockColors[name]
-        ? penPlus.customBlockColors[name].colourSecondary
-        : color2,
-      colourTertiary: penPlus.customBlockColors[name]
-        ? penPlus.customBlockColors[name].colourTertiary
-        : color3,
-      colorText: penPlus.customBlockColors[name]
-        ? penPlus.customBlockColors[name].colorText
-        : text || penPlus.brightnessByColor(color1) >= 200
-        ? "#000000"
-        : "#ffffff",
+      colourPrimary: penPlus.customBlockColors[name] ? penPlus.customBlockColors[name].colourPrimary : color1,
+      colourSecondary: penPlus.customBlockColors[name] ? penPlus.customBlockColors[name].colourSecondary : color2,
+      colourTertiary: penPlus.customBlockColors[name] ? penPlus.customBlockColors[name].colourTertiary : color3,
+      colorText: penPlus.customBlockColors[name] ? penPlus.customBlockColors[name].colorText : text || penPlus.brightnessByColor(color1) >= 200 ? "#000000" : "#ffffff",
     };
 
-    document.body.style.setProperty(
-      `--${name}`,
-      penPlus.customBlockColors[name]
-        ? penPlus.customBlockColors[name].colourPrimary
-        : color1
-    );
+    document.body.style.setProperty(`--${name}`, penPlus.customBlockColors[name] ? penPlus.customBlockColors[name].colourPrimary : color1);
 
     workspace.getToolbox().refreshSelection();
 

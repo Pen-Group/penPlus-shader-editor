@@ -13,10 +13,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(
-    -50%,
-    calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-  );
+  transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
   -webkit-animation: loading 4s ease infinite;
   -moz-animation: loading 4s ease infinite;
   -ms-animation: loading 4s ease infinite;
@@ -28,37 +25,25 @@
 @-moz-keyframes loading {
   0% {
     --yOffset: 100%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 
   25% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   40% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   60% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 }
@@ -66,37 +51,25 @@
 @-webkit-keyframes loading {
   0% {
     --yOffset: 100%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 
   25% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   40% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   60% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 }
@@ -104,37 +77,25 @@
 @keyframes loading {
   0% {
     --yOffset: 100%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 
   25% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   40% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 100%;
   }
 
   60% {
     --yOffset: 0%;
-    transform: translate(
-      -50%,
-      calc(-50% + (var(--BlockOffset) + var(--yOffset)))
-    );
+    transform: translate(-50%, calc(-50% + (var(--BlockOffset) + var(--yOffset))));
     opacity: 0%;
   }
 }

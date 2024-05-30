@@ -174,8 +174,7 @@
             opcode: "less",
             type: "boolean",
             text: "%1<%2",
-            tooltip:
-              "Returns true if the first number is less than the second.",
+            tooltip: "Returns true if the first number is less than the second.",
             arguments: [
               {
                 type: "input_value",
@@ -197,8 +196,7 @@
             opcode: "equalLess",
             type: "boolean",
             text: "%1≤%2",
-            tooltip:
-              "Returns true if the first number is less than or equal to the second.",
+            tooltip: "Returns true if the first number is less than or equal to the second.",
             arguments: [
               {
                 type: "input_value",
@@ -220,8 +218,7 @@
             opcode: "more",
             type: "boolean",
             text: "%1>%2",
-            tooltip:
-              "Returns true if the first number is more than the second.",
+            tooltip: "Returns true if the first number is more than the second.",
             arguments: [
               {
                 type: "input_value",
@@ -243,8 +240,7 @@
             opcode: "equalMore",
             type: "boolean",
             text: "%1≥%2",
-            tooltip:
-              "Returns true if the first number is more than or equal to the second.",
+            tooltip: "Returns true if the first number is more than or equal to the second.",
             arguments: [
               {
                 type: "input_value",
@@ -404,8 +400,7 @@
             opcode: "smoothstep",
             type: "reporter",
             text: "smooth %1 and %2 by %3",
-            tooltip:
-              "Uses the smooth step operator and steps by the third number",
+            tooltip: "Uses the smooth step operator and steps by the third number",
 
             arguments: [
               {
@@ -515,46 +510,31 @@
     add(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} + ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} + ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     sub(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} - ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} - ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     mul(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} * ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} * ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     div(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} / ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} / ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     pow(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `pow(${A}, ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`pow(${A}, ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     equal(block, generator) {
@@ -596,19 +576,13 @@
     and(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} && ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} && ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     or(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `(${A} || ${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`(${A} || ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     not(block, generator) {
@@ -627,47 +601,32 @@
     mod(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `mod(${A},${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`mod(${A},${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     arith(block, generator) {
       const arith = block.getFieldValue("arithmatic");
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
-      return [
-        `${arith}(${A})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`${arith}(${A})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     smoothstep(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
       const C = generator.valueToCode(block, "C", Order.ATOMIC);
-      return [
-        `smoothstep(${A}, ${B}, ${C})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`smoothstep(${A}, ${B}, ${C})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     min(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `min(${A},${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`min(${A},${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     max(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [
-        `max(${A},${B})` + nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`max(${A},${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     cast(block, generator) {

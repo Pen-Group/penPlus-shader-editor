@@ -48,25 +48,13 @@
         Blockly.utils.dom.addClass(this.rowDiv_, this.cssConfig_["selected"]);
       } else {
         this.rowDiv_.style.backgroundColor = "";
-        Blockly.utils.dom.removeClass(
-          this.rowDiv_,
-          this.cssConfig_["selected"]
-        );
+        Blockly.utils.dom.removeClass(this.rowDiv_, this.cssConfig_["selected"]);
       }
-      Blockly.utils.aria.setState(
-        /** @type {!Element} */ (this.htmlDiv_),
-        Blockly.utils.aria.State.SELECTED,
-        isSelected
-      );
+      Blockly.utils.aria.setState(/** @type {!Element} */ (this.htmlDiv_), Blockly.utils.aria.State.SELECTED, isSelected);
     }
   }
 
-  Blockly.registry.register(
-    Blockly.registry.Type.TOOLBOX_ITEM,
-    Blockly.ToolboxCategory.registrationName,
-    ContinuousCategory,
-    true
-  );
+  Blockly.registry.register(Blockly.registry.Type.TOOLBOX_ITEM, Blockly.ToolboxCategory.registrationName, ContinuousCategory, true);
 
   /**
    * @license
@@ -114,9 +102,7 @@
        */
       this.recyclingEnabled_ = true;
 
-      this.workspace_.setMetricsManager(
-        new ContinuousFlyoutMetrics(this.workspace_, this)
-      );
+      this.workspace_.setMetricsManager(new ContinuousFlyoutMetrics(this.workspace_, this));
 
       this.workspace_.addChangeListener((e) => {
         if (e.type === Blockly.Events.VIEWPORT_CHANGE) {
@@ -146,18 +132,11 @@
      */
     recordScrollPositions() {
       this.scrollPositions = [];
-      const categoryLabels = this.buttons_.filter(
-        (button) =>
-          button.isLabel() &&
-          this.getParentToolbox_().getCategoryByName(button.getButtonText())
-      );
+      const categoryLabels = this.buttons_.filter((button) => button.isLabel() && this.getParentToolbox_().getCategoryByName(button.getButtonText()));
       for (const [index, button] of categoryLabels.entries()) {
         if (button.isLabel()) {
           const position = button.getPosition();
-          const adjustedPosition = new Blockly.utils.Coordinate(
-            position.x,
-            position.y - this.labelGaps[index]
-          );
+          const adjustedPosition = new Blockly.utils.Coordinate(position.x, position.y - this.labelGaps[index]);
           this.scrollPositions.push({
             name: button.getButtonText(),
             position: adjustedPosition,
@@ -214,10 +193,7 @@
       // Set the scroll target to either the scaled position or the lowest
       // possible scroll point, whichever is smaller.
       const metrics = this.workspace_.getMetrics();
-      this.scrollTarget = Math.min(
-        position * this.workspace_.scale,
-        metrics.scrollHeight - metrics.viewHeight
-      );
+      this.scrollTarget = Math.min(position * this.workspace_.scale, metrics.scrollHeight - metrics.viewHeight);
 
       this.stepScrollAnimation_();
     }
@@ -239,9 +215,7 @@
         this.scrollTarget = null;
         return;
       }
-      this.workspace_.scrollbar.setY(
-        currentScrollPos + diff * this.scrollAnimationFraction
-      );
+      this.workspace_.scrollbar.setY(currentScrollPos + diff * this.scrollAnimationFraction);
 
       requestAnimationFrame(this.stepScrollAnimation_.bind(this));
     }
@@ -257,8 +231,7 @@
      */
     calculateBottomPadding(contentMetrics, viewMetrics) {
       if (this.scrollPositions.length > 0) {
-        const lastCategory =
-          this.scrollPositions[this.scrollPositions.length - 1];
+        const lastCategory = this.scrollPositions[this.scrollPositions.length - 1];
         const lastPosition = lastCategory.position.y * this.workspace_.scale;
         const lastCategoryHeight = contentMetrics.height - lastPosition;
         if (lastCategoryHeight < viewMetrics.height) {
@@ -270,12 +243,7 @@
 
     /** @override */
     getX() {
-      if (
-        this.isVisible() &&
-        this.targetWorkspace.toolboxPosition === this.toolboxPosition_ &&
-        this.targetWorkspace.getToolbox() &&
-        this.toolboxPosition_ !== Blockly.utils.toolbox.Position.LEFT
-      ) {
+      if (this.isVisible() && this.targetWorkspace.toolboxPosition === this.toolboxPosition_ && this.targetWorkspace.getToolbox() && this.toolboxPosition_ !== Blockly.utils.toolbox.Position.LEFT) {
         // This makes it so blocks cannot go under the flyout in RTL mode.
         return this.targetWorkspace.getMetricsManager().getViewMetrics().width;
       }
@@ -406,15 +374,9 @@
       if (this.workspace_.getToolbox()) {
         // Note: Not actually supported at this time due to ContinunousToolbox
         // only supporting a vertical flyout. But included for completeness.
-        if (
-          toolboxPosition == Blockly.TOOLBOX_AT_TOP ||
-          toolboxPosition == Blockly.TOOLBOX_AT_BOTTOM
-        ) {
+        if (toolboxPosition == Blockly.TOOLBOX_AT_TOP || toolboxPosition == Blockly.TOOLBOX_AT_BOTTOM) {
           svgMetrics.height -= toolboxMetrics.height + flyoutMetrics.height;
-        } else if (
-          toolboxPosition == Blockly.TOOLBOX_AT_LEFT ||
-          toolboxPosition == Blockly.TOOLBOX_AT_RIGHT
-        ) {
+        } else if (toolboxPosition == Blockly.TOOLBOX_AT_LEFT || toolboxPosition == Blockly.TOOLBOX_AT_RIGHT) {
           svgMetrics.width -= toolboxMetrics.width + flyoutMetrics.width;
         }
       }
@@ -437,17 +399,11 @@
       const toolboxPosition = toolboxMetrics.position;
       let absoluteLeft = 0;
 
-      if (
-        this.workspace_.getToolbox() &&
-        toolboxPosition == Blockly.TOOLBOX_AT_LEFT
-      ) {
+      if (this.workspace_.getToolbox() && toolboxPosition == Blockly.TOOLBOX_AT_LEFT) {
         absoluteLeft = toolboxMetrics.width + flyoutMetrics.width;
       }
       let absoluteTop = 0;
-      if (
-        this.workspace_.getToolbox() &&
-        toolboxPosition == Blockly.TOOLBOX_AT_TOP
-      ) {
+      if (this.workspace_.getToolbox() && toolboxPosition == Blockly.TOOLBOX_AT_TOP) {
         absoluteTop = toolboxMetrics.height + flyoutMetrics.height;
       }
       return {
@@ -457,11 +413,7 @@
     }
   }
 
-  Blockly.registry.register(
-    Blockly.registry.Type.METRICS_MANAGER,
-    "CustomMetricsManager",
-    ContinuousMetrics
-  );
+  Blockly.registry.register(Blockly.registry.Type.METRICS_MANAGER, "CustomMetricsManager", ContinuousMetrics);
 
   /**
    * @license
@@ -480,26 +432,13 @@
      * in order to make it possible to scroll to the top of the last category.
      * @override
      */
-    getScrollMetrics(
-      getWorkspaceCoordinates = undefined,
-      cachedViewMetrics = undefined,
-      cachedContentMetrics = undefined
-    ) {
-      const scrollMetrics = super.getScrollMetrics(
-        getWorkspaceCoordinates,
-        cachedViewMetrics,
-        cachedContentMetrics
-      );
-      const contentMetrics =
-        cachedContentMetrics || this.getContentMetrics(getWorkspaceCoordinates);
-      const viewMetrics =
-        cachedViewMetrics || this.getViewMetrics(getWorkspaceCoordinates);
+    getScrollMetrics(getWorkspaceCoordinates = undefined, cachedViewMetrics = undefined, cachedContentMetrics = undefined) {
+      const scrollMetrics = super.getScrollMetrics(getWorkspaceCoordinates, cachedViewMetrics, cachedContentMetrics);
+      const contentMetrics = cachedContentMetrics || this.getContentMetrics(getWorkspaceCoordinates);
+      const viewMetrics = cachedViewMetrics || this.getViewMetrics(getWorkspaceCoordinates);
 
       if (scrollMetrics) {
-        scrollMetrics.height += this.flyout_.calculateBottomPadding(
-          contentMetrics,
-          viewMetrics
-        );
+        scrollMetrics.height += this.flyout_.calculateBottomPadding(contentMetrics, viewMetrics);
       }
       return scrollMetrics;
     }
@@ -534,10 +473,7 @@
       flyout.recordScrollPositions();
 
       this.workspace_.addChangeListener((e) => {
-        if (
-          e.type === Blockly.Events.BLOCK_CREATE ||
-          e.type === Blockly.Events.BLOCK_DELETE
-        ) {
+        if (e.type === Blockly.Events.BLOCK_CREATE || e.type === Blockly.Events.BLOCK_DELETE) {
           this.refreshSelection();
         }
       });
@@ -569,11 +505,10 @@
 
           // Handle custom categories (e.g. variables and functions)
           if (typeof itemContents === "string") {
-            itemContents =
-              /** @type {!Blockly.utils.toolbox.DynamicCategoryInfo} */ ({
-                custom: itemContents,
-                kind: "CATEGORY",
-              });
+            itemContents = /** @type {!Blockly.utils.toolbox.DynamicCategoryInfo} */ ({
+              custom: itemContents,
+              kind: "CATEGORY",
+            });
           }
           contents = contents.concat(itemContents);
         }
@@ -589,9 +524,7 @@
     /** @override */
     updateFlyout_(_oldItem, newItem) {
       if (newItem) {
-        const target = this.getFlyout().getCategoryScrollPosition(
-          newItem.name_
-        ).y;
+        const target = this.getFlyout().getCategoryScrollPosition(newItem.name_).y;
         this.getFlyout().scrollTo(target);
       }
     }
@@ -610,12 +543,7 @@
      * @package
      */
     getCategoryByName(name) {
-      const category = this.contents_.find(
-        (item) =>
-          item instanceof Blockly.ToolboxCategory &&
-          item.isSelectable() &&
-          name === item.getName()
-      );
+      const category = this.contents_.find((item) => item instanceof Blockly.ToolboxCategory && item.isSelectable() && name === item.getName());
       if (category) {
         return /** @type {!Blockly.ToolboxCategory} */ (category);
       }

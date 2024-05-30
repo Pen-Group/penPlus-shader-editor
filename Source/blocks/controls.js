@@ -147,20 +147,14 @@
     if(block, generator) {
       const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
       const trueExec = generator.statementToCode(block, "true");
-      return (
-        `if (${condition}) {\n${trueExec}\n}` +
-        nextBlockToCode(block, generator)
-      );
+      return `if (${condition}) {\n${trueExec}\n}` + nextBlockToCode(block, generator);
     }
 
     ifelse(block, generator) {
       const condition = generator.valueToCode(block, "condition", Order.ATOMIC);
       const trueExec = generator.statementToCode(block, "true");
       const falseExec = generator.statementToCode(block, "false");
-      return (
-        `if (${condition}) {\n${trueExec}\n}\nelse{\n${falseExec}\n}` +
-        nextBlockToCode(block, generator)
-      );
+      return `if (${condition}) {\n${trueExec}\n}\nelse{\n${falseExec}\n}` + nextBlockToCode(block, generator);
     }
 
     repeat(block, generator) {
@@ -168,9 +162,7 @@
       penPlus.loopID = penPlus.loopID || 0;
       penPlus.loopID += 1;
       const code = generator.statementToCode(block, "code");
-      const text =
-        `for (int penPlusLoop_${penPlus.loopID}=0;penPlusLoop_${penPlus.loopID}<int(${times});penPlusLoop_${penPlus.loopID}++) {\n${code}\n}` +
-        nextBlockToCode(block, generator);
+      const text = `for (int penPlusLoop_${penPlus.loopID}=0;penPlusLoop_${penPlus.loopID}<int(${times});penPlusLoop_${penPlus.loopID}++) {\n${code}\n}` + nextBlockToCode(block, generator);
       penPlus.loopID -= 1;
       return text;
     }

@@ -2,16 +2,9 @@
 <html lang="en">
   <head>
     <!-- Lexend Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      data-name="vs/editor/editor.main"
-      href="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.css"
-    />
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.css" />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,158 +22,62 @@
     <div class="shaderMenu">
       <div class="topBar">
         <div class="optionsContainer">
-          <div
-            style="
-              visibility: hidden;
-              width: 128px;
-              position: absolute;
-              left: calc(var(--EditorTheme_TopBarSize) * 0);
-              top: calc(var(--EditorTheme_TopBarSize) - 20px);
-              margin-top: 0px;
-              padding-top: 0px;
-              z-index: 10000;
-            "
-            id="settingsDropdown"
-          >
-            <button
-              class="toggleButton"
-              id="DarkToggle"
-              style="
-                width: 100%;
-                border-bottom-left-radius: 0%;
-                border-bottom-right-radius: 0%;
-              "
-            >
-              <svg class="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon" style="transform: translate(0%, 25%)" id="themeIcon"></svg>Theme
-            </button>
-            <button class="toggleButton" id="OptionsButton" style="   width: 100%;   border-top-left-radius: 0%;   border-top-right-radius: 0%; ">
-              Settings
-            </button>
+          <div style="visibility: hidden; width: 128px; position: absolute; left: calc(var(--EditorTheme_TopBarSize) * 0); top: calc(var(--EditorTheme_TopBarSize) - 20px); margin-top: 0px; padding-top: 0px; z-index: 10000" id="settingsDropdown">
+            <button class="toggleButton" id="DarkToggle" style="width: 100%; border-bottom-left-radius: 0%; border-bottom-right-radius: 0%"><svg class="" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon" style="transform: translate(0%, 25%)" id="themeIcon"></svg>Theme</button>
+            <button class="toggleButton" id="OptionsButton" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%">Settings</button>
           </div>
           <button class="toggleButton" id="CloseIFRAMEeditor">
-            <img src="icons/ScratchCat.svg" class="buttonSVG" alt="">
+            <img src="icons/ScratchCat.svg" class="buttonSVG" alt="" />
           </button>
           <button class="toggleButton" id="SettingsButton">
-            <img src="icons/settings.svg" class="buttonSVG"></img>
+            <img src="icons/settings.svg" class="buttonSVG" />
           </button>
           <button class="toggleButton" id="TerminalToggle">
-            <img src="icons/terminal.svg" class="buttonSVG"></img>
+            <img src="icons/terminal.svg" class="buttonSVG" />
           </button>
           <button class="toggleButton" id="CreditsButton">
-            <img src="icons/credits.svg" class="buttonSVG"></img>
+            <img src="icons/credits.svg" class="buttonSVG" />
           </button>
           <button class="toggleButton" id="fileButton">
-            <img src="icons/save.svg" class="buttonSVG"></img>
+            <img src="icons/save.svg" class="buttonSVG" />
           </button>
-          <div
-            style="
-              visibility: hidden;
-              width: 128px;
-              position: absolute;
-              left: calc(var(--EditorTheme_TopBarSize) * 2.75);
-              top: calc(var(--EditorTheme_TopBarSize) - 20px);
-              margin-top: 0px;
-              padding-top: 0px;
-              z-index: 10000;
-            "
-            id="fileDropdown"
-          >
-            <button
-              class="toggleButton"
-              id="newButton"
-              style="
-                width: 100%;
-                border-bottom-left-radius: 0%;
-                border-bottom-right-radius: 0%;
-              "
-            >
-              New Project
-            </button>
-            <button
-              class="toggleButton"
-              id="saveButton"
-              style="width: 100%; border-radius: 0%; border-radius: 0%"
-            >
-              Save Project
-            </button>
-            <button
-              class="toggleButton"
-              id="importButton"
-              style="width: 100%; border-radius: 0%; border-radius: 0%"
-            >
-              Import from Scratch
-            </button>
-            <button
-              class="toggleButton"
-              id="exportButton"
-              style="width: 100%; border-radius: 0%; border-radius: 0%"
-            >
-              Export to Scratch
-            </button>
-            <button
-              class="toggleButton"
-              id="loadButton"
-              style="
-                width: 100%;
-                border-top-left-radius: 0%;
-                border-top-right-radius: 0%;
-              "
-            >
-              Load Project
-            </button>
+          <div style="visibility: hidden; width: 128px; position: absolute; left: calc(var(--EditorTheme_TopBarSize) * 2.75); top: calc(var(--EditorTheme_TopBarSize) - 20px); margin-top: 0px; padding-top: 0px; z-index: 10000" id="fileDropdown">
+            <button class="toggleButton" id="newButton" style="width: 100%; border-bottom-left-radius: 0%; border-bottom-right-radius: 0%">New Project</button>
+            <button class="toggleButton" id="saveButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Save Project</button>
+            <button class="toggleButton" id="importButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Import from Scratch</button>
+            <button class="toggleButton" id="exportButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Export to Scratch</button>
+            <button class="toggleButton" id="loadButton" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%">Load Project</button>
           </div>
           <!--Put load and save buttons under here! loadButton -->
           <button class="toggleButton" id="recompileButton">
-            <img src="icons/repeat.svg" class="buttonSVG"></img>
+            <img src="icons/repeat.svg" class="buttonSVG" />
           </button>
         </div>
         <div class="title">Pen+ Shader Editor</div>
         <div class="previewAndConsole" id="prevAndConsole">
           <canvas id="shaderpreview" class="shaderpreview"> </canvas>
 
-          <button
-            id="FullScreen"
-            class="previewStyle"
-            style="top: calc(var(--EditorTheme_TopBarSize) + 8px)"
-          >
-            <img src="icons/maximize.svg" class="previewStyleSVG"></img>
+          <button id="FullScreen" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 8px)">
+            <img src="icons/maximize.svg" class="previewStyleSVG" />
           </button>
-          <button
-            id="CubeButton"
-            class="previewStyle"
-            style="top: calc(var(--EditorTheme_TopBarSize) + 48px)"
-          >
-            <img src="icons/box.svg" class="previewStyleSVG"></img>
+          <button id="CubeButton" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 48px)">
+            <img src="icons/box.svg" class="previewStyleSVG" />
           </button>
-          <button
-            id="SquareButton"
-            class="previewStyle"
-            style="top: calc(var(--EditorTheme_TopBarSize) + 88px)"
-          >
-            <img src="icons/square.svg" class="previewStyleSVG"></img>
+          <button id="SquareButton" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 88px)">
+            <img src="icons/square.svg" class="previewStyleSVG" />
           </button>
-          <button
-            id="TriangleButton"
-            class="previewStyle"
-            style="top: calc(var(--EditorTheme_TopBarSize) + 128px)"
-          >
-            <img src="icons/triangle.svg" class="previewStyleSVG"></img>
+          <button id="TriangleButton" class="previewStyle" style="top: calc(var(--EditorTheme_TopBarSize) + 128px)">
+            <img src="icons/triangle.svg" class="previewStyleSVG" />
           </button>
 
           <div class="logVarSwitchBar">
             <div class="BlocklyShaderButtons">
               <button class="buttonSelected" id="ButtonLog">Log</button>
-              <button class="buttonUnselected" id="ButtonVar">
-                Uniforms/Arrays
-              </button>
+              <button class="buttonUnselected" id="ButtonVar">Uniforms/Arrays</button>
             </div>
           </div>
           <div id="shaderLog" class="shaderLog"></div>
-          <div
-            id="shaderVars"
-            style="visibility: hidden"
-            class="shaderLog"
-          ></div>
+          <div id="shaderVars" style="visibility: hidden" class="shaderLog"></div>
         </div>
         <div class="BlocklyShaderButtons">
           <button class="buttonSelected" id="ButtonBlockly">Scratch</button>
@@ -188,138 +85,35 @@
         </div>
 
         <div id="BlocklyDiv" class="BlocklyDiv"></div>
-        <div
-          id="myBlocklyCodeOutput"
-          class="tempCodePreview codeUnhighlighted"
-          spellcheck="false"
-          style="
-            margin-top: 0px;
-            margin-left: 0px;
-            padding-top: 0px;
-            padding-left: 0px;
-          "
-        ></div>
-        <code
-          id="blocklyHighlightedOutput"
-          class="tempCodePreview"
-          style="
-            margin-top: 0px;
-            margin-left: 0px;
-            padding-top: 0px;
-            padding-left: 0px;
-          "
-        ></code>
+        <div id="myBlocklyCodeOutput" class="tempCodePreview codeUnhighlighted" spellcheck="false" style="margin-top: 0px; margin-left: 0px; padding-top: 0px; padding-left: 0px"></div>
+        <code id="blocklyHighlightedOutput" class="tempCodePreview" style="margin-top: 0px; margin-left: 0px; padding-top: 0px; padding-left: 0px"></code>
       </div>
     </div>
     <div id="popupModal"></div>
 
     <div id="loadingScreen" class="loadingScreen">
       <div>
-        <svg
-          class="blocklyBlock"
-          style="--BlockOffset: -85%"
-          viewBox="0,0,150.38334,57"
-          height="57"
-          width="150.38334"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-        >
+        <svg class="blocklyBlock" style="--BlockOffset: -85%" viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1">
           <g transform="translate(-164.30833,-151)">
-            <g
-              style="mix-blend-mode: normal"
-              stroke-dashoffset="0"
-              stroke-dasharray=""
-              stroke-miterlimit="10"
-              stroke-linejoin="miter"
-              stroke-linecap="butt"
-              stroke-width="1"
-              fill-rule="nonzero"
-              data-paper-data='{"isPaintingLayer":true}'
-            >
-              <path
-                stroke="#0c9770"
-                fill="#0fbd8c"
-                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
-              ></path>
-              <path
-                visibility="hidden"
-                stroke="none"
-                fill="#3d79cc"
-                d=""
-              ></path>
+            <g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data='{"isPaintingLayer":true}'>
+              <path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path>
+              <path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path>
             </g>
           </g>
         </svg>
-        <svg
-          class="blocklyBlock"
-          style="--BlockOffset: 0%; animation-delay: 1s"
-          viewBox="0,0,150.38334,57"
-          height="57"
-          width="150.38334"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-        >
+        <svg class="blocklyBlock" style="--BlockOffset: 0%; animation-delay: 1s" viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1">
           <g transform="translate(-164.30833,-151)">
-            <g
-              style="mix-blend-mode: normal"
-              stroke-dashoffset="0"
-              stroke-dasharray=""
-              stroke-miterlimit="10"
-              stroke-linejoin="miter"
-              stroke-linecap="butt"
-              stroke-width="1"
-              fill-rule="nonzero"
-              data-paper-data='{"isPaintingLayer":true}'
-            >
-              <path
-                stroke="#0c9770"
-                fill="#0fbd8c"
-                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
-              ></path>
-              <path
-                visibility="hidden"
-                stroke="none"
-                fill="#3d79cc"
-                d=""
-              ></path>
+            <g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data='{"isPaintingLayer":true}'>
+              <path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path>
+              <path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path>
             </g>
           </g>
         </svg>
-        <svg
-          class="blocklyBlock"
-          style="--BlockOffset: 85%; animation-delay: 2s"
-          viewBox="0,0,150.38334,57"
-          height="57"
-          width="150.38334"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          xmlns="http://www.w3.org/2000/svg"
-          version="1.1"
-        >
+        <svg class="blocklyBlock" style="--BlockOffset: 85%; animation-delay: 2s" viewBox="0,0,150.38334,57" height="57" width="150.38334" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1">
           <g transform="translate(-164.30833,-151)">
-            <g
-              style="mix-blend-mode: normal"
-              stroke-dashoffset="0"
-              stroke-dasharray=""
-              stroke-miterlimit="10"
-              stroke-linejoin="miter"
-              stroke-linecap="butt"
-              stroke-width="1"
-              fill-rule="nonzero"
-              data-paper-data='{"isPaintingLayer":true}'
-            >
-              <path
-                stroke="#0c9770"
-                fill="#0fbd8c"
-                d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"
-              ></path>
-              <path
-                visibility="hidden"
-                stroke="none"
-                fill="#3d79cc"
-                d=""
-              ></path>
+            <g style="mix-blend-mode: normal" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" fill-rule="nonzero" data-paper-data='{"isPaintingLayer":true}'>
+              <path stroke="#0c9770" fill="#0fbd8c" d="M164.80833,155.5c0,-2.20914 1.79086,-4 4,-4h8c2,0 3,1 4,2l4,4c1,1 2,2 4,2h12c2,0 3,-1 4,-2l4,-4c1,-1 2,-2 4,-2h97.38334c2.20914,0 4,1.79086 4,4v40c0,2.20914 -1.79086,4 -4,4h-97.38334c-2,0 -3,1 -4,2l-4,4c-1,1 -2,2 -4,2h-12c-2,0 -3,-1 -4,-2l-4,-4c-1,-1 -2,-2 -4,-2h-8c-2.20914,0 -4,-1.79086 -4,-4z"></path>
+              <path visibility="hidden" stroke="none" fill="#3d79cc" d=""></path>
             </g>
           </g>
         </svg>

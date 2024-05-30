@@ -10,8 +10,7 @@ let functionsThatExist = {
 };
 
 //Base GLSL code
-penPlus.Generated_GLSL =
-  penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
+penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
 
 //Helper function to convert the next block
 function nextBlockToCode(block, generator) {
@@ -53,10 +52,7 @@ function createGLSLGen() {
     converted.r /= 255;
     converted.g /= 255;
     converted.b /= 255;
-    return [
-      `vec4(${converted.r},${converted.g},${converted.b},1.0)`,
-      Order.ATOMIC,
-    ];
+    return [`vec4(${converted.r},${converted.g},${converted.b},1.0)`, Order.ATOMIC];
   };
 
   GLSL_GEN.forBlock["vec2_reporter"] = function (block, generator) {
@@ -81,48 +77,15 @@ function createGLSLGen() {
   };
 
   GLSL_GEN.forBlock["matrix2_reporter"] = function (block, generator) {
-    return [
-      `mat2(${block.getFieldValue("00")},${block.getFieldValue(
-        "01"
-      )},${block.getFieldValue("10")},${block.getFieldValue("11")})`,
-      Order.ATOMIC,
-    ];
+    return [`mat2(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("10")},${block.getFieldValue("11")})`, Order.ATOMIC];
   };
 
   GLSL_GEN.forBlock["matrix3_reporter"] = function (block, generator) {
-    return [
-      `mat3(${block.getFieldValue("00")},${block.getFieldValue(
-        "01"
-      )},${block.getFieldValue("02")},${block.getFieldValue(
-        "10"
-      )},${block.getFieldValue("11")},${block.getFieldValue(
-        "12"
-      )},${block.getFieldValue("20")},${block.getFieldValue(
-        "21"
-      )},${block.getFieldValue("22")})`,
-      Order.ATOMIC,
-    ];
+    return [`mat3(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("02")},${block.getFieldValue("10")},${block.getFieldValue("11")},${block.getFieldValue("12")},${block.getFieldValue("20")},${block.getFieldValue("21")},${block.getFieldValue("22")})`, Order.ATOMIC];
   };
 
   GLSL_GEN.forBlock["matrix4_reporter"] = function (block, generator) {
-    return [
-      `mat4(${block.getFieldValue("00")},${block.getFieldValue(
-        "01"
-      )},${block.getFieldValue("02")},${block.getFieldValue(
-        "03"
-      )},${block.getFieldValue("10")},${block.getFieldValue(
-        "11"
-      )},${block.getFieldValue("12")},${block.getFieldValue(
-        "13"
-      )},${block.getFieldValue("20")},${block.getFieldValue(
-        "21"
-      )},${block.getFieldValue("22")},${block.getFieldValue(
-        "23"
-      )},${block.getFieldValue("30")},${block.getFieldValue(
-        "31"
-      )},${block.getFieldValue("32")},${block.getFieldValue("33")})`,
-      Order.ATOMIC,
-    ];
+    return [`mat4(${block.getFieldValue("00")},${block.getFieldValue("01")},${block.getFieldValue("02")},${block.getFieldValue("03")},${block.getFieldValue("10")},${block.getFieldValue("11")},${block.getFieldValue("12")},${block.getFieldValue("13")},${block.getFieldValue("20")},${block.getFieldValue("21")},${block.getFieldValue("22")},${block.getFieldValue("23")},${block.getFieldValue("30")},${block.getFieldValue("31")},${block.getFieldValue("32")},${block.getFieldValue("33")})`, Order.ATOMIC];
   };
 
   GLSL_GEN.forBlock["string_reporter"] = function (block, generator) {
@@ -161,36 +124,21 @@ function updateGLSL(event) {
       let scope = variable.name.split(" ")[0].split("[")[0];
       if (scope == "array") {
         scope = "uniform";
-        appendance = `[${variable.name
-          .split(" ")[0]
-          .split("[")[1]
-          .replace("]", "")}]`;
+        appendance = `[${variable.name.split(" ")[0].split("[")[1].replace("]", "")}]`;
       }
       if (scope == "hat") return;
 
       if (!variable.name.split(" ")[1]) return;
 
       //Types that don't have precision
-      if (
-        variable.type == "texture" ||
-        variable.type == "cubemap" ||
-        variable.type == "int"
-      )
-        penPlus.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${
-          variable.name.split(" ")[1] + appendance
-        };\n`;
-      else
-        penPlus.Generated_GLSL += `\n${scope} highp ${type} ${
-          variable.name.split(" ")[1] + appendance
-        };\n`;
+      if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") penPlus.Generated_GLSL += `\n${variable.name.split(" ")[0]} ${type} ${variable.name.split(" ")[1] + appendance};\n`;
+      else penPlus.Generated_GLSL += `\n${scope} highp ${type} ${variable.name.split(" ")[1] + appendance};\n`;
     });
 
     //Add some spacing
     penPlus.Generated_GLSL += `\n`;
 
-    penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(
-      penPlus.workspace
-    );
+    penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
 
     penPlus.monacoEditor.setValue(penPlus.Generated_GLSL);
   } else {
@@ -219,11 +167,7 @@ function updateGLSL(event) {
     penPlus.Generated_GLSL += penPlus.defaultFrag;
   }
 
-  for (
-    let letterID = penPlus.Generated_GLSL.indexOf("void vertex");
-    letterID < penPlus.Generated_GLSL.length;
-    letterID++
-  ) {
+  for (let letterID = penPlus.Generated_GLSL.indexOf("void vertex"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
     if (letter == "{") {
@@ -238,11 +182,7 @@ function updateGLSL(event) {
 
   inner = 0;
 
-  for (
-    let letterID = penPlus.Generated_GLSL.indexOf("void fragment");
-    letterID < penPlus.Generated_GLSL.length;
-    letterID++
-  ) {
+  for (let letterID = penPlus.Generated_GLSL.indexOf("void fragment"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
     if (letter == "{") {
@@ -256,24 +196,10 @@ function updateGLSL(event) {
   }
 
   //I know this isn't the best but it works
-  penPlus.Generated_Vert = penPlus.makeVertexSafe(
-    (
-      penPlus.Generated_GLSL.replace(fragFunction, "").replace(
-        vertFunction,
-        ""
-      ) + vertFunction
-    ).replace("void vertex", "void main")
-  );
+  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") + vertFunction).replace("void vertex", "void main"));
 
   //This too
-  penPlus.Generated_Frag = penPlus.makeFragmentSafe(
-    (
-      penPlus.Generated_GLSL.replace(vertFunction, "").replace(
-        fragFunction,
-        ""
-      ) + fragFunction
-    ).replace("void fragment", "void main")
-  );
+  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") + fragFunction).replace("void fragment", "void main"));
 
   genProgram();
 }

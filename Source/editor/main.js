@@ -6,10 +6,7 @@ function onAllAddonsLoaded() {
 
   //Custom zelos renderer.
   addImportantReporters();
-  Blockly.blockRendering.register(
-    "pen_plus_renderer",
-    penPlus.customZelosRenderer
-  );
+  Blockly.blockRendering.register("pen_plus_renderer", penPlus.customZelosRenderer);
 
   workspace = Blockly.inject("BlocklyDiv", {
     toolbox: penPlus.toolbox,
@@ -70,12 +67,7 @@ function onAllAddonsLoaded() {
   zoomToFit.init();
 
   //Our auto recompile events
-  penPlus.supportedEvents = new Set([
-    Blockly.Events.BLOCK_CHANGE,
-    Blockly.Events.BLOCK_CREATE,
-    Blockly.Events.BLOCK_DELETE,
-    Blockly.Events.BLOCK_MOVE,
-  ]);
+  penPlus.supportedEvents = new Set([Blockly.Events.BLOCK_CHANGE, Blockly.Events.BLOCK_CREATE, Blockly.Events.BLOCK_DELETE, Blockly.Events.BLOCK_MOVE]);
 
   //Init our preview render
   previewRender();

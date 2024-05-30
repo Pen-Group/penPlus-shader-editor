@@ -98,32 +98,17 @@
      * Creates DOM for ui element.
      */
     createDom() {
-      this.svgGroup = Blockly.utils.dom.createSvgElement(
-        Blockly.utils.Svg.IMAGE,
-        {
-          height: `${this.height}px`,
-          width: `${this.width}px`,
-          class: "zoomToFit",
-        }
-      );
-      this.svgGroup.setAttributeNS(
-        Blockly.utils.dom.XLINK_NS,
-        "xlink:href",
-        zoomToFitSvgDataUri
-      );
+      this.svgGroup = Blockly.utils.dom.createSvgElement(Blockly.utils.Svg.IMAGE, {
+        height: `${this.height}px`,
+        width: `${this.width}px`,
+        class: "zoomToFit",
+      });
+      this.svgGroup.setAttributeNS(Blockly.utils.dom.XLINK_NS, "xlink:href", zoomToFitSvgDataUri);
 
-      Blockly.utils.dom.insertAfter(
-        this.svgGroup,
-        this.workspace.getBubbleCanvas()
-      );
+      Blockly.utils.dom.insertAfter(this.svgGroup, this.workspace.getBubbleCanvas());
 
       // Attach listener.
-      this.onZoomToFitWrapper = Blockly.browserEvents.conditionalBind(
-        this.svgGroup,
-        "mousedown",
-        null,
-        this.onClick.bind(this)
-      );
+      this.onZoomToFitWrapper = Blockly.browserEvents.conditionalBind(this.svgGroup, "mousedown", null, this.onClick.bind(this));
     }
 
     /**
@@ -131,11 +116,7 @@
      */
     onClick() {
       this.workspace.zoomToFit();
-      const uiEvent = new (Blockly.Events.get(Blockly.Events.CLICK))(
-        null,
-        this.workspace.id,
-        "zoom_reset_control"
-      );
+      const uiEvent = new (Blockly.Events.get(Blockly.Events.CLICK))(null, this.workspace.id, "zoom_reset_control");
       Blockly.Events.fire(uiEvent);
     }
 
@@ -146,12 +127,7 @@
      * @returns The component’s bounding box.
      */
     getBoundingRectangle() {
-      return new Blockly.utils.Rect(
-        this.top,
-        this.top + this.height,
-        this.left,
-        this.left + this.width
-      );
+      return new Blockly.utils.Rect(this.top, this.top + this.height, this.left, this.left + this.width);
     }
 
     /**
@@ -167,23 +143,12 @@
       if (!this.initialized) {
         return;
       }
-      const hasVerticalScrollbars =
-        this.workspace.scrollbar &&
-        this.workspace.scrollbar.canScrollHorizontally();
-      const hasHorizontalScrollbars =
-        this.workspace.scrollbar &&
-        this.workspace.scrollbar.canScrollVertically();
+      const hasVerticalScrollbars = this.workspace.scrollbar && this.workspace.scrollbar.canScrollHorizontally();
+      const hasHorizontalScrollbars = this.workspace.scrollbar && this.workspace.scrollbar.canScrollVertically();
 
-      if (
-        metrics.toolboxMetrics.position === Blockly.TOOLBOX_AT_LEFT ||
-        (this.workspace.horizontalLayout && !this.workspace.RTL)
-      ) {
+      if (metrics.toolboxMetrics.position === Blockly.TOOLBOX_AT_LEFT || (this.workspace.horizontalLayout && !this.workspace.RTL)) {
         // Right corner placement.
-        this.left =
-          metrics.absoluteMetrics.left +
-          metrics.viewMetrics.width -
-          this.width -
-          this.marginHorizontal;
+        this.left = metrics.absoluteMetrics.left + metrics.viewMetrics.width - this.width - this.marginHorizontal;
         if (hasVerticalScrollbars && !this.workspace.RTL) {
           this.left -= Blockly.Scrollbar.scrollbarThickness;
         }
@@ -195,15 +160,10 @@
         }
       }
 
-      const startAtBottom =
-        metrics.toolboxMetrics.position !== Blockly.TOOLBOX_AT_BOTTOM;
+      const startAtBottom = metrics.toolboxMetrics.position !== Blockly.TOOLBOX_AT_BOTTOM;
       if (startAtBottom) {
         // Bottom corner placement
-        this.top =
-          metrics.absoluteMetrics.top +
-          metrics.viewMetrics.height -
-          this.height -
-          this.marginVertical;
+        this.top = metrics.absoluteMetrics.top + metrics.viewMetrics.height - this.height - this.marginVertical;
         if (hasHorizontalScrollbars) {
           // The horizontal scrollbars are always positioned on the bottom.
           this.top -= Blockly.Scrollbar.scrollbarThickness;
@@ -230,24 +190,14 @@
         }
       }
 
-      this.svgGroup?.setAttribute(
-        "transform",
-        `translate(${this.left}, ${this.top})`
-      );
+      this.svgGroup?.setAttribute("transform", `translate(${this.left}, ${this.top})`);
     }
   }
 
   /**
    * Base64 encoded data uri for zoom to fit icon.
    */
-  const zoomToFitSvgDataUri =
-    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC" +
-    "9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCIgZm" +
-    "lsbD0iIzU0NkU3QSI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PH" +
-    "BhdGggZD0iTTUgNi40Mkw4LjA5IDkuNSA5LjUgOC4wOSA2LjQxIDVIOVYzSDN2Nmgyem0xMC" +
-    "0zLjQxdjJoMi41N0wxNC41IDguMDlsMS40MSAxLjQxTDE5IDYuNDFWOWgyVjMuMDF6bTQgMT" +
-    "QuNTdsLTMuMDktMy4wOC0xLjQxIDEuNDFMMTcuNTkgMTlIMTV2Mmg2di02aC0yek04LjA5ID" +
-    "E0LjVMNSAxNy41OVYxNUgzdjZoNnYtMkg2LjQybDMuMDgtMy4wOXoiLz48L3N2Zz4=";
+  const zoomToFitSvgDataUri = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC" + "9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjRweCIgZm" + "lsbD0iIzU0NkU3QSI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PH" + "BhdGggZD0iTTUgNi40Mkw4LjA5IDkuNSA5LjUgOC4wOSA2LjQxIDVIOVYzSDN2Nmgyem0xMC" + "0zLjQxdjJoMi41N0wxNC41IDguMDlsMS40MSAxLjQxTDE5IDYuNDFWOWgyVjMuMDF6bTQgMT" + "QuNTdsLTMuMDktMy4wOC0xLjQxIDEuNDFMMTcuNTkgMTlIMTV2Mmg2di02aC0yek04LjA5ID" + "E0LjVMNSAxNy41OVYxNUgzdjZoNnYtMkg2LjQybDMuMDgtMy4wOXoiLz48L3N2Zz4=";
 
   Blockly.Css.register(`
   .zoomToFit {

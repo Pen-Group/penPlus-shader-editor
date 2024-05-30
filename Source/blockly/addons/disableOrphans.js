@@ -18,18 +18,11 @@
      * Modifies the context menu 'disable' option as described above.
      */
     init() {
-      const disableMenuItem =
-        Blockly.ContextMenuRegistry.registry.getItem("blockDisable");
+      const disableMenuItem = Blockly.ContextMenuRegistry.registry.getItem("blockDisable");
       this.oldPreconditionFn = disableMenuItem.preconditionFn;
-      disableMenuItem.preconditionFn = function (
-        /** @type {!Blockly.ContextMenuRegistry.Scope} */ scope
-      ) {
+      disableMenuItem.preconditionFn = function (/** @type {!Blockly.ContextMenuRegistry.Scope} */ scope) {
         const block = scope.block;
-        if (
-          !block.isInFlyout &&
-          block.workspace.options.disable &&
-          block.isEditable()
-        ) {
+        if (!block.isInFlyout && block.workspace.options.disable && block.isEditable()) {
           if (block.getInheritedDisabled() || isOrphan(block)) {
             return "disabled";
           }
@@ -45,8 +38,7 @@
      * disable the plugin.
      */
     dispose() {
-      const disableMenuItem =
-        Blockly.ContextMenuRegistry.registry.getItem("blockDisable");
+      const disableMenuItem = Blockly.ContextMenuRegistry.registry.getItem("blockDisable");
       disableMenuItem.preconditionFn = this.oldPreconditionFn;
     }
   }

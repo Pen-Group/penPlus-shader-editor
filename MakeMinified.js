@@ -120,8 +120,7 @@ function build() {
       let head = new JSDOM(htmlFileDat).window.document.head.innerHTML;
 
       //Locate scripts and grab keys, Also create a counter
-      let scripts =
-        dataReader.window.document.body.getElementsByTagName("script");
+      let scripts = dataReader.window.document.body.getElementsByTagName("script");
 
       let scriptKeys = Object.keys(scripts);
 
@@ -134,23 +133,14 @@ function build() {
           console.log("new html created.");
           console.log("old replaced with new");
           fs.appendFile(
-            OutputDir +
-              buildPrefix +
-              "_" +
-              htmlFile +
-              "_Build_" +
-              Date.now() +
-              ".html",
+            OutputDir + buildPrefix + "_" + htmlFile + "_Build_" + Date.now() + ".html",
             `<!DOCTYPE html>
                     <html lang="en">
                       <head>` +
               head +
               `</head>
                       <body>` +
-              dataReader.window.document.body.innerHTML.replaceAll(
-                /[\n\t]/g,
-                ""
-              ) +
+              dataReader.window.document.body.innerHTML.replaceAll(/[\n\t]/g, "") +
               `</body>
                     </html>
                     `,
@@ -158,15 +148,7 @@ function build() {
               if (err) {
                 console.log("File creation failed");
               }
-              console.log(
-                "file exported as '" +
-                  buildPrefix +
-                  "_" +
-                  htmlFile +
-                  "_Build_" +
-                  Date.now() +
-                  "' check Build for the result"
-              );
+              console.log("file exported as '" + buildPrefix + "_" + htmlFile + "_Build_" + Date.now() + "' check Build for the result");
               process.exit();
             }
           );
@@ -183,18 +165,11 @@ function build() {
               return;
             }
 
-            data = data.replaceAll(
-              /(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)|(\/\/.*)/g,
-              ""
-            );
+            data = data.replaceAll(/(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)|(\/\/.*)/g, "");
 
             scripts[element].innerHTML = data;
 
-            console.log(
-              "Read and added " +
-                scripts[element].getAttribute("src") +
-                " to standalone html"
-            );
+            console.log("Read and added " + scripts[element].getAttribute("src") + " to standalone html");
 
             scripts[element].removeAttribute("src");
             scriptsLoaded += 1;

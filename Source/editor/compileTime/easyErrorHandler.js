@@ -33,11 +33,9 @@
       }
     }
 
-    return description
-      .split(" ")
-      [description.split(" ").length - 1].replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
+    return description.split(" ")[description.split(" ").length - 1].replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   };
 
   penPlus.easyErrorHandler = (error) => {
@@ -78,21 +76,15 @@
     }
     //If something is undeclared
     else if (error.includes("undeclared identifier")) {
-      returnedError = `Unknown variable ${
-        error.split(":")[2]
-      } : At line ${lineNumber} in GLSL`;
+      returnedError = `Unknown variable ${error.split(":")[2]} : At line ${lineNumber} in GLSL`;
     }
     //If a void function returns a value
     else if (error.includes("void function cannot return a value")) {
       returnedError = `Unexpected return : At line ${lineNumber} in GLSL`;
     } else if (error.includes("function does not return a value")) {
-      returnedError = `function ${
-        error.split(":")[2]
-      } has is missing a returning point : At line ${lineNumber} in GLSL`;
+      returnedError = `function ${error.split(":")[2]} has is missing a returning point : At line ${lineNumber} in GLSL`;
     } else if (error.includes("Recursive function cal")) {
-      returnedError = `Recursion detected in function ${error
-        .split("-> ")[1]
-        .replace(")", "")}`;
+      returnedError = `Recursion detected in function ${error.split("-> ")[1].replace(")", "")}`;
     }
 
     return returnedError;

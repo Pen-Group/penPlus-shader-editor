@@ -1,13 +1,10 @@
 penPlus.setupMonacoEditor = () => {
   penPlus.isTextMode = false;
 
-  penPlus.monacoEditor = monaco.editor.create(
-    document.getElementById("myBlocklyCodeOutput"),
-    {
-      value: penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag,
-      language: "glsl",
-    }
-  );
+  penPlus.monacoEditor = monaco.editor.create(document.getElementById("myBlocklyCodeOutput"), {
+    value: penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag,
+    language: "glsl",
+  });
   monaco.editor.setTheme("myCoolTheme");
 
   //This should work //?Right

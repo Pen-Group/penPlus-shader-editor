@@ -94,79 +94,66 @@ penPlus.setupMonacoTheme = () => {
     rules: [
       {
         token: "my-blocks",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["myblocks_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["myblocks_blocks"].colourPrimary,
         fontStyle: "bold",
       },
 
       {
         token: "variable",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["variables_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["variables_blocks"].colourPrimary,
       },
       {
         token: "int",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["int_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["int_blocks"].colourPrimary,
       },
 
       {
         token: "vec-two",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["vector_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["vector_blocks"].colourPrimary,
       },
       {
         token: "vec-three",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["vec3_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["vec3_blocks"].colourPrimary,
       },
       {
         token: "vec-four",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["vec4_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["vec4_blocks"].colourPrimary,
       },
 
       {
         token: "matrix",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["matrix_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["matrix_blocks"].colourPrimary,
       },
 
       {
         token: "texture",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["texture_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["texture_blocks"].colourPrimary,
       },
       {
         token: "cubemap",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["cubemap_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["cubemap_blocks"].colourPrimary,
       },
 
       {
         token: "controls",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["controls_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["controls_blocks"].colourPrimary,
         fontStyle: "bold",
       },
 
       {
         token: "comment",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["sensing_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["sensing_blocks"].colourPrimary,
         fontStyle: "italic",
       },
 
       {
         token: "operator",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["operators_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["operators_blocks"].colourPrimary,
       },
 
       {
         token: "precision",
-        foreground:
-          penPlus.penPlusTheme.blockStyles["colors_blocks"].colourPrimary,
+        foreground: penPlus.penPlusTheme.blockStyles["colors_blocks"].colourPrimary,
       },
     ],
     colors: {

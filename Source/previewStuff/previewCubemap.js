@@ -1,12 +1,5 @@
 (function () {
-  penPlus.cubemapFaceOrder = [
-    "TEXTURE_CUBE_MAP_NEGATIVE_X",
-    "TEXTURE_CUBE_MAP_POSITIVE_X",
-    "TEXTURE_CUBE_MAP_NEGATIVE_Y",
-    "TEXTURE_CUBE_MAP_POSITIVE_Y",
-    "TEXTURE_CUBE_MAP_NEGATIVE_Z",
-    "TEXTURE_CUBE_MAP_POSITIVE_Z",
-  ];
+  penPlus.cubemapFaceOrder = ["TEXTURE_CUBE_MAP_NEGATIVE_X", "TEXTURE_CUBE_MAP_POSITIVE_X", "TEXTURE_CUBE_MAP_NEGATIVE_Y", "TEXTURE_CUBE_MAP_POSITIVE_Y", "TEXTURE_CUBE_MAP_NEGATIVE_Z", "TEXTURE_CUBE_MAP_POSITIVE_Z"];
 
   penPlus.shaderParams = penPlus.shaderParams || {};
   penPlus.shaderParams.sampleCubemaps = [

@@ -8,10 +8,7 @@
 
   penPlus.attributeSetters = [{}, {}, {}, {}, {}, {}, {}, {}];
 
-  penPlus.previewMode =
-    localStorage.getItem("preferredPreviewMode") === null
-      ? "triangle"
-      : localStorage.getItem("preferredPreviewMode");
+  penPlus.previewMode = localStorage.getItem("preferredPreviewMode") === null ? "triangle" : localStorage.getItem("preferredPreviewMode");
 
   switch (penPlus.previewMode) {
     case "triangle":

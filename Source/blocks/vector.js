@@ -215,102 +215,35 @@
     }
 
     vec2(block, generator) {
-      return [
-        `vec2(${generator.valueToCode(
-          block,
-          "x",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "y", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`vec2(${generator.valueToCode(block, "x", Order.ATOMIC)},${generator.valueToCode(block, "y", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     vec3(block, generator) {
-      return [
-        `vec3(${generator.valueToCode(
-          block,
-          "x",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "y",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "z", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`vec3(${generator.valueToCode(block, "x", Order.ATOMIC)},${generator.valueToCode(block, "y", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     vec4(block, generator) {
-      return [
-        `vec4(${generator.valueToCode(
-          block,
-          "x",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "y",
-          Order.ATOMIC
-        )},${generator.valueToCode(
-          block,
-          "z",
-          Order.ATOMIC
-        )},${generator.valueToCode(block, "w", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`vec4(${generator.valueToCode(block, "x", Order.ATOMIC)},${generator.valueToCode(block, "y", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)},${generator.valueToCode(block, "w", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getitem(block, generator) {
-      return [
-        `${generator.valueToCode(
-          block,
-          "vector",
-          Order.ATOMIC
-        )}.${block.getFieldValue("coordinate")}`,
-        Order.ATOMIC,
-      ];
+      return [`${generator.valueToCode(block, "vector", Order.ATOMIC)}.${block.getFieldValue("coordinate")}`, Order.ATOMIC];
     }
 
     normalize(block, generator) {
-      return [
-        `normalize(${generator.valueToCode(block, "a", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`normalize(${generator.valueToCode(block, "a", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     dot(block, generator) {
-      return [
-        `dot(${generator.valueToCode(
-          block,
-          "a",
-          Order.ATOMIC
-        )}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`dot(${generator.valueToCode(block, "a", Order.ATOMIC)}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     cross(block, generator) {
-      return [
-        `cross(${generator.valueToCode(
-          block,
-          "a",
-          Order.ATOMIC
-        )}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`cross(${generator.valueToCode(block, "a", Order.ATOMIC)}, ${generator.valueToCode(block, "b", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     length(block, generator) {
-      return [
-        `length(${generator.valueToCode(block, "a", Order.ATOMIC)})` +
-          nextBlockToCode(block, generator),
-        Order.ATOMIC,
-      ];
+      return [`length(${generator.valueToCode(block, "a", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 

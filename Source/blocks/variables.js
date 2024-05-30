@@ -60,12 +60,7 @@
       penPlus.addBlockColorSet("vec4_blocks", "#59BC77", "#47AB6A", "#359258");
       penPlus.addBlockColorSet("int_blocks", "#FF791A", "#E15D00", "#E15D00");
       penPlus.addBlockColorSet("bool_blocks", "#c2d916", "#adc213", "#a0b312");
-      penPlus.addBlockColorSet(
-        "matrix_blocks",
-        "#737fff",
-        "#636ed6",
-        "#5560cb"
-      );
+      penPlus.addBlockColorSet("matrix_blocks", "#737fff", "#636ed6", "#5560cb");
       return {
         name: "Variables",
         id: "variables",
@@ -100,16 +95,7 @@
                 name: "VAR",
                 variable: "uniform u_default",
                 defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                variableTypes: ["float", "int", "vec2", "vec3", "vec4", "matrix_2x", "matrix_3x", "matrix_4x"],
               },
               {
                 type: "input_value",
@@ -132,16 +118,7 @@
                 name: "VAR",
                 variable: "uniform u_default",
                 defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                variableTypes: ["float", "int", "vec2", "vec3", "vec4", "matrix_2x", "matrix_3x", "matrix_4x"],
               },
               {
                 type: "input_value",
@@ -164,16 +141,7 @@
                 name: "VAR",
                 variable: "uniform u_default",
                 defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                variableTypes: ["float", "int", "vec2", "vec3", "vec4", "matrix_2x", "matrix_3x", "matrix_4x"],
               },
               {
                 type: "input_value",
@@ -196,16 +164,7 @@
                 name: "VAR",
                 variable: "uniform u_default",
                 defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                variableTypes: ["float", "int", "vec2", "vec3", "vec4", "matrix_2x", "matrix_3x", "matrix_4x"],
               },
               {
                 type: "input_value",
@@ -236,16 +195,7 @@
                 name: "VAR",
                 variable: "array[1] a_default",
                 defaultType: "float",
-                variableTypes: [
-                  "float",
-                  "int",
-                  "vec2",
-                  "vec3",
-                  "vec4",
-                  "matrix_2x",
-                  "matrix_3x",
-                  "matrix_4x",
-                ],
+                variableTypes: ["float", "int", "vec2", "vec3", "vec4", "matrix_2x", "matrix_3x", "matrix_4x"],
               },
             ],
           },
@@ -258,10 +208,7 @@
     }
 
     variable_set(block, generator) {
-      const variable = Blockly.Variables.getVariable(
-        penPlus.workspace,
-        block.getFieldValue("VAR")
-      );
+      const variable = Blockly.Variables.getVariable(penPlus.workspace, block.getFieldValue("VAR"));
 
       const variableName = variable.name;
       const variableType = variable.type;
@@ -272,133 +219,75 @@
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      let shadowDeisred = penPlus.stringToDOM(
-        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
-      );
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
 
-      if (
-        block.inputList[0].getShadowDom() == null ||
-        block.inputList[0].getShadowDom().getAttribute("type") !=
-          shadowDeisred.getAttribute("type")
-      )
-        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return (
-        `${variableName.split(" ")[1]} = ${variableType}(${value});\n` +
-        nextBlockToCode(block, generator)
-      );
+      return `${variableName.split(" ")[1]} = ${variableType}(${value});\n` + nextBlockToCode(block, generator);
     }
 
     variable_change(block, generator) {
-      const variable = Blockly.Variables.getVariable(
-        penPlus.workspace,
-        block.getFieldValue("VAR")
-      );
+      const variable = Blockly.Variables.getVariable(penPlus.workspace, block.getFieldValue("VAR"));
 
       const variableName = variable.name;
       const variableType = variable.type;
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      let shadowDeisred = penPlus.stringToDOM(
-        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
-      );
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
 
-      if (
-        block.inputList[0].getShadowDom() == null ||
-        block.inputList[0].getShadowDom().getAttribute("type") !=
-          shadowDeisred.getAttribute("type")
-      )
-        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return (
-        `${variableName.split(" ")[1]} += ${value};\n` +
-        nextBlockToCode(block, generator)
-      );
+      return `${variableName.split(" ")[1]} += ${value};\n` + nextBlockToCode(block, generator);
     }
 
     variable_multiply(block, generator) {
-      const variable = Blockly.Variables.getVariable(
-        penPlus.workspace,
-        block.getFieldValue("VAR")
-      );
+      const variable = Blockly.Variables.getVariable(penPlus.workspace, block.getFieldValue("VAR"));
 
       const variableName = variable.name;
       const variableType = variable.type;
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      let shadowDeisred = penPlus.stringToDOM(
-        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
-      );
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
 
-      if (
-        block.inputList[0].getShadowDom() == null ||
-        block.inputList[0].getShadowDom().getAttribute("type") !=
-          shadowDeisred.getAttribute("type")
-      )
-        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return (
-        `${variableName.split(" ")[1]} *= ${value};\n` +
-        nextBlockToCode(block, generator)
-      );
+      return `${variableName.split(" ")[1]} *= ${value};\n` + nextBlockToCode(block, generator);
     }
 
     variable_divide(block, generator) {
-      const variable = Blockly.Variables.getVariable(
-        penPlus.workspace,
-        block.getFieldValue("VAR")
-      );
+      const variable = Blockly.Variables.getVariable(penPlus.workspace, block.getFieldValue("VAR"));
 
       const variableName = variable.name;
       const variableType = variable.type;
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
-      let shadowDeisred = penPlus.stringToDOM(
-        `<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`
-      );
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
 
-      if (
-        block.inputList[0].getShadowDom() == null ||
-        block.inputList[0].getShadowDom().getAttribute("type") !=
-          shadowDeisred.getAttribute("type")
-      )
-        this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
 
-      return (
-        `${variableName.split(" ")[1]} /= ${value};\n` +
-        nextBlockToCode(block, generator)
-      );
+      return `${variableName.split(" ")[1]} /= ${value};\n` + nextBlockToCode(block, generator);
     }
 
     variable_item(block, generator) {
-      const variable = Blockly.Variables.getVariable(
-        penPlus.workspace,
-        block.getFieldValue("VAR")
-      );
+      const variable = Blockly.Variables.getVariable(penPlus.workspace, block.getFieldValue("VAR"));
 
       const variableName = variable.name;
       const variableType = variable.type;
 
-      let shadowDeisred = penPlus.stringToDOM(
-        '<shadow type="number_reporter"></shadow>'
-      );
+      let shadowDeisred = penPlus.stringToDOM('<shadow type="number_reporter"></shadow>');
 
-      if (
-        block.inputList[0].getShadowDom() == null ||
-        block.inputList[0].getShadowDom().getAttribute("type") !=
-          shadowDeisred.getAttribute("type")
-      ) {
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) {
         this.inputList[0].setShadowDom(shadowDeisred);
       }
 
@@ -618,8 +507,7 @@
       const cycleVariable = (type) => {
         typeName = type;
         currentType.style.backgroundColor = "var(--EditorTheme_Theme_3)";
-        variableTypeChangers[type].style.backgroundColor =
-          "var(--EditorTheme_Theme_4)";
+        variableTypeChangers[type].style.backgroundColor = "var(--EditorTheme_Theme_4)";
         currentType = variableTypeChangers[type];
         if (type == "matrix") {
           matrixSizeChanger.style.visibility = "visible";
@@ -778,16 +666,11 @@
               break;
 
             case "varExists":
-              text.innerHTML =
-                "variable " +
-                variable_Exists[1] +
-                " exists as a " +
-                variable_Exists[2];
+              text.innerHTML = "variable " + variable_Exists[1] + " exists as a " + variable_Exists[2];
               break;
 
             default:
-              text.innerHTML =
-                "Honestly I dunno why you got this. Check the console";
+              text.innerHTML = "Honestly I dunno why you got this. Check the console";
               break;
           }
           errorPopup.style.width = "80%";
