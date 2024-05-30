@@ -2,29 +2,6 @@ const gl = document
   .getElementById("shaderpreview")
   .getContext("webgl", { antialias: false });
 
-function shaderLog(reason) {
-  const logThing = document.createElement("div");
-  logThing.innerHTML = "Errors at : " + Date.now();
-  logThing.className = "logText";
-
-  document.getElementById("shaderLog").appendChild(logThing);
-
-  reason.split("ERROR:").forEach(Error => {
-    const errorElement = penPlus.easyErrorHandler(Error);
-    if (errorElement) {
-      errorElement.style.backgroundColor = "#ff666699";
-
-      errorElement.style.backgroundImage = "url(\"data:image/png;base64,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\")"
-      errorElement.style.backgroundRepeat = "repeat";
-      errorElement.style.backgroundSize = "80px 80px";
-
-      document.getElementById("shaderLog").appendChild(errorElement);
-
-      errorElement.style.backgroundPosition = `0px calc(var(--U_TIMER) * 10)`;
-    }
-  })
-}
-
 function replacementShader() {
   penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
 
@@ -852,7 +829,7 @@ function genProgram() {
     vert,
     frag,
     (error) => {
-      shaderLog(error);
+      penPlus.shaderCompileLog(error);
       replacementShader();
     }
   );
@@ -958,7 +935,8 @@ function genProgram() {
     penPlus.refreshVariableMenu();
     penPlus.refreshMesh();
   } catch (error) {
-    shaderLog(error);
+    penPlus.shaderError(error);
+    penPlus.shaderWarning(penPlus.JS_ERROR_MESSAGE);
   }
 
   penPlus.compiling = false;

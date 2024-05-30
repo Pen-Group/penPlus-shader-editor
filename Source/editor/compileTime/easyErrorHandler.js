@@ -49,9 +49,7 @@
             return;
         }
 
-        const errorElement = document.createElement("div");
-        errorElement.textContent = error;
-        errorElement.className = "logText";
+        let returnedError = error;
 
         const lineNumber = error.split(":")[1] - 1;
 
@@ -60,44 +58,44 @@
             let to = typeFromLongDescription(assignToREGEX.exec(error)[1]);
 
             if (error.includes("assign")) {
-                errorElement.textContent = `Cannot assign a ${from} to a ${to} : At line ${lineNumber} in GLSL`;
+                returnedError = `Cannot assign a ${from} to a ${to} : At line ${lineNumber} in GLSL`;
             }
             else {
-                errorElement.textContent = `Invalid operation between a ${from} and a ${to} : At line ${lineNumber} in GLSL`;
+                returnedError = `Invalid operation between a ${from} and a ${to} : At line ${lineNumber} in GLSL`;
             }
         }
         //constructor.
         else if(error.includes("'constructor' : too many arguments")) {
-            errorElement.textContent = `Constructor at ${lineNumber} in GLSL is invalid!`;
+            returnedError = `Constructor at ${lineNumber} in GLSL is invalid!`;
         }
         //Can only take one argument
         else if (error.includes("can only take one argument")) {
             let from = typeFromLongDescription(constructorNameREGEX.exec(error)[1]);
             let to = typeFromLongDescription(constructorFromREGEX.exec(error)[1]);
 
-            errorElement.textContent = `Constructing a ${from} using a ${to} and other arguments is not vaild : At line ${lineNumber} in GLSL`;
+            returnedError = `Constructing a ${from} using a ${to} and other arguments is not vaild : At line ${lineNumber} in GLSL`;
         }
         //I'm screaming
         else if (error.includes("Invalid operation")) {
             if (error.includes("opaque type")) {
-                errorElement.textContent = `An operation with a special variable type is invalid! : At line ${lineNumber} in GLSL`;
+                returnedError = `An operation with a special variable type is invalid! : At line ${lineNumber} in GLSL`;
             }
         }
         //If something is undeclared
         else if (error.includes("undeclared identifier")) {
-            errorElement.textContent = `Unknown variable ${error.split(":")[2]} : At line ${lineNumber} in GLSL`;
+            returnedError = `Unknown variable ${error.split(":")[2]} : At line ${lineNumber} in GLSL`;
         }
         //If a void function returns a value
         else if (error.includes("void function cannot return a value")) {
-            errorElement.textContent = `Unexpected return : At line ${lineNumber} in GLSL`;
+            returnedError = `Unexpected return : At line ${lineNumber} in GLSL`;
         }
         else if (error.includes("function does not return a value")) {
-            errorElement.textContent = `function ${error.split(":")[2]} has is missing a returning point : At line ${lineNumber} in GLSL`;
+            returnedError = `function ${error.split(":")[2]} has is missing a returning point : At line ${lineNumber} in GLSL`;
         }
         else if (error.includes("Recursive function cal")) {
-            errorElement.textContent = `Recursion detected in function ${error.split("-> ")[1].replace(")","")}`;
+            returnedError = `Recursion detected in function ${error.split("-> ")[1].replace(")","")}`;
         }
 
-        return errorElement;
+        return returnedError;
     }
 })();
