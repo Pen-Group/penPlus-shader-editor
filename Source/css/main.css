@@ -1,9 +1,3 @@
-@property --previewWidth {
-  syntax: '<number>'; /* <- defined as type number for the transition to work */
-  initial-value: 0;
-  inherits: false;
-}
-
 body {
   overflow: hidden;
 
