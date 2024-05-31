@@ -5,6 +5,10 @@
 
   let customBlockArguments = [];
 
+  penPlus.addEventListener("onCompileStart", () => {
+    penPlus.customBlocks = [];
+  });
+
   let getHatBlockVariables = undefined;
 
   let argCount = 0;

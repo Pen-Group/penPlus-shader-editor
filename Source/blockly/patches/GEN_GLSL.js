@@ -99,9 +99,9 @@ function updateGLSL(event) {
   if (!penPlus.supportedEvents.has(event.type)) return;
   if (!penPlus.autoCompile && !event.isManualCompile) return;
 
-  penPlus.timer = 0;
+  penPlus.dispatchEvent("onCompileStart");
 
-  penPlus.customBlocks = [];
+  penPlus.timer = 0;
 
   document.getElementById("shaderLog").innerHTML = "";
 

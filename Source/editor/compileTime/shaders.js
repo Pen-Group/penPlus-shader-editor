@@ -3,13 +3,9 @@ const gl = document.getElementById("shaderpreview").getContext("webgl", { antial
 function replacementShader() {
   penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
 
-  if (!penPlus.Generated_GLSL.includes("void vertex")) {
-    penPlus.Generated_GLSL += penPlus.defaultVert;
-  }
-
-  if (!penPlus.Generated_GLSL.includes("void fragment")) {
-    penPlus.Generated_GLSL += penPlus.defaultFrag;
-  }
+  let vertFunction = "";
+  let fragFunction = "";
+  let inner = 0;
 
   for (let letterID = penPlus.Generated_GLSL.indexOf("void vertex"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
@@ -38,6 +34,12 @@ function replacementShader() {
       }
     }
   }
+
+  //I know this isn't the best but it works
+  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") + vertFunction).replace("void vertex", "void main"));
+
+  //This too
+  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") + fragFunction).replace("void fragment", "void main"));
 
   genProgram();
 }

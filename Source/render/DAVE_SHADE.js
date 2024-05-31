@@ -4,9 +4,7 @@
   penPlus.webGLShaderManager.createAndCompile = (GL, name, vert, frag, onError) => {
     onError =
       onError ||
-      function (error) {
-        console.error(error);
-      };
+      function (error) {};
 
     //? compile vertex Shader
     const vertShader = GL.createShader(GL.VERTEX_SHADER);
@@ -18,7 +16,6 @@
       }
     } catch (error) {
       onError(error);
-      console.error(error);
       return;
     }
 
@@ -32,7 +29,6 @@
       }
     } catch (error) {
       onError(error);
-      console.error(error);
       return;
     }
 
@@ -52,7 +48,6 @@
       }
     } catch (error) {
       onError(error);
-      console.error(error);
       return;
     }
 
