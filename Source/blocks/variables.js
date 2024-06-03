@@ -572,7 +572,7 @@
       variableTypeChangers.matrix.onclick = () => {
         cycleVariable("matrix");
         //I don't want to handle arrays for this imma be honest
-        setScopeVisibilities(false, true, false, false, true);
+        setScopeVisibilities((penPlus.experimental), true, false, false, true);
       };
 
       Array.onclick = () => {
