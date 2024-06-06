@@ -22,8 +22,6 @@ penPlus.customZelosConstant = class extends Blockly.zelos.ConstantProvider {
       return Blockly.utils.svgPaths.lineTo(0, 0);
     }
 
-    var this2 = this;
-
     return {
       type: this.SHAPES.HEXAGONAL,
       isDynamic: true,
@@ -41,6 +39,8 @@ penPlus.customZelosConstant = class extends Blockly.zelos.ConstantProvider {
         return -connectionWidth / 2;
       },
       pathDown(height) {
+        console.log(arguments);
+        console.log(this)
         return makeMainPath(height, true, false);
       },
       pathUp(height) {
