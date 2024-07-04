@@ -140,12 +140,13 @@ function updateGLSL(event) {
 
     penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
 
+    penPlus.dispatchEvent("onMainScriptCompiled");
+
     penPlus.monacoEditor.setValue(penPlus.Generated_GLSL);
   } else {
     penPlus.Generated_GLSL = penPlus.monacoEditor.getValue();
+    penPlus.dispatchEvent("onMainScriptCompiled");
   }
-
-  penPlus.dispatchEvent("onMainScriptCompiled");
 
   penPlus.Generated_Frag = "";
   penPlus.Generated_Vert = "";
