@@ -145,6 +145,8 @@ function updateGLSL(event) {
     penPlus.Generated_GLSL = penPlus.monacoEditor.getValue();
   }
 
+  penPlus.dispatchEvent("onMainScriptCompiled");
+
   penPlus.Generated_Frag = "";
   penPlus.Generated_Vert = "";
 

@@ -1,6 +1,7 @@
 (function() {
     penPlus.events = {
-        "onCompileStart": []
+        "onCompileStart": [],
+        "onMainScriptCompiled": []
     }
 
     penPlus.addEventListener = (eventName,eventFunction) => {
