@@ -76,6 +76,38 @@
 
         document.getElementById("exportButton").innerHTML = penPlus.IFRAME_API.exportText;
 
+        if (event.data.primaryColor) {
+          penPlus.colorScheme.color_1 = event.data.primaryColor;
+
+          const colorTransposer = penPlus.hexToRgb(event.data.primaryColor);
+
+          penPlus.colorScheme.color_2 = "#" + penPlus.RGBtoHex({
+            r:colorTransposer.r * 0.85,
+            g:colorTransposer.g * 0.85,
+            b:colorTransposer.b * 0.85
+          });
+
+          penPlus.colorScheme.color_3 = "#" + penPlus.RGBtoHex({
+            r:colorTransposer.r * 0.75,
+            g:colorTransposer.g * 0.75,
+            b:colorTransposer.b * 0.75
+          });
+          
+          penPlus.colorScheme.color_4 = "#" + penPlus.RGBtoHex({
+            r:colorTransposer.r * 0.9,
+            g:colorTransposer.g * 0.9,
+            b:colorTransposer.b * 0.9
+          });
+          
+          penPlus.colorScheme.color_5 = "#" + penPlus.RGBtoHex({
+            r:colorTransposer.r * 0.6,
+            g:colorTransposer.g * 0.6,
+            b:colorTransposer.b * 0.6
+          });
+
+          penPlus.colorScheme.refreshPrimary();
+        }
+
         event.source.postMessage(
           {
             type: "REGISTER_SUCCESS",

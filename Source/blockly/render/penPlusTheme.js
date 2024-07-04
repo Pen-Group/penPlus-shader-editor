@@ -1,3 +1,18 @@
+penPlus.colorScheme = {
+  color_1:"#0fbd8c",
+  color_2:"#0eaa7e",
+  color_3:"#0c9770",
+  color_4:"#28d1a1",
+  color_5:"#067958",
+  refreshPrimary: () => {
+    document.body.style.setProperty("--EditorTheme_Color_1", penPlus.colorScheme.color_1);
+    document.body.style.setProperty("--EditorTheme_Color_2", penPlus.colorScheme.color_2);
+    document.body.style.setProperty("--EditorTheme_Color_3", penPlus.colorScheme.color_3);
+    document.body.style.setProperty("--EditorTheme_Color_4", penPlus.colorScheme.color_4);
+    document.body.style.setProperty("--EditorTheme_Color_5", penPlus.colorScheme.color_5);
+  }
+}
+
 penPlus.refreshTheme = (init) => {
   //Hacky fix
   //Works

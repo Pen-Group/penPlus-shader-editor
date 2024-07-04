@@ -24,6 +24,7 @@
       type: "REGISTER_PARENT",
       exportText: `Export to ${window.location.hostname}`,
       exitButton: true,
+      //primaryColor: "#ff4c4c"
     });
     //Check for incoming messages
     window.addEventListener(
