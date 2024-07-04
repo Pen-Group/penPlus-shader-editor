@@ -18,7 +18,6 @@ function previewRender() {
   penPlus.cubemaps = {};
 
   const powerOfTwo = (x) => {
-    console.log((Math.log(x) / Math.log(2)) % 1 === 0);
     return (Math.log(x) / Math.log(2)) % 1 === 0;
   };
 

@@ -83,6 +83,8 @@
 
             hideFromPallete: true,
           },
+
+          //!Unused old variable stuff
           {
             opcode: "variable_set",
             type: "command",
@@ -199,6 +201,119 @@
               },
             ],
           },
+
+          //* Used new variable stuff
+          {
+            opcode: "variable_set_new",
+            type: "command",
+            text: "set %1 to %2",
+            tooltip: "sets the desired variable to the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_penPlus_var",
+                name: "VAR",
+                //Hacky? yes... Working? yes.
+                options: [["",""]]
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_change_new",
+            type: "command",
+            text: "change %1 by %2",
+            tooltip: "changes the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_penPlus_var",
+                name: "VAR",
+                //Hacky? yes... Working? yes.
+                options: [["",""]]
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_multiply_new",
+            type: "command",
+            text: "multiply %1 by %2",
+            tooltip: "multiplies the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_penPlus_var",
+                name: "VAR",
+                //Hacky? yes... Working? yes.
+                options: [["",""]]
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_divide_new",
+            type: "command",
+            text: "divide %1 by %2",
+            tooltip: "divides the desired variable by the value",
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "field_penPlus_var",
+                name: "VAR",
+                //Hacky? yes... Working? yes.
+                options: [["",""]]
+              },
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "variable_item_new",
+            type: "reporter",
+            text: "item %1 of %2",
+            tooltip: "get an item from an array",
+
+            hideFromPallete: true,
+            arguments: [
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "field_penPlus_vararray",
+                name: "VAR",
+                //Hacky? yes... Working? yes.
+                options: [["",""]]
+              },
+            ],
+          },
         ],
       };
     }
@@ -298,6 +413,97 @@
       return [`${variableName.split(" ")[1]}[int(${value})]`, Order.ATOMIC];
     }
 
+    variable_set_new(block, generator) {
+      const variable = block.getFieldValue("VAR");
+
+      const variableName = variable.split(" ")[1];
+      const variableType = variable.split(" ")[2];
+
+      if (variableType == "matrix_2x") variableType = "mat2";
+      if (variableType == "matrix_3x") variableType = "mat3";
+      if (variableType == "matrix_4x") variableType = "mat4";
+
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return `${variableName} = ${variableType}(${value});\n` + nextBlockToCode(block, generator);
+    }
+
+    variable_change_new(block, generator) {
+      const variable = block.getFieldValue("VAR");
+
+      const variableName = variable.split(" ")[1];
+      const variableType = variable.split(" ")[2];
+
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return `${variableName} += ${value};\n` + nextBlockToCode(block, generator);
+    }
+
+    variable_multiply_new(block, generator) {
+      const variable = block.getFieldValue("VAR");
+
+      const variableName = variable.split(" ")[1];
+      const variableType = variable.split(" ")[2];
+
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return `${variableName} *= ${value};\n` + nextBlockToCode(block, generator);
+    }
+
+    variable_divide_new(block, generator) {
+      const variable = block.getFieldValue("VAR");
+
+      const variableName = variable.split(" ")[1];
+      const variableType = variable.split(" ")[2];
+
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      let shadowDeisred = penPlus.stringToDOM(`<shadow type="${__getShadowForArgumentType(variableType)}"></shadow>`);
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return `${variableName} /= ${value};\n` + nextBlockToCode(block, generator);
+    }
+
+    variable_item_new(block, generator) {
+      const variable = block.getFieldValue("VAR");
+
+      const variableName = variable.split(" ")[1];
+      const variableType = variable.split(" ")[2];
+
+      let shadowDeisred = penPlus.stringToDOM('<shadow type="number_reporter"></shadow>');
+
+      if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) {
+        this.inputList[0].setShadowDom(shadowDeisred);
+      }
+
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      block.setStyle(__colorVariableBlock(variableType));
+
+      return [`${variableName}[int(${value})]`, Order.ATOMIC];
+    }
+
     createVariableReporters(workspace) {
       let returnedBlocks = [];
 
@@ -331,7 +537,7 @@
 
           if (variable.name.split(" ")[0].split("[")[0] == "array") {
             hasArrayScope = true;
-          } else {
+          } else if (variable.name.split(" ")[0] == "hat") {
             hasNormalScope = true;
           }
         });
@@ -342,28 +548,28 @@
             //Add the set change multiply and divide blocks with the needed color for the most correctness
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_set",
+              of: "variable_set_new",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_change",
+              of: "variable_change_new",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_multiply",
+              of: "variable_multiply_new",
             });
 
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_divide",
+              of: "variable_divide_new",
             });
           }
           if (hasArrayScope) {
             returnedBlocks.push({
               type: "duplicate",
-              of: "variable_item",
+              of: "variable_item_new",
             });
           }
         }
@@ -397,50 +603,44 @@
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Float</p>
                 </div>
-                <!--Int-->
-                <div id="int" style="left:25%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
-                  <div style="background-color:var(--int_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
-                  </div>
 
-                  <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Int</p>
-                </div>
                 <!--Vec 2-->
-                <div id="vec2" style="left:50%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="vec2" style="left:25%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--vector_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 2</p>
                 </div>
                 <!--Vec 3-->
-                <div id="vec3" style="left:75%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="vec3" style="left:50%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--vec3_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 3</p>
                 </div>
                 <!--Vec 4-->
-                <div id="vec4" style="left:100%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="vec4" style="left:75%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--vec4_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1em; width:50%; height:50%;">Vector 4</p>
                 </div>
                 <!--Texture-->
-                <div id="texture" style="left:125%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="texture" style="left:100%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--texture_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Texture</p>
                 </div>
                 <!--Cubemap-->
-                <div id="cubemap" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="cubemap" style="left:125%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--cubemap_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Cubemap</p>
                 </div>
                 <!--Matrix-->
-                <div id="matrix" style="left:175%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="matrix" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--matrix_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
@@ -486,7 +686,6 @@
 
       const variableTypeChangers = {
         float: document.getElementById("float"),
-        int: document.getElementById("int"),
         vec2: document.getElementById("vec2"),
         vec3: document.getElementById("vec3"),
         vec4: document.getElementById("vec4"),
@@ -539,10 +738,6 @@
 
       variableTypeChangers.float.onclick = () => {
         cycleVariable("float");
-        setScopeVisibilities(true, true, true, true, true);
-      };
-      variableTypeChangers.int.onclick = () => {
-        cycleVariable("int");
         setScopeVisibilities(true, true, true, true, true);
       };
       variableTypeChangers.vec2.onclick = () => {
