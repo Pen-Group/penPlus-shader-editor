@@ -1,0 +1,19 @@
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--EditorTheme_Theme_2);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--EditorTheme_Theme_3);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--EditorTheme_Theme_4);
+}
