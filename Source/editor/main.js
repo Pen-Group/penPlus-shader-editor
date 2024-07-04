@@ -1,4 +1,4 @@
-function onAllAddonsLoaded() {
+function setupBlockly() {
   penPlus.toolbox = {
     kind: "categoryToolbox",
     contents: [],
@@ -46,6 +46,12 @@ function onAllAddonsLoaded() {
   });
 
   penPlus.workspace = workspace;
+}
+
+function onAllAddonsLoaded() {
+  penPlus.editorReady = true;
+  
+  penPlus.IFRAME_API.checkForExtensionReadyness()
 
   //Experimental features.
   const urlParams = new URLSearchParams(document.location.search);
@@ -55,6 +61,7 @@ function onAllAddonsLoaded() {
   }
 
   //Create the generator and add our blocks
+  setupBlockly();
   createGLSLGen();
   addBlocks();
 

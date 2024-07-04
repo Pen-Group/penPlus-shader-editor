@@ -82,10 +82,17 @@
           },
           penPlus.IFRAME_API.parentURL
         );
+
+        penPlus.IFRAME_API.checkForExtensionReadyness()
         break;
 
       case "DATA_LOAD":
         penPlus.loadProjectFile(event.data.projectData);
+        break;
+
+      case "ADD_EXTENSION":
+        if (!event.data.URL) break;
+        penPlus.addExtension(event.data.URL);
         break;
 
       default:
@@ -93,4 +100,17 @@
         break;
     }
   });
+
+  penPlus.IFRAME_API.checkForExtensionReadyness = () => {
+    if (penPlus.IFRAME_API.isIFRAME) {
+      if (penPlus.IFRAME_API.parent && penPlus.editorReady) {
+          penPlus.IFRAME_API.parent.postMessage(
+            {
+              type: "EXTENSION_REQUEST",
+            },
+            penPlus.IFRAME_API.parentURL
+          );
+      }
+    }
+  }
 })();
