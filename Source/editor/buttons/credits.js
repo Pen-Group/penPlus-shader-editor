@@ -99,6 +99,22 @@
         </div>
 
         <div class="modalContentHeader">
+          <span>Gif.js is by</span>
+          <div class="modalContentHeaderDivider"></div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label style="cursor:default;">
+              <img src="creditsImages/Johan.jpg" class="creditsImage"></img>
+              <span><a href="https://github.com/jnordberg">Johan Nordberg</a></span>
+              <span style="white-space: pre; color:var(--EditorTheme_Theme_3)">  ---  </span>
+              <span>Project Developer</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentHeader">
           <span>Code Editors are from</span>
           <div class="modalContentHeaderDivider"></div>
         </div>

@@ -49,10 +49,11 @@
           </button>
           <div style="visibility: hidden; width: 128px; position: absolute; left: calc(var(--EditorTheme_TopBarSize) * 2.75); top: calc(var(--EditorTheme_TopBarSize) - 20px); margin-top: 0px; padding-top: 0px; z-index: 10000" id="fileDropdown">
             <button class="toggleButton" id="newButton" style="width: 100%; border-bottom-left-radius: 0%; border-bottom-right-radius: 0%">New Project</button>
-            <button class="toggleButton" id="saveButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Save Project</button>
-            <button class="toggleButton" id="importButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Import from Scratch</button>
-            <button class="toggleButton" id="exportButton" style="width: 100%; border-radius: 0%; border-radius: 0%">Export to Scratch</button>
-            <button class="toggleButton" id="loadButton" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%">Load Project</button>
+            <button class="toggleButton" id="saveButton" style="width: 100%; border-radius: 0%;">Save Project</button>
+            <button class="toggleButton" id="importButton" style="width: 100%; border-radius: 0%;">Import from Scratch</button>
+            <button class="toggleButton" id="exportButton" style="width: 100%; border-radius: 0%;">Export to Scratch</button>
+            <button class="toggleButton" id="loadButton" style="width: 100%; border-radius: 0%;">Load Project</button>
+            <button class="toggleButton" id="recordButton" style="width: 100%; border-top-left-radius: 0%; border-top-right-radius: 0%">Capture GIF</button>
           </div>
           <!--Put load and save buttons under here! loadButton -->
           <button class="toggleButton" id="recompileButton">
@@ -139,10 +140,6 @@
     <!--Blockly Itself-->
     <script src="blockly/blockly.min.js"></script>
 
-    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/loader.js"></script>
-    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.nls.js"></script>
-    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.js"></script>
-
     <!--Iframe API-->
     <script src="iframe/iframeAPI.js"></script>
 
@@ -161,6 +158,7 @@
     <script src="util/xml_helper.js"></script>
     <script src="util/eventDispatcher.js"></script>
     <script src="editor/lib/extensionLoader.js"></script>
+    <script src="util/gif.js"></script>
 
     <!--Blockly Patches-->
     <script src="blockly/render/penPlusTheme.js"></script>
@@ -171,6 +169,11 @@
     <!--Blockly Mutators-->
     <script src="blockly/patches/customBlockMutator.js"></script>
     <script src="blockly/patches/variableMutator.js"></script>
+
+    <!--Monaco-->
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/loader.js"></script>
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.nls.js"></script>
+    <script src="https://unpkg.com/monaco-editor@0.34.0/min/vs/editor/editor.main.js"></script>
 
     <!--Default Reporters and Extension Format-->
     <script src="blockly/patches/blocks.js"></script>
@@ -219,6 +222,7 @@
     <script src="editor/buttons/settings.js"></script>
     <script src="editor/buttons/credits.js"></script>
     <script src="editor/buttons/previewButtons.js"></script>
+    <script src="editor/buttons/recordButton.js"></script>
     <script src="editor/resizing.js"></script>
     <script src="editor/main.js"></script>
     <script src="editor/previewPopout.js"></script>
