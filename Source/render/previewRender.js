@@ -1,5 +1,10 @@
 //Isolating render preview variables and code just so we don't accidentally overrite them!
 function previewRender() {
+  penPlus.overrideSize = {
+    width:null,
+    height:null
+  };
+  
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
   gl.enable(gl.DEPTH_TEST);
   gl.depthFunc(gl.LEQUAL);
@@ -549,12 +554,13 @@ function previewRender() {
   function renderFrame() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
+      gl.clear(gl.COLOR_BUFFER_BIT );
       penPlus.timer += (now - lastTime) / 1000;
       document.body.style.setProperty("--U_TIMER", penPlus.timer + "px");
       document.body.style.setProperty("--U_TIMER_SIN", Math.sin(penPlus.timer * 0.5) + "px");
 
-      gl.canvas.width = gl.canvas.clientWidth;
-      gl.canvas.height = gl.canvas.clientHeight;
+      gl.canvas.width = penPlus.overrideSize.width || gl.canvas.clientWidth;
+      gl.canvas.height = penPlus.overrideSize.height || gl.canvas.clientHeight;
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
       gl.useProgram(gl.shaders["editorShader"]);

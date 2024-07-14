@@ -1,4 +1,4 @@
-const gl = document.getElementById("shaderpreview").getContext("webgl", { antialias: false });
+const gl = document.getElementById("shaderpreview").getContext("webgl", { antialias: false, preserveDrawingBuffer: true });
 
 function replacementShader() {
   penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
