@@ -1,10 +1,13 @@
 (function () {
-  penPlus.defaultShader = `//replacement shader
-//Base Variables
+  penPlus.defaultShader = /*`#version 300 es
+  //This is the default shader for the shader editor!
+//These functions are here and are written for the GLSL 3.0 specification.
+//You can revert it to GLSL 2.0 by removing the version number//our output for color
+//out highp vec4 fragColor;*/`//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;
 attribute highp vec2 a_texCoord;
- 
+
 varying highp vec4 v_color;
 varying highp vec2 v_texCoord;
 
@@ -16,12 +19,43 @@ uniform highp mat4 u_transform;
 uniform mediump vec2 u_res;
 
 //Base functions
+
+//Some missing math functions
 highp float log10(highp float a) {
   return log(a)/log(10.0);
 }
 
 highp float eulernum(highp float a) {
     return 2.718 * a;
+}
+
+//Psuedorandomness
+highp vec4 pcg4d(highp vec4 v)
+{
+    v = v * 1664525.0 + 1013904223.0;
+    
+    v.x += v.y*v.w;
+    v.y += v.z*v.x;
+    v.z += v.x*v.y;
+    v.w += v.y*v.z;
+    
+    v.x += v.z*v.w;
+    v.y += v.y*v.x;
+    v.z += v.x*v.w;
+    v.w += v.y*v.x;
+    
+    return vec4(v);
+}
+
+highp vec4 daveRandomRange(highp float lowR, highp float highR)
+{
+    highp float randomizer = (gl_FragCoord.x * 50.25313532) + (gl_FragCoord.y * 21.5453) + u_timer;
+    return clamp(vec4(
+    fract(sin(randomizer*(91.3458)) * 47453.5453),
+    fract(sin(randomizer*(80.3458)) * 48456.5453),
+    fract(sin(randomizer*(95.3458)) * 42457.5453),
+    fract(sin(randomizer*(85.3458)) * 47553.5453)
+    ), lowR, highR);
 }
 
 highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, highp float a) {

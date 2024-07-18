@@ -474,6 +474,69 @@
               },
             ],
           },
+          {
+            opcode:"clamp",
+            type: "reporter",
+            text: "clamp %1 between %2 and %3",
+            tooltip: "if A < B then A = B, if A > C then A = C",
+
+            arguments: [
+              {
+                type: "input_value",
+                name: "A",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "B",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "C",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
+          {
+            opcode:"random",
+            type: "reporter",
+            text: "random %1 between %2 and %3",
+            tooltip: "if A < B then A = B, if A > C then A = C",
+
+            arguments: [
+              penPlus.createMenu(
+                [
+                  ["float", "x"],
+                  ["vector 2", "xy"],
+                  ["vector 3", "xyz"],
+                  ["vector 4", "xyzw"],
+                ],
+                "A"
+              ),
+              {
+                type: "input_value",
+                name: "B",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "C",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },          
           "---",
           {
             opcode: "cast",
@@ -627,6 +690,20 @@
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
       return [`max(${A},${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    clamp(block, generator) {
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      const B = generator.valueToCode(block, "B", Order.ATOMIC);
+      const C = generator.valueToCode(block, "C", Order.ATOMIC);
+      return [`clamp(${A},${B},${C})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    random(block, generator) {
+      const A = block.getFieldValue("A");
+      const B = generator.valueToCode(block, "B", Order.ATOMIC);
+      const C = generator.valueToCode(block, "C", Order.ATOMIC);
+      return [`daveRandomRange(${B},${C}).${A}` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     cast(block, generator) {
