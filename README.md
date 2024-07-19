@@ -1,5 +1,7 @@
 ![BLOCKLY_SHADER](github_assets/EditorLogo.png "Title")<br>
-![GitHub repo size](https://img.shields.io/github/repo-size/Pen-Group/penPlus-shader-editor?color=%23ffe819)<br>
+![GitHub repo size](https://img.shields.io/github/repo-size/Pen-Group/penPlus-shader-editor?style=for-the-badge&color=%23ffda21)
+![Made Using](https://img.shields.io/badge/WebGL-900?logo=webgl&logoColor=fff&style=for-the-badge)
+![And](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge)<br>
 A Blockly based GLSL editor made for Pen+ Version 7 and Above.<br>
 | BLOCKLY  | GLSL |
 | ------------- | ------------- |
