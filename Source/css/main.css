@@ -258,6 +258,8 @@ a:hover {
   position: absolute;
   width: 100%;
   height: var(--EditorTheme_TopBarSize);
+  display: grid;
+  grid-template-columns: 30.333% 39.333% 30.333%;
 }
 
 .logVarSwitchBar {
@@ -269,20 +271,19 @@ a:hover {
 }
 
 .title {
-  top: 12px;
-  position: absolute;
+  margin-top: calc(var(--EditorTheme_TopBarSize) / 5.333333);
   font-size: 32px;
   font-family: "Lexend", sans-serif;
   font-weight: bold;
   color: #fff;
-  width: 100%;
   text-align: center;
 }
 
 .optionsContainer {
-  top: 10px;
-  position: absolute;
-  width: 30%;
+  --calculatedTopSize: calc(var(--EditorTheme_TopBarSize) - 12px);
+  margin-top: 10px;
+  display: grid; 
+  grid-template-columns: var(--calculatedTopSize) var(--calculatedTopSize) var(--calculatedTopSize) var(--calculatedTopSize) var(--calculatedTopSize) var(--calculatedTopSize);
 }
 
 .toggleButton {
