@@ -146,6 +146,12 @@
           },
           "---",
           {
+            opcode: "applyTransform",
+            type: "command",
+            text:"apply default transforms",
+          },
+          "---",
+          {
             opcode: "inputPosition",
             type: "reporter",
             text: "input position",
@@ -244,6 +250,10 @@
 
     getW(block, generator) {
       return [`gl_Position.w` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    applyTransform(block, generator) {
+      return `gl_Position = (rotation(gl_Position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(gl_Position.w * u_transform[0][0],gl_Position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);` + nextBlockToCode(block, generator);
     }
   }
 
