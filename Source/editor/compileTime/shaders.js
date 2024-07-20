@@ -625,6 +625,11 @@ penPlus.previousVariableStates = {};
 function genProgram() {
   penPlus.compiling = true;
 
+
+  if (penPlus.Generated_Frag.includes("#version 300 es")) {
+    penPlus.shaderWarning("GLSL version 300 and above only works with <a href=\"https://penguinmod.com/\">PenguinMod</a> and <a href=\"https://github.com/Nitro-Bolt\">NitroBolt</a><br>Turbowarp is not supported due to a PR not being merged")
+  }
+
   //Remove attributes from fragment
   penPlus.Generated_Frag = penPlus.Generated_Frag.replace(/attribute (.*?);/g, "");
 

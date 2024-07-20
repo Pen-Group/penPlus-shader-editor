@@ -49,12 +49,13 @@ highp vec4 pcg4d(highp vec4 v)
 
 highp vec4 daveRandomRange(highp float lowR, highp float highR)
 {
-    highp float randomizer = (gl_FragCoord.x * 50.25313532) + (gl_FragCoord.y * 21.5453) + u_timer;
+    lowp float r = (gl_FragCoord.x * 50.25313532) + (gl_FragCoord.y * 21.5453) + u_timer;
+    highp float randomizer = r*r/u_timer/5398932.234523;
     return clamp(vec4(
-    fract(sin(randomizer*(91.3458)) * 47453.5453),
-    fract(sin(randomizer*(80.3458)) * 48456.5453),
-    fract(sin(randomizer*(95.3458)) * 42457.5453),
-    fract(sin(randomizer*(85.3458)) * 47553.5453)
+    fract(sin(mod(randomizer*(91.3458), 1440.0)) * 47453.5453),
+    fract(sin(mod(randomizer*(80.3458), 1440.0)) * 48456.5453),
+    fract(sin(mod(randomizer*(95.3458), 1440.0)) * 42457.5453),
+    fract(sin(mod(randomizer*(85.3458), 1440.0)) * 47553.5453)
     ), lowR, highR);
 }
 
