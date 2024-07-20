@@ -187,7 +187,7 @@
             <div>
               <label style="cursor:default;">
                 <img src="creditsImages/Spogn.png" class="creditsImage"></img>
-                <span><a href="https://www.google.com/search?client=firefox-b-1-d&sca_esv=fd9a95c27a98d6d9&sxsrf=ADLYWIILwSYLj5Wn2sLXw26h_Rh1H__fVg:1717100117908&q=spongebob&uds=ADvngMhdvWgwd1DARqoW4xZQ2piGwbHeLJPsQjZydZcU4Gua_nK1pe2VmIU8RuBelycJDOMQa9NBK3awpfq9fyAcMEq6IQ9Qs09I1NDj_EgKFd1YN1vnd02H8PVU9iSWz5VVklz3Mx_XfKqbD7PPc9kONqo23aCyNoNJcObJ0-KMTU1fx2Opa2HK5BWanqTIJFTxl_pfzoHi_RPtEr06ZQYevK5XdkSQ_IHJSBk8TNVqlpNzsHAP1-RY7bYx-M6UY6D9OR-rptByh_MvVcXzgwvCdtNSBmyt8uk5BGjLMc7y3zY3wOlTxJ64_OngMBGWNlrC9IDziLNl&udm=2&prmd=ivnsmbt&sa=X&ved=2ahUKEwjVlMm0mLaGAxXtk4kEHVETCdUQtKgLegQIDRAB&biw=1600&bih=775&dpr=1">Spong</a></span>
+                <span><a href="https://www.google.com/search?client=firefox-b-1-d&sca_esv=fd9a95c27a98d6d9&sxsrf=ADLYWIILwSYLj5Wn2sLXw26h_Rh1H__fVg:1717100117908&q=spongebob&uds=ADvngMhdvWgwd1DARqoW4xZQ2piGwbHeLJPsQjZydZcU4Gua_nK1pe2VmIU8RuBelycJDOMQa9NBK3awpfq9fyAcMEq6IQ9Qs09I1NDj_EgKFd1YN1vnd02H8PVU9iSWz5VVklz3Mx_XfKqbD7PPc9kONqo23aCyNoNJcObJ0-KMTU1fx2Opa2HK5BWanqTIJFTxl_pfzoHi_RPtEr06ZQYevK5XdkSQ_IHJSBk8TNVqlpNzsHAP1-RY7bYx-M6UY6D9OR-rptByh_MvVcXzgwvCdtNSBmyt8uk5BGjLMc7y3zY3wOlTxJ64_OngMBGWNlrC9IDziLNl&udm=2&prmd=ivnsmbt&sa=X&ved=2ahUKEwjVlMm0mLaGAxXtk4kEHVETCdUQtKgLegQIDRAB&biw=1600&bih=775&dpr=1">Spong (Fixed the random Function)</a></span>
               </label>
             </div>
           </div>
