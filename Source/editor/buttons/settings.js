@@ -14,6 +14,12 @@
 
   penPlus.fancyLogBG = localStorage.getItem("fancyLogBG") === null ? true : localStorage.getItem("fancyLogBG") == "true";
 
+  penPlus.EditorAccent = localStorage.getItem("accentColor") === null ? "#0fbd8c" : localStorage.getItem("accentColor");
+  penPlus.CustomEditorAccent = localStorage.getItem("customColor") === null ? "#0fbd8c" : localStorage.getItem("customColor");
+
+  penPlus.blocklyGLSLVersion = localStorage.getItem("blocklyGLSLVersion") === null ? "300" : localStorage.getItem("blocklyGLSLVersion");
+  penPlus.refreshDefaultShaderString();
+
   penPlus.customBlockColors = JSON.parse(localStorage.getItem("customBlockColors")) || {};
 
   recompileButton.style.visibility = penPlus.autoCompile ? "hidden" : "visible";
@@ -35,7 +41,7 @@
     
       <div class="modalContents">
         <div class="modalContentHeader">
-          <span>Compilation Settings</span>
+          <span>Scratch Settings</span>
           <div class="modalContentHeaderDivider"></div>
         </div>
 
@@ -43,7 +49,19 @@
           <div>
             <label>
               <input type="checkbox" id="AutoComp"></input>
-              <span>Auto Compilation (Scratch Only)</span>
+              <span>Auto Compilation</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <span>GLSL Version</span>
+              <select value="300" id="GLSLVersion">
+                <option value="100">1.0 (Legacy)</option>
+                <option value="300">3.0</option>
+              </select>
             </label>
           </div>
         </div>
@@ -60,6 +78,32 @@
             <label>
               <input type="checkbox" id="ErrAWarnAnim"></input>
               <span>Error and Warning Animations</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <span>Editor Accent</span>
+              <select value="300" id="EditorThemeDropdown">
+                <option value="#0fbd8c">Editor Green</option>
+                <option value="#ff4c4c">Warped Red</option>
+                <option value="#855cd6">Proper Purple</option>
+                <option value="#4c97ff">Classic Blue</option>
+                <option value="#ffcc00">Banana Yellow</option>
+                <option value="#333333">Garish Grey</option>
+                <option value="CUSTOM_COLOR">Custom Color</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" value="${penPlus.CustomEditorAccent}" id="customColorInput"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Custom Accent Color</span>
             </label>
           </div>
         </div>
@@ -242,6 +286,39 @@
     document.getElementById("closeButton").onclick = () => {
       varModal.close();
     };
+
+    const versionElement = document.getElementById("GLSLVersion");
+    versionElement.value = penPlus.blocklyGLSLVersion;
+    versionElement.onchange = () => {
+      penPlus.blocklyGLSLVersion = versionElement.value;
+      localStorage.setItem("blocklyGLSLVersion", penPlus.blocklyGLSLVersion);
+
+      penPlus.refreshDefaultShaderString();
+    }
+
+    const editorTheme = document.getElementById("EditorThemeDropdown");
+    const editorThemeCustomColor = document.getElementById("customColorInput");
+
+    editorTheme.value = penPlus.EditorAccent;
+    editorThemeCustomColor.value = penPlus.CustomEditorAccent;
+    editorTheme.onchange = () => {
+      penPlus.EditorAccent = editorTheme.value;
+      localStorage.setItem("accentColor", penPlus.EditorAccent);
+      if (editorTheme.value != "CUSTOM_COLOR") {
+        localStorage.setItem("customColor", penPlus.EditorAccent);
+        penPlus.setThemeToColor(editorTheme.value);
+        editorThemeCustomColor.value = editorTheme.value;
+      }
+    }
+    
+    editorThemeCustomColor.onchange = () => {
+      penPlus.CustomEditorAccent = editorThemeCustomColor.value;
+      penPlus.EditorAccent = "CUSTOM_COLOR";
+      editorTheme.value = "CUSTOM_COLOR";
+      localStorage.setItem("accentColor", penPlus.EditorAccent);
+      localStorage.setItem("customColor", penPlus.CustomEditorAccent);
+      penPlus.setThemeToColor(editorThemeCustomColor.value);
+    }
 
     const categoryButtons = {
       events: document.getElementById("eventsColor"),
