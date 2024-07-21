@@ -1,9 +1,14 @@
 (function () {
-  penPlus.defaultShader = /*`#version 300 es
-  //This is the default shader for the shader editor!
+  penPlus.refreshDefaultShaderString = () => {
+    penPlus.defaultShader = (
+      (penPlus.blocklyGLSLVersion == "300") ? `#version 300 es
+//This is the default shader for the shader editor!
 //These functions are here and are written for the GLSL 3.0 specification.
-//You can revert it to GLSL 2.0 by removing the version number//our output for color
-//out highp vec4 fragColor;*/`//Base Variables
+//You can revert it to GLSL 1.0 by removing the version number
+
+//our output for color
+out highp vec4 fragColor;\n` : "") +
+  `//Base Variables
 attribute highp vec4 a_position;
 attribute highp vec4 a_color;
 attribute highp vec2 a_texCoord;
@@ -100,23 +105,29 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
 }
 
 highp vec4 rotation(highp vec4 invec4) {
-    return vec4(
-      (invec4.y) * u_transform[1][0] + (invec4.x) * u_transform[1][1],
-      (invec4.y) * u_transform[1][1] - (invec4.x) * u_transform[1][0],
-      invec4.zw
-    );
-  }
-    `;
+  return vec4(
+    (invec4.y) * u_transform[1][0] + (invec4.x) * u_transform[1][1],
+    (invec4.y) * u_transform[1][1] - (invec4.x) * u_transform[1][0],
+    invec4.zw
+  );
+}`;
 
-  penPlus.defaultVert = `//Vertex Shader
+    penPlus.defaultVert = `//Vertex Shader
 void vertex() {
-gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);
-v_color = a_color;
-v_texCoord = a_texCoord;
+  gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);
+  v_color = a_color;
+  v_texCoord = a_texCoord;
 }`;
 
-  penPlus.defaultFrag = `//Fragment Shader
+    penPlus.defaultFrag = `//Fragment Shader
 void fragment() {
-gl_FragColor = v_color;
+  ${(penPlus.blocklyGLSLVersion == "300") ?  "f" : "gl_F"}ragColor = v_color;
 }`;
+
+    penPlus.colorVariable = (penPlus.blocklyGLSLVersion == "300") ?  "fragColor" : "gl_FragColor";
+
+    penPlus.is300Version = penPlus.blocklyGLSLVersion == "300";
+  }
+
+  penPlus.refreshDefaultShaderString();
 })();
