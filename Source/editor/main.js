@@ -62,6 +62,8 @@ function onAllAddonsLoaded() {
 
   //Create the generator and add our blocks
   setupBlockly();
+  penPlus.setThemeToColor((penPlus.EditorAccent == "CUSTOM_COLOR") ? penPlus.CustomEditorAccent : penPlus.EditorAccent);
+
   createGLSLGen();
   addBlocks();
 
@@ -92,4 +94,36 @@ function onAllAddonsLoaded() {
   disableTopBlocksPlugin.init();
 
   penPlus.handleURLParams();
+}
+
+penPlus.setThemeToColor = (color) => {
+  penPlus.colorScheme.color_1 = color;
+
+  const colorTransposer = penPlus.hexToRgb(color);
+
+  penPlus.colorScheme.color_2 = "#" + penPlus.RGBtoHex({
+    r:colorTransposer.r * ((penPlus.brightnessByColor(color) < 105) ? 1.15 : 0.85),
+    g:colorTransposer.g * ((penPlus.brightnessByColor(color) < 105) ? 1.15 :0.85),
+    b:colorTransposer.b * ((penPlus.brightnessByColor(color) < 105) ? 1.15 :0.85)
+  });
+
+  penPlus.colorScheme.color_3 = "#" + penPlus.RGBtoHex({
+    r:colorTransposer.r * ((penPlus.brightnessByColor(color) < 105) ? 1.35 :0.75),
+    g:colorTransposer.g * ((penPlus.brightnessByColor(color) < 105) ? 1.35 :0.75),
+    b:colorTransposer.b * ((penPlus.brightnessByColor(color) < 105) ? 1.35 :0.75)
+  });
+  
+  penPlus.colorScheme.color_4 = "#" + penPlus.RGBtoHex({
+    r:colorTransposer.r * ((penPlus.brightnessByColor(color) < 105) ? 1.1 :0.9),
+    g:colorTransposer.g * ((penPlus.brightnessByColor(color) < 105) ? 1.1 :0.9),
+    b:colorTransposer.b * ((penPlus.brightnessByColor(color) < 105) ? 1.1 :0.9)
+  });
+  
+  penPlus.colorScheme.color_5 = "#" + penPlus.RGBtoHex({
+    r:colorTransposer.r * ((penPlus.brightnessByColor(color) < 105) ? 1.5 :0.6),
+    g:colorTransposer.g * ((penPlus.brightnessByColor(color) < 105) ? 1.5 :0.6),
+    b:colorTransposer.b * ((penPlus.brightnessByColor(color) < 105) ? 1.5 :0.6)
+  });
+
+  penPlus.colorScheme.refreshPrimary();
 }

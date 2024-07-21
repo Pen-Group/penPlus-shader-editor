@@ -627,7 +627,7 @@ function genProgram() {
 
 
   if (penPlus.Generated_Frag.includes("#version 300 es")) {
-    penPlus.shaderWarning("GLSL version 300 and above only works with <a href=\"https://penguinmod.com/\">PenguinMod</a> and <a href=\"https://github.com/Nitro-Bolt\">NitroBolt</a><br>Turbowarp is not supported due to a PR not being merged")
+    penPlus.shaderLog("You are using GLSL version 300. Penguinmod, and Turbowarp support this. Some other scratch mods might not. For more info check <a href=\"https://pen-group.github.io/docs/?page=shaderEditor%2FcompatChart\">300 compatibility</a>")
   }
 
   //Remove attributes from fragment
