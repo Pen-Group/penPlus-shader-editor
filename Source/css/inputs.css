@@ -64,3 +64,17 @@ input[type="color"] {
 
   cursor: pointer;
 }
+
+select {
+  font-size: large;
+  color: var(--EditorTheme_Text_1);
+
+  background-color: var(--EditorTheme_Theme_2);
+
+  border-color: var(--EditorTheme_Theme_3);
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 4px;
+  
+  padding: 4px;
+}
