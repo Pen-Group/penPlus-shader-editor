@@ -201,15 +201,15 @@
 
     setPixColor(block, generator) {
       const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
-      return `gl_FragColor = ${colour};` + nextBlockToCode(block, generator);
+      return `${penPlus.colorVariable} = ${colour};` + nextBlockToCode(block, generator);
     }
 
     getPixColor() {
-      return [`gl_FragColor`, Order.ATOMIC];
+      return [`${penPlus.colorVariable}`, Order.ATOMIC];
     }
 
     mulBlending(block, generator) {
-      return `gl_FragColor.rgb *= vec3(gl_FragColor.a);` + nextBlockToCode(block, generator);
+      return `${penPlus.colorVariable}.rgb *= vec3(${penPlus.colorVariable}.a);` + nextBlockToCode(block, generator);
     }
 
     setVertColor(block, generator) {
@@ -260,13 +260,13 @@
     sample_texture(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UV = generator.valueToCode(block, "UV", Order.ATOMIC);
-      return [`texture2D(${TEXTURE},${UV})` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`texture${penPlus.is300Version ? "" : "2D"}(${TEXTURE},${UV})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     sample_cubemap(block, generator) {
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
-      return [`textureCube(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`texture${penPlus.is300Version ? "" : "Cube"}(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 
