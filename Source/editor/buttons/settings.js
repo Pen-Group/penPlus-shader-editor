@@ -22,6 +22,20 @@
 
   penPlus.customBlockColors = JSON.parse(localStorage.getItem("customBlockColors")) || {};
 
+  const addInputOption = (input,func,value) => {
+    input.value = value;
+    input.onchange = (event) => {
+      func(input,event);
+    };
+  }
+
+  const addCheckboxValue = (input,func,value) => {
+    input.checked = value;
+    input.onclick = (event) => {
+      func(input,event);
+    }
+  }
+
   recompileButton.style.visibility = penPlus.autoCompile ? "hidden" : "visible";
 
   settingsButton.onclick = () => {
@@ -88,7 +102,7 @@
               <span>Editor Accent</span>
               <select value="300" id="EditorThemeDropdown">
                 <option value="#0fbd8c">Editor Green</option>
-                <option value="#ff4c4c">Warped Red</option>
+                <option value="#ff4c4c">Turbo Red</option>
                 <option value="#855cd6">Proper Purple</option>
                 <option value="#4c97ff">Classic Blue</option>
                 <option value="#ffcc00">Banana Yellow</option>
@@ -263,62 +277,51 @@
     </div>
     `);
 
-    const autocompileButton = document.getElementById("AutoComp");
-
-    autocompileButton.checked = penPlus.autoCompile;
-
-    autocompileButton.onclick = () => {
-      penPlus.autoCompile = autocompileButton.checked;
-      localStorage.setItem("AutoCompile", autocompileButton.checked);
-
-      recompileButton.style.visibility = penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
-    };
-
-    const fancyLogBG = document.getElementById("ErrAWarnAnim");
-
-    fancyLogBG.checked = penPlus.fancyLogBG;
-
-    fancyLogBG.onclick = () => {
-      penPlus.fancyLogBG = fancyLogBG.checked;
-      localStorage.setItem("fancyLogBG", fancyLogBG.checked);
-    };
-
     document.getElementById("closeButton").onclick = () => {
       varModal.close();
     };
 
-    const versionElement = document.getElementById("GLSLVersion");
-    versionElement.value = penPlus.blocklyGLSLVersion;
-    versionElement.onchange = () => {
-      penPlus.blocklyGLSLVersion = versionElement.value;
+    addCheckboxValue(document.getElementById("AutoComp"), (input) => {
+      penPlus.autoCompile = input.checked;
+      localStorage.setItem("AutoCompile", input.checked);
+
+      recompileButton.style.visibility = penPlus.autoCompile && !penPlus.isTextMode ? "hidden" : "visible";
+    },penPlus.autoCompile);
+
+    addCheckboxValue(document.getElementById("ErrAWarnAnim"), (input) => {
+      penPlus.fancyLogBG = input.checked;
+      localStorage.setItem("fancyLogBG", input.checked);
+    },penPlus.fancyLogBG);
+
+    addInputOption(document.getElementById("GLSLVersion"), (input) => {
+      penPlus.blocklyGLSLVersion = input.value;
       localStorage.setItem("blocklyGLSLVersion", penPlus.blocklyGLSLVersion);
 
       penPlus.refreshDefaultShaderString();
-    }
+    },penPlus.blocklyGLSLVersion);
 
+    //These two are tied to each other.
     const editorTheme = document.getElementById("EditorThemeDropdown");
     const editorThemeCustomColor = document.getElementById("customColorInput");
 
-    editorTheme.value = penPlus.EditorAccent;
-    editorThemeCustomColor.value = penPlus.CustomEditorAccent;
-    editorTheme.onchange = () => {
-      penPlus.EditorAccent = editorTheme.value;
+    addInputOption(editorTheme, (input) => {
+      penPlus.EditorAccent = input.value;
       localStorage.setItem("accentColor", penPlus.EditorAccent);
-      if (editorTheme.value != "CUSTOM_COLOR") {
+      if (input.value != "CUSTOM_COLOR") {
         localStorage.setItem("customColor", penPlus.EditorAccent);
-        penPlus.setThemeToColor(editorTheme.value);
-        editorThemeCustomColor.value = editorTheme.value;
+        penPlus.setThemeToColor(input.value);
+        editorThemeCustomColor.value = input.value;
       }
-    }
-    
-    editorThemeCustomColor.onchange = () => {
-      penPlus.CustomEditorAccent = editorThemeCustomColor.value;
+    },penPlus.EditorAccent);
+
+    addInputOption(editorThemeCustomColor, (input) => {
+      penPlus.CustomEditorAccent = input.value;
       penPlus.EditorAccent = "CUSTOM_COLOR";
       editorTheme.value = "CUSTOM_COLOR";
       localStorage.setItem("accentColor", penPlus.EditorAccent);
       localStorage.setItem("customColor", penPlus.CustomEditorAccent);
-      penPlus.setThemeToColor(editorThemeCustomColor.value);
-    }
+      penPlus.setThemeToColor(input.value);
+    },penPlus.CustomEditorAccent);
 
     const categoryButtons = {
       events: document.getElementById("eventsColor"),
