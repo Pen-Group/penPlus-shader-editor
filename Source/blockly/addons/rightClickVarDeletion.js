@@ -3,7 +3,6 @@
         id: 'deleteVar',
         scopeType: Blockly.ContextMenuRegistry.ScopeType.BLOCK,
         displayText: (scope) => {
-            console.log(scope);
             return `Remove variable ${scope.block.variableData.mainText.split(" ")[1]}`
         },
         weight: 10,
