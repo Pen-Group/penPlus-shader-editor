@@ -22,6 +22,29 @@
 
   penPlus.customBlockColors = JSON.parse(localStorage.getItem("customBlockColors")) || {};
 
+  let availableSounds; 
+  fetch("media/SoundSets.json").then(result => result.json()).then(soundJSONS => {
+    availableSounds = soundJSONS;
+    if (Blockly) {
+      penPlus.loadSounds(penPlus.blocklyEditorSounds);
+    }
+  });
+
+  penPlus.blocklyEditorSounds = localStorage.getItem("blocklyEditorSounds") === null ? "Blockly" : localStorage.getItem("blocklyEditorSounds");
+
+  penPlus.loadSounds = (soundSet) => {
+    if (!availableSounds) return;
+    Blockly.getMainWorkspace().audioManager.sounds.clear();
+
+    availableSounds.forEach(soundSet2 => {
+      if (soundSet2.Name != soundSet) return;
+
+      soundSet2.Sounds.forEach(sound => {
+        Blockly.getMainWorkspace().audioManager.sounds.set(sound,new Audio(`media/sounds/${soundSet}/${sound}.mp3`));
+      });
+    });
+  }
+
   const addInputOption = (input,func,value) => {
     input.value = value;
     input.onchange = (event) => {
@@ -75,6 +98,23 @@
               <select value="300" id="GLSLVersion">
                 <option value="100">1.0 (Legacy)</option>
                 <option value="300">3.0</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <span>Sounds</span>
+              <select value="300" id="EditorSoundDropdown">
+                ${(() => {
+                  let resultingSounds = "";
+                  availableSounds.forEach(sound => {
+                    resultingSounds += `<option value="${sound.Name}">${sound.Name}</option>`;
+                  });
+                  return resultingSounds;
+                })()}
               </select>
             </label>
           </div>
@@ -299,6 +339,12 @@
 
       penPlus.refreshDefaultShaderString();
     },penPlus.blocklyGLSLVersion);
+
+    addInputOption(document.getElementById("EditorSoundDropdown"),(input) => {
+      penPlus.blocklyEditorSounds = input.value;
+      localStorage.setItem("blocklyEditorSounds",penPlus.blocklyEditorSounds);
+      penPlus.loadSounds(penPlus.blocklyEditorSounds);
+    },penPlus.blocklyEditorSounds);
 
     //These two are tied to each other.
     const editorTheme = document.getElementById("EditorThemeDropdown");

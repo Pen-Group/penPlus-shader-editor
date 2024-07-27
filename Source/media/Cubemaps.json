@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Checker",
+        "faces": [
+        "media/images/cubemap/checkerNX.png",
+        "media/images/cubemap/checkerPX.png",
+        "media/images/cubemap/checkerNY.png",
+        "media/images/cubemap/checkerPY.png",
+        "media/images/cubemap/checkerNZ.png",
+        "media/images/cubemap/checkerPZ.png"
+        ]
+    },
+    {
+        "name": "Outdoor Fire",
+        "faces": [
+        "media/images/cubemap/fireNX.jpg",
+        "media/images/cubemap/firePX.png",
+        "media/images/cubemap/fireNY.png",
+        "media/images/cubemap/firePY.png",
+        "media/images/cubemap/fireNZ.png",
+        "media/images/cubemap/firePZ.png"
+        ]
+    }
+]

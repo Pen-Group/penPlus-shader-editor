@@ -639,8 +639,17 @@
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">Cubemap</p>
                 </div>
+                ${(penPlus.is300Version && penPlus.experimental) ? `
+                <!--3D Texture-->
+                <div id="texture3D" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                  <div style="background-color:var(--3DTexture_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
+                  </div>
+
+                  <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">3D Texture</p>
+                </div>
+                ` : ""}
                 <!--Matrix-->
-                <div id="matrix" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                <div id="matrix" style="left:${(penPlus.is300Version && penPlus.experimental) ? "175" : "150"}%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
                   <div style="background-color:var(--matrix_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
@@ -769,6 +778,14 @@
         //I don't want to handle arrays for this imma be honest
         setScopeVisibilities((penPlus.experimental), true, false, false, true);
       };
+      
+      if ((penPlus.is300Version && penPlus.experimental)) {
+        variableTypeChangers.texture3D = document.getElementById("texture3D");
+        variableTypeChangers.texture3D.onclick = () => {
+          cycleVariable("texture3D");
+          setScopeVisibilities(false, true, false, false, false);
+        }
+      }
 
       Array.onclick = () => {
         Attribute.checked = false;

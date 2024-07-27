@@ -63,6 +63,7 @@ function onAllAddonsLoaded() {
   //Create the generator and add our blocks
   setupBlockly();
   penPlus.setThemeToColor((penPlus.EditorAccent == "CUSTOM_COLOR") ? penPlus.CustomEditorAccent : penPlus.EditorAccent);
+  penPlus.loadSounds(penPlus.blocklyEditorSounds);
 
   createGLSLGen();
   addBlocks();

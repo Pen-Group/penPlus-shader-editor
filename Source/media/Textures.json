@@ -1,0 +1,14 @@
+[
+    {
+      "name": "Checkerboard",
+      "src": "media/images/textures/Checkerboard.png"
+    },
+    {
+      "name": "MANDRILL",
+      "src": "media/images/textures/Mandrill.png"
+    },
+    {
+      "name": "Pepper",
+      "src": "media/images/textures/Peppers.png"
+    }
+]

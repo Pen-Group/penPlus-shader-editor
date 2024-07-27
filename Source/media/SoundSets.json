@@ -1,0 +1,21 @@
+[
+    {
+        "Name": "Scratch-Addons",
+        "Sounds":[
+            "click",
+            "delete"
+        ]
+    },
+    {
+        "Name": "Blockly",
+        "Sounds":[
+            "click",
+            "disconnect",
+            "delete"
+        ]
+    },
+    {
+        "Name": "None",
+        "Sounds":[]
+    }
+]

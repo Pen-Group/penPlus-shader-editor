@@ -5,6 +5,7 @@
     getInfo() {
       penPlus.addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
       penPlus.addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
+      penPlus.addBlockColorSet("3DTexture_blocks", "#967FD7", "#8771C4", "#7760B5");
       return {
         name: "Looks",
         id: "looks",
@@ -178,8 +179,29 @@
             opcode: "sample_cubemap",
             type: "reporter",
             text: "color at %1 of cubemap %2",
-            tooltip: "Sample the pixel at the UV coordinates desired",
+            tooltip: "Sample the pixel at the UVW coordinates desired",
             style: "cubemap_blocks",
+
+            arguments: [
+              {
+                type: "input_value",
+                name: "UVW",
+                shadow: {
+                  type: "vec3_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "TEXTURE",
+              },
+            ],
+          },
+          {
+            opcode: "sample_3dTexture",
+            type: "reporter",
+            text: "color at %1 of 3D texture %2",
+            tooltip: "Sample the pixel at the UVW coordinates desired",
+            style: "3DTexture_blocks",
 
             arguments: [
               {
@@ -267,6 +289,12 @@
       const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
       const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
       return [`texture${penPlus.is300Version ? "" : "Cube"}(${TEXTURE},${UVW})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    sample_3dTexture(block, generator) {
+      const TEXTURE = generator.valueToCode(block, "TEXTURE", Order.ATOMIC);
+      const UVW = generator.valueToCode(block, "UVW", Order.ATOMIC);
+      return [penPlus.is300Version ? `texture(${TEXTURE},${UVW})` : "vec4(1)" + nextBlockToCode(block, generator), Order.ATOMIC];
     }
   }
 
