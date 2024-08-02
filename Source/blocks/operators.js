@@ -603,37 +603,37 @@
     equal(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} == ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} == ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     notequal(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} != ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} != ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     less(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} < ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} < ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     equalLess(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} <= ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} <= ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     more(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} > ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} > ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     equalMore(block, generator) {
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       const B = generator.valueToCode(block, "B", Order.ATOMIC);
-      return [`${A} >= ${B}` + nextBlockToCode(block, generator), Order.ATOMIC];
+      return [`(${A} >= ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     and(block, generator) {
