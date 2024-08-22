@@ -537,7 +537,7 @@
 
           if (variable.name.split(" ")[0].split("[")[0] == "array") {
             hasArrayScope = true;
-          } else if (variable.name.split(" ")[0] == "hat") {
+          } else if (variable.name.split(" ")[0] == "hat" || variable.name.split(" ")[0] == "varying") {
             hasNormalScope = true;
           }
         });
