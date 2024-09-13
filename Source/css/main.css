@@ -1,4 +1,4 @@
-body {
+Rbody {
   overflow: hidden;
 
   /*Made this a body attribute since I find myself using it a whole hell of a lot*/
@@ -224,6 +224,8 @@ a:hover {
   top: var(--EditorTheme_TopBarSize);
   left: 0px;
   background: var(--EditorTheme_Theme_3);
+  /*Literally a really dumb fix*/
+  transform: scale(1, -1);
 }
 
 .shaderLog {
