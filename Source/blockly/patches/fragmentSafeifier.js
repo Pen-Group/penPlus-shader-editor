@@ -1,4 +1,5 @@
 penPlus.makeFragmentSafe = (shaderText) => {
+  console.log(shaderText);
   if (shaderText.includes("#version 300 es")) {
     return shaderText
       .replaceAll(/(gl_Position\.*[xyzw]*\s*[+*/-]*=.*;)/g, "")

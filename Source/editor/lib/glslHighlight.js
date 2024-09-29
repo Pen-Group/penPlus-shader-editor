@@ -7,6 +7,8 @@ penPlus.setupMonacoTheme = () => {
         [/(\/\/.*)/, "comment"],
         //lol for some reason it doesn't like this if anybody knows a monaco fix then pr it
         [/(\/\*.*\*\/)/, "comment"],
+        
+        [/layout.*\(.*location.*=.*\d\)/,"operator"],
 
         [/(float+)/, "variable"],
         [/(int+)/, "int"],
