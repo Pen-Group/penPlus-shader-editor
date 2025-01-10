@@ -153,6 +153,31 @@ function getTypedInput(type, name, index) {
 
       return input;
 
+    case "uint":
+      input = document.createElement("input");
+      input.style.width = "75%";
+
+      input.type = "Number";
+      input.value = 0;
+      input.className = "scratchStyledInput";
+      if (index !== undefined) {
+        input.value = penPlus.previousVariableStates[name + index] ? penPlus.previousVariableStates[name + index] : gl.shaders.editorShader.uniforms[name].elements[index].current;
+        if (penPlus.previousVariableStates[name + index]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name + index];
+        input.addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[name].elements[index].value = Math.floor(input.value);
+          penPlus.previousVariableStates[name + index] = gl.shaders.editorShader.uniforms[name].elements[index].current;
+        });
+      } else {
+        input.value = penPlus.previousVariableStates[name] ? penPlus.previousVariableStates[name] : gl.shaders.editorShader.uniforms[name].current;
+        if (penPlus.previousVariableStates[name]) gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name];
+        input.addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[name].value = Math.floor(input.value);
+          penPlus.previousVariableStates[name] = gl.shaders.editorShader.uniforms[name].current;
+        });
+      }
+
+      return input;
+
     case "vec2":
       input = document.createElement("div");
       input.style.width = "75%";

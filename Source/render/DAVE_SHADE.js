@@ -104,7 +104,7 @@
               break;
 
             case "uint":
-              GL.uniform1u(GL.shaders[name].uniforms[uniformName].location, Math.floor(val));
+              GL.uniform1ui(GL.shaders[name].uniforms[uniformName].location, Math.floor(val));
               break;
 
             case "vec2":
