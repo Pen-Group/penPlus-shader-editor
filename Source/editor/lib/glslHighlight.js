@@ -5,8 +5,7 @@ penPlus.setupMonacoTheme = () => {
     tokenizer: {
       root: [
         [/(\/\/.*)/, "comment"],
-        //lol for some reason it doesn't like this if anybody knows a monaco fix then pr it
-        [/(\/\*.*\*\/)/, "comment"],
+        [/\/\*/, 'comment', '@comment'],
         
         [/layout.*\(.*location.*=.*\d\)/,"operator"],
 
@@ -86,6 +85,11 @@ penPlus.setupMonacoTheme = () => {
         [/(continue+)/, "my-blocks"],
         [/(void+)/, "my-blocks"],
       ],
+        comment: [
+          [/[^\/*]+/, 'comment'],
+          ['\\*/', 'comment', '@pop'],
+          [/[\/*]/, 'comment']
+        ],
     },
   });
 
