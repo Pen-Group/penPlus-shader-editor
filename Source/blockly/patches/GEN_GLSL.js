@@ -199,10 +199,11 @@ function updateGLSL(event) {
   }
 
   //I know this isn't the best but it works
-  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") + vertFunction).replace("void vertex", "void main"));
+  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, fragFunction.replace(/[^\n]/g, ''))).replace("void vertex", "void main"));
 
+  console.log(vertFunction.replace(/^\n/, ""));
   //This too
-  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") + fragFunction).replace("void fragment", "void main"));
+  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, vertFunction.replace(/[^\n]/g, ''))).replace("void fragment", "void main"));
 
   genProgram();
 }
