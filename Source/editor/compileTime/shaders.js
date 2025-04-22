@@ -5,32 +5,69 @@ function replacementShader() {
 
   let vertFunction = "";
   let fragFunction = "";
+  let isComment = false;
+  let isMultilineComment = false;
   let inner = 0;
 
   for (let letterID = penPlus.Generated_GLSL.indexOf("void vertex"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
-    if (letter == "{") {
-      inner += 1;
-    } else if (letter == "}") {
-      inner -= 1;
-      if (inner == 0) {
-        break;
+    if (isComment) {
+      if (letter == "\n") {
+        isComment = false;
+      }
+    } else if (isMultilineComment) {
+      if (letter == "*" && penPlus.Generated_GLSL.charAt(letterID + 1) == "/") {
+        isMultilineComment = false;
+      }
+    } else {
+      if (letter == "/") {
+        const nextLetter = penPlus.Generated_GLSL.charAt(letterID + 1);
+        if (nextLetter == "/") {
+          isComment = true;
+        } else if (nextLetter == "*") {
+          isMultilineComment = true;
+        }
+      }
+      else if (letter == "{") {
+        inner += 1;
+      } else if (letter == "}") {
+        inner -= 1;
+        if (inner == 0) {
+          break;
+        }
       }
     }
   }
 
   inner = 0;
-
   for (let letterID = penPlus.Generated_GLSL.indexOf("void fragment"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
-    if (letter == "{") {
-      inner += 1;
-    } else if (letter == "}") {
-      inner -= 1;
-      if (inner == 0) {
-        break;
+    if (isComment) {
+      if (letter == "\n") {
+        isComment = false;
+      }
+    } else if (isMultilineComment) {
+      if (letter == "*" && penPlus.Generated_GLSL.charAt(letterID + 1) == "/") {
+        isMultilineComment = false;
+      }
+    } else {
+      if (letter == "/") {
+        const nextLetter = penPlus.Generated_GLSL.charAt(letterID + 1);
+        if (nextLetter == "/") {
+          isComment = true;
+        } else if (nextLetter == "*") {
+          isMultilineComment = true;
+        }
+      }
+      else if (letter == "{") {
+        inner += 1;
+      } else if (letter == "}") {
+        inner -= 1;
+        if (inner == 0) {
+          break;
+        }
       }
     }
   }
