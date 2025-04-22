@@ -45,7 +45,7 @@
 
     let returnedError = error;
 
-    const lineNumber = error.split(":")[1] - 1;
+    const lineNumber = error.split(":")[1];
 
     if (error.includes("cannot convert from")) {
       let from = typeFromLongDescription(assignFromREGEX.exec(error)[1]);
