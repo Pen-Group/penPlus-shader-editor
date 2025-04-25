@@ -156,6 +156,8 @@ function updateGLSL(event) {
   workspace.getToolbox().refreshSelection();
 
   let inner = 0;
+  let isComment = false;
+  let isMultilineComment = false;
 
   let vertFunction = "";
   let fragFunction = "";
@@ -173,36 +175,71 @@ function updateGLSL(event) {
   for (let letterID = penPlus.Generated_GLSL.indexOf("void vertex"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     vertFunction += letter;
-    if (letter == "{") {
-      inner += 1;
-    } else if (letter == "}") {
-      inner -= 1;
-      if (inner == 0) {
-        break;
+    if (isComment) {
+      if (letter == "\n") {
+        isComment = false;
+      }
+    } else if (isMultilineComment) {
+      if (letter == "*" && penPlus.Generated_GLSL.charAt(letterID + 1) == "/") {
+        isMultilineComment = false;
+      }
+    } else {
+      if (letter == "/") {
+        const nextLetter = penPlus.Generated_GLSL.charAt(letterID + 1);
+        if (nextLetter == "/") {
+          isComment = true;
+        } else if (nextLetter == "*") {
+          isMultilineComment = true;
+        }
+      }
+      else if (letter == "{") {
+        inner += 1;
+      } else if (letter == "}") {
+        inner -= 1;
+        if (inner == 0) {
+          break;
+        }
       }
     }
   }
 
   inner = 0;
-
   for (let letterID = penPlus.Generated_GLSL.indexOf("void fragment"); letterID < penPlus.Generated_GLSL.length; letterID++) {
     const letter = penPlus.Generated_GLSL.charAt(letterID);
     fragFunction += letter;
-    if (letter == "{") {
-      inner += 1;
-    } else if (letter == "}") {
-      inner -= 1;
-      if (inner == 0) {
-        break;
+    if (isComment) {
+      if (letter == "\n") {
+        isComment = false;
+      }
+    } else if (isMultilineComment) {
+      if (letter == "*" && penPlus.Generated_GLSL.charAt(letterID + 1) == "/") {
+        isMultilineComment = false;
+      }
+    } else {
+      if (letter == "/") {
+        const nextLetter = penPlus.Generated_GLSL.charAt(letterID + 1);
+        if (nextLetter == "/") {
+          isComment = true;
+        } else if (nextLetter == "*") {
+          isMultilineComment = true;
+        }
+      }
+      else if (letter == "{") {
+        inner += 1;
+      } else if (letter == "}") {
+        inner -= 1;
+        if (inner == 0) {
+          break;
+        }
       }
     }
   }
 
   //I know this isn't the best but it works
-  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, "").replace(vertFunction, "") + vertFunction).replace("void vertex", "void main"));
+  penPlus.Generated_Vert = penPlus.makeVertexSafe((penPlus.Generated_GLSL.replace(fragFunction, fragFunction.replace(/[^\n]/g, ''))).replace("void vertex", "void main"));
 
   //This too
-  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, "").replace(fragFunction, "") + fragFunction).replace("void fragment", "void main"));
+  penPlus.Generated_Frag = penPlus.makeFragmentSafe((penPlus.Generated_GLSL.replace(vertFunction, vertFunction.replace(/[^\n]/g, ''))).replace("void fragment", "void main"));
 
   genProgram();
 }
