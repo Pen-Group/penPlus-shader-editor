@@ -64,7 +64,7 @@
         <div class="modalContentSetting">
           <div>
             <label style="cursor:default;">
-              <img src="creditsImages/Isaac.png" class="creditsImage"></img>
+              <img src="creditsImages/Isaac.jpg" class="creditsImage"></img>
               <span><a href="https://github.com/potential1energy">Isaac</a></span>
               <span style="white-space: pre; color:var(--EditorTheme_Theme_3)">  ---  </span>
               <span>Bug Fixes</span>
