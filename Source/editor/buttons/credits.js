@@ -53,6 +53,28 @@
         <div class="modalContentSetting">
           <div>
             <label style="cursor:default;">
+              <img src="creditsImages/LegoBrainBiker.png" class="creditsImage"></img>
+              <span><a href="https://github.com/LegoBrainBiker">LegoBrainBiker</a></span>
+              <span style="white-space: pre; color:var(--EditorTheme_Theme_3)">  ---  </span>
+              <span>Bug Fixes, Various additions</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label style="cursor:default;">
+              <img src="creditsImages/Isaac.png" class="creditsImage"></img>
+              <span><a href="https://github.com/potential1energy">Isaac</a></span>
+              <span style="white-space: pre; color:var(--EditorTheme_Theme_3)">  ---  </span>
+              <span>Bug Fixes</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label style="cursor:default;">
               <img src="creditsImages/JWKLong.png" class="creditsImage"></img>
               <span><a href="https://github.com/jwklong?page=2&tab=repositories">jwklong</a></span>
               <span style="white-space: pre; color:var(--EditorTheme_Theme_3)">  ---  </span>
