@@ -138,6 +138,14 @@
               GL.uniform1i(GL.shaders[name].uniforms[uniformName].location, GL.shaders[name].uniforms[uniformName].textureID);
               break;
 
+            case "sampler3D":
+              if (!val || typeof val != "object") return;
+
+              GL.activeTexture(GL[`TEXTURE${GL.shaders[name].uniforms[uniformName].textureID}`]);
+
+              GL.bindTexture(GL.TEXTURE_3D, val);
+              GL.uniform1i(GL.shaders[name].uniforms[uniformName].location, GL.shaders[name].uniforms[uniformName].textureID);
+              break;
             default:
               if (!val || typeof val != "object") return;
 
@@ -189,6 +197,11 @@
           break;
 
         case "sampler2D":
+          GL.shaders[name].uniforms[uniformName].textureID = Number(GL.shaders[name].textureID);
+          GL.shaders[name].textureID += 1;
+          break;
+        
+        case "sampler3D":
           GL.shaders[name].uniforms[uniformName].textureID = Number(GL.shaders[name].textureID);
           GL.shaders[name].textureID += 1;
           break;

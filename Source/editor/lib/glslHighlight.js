@@ -21,6 +21,7 @@ penPlus.setupMonacoTheme = () => {
         [/(mat4+)/, "matrix"],
 
         [/(sampler2D+)/, "texture"],
+        [/(sampler2D+)/, "texture3d"],
         [/(samplerCube+)/, "cubemap"],
 
         [/([\{\}])/, "controls"],
@@ -135,6 +136,10 @@ penPlus.setupMonacoTheme = () => {
         {
           token: "texture",
           foreground: penPlus.penPlusTheme.blockStyles["texture_blocks"].colourPrimary,
+        },
+        {
+          token: "texture3d",
+          foreground: penPlus.penPlusTheme.blockStyles["texture3d_blocks"].colourPrimary,
         },
         {
           token: "cubemap",
