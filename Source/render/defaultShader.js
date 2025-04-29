@@ -31,37 +31,37 @@ highp float log10(highp float a) {
 }
 
 highp float eulernum(highp float a) {
-    return 2.718 * a;
+  return 2.718 * a;
 }
 
 //Psuedorandomness
 highp vec4 pcg4d(highp vec4 v)
 {
-    v = v * 1664525.0 + 1013904223.0;
-    
-    v.x += v.y*v.w;
-    v.y += v.z*v.x;
-    v.z += v.x*v.y;
-    v.w += v.y*v.z;
-    
-    v.x += v.z*v.w;
-    v.y += v.y*v.x;
-    v.z += v.x*v.w;
-    v.w += v.y*v.x;
-    
-    return vec4(v);
+  v = v * 1664525.0 + 1013904223.0;
+  
+  v.x += v.y*v.w;
+  v.y += v.z*v.x;
+  v.z += v.x*v.y;
+  v.w += v.y*v.z;
+  
+  v.x += v.z*v.w;
+  v.y += v.y*v.x;
+  v.z += v.x*v.w;
+  v.w += v.y*v.x;
+  
+  return vec4(v);
 }
 
 highp vec4 daveRandomRange(highp float lowR, highp float highR)
 {
-    lowp float r = (gl_FragCoord.x * 50.25313532) + (gl_FragCoord.y * 21.5453) + u_timer;
-    highp float randomizer = r*r/u_timer/5398932.234523;
-    return clamp(vec4(
-    fract(sin(mod(randomizer*(91.3458), 1440.0)) * 47453.5453),
-    fract(sin(mod(randomizer*(80.3458), 1440.0)) * 48456.5453),
-    fract(sin(mod(randomizer*(95.3458), 1440.0)) * 42457.5453),
-    fract(sin(mod(randomizer*(85.3458), 1440.0)) * 47553.5453)
-    ), lowR, highR);
+  lowp float r = (gl_FragCoord.x * 50.25313532) + (gl_FragCoord.y * 21.5453) + u_timer;
+  highp float randomizer = r*r/u_timer/5398932.234523;
+  return clamp(vec4(
+  fract(sin(mod(randomizer*(91.3458), 1440.0)) * 47453.5453),
+  fract(sin(mod(randomizer*(80.3458), 1440.0)) * 48456.5453),
+  fract(sin(mod(randomizer*(95.3458), 1440.0)) * 42457.5453),
+  fract(sin(mod(randomizer*(85.3458), 1440.0)) * 47553.5453)
+  ), lowR, highR);
 }
 
 highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, highp float a) {
