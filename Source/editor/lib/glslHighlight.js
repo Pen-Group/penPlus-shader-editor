@@ -62,7 +62,8 @@ penPlus.setupMonacoTheme = () => {
     [/((?:^|\W)do(?:$|\W))/, "controls"],
     [/(break+)/, "controls"],
     [/(continue+)/, "controls"],
-    [/([\w_]*\s*)\(/, "my-blocks"],
+    [/\(/, "my-blocks"],
+    [/\)/, "my-blocks"],
   ]
   monaco.languages.setLanguageConfiguration("glsl", {
     autoClosingPairs: [
@@ -70,6 +71,12 @@ penPlus.setupMonacoTheme = () => {
       { open: '[', close: ']' },
       { open: '(', close: ')' },
     ],
+    folding: {
+      markers: {
+        start: new RegExp('^\\s*//\\s*(?:(?:#?region\\b)|(?:<editor-fold\\b))'),
+        end: new RegExp('^\\s*//\\s*(?:(?:#?endregion\\b)|(?:</editor-fold>))')
+      }
+    }
   })
   monaco.languages.setMonarchTokensProvider("glsl", {
     tokenizer: {
