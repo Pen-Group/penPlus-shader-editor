@@ -86,7 +86,7 @@ penPlus.setupMonacoTheme = () => {
         ...mainTypes,
 
         [/(sampler2D+)/, "texture"],
-        [/(sampler2D+)/, "texture3d"],
+        [/(sampler3D+)/, "texture3d"],
         [/(samplerCube+)/, "cubemap"],
 
         [/(\d+\.\d+)/, "operator"],
