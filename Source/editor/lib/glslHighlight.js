@@ -1,58 +1,85 @@
 penPlus.setupMonacoTheme = () => {
   monaco.languages.register({ id: "glsl" });
+  const mainTypes = [
+    [/(\/\/.*)/, "comment"],
+    [/\/\*/, 'comment', '@comment'],
+    
+    [/(float+)/, "variable"],
+    [/(int+)/, "int"],
 
+    [/(vec2+)/, "vec-two"],
+    [/(vec3+)/, "vec-three"],
+    [/(vec4+)/, "vec-four"],
+
+    [/(mat2+)/, "matrix"],
+    [/(mat3+)/, "matrix"],
+    [/(mat4+)/, "matrix"],
+
+    [/(lowp+)/, "precision"],
+    [/(mediump+)/, "precision"],
+    [/(highp+)/, "precision"],
+  ];
+  const inFunctions = [
+    [/([\{])/, "controls", "@controls"],
+
+    [/(>=+)/, "operator"],
+    [/(<=+)/, "operator"],
+    [/(>>+)/, "operator"],
+    [/(<<+)/, "operator"],
+    [/(<+)/, "operator"],
+    [/(>+)/, "operator"],
+    [/(==+)/, "operator"],
+    [/(!=+)/, "operator"],
+    [/(=+)/, "operator"],
+
+    [/(\+=+)/, "operator"],
+    [/(\/=+)/, "operator"],
+    [/(\-=+)/, "operator"],
+    [/(\*=+)/, "operator"],
+
+    [/(\/+)/, "operator"],
+    [/(\*+)/, "operator"],
+    [/(\++)/, "operator"],
+    [/(\-+)/, "operator"],
+
+    [/(\|\|+)/, "operator"],
+    [/(\&\&+)/, "operator"],
+    [/(\^\^+)/, "operator"],
+
+    [/(\|+)/, "operator"],
+    [/(\&+)/, "operator"],
+    [/(\^+)/, "operator"],
+    ...mainTypes,
+
+    [/return/, "my-blocks"],
+    [/discard/, "my-blocks"],
+    [/((?:^|\W)if(?:$|\W))/, "controls"],
+    [/((?:^|\W)else(?:$|\W))/, "controls"],
+    [/((?:^|\W)switch(?:$|\W))/, "controls"],
+    [/((?:^|\W)case(?:$|\W))/, "controls"],
+    [/((?:^|\W)for(?:$|\W))/, "controls"],
+    [/((?:^|\W)while(?:$|\W))/, "controls"],
+    [/((?:^|\W)do(?:$|\W))/, "controls"],
+    [/(break+)/, "controls"],
+    [/(continue+)/, "controls"],
+  ]
+  monaco.languages.setLanguageConfiguration("glsl", {
+    autoClosingPairs: [
+      { open: '{', close: '}' },
+      { open: '[', close: ']' },
+      { open: '(', close: ')' },
+    ],
+  })
   monaco.languages.setMonarchTokensProvider("glsl", {
     tokenizer: {
       root: [
-        [/(\/\/.*)/, "comment"],
-        [/\/\*/, 'comment', '@comment'],
         
         [/layout.*\(.*location.*=.*\d\)/,"operator"],
-
-        [/(float+)/, "variable"],
-        [/(int+)/, "int"],
-
-        [/(vec2+)/, "vec-two"],
-        [/(vec3+)/, "vec-three"],
-        [/(vec4+)/, "vec-four"],
-
-        [/(mat2+)/, "matrix"],
-        [/(mat3+)/, "matrix"],
-        [/(mat4+)/, "matrix"],
+        ...mainTypes,
 
         [/(sampler2D+)/, "texture"],
         [/(sampler2D+)/, "texture3d"],
         [/(samplerCube+)/, "cubemap"],
-
-        [/([\{\}])/, "controls"],
-
-        [/(>=+)/, "operator"],
-        [/(<=+)/, "operator"],
-        [/(>>+)/, "operator"],
-        [/(<<+)/, "operator"],
-        [/(<+)/, "operator"],
-        [/(>+)/, "operator"],
-        [/(==+)/, "operator"],
-        [/(!=+)/, "operator"],
-        [/(=+)/, "operator"],
-
-        [/(\+=+)/, "operator"],
-        [/(\/=+)/, "operator"],
-        [/(\-=+)/, "operator"],
-        [/(\*=+)/, "operator"],
-
-        [/(\/+)/, "operator"],
-        [/(\*+)/, "operator"],
-        [/(\++)/, "operator"],
-        [/(\-+)/, "operator"],
-
-        [/(\|\|+)/, "operator"],
-        [/(\&\&+)/, "operator"],
-        [/(\^\^+)/, "operator"],
-
-        [/(\|+)/, "operator"],
-        [/(\&+)/, "operator"],
-        [/(\^+)/, "operator"],
 
         [/(\d+\.\d+)/, "operator"],
         [/(\d+\.)/, "operator"],
@@ -62,35 +89,39 @@ penPlus.setupMonacoTheme = () => {
         [/(true+)/, "operator"],
         [/(false+)/, "operator"],
 
-        [/(lowp+)/, "precision"],
-        [/(mediump+)/, "precision"],
-        [/(highp+)/, "precision"],
+        ...mainTypes,
 
         [/(varying+)/, "precision"],
         [/(attribute+)/, "precision"],
         [/(uniform+)/, "precision"],
 
-        [/((?:^|\W)if(?:$|\W))/, "controls"],
-        [/((?:^|\W)else(?:$|\W))/, "controls"],
-        [/((?:^|\W)switch(?:$|\W))/, "controls"],
-        [/((?:^|\W)case(?:$|\W))/, "controls"],
-        [/((?:^|\W)for(?:$|\W))/, "controls"],
-        [/((?:^|\W)while(?:$|\W))/, "controls"],
-        [/((?:^|\W)do(?:$|\W))/, "controls"],
 
         [/([\w_]*\s*)\(/, "my-blocks"],
         [/\)/, "my-blocks"],
-        [/(return+)/, "my-blocks"],
-        [/(discard+)/, "my-blocks"],
-        [/(break+)/, "my-blocks"],
-        [/(continue+)/, "my-blocks"],
-        [/(void+)/, "my-blocks"],
+        [/void/, "my-blocks"],
+        [/struct/, "struct", "@struct"],
+        [/{/,"my-blocks", "@myblock"],
       ],
-        comment: [
-          [/[^\/*]+/, 'comment'],
-          ['\\*/', 'comment', '@pop'],
-          [/[\/*]/, 'comment']
-        ],
+      struct: [
+        ...mainTypes,
+
+        [/{/, 'struct'],
+        [/}/, 'struct', '@pop'],
+      ],
+      myblock: [
+        [/}/, 'my-blocks', '@pop'],
+        ...inFunctions,
+      ],
+      controls: [
+        [/}/, 'controls', '@pop'],
+        ...inFunctions,
+      ]
+      ,
+      comment: [
+        [/[^\/*]+/, 'comment'],
+        ['\\*/', 'comment', '@pop'],
+        [/[\/*]/, 'comment']
+      ],
     },
   });
 
@@ -110,6 +141,7 @@ penPlus.setupMonacoTheme = () => {
           token: "variable",
           foreground: penPlus.penPlusTheme.blockStyles["variables_blocks"].colourPrimary,
         },
+        
         {
           token: "int",
           foreground: penPlus.penPlusTheme.blockStyles["int_blocks"].colourPrimary,
@@ -166,6 +198,11 @@ penPlus.setupMonacoTheme = () => {
         {
           token: "precision",
           foreground: penPlus.penPlusTheme.blockStyles["colors_blocks"].colourPrimary,
+        },
+
+        {
+          token: "struct",
+          foreground: penPlus.penPlusTheme.blockStyles["structs_blocks"].colourPrimary,
         },
       ],
       colors: {
