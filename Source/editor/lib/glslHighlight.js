@@ -62,6 +62,7 @@ penPlus.setupMonacoTheme = () => {
     [/((?:^|\W)do(?:$|\W))/, "controls"],
     [/(break+)/, "controls"],
     [/(continue+)/, "controls"],
+    [/([\w_]*\s*)\(/, "my-blocks"],
   ]
   monaco.languages.setLanguageConfiguration("glsl", {
     autoClosingPairs: [
