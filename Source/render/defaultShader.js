@@ -6,6 +6,9 @@
 //These functions are here and are written for the GLSL 3.0 specification.
 //You can revert it to GLSL 1.0 by removing the version number
 
+precision highp float;
+// defualt precision for floats
+
 //our output for color
 out highp vec4 fragColor;\n` : "") +
   `//Base Variables
