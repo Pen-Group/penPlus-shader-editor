@@ -641,8 +641,8 @@
                 </div>
                 ${(penPlus.is300Version && penPlus.experimental) ? `
                 <!--3D Texture-->
-                <div id="texture3D" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
-                  <div style="background-color:var(--3DTexture_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
+                <div id="texture3d" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                  <div style="background-color:var(--texture3d_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">3D Texture</p>
@@ -780,9 +780,9 @@
       };
       
       if ((penPlus.is300Version && penPlus.experimental)) {
-        variableTypeChangers.texture3D = document.getElementById("texture3D");
-        variableTypeChangers.texture3D.onclick = () => {
-          cycleVariable("texture3D");
+        variableTypeChangers.texture3d = document.getElementById("texture3d");
+        variableTypeChangers.texture3d.onclick = () => {
+          cycleVariable("texture3d");
           setScopeVisibilities(false, true, false, false, false);
         }
       }

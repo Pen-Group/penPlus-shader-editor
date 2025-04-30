@@ -258,6 +258,7 @@ penPlus.penPlusExtension = class {
       if (type == "matrix_2x") type = "mat2";
       if (type == "matrix_3x") type = "mat3";
       if (type == "matrix_4x") type = "mat4";
+      if (type == "texture3d") type = "sampler3D";
 
       let scope = variable.name.split(" ")[0];
       if (scope != "hat") return;
@@ -265,7 +266,7 @@ penPlus.penPlusExtension = class {
       if (!variable.name.split(" ")[1]) return;
 
       //Types that don't have precision
-      if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int") returnedGLSL += `${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
+      if (variable.type == "texture" || variable.type == "cubemap" || variable.type == "int" || variable.type == "sampler3D") returnedGLSL += `${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
       else returnedGLSL += `highp ${type} ${variable.name.split(" ")[1]} = ${type}(1);\n`;
     });
 

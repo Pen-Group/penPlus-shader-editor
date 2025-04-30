@@ -5,7 +5,7 @@
     getInfo() {
       penPlus.addBlockColorSet("texture_blocks", "#b464e7", "#a755cf", "#9a48c4");
       penPlus.addBlockColorSet("cubemap_blocks", "#8672ff", "#7465d6", "#6657cb");
-      penPlus.addBlockColorSet("3DTexture_blocks", "#967FD7", "#8771C4", "#7760B5");
+      penPlus.addBlockColorSet("texture3d_blocks", "#967FD7", "#8771C4", "#7760B5");
       return {
         name: "Looks",
         id: "looks",
