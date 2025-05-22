@@ -210,7 +210,7 @@ penPlus.setupMonacoTheme = () => {
 
         {
           token: "struct",
-          foreground: penPlus.penPlusTheme.blockStyles["structs_blocks"].colourPrimary,
+          foreground: penPlus.experimental?penPlus.penPlusTheme.blockStyles["structs_blocks"].colourPrimary:'#ffffff',
         },
       ],
       colors: {
@@ -218,6 +218,6 @@ penPlus.setupMonacoTheme = () => {
       },
     });
   }
-
+  
   penPlus.updateMonacoTheme();
 };
