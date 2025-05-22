@@ -118,6 +118,7 @@ function updateGLSL(event) {
       if (type == "matrix_2x") type = "mat2";
       if (type == "matrix_3x") type = "mat3";
       if (type == "matrix_4x") type = "mat4";
+      if (type == "texture3d") type = "sampler3D";
 
       let appendance = "";
 
@@ -147,7 +148,6 @@ function updateGLSL(event) {
     penPlus.Generated_GLSL = penPlus.monacoEditor.getValue();
     penPlus.dispatchEvent("onMainScriptCompiled");
   }
-
   penPlus.Generated_Frag = "";
   penPlus.Generated_Vert = "";
 

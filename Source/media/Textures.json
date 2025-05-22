@@ -1,14 +1,29 @@
 [
-    {
-      "name": "Checkerboard",
-      "src": "media/images/textures/Checkerboard.png"
-    },
-    {
-      "name": "MANDRILL",
-      "src": "media/images/textures/Mandrill.png"
-    },
-    {
-      "name": "Pepper",
-      "src": "media/images/textures/Peppers.png"
-    }
+  {
+    "name": "Checkerboard",
+    "src": "media/images/textures/Checkerboard.png",
+    "type": "texture"
+  },
+  {
+    "name": "MANDRILL",
+    "src": "media/images/textures/Mandrill.png",
+    "type": "texture"
+  },
+  {
+    "name": "Pepper",
+    "src": "media/images/textures/Peppers.png",
+    "type": "texture"
+  },
+  {
+    "name": "grid",
+    "src": "media/images/3dimages/grid3d.png",
+    "type": "3d",
+    "dimensions": [8, 8, 8]
+  },
+  {
+    "name": "torus",
+    "src": "media/images/3dimages/torus.png",
+    "type": "3d",
+    "dimensions": [16, 16, 16]
+  }
 ]
