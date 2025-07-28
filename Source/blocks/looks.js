@@ -76,7 +76,7 @@
           {
             opcode: "getColor",
             type: "reporter",
-            text: "color",
+            text: "colour",
           },
           "---",
           {
