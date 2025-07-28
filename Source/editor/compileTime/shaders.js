@@ -2,6 +2,7 @@ const gl = document.getElementById("shaderpreview").getContext("webgl2", { antia
 
 function replacementShader() {
   penPlus.Generated_GLSL = penPlus.defaultShader + penPlus.defaultVert + penPlus.defaultFrag;
+  if (penPlus.blocklyGLSLVersion == "300") penPlus.Generated_GLSL = "#version 300 es\n" + penPlus.Generated_GLSL;
 
   let vertFunction = "";
   let fragFunction = "";

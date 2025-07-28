@@ -6,6 +6,9 @@
         BlockJson.nextStatement = BlockJson.nextStatement || "Action";
         break;
 
+      case "hatNoNext":
+        break;
+
       case "hat_customBlock":
         break;
 

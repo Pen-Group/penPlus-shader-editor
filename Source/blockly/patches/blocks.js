@@ -324,6 +324,7 @@ function addBlocks() {
   new penPlus.categories.matrix();
   new penPlus.categories.variables();
   new penPlus.categories.myBlocks();
+  new penPlus.categories.glsl();
 
   if (penPlus.experimental) {
     new penPlus.categories.structs();
