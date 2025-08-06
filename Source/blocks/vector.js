@@ -103,6 +103,57 @@
             ],
           },
           "---",
+          "Vector Expansions",
+          {
+            opcode: "vec2tovec3",
+            type: "reporter",
+            text: "%1 z:%2",
+            tooltip: "A vector with 3 elements",
+            output: "vec3 arithmatic",
+            style: "vec3_blocks",
+            arguments: [
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec2_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "z",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "vec3tovec4",
+            type: "reporter",
+            text: "%1 w:%2",
+            tooltip: "A vector with 4 elements",
+            output: "vec4 arithmatic",
+            style: "vec4_blocks",
+            arguments: [
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec3_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "w",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
+          "Vector Components",
           {
             opcode: "getitem",
             type: "reporter",
@@ -284,6 +335,14 @@
 
     vec4(block, generator) {
       return [`vec4(${generator.valueToCode(block, "x", Order.ATOMIC)},${generator.valueToCode(block, "y", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)},${generator.valueToCode(block, "w", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    vec2tovec3(block, generator) {
+      return [`vec3(${generator.valueToCode(block, "vector", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    vec3tovec4(block, generator) {
+      return [`vec4(${generator.valueToCode(block, "vector", Order.ATOMIC)},${generator.valueToCode(block, "w", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     getitem(block, generator) {
