@@ -30,6 +30,10 @@
   color: var(--texture_blocks);
 }
 
+.texture3d_Highlight {
+  color: var(--texture3d_blocks);
+}
+
 .cubemap_Highlight {
   color: var(--cubemap_blocks);
 }

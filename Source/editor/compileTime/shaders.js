@@ -138,6 +138,31 @@ function getTypedInput(type, name, index) {
 
       return input;
 
+      case "sampler3D":
+        keys = Object.keys(penPlus.textures3d);
+  
+        input = document.createElement("select");
+        input.style.width = "75%";
+        input.className = "scratchStyledInput";
+  
+        //Loop through textures to add them to the list
+        options = "";
+        keys.forEach((key) => {
+          options += `<option value="${key}">texture ${key}</option>`;
+        });
+  
+        input.innerHTML = options;
+  
+        if (penPlus.previousVariableStates[name]) input.value = penPlus.previousVariableStates[name];
+        gl.shaders.editorShader.uniforms[name].value = penPlus.previousVariableStates[name] ? penPlus.previousVariableStates[name] : penPlus.textures3d[input.value];
+  
+        input.addEventListener("change", () => {
+          gl.shaders.editorShader.uniforms[name].value = penPlus.textures3d[input.value];
+          penPlus.previousVariableStates[name] = input.value;
+        });
+  
+        return input;
+  
     case "float":
       input = document.createElement("input");
       input.style.width = "75%";
@@ -769,9 +794,9 @@ function genProgram() {
             }
             return;
           }
-
           //Handle non arrays
           if (!refreshedPoints) gl.shaders["editorShader"].setupUniform(attribute.name, attribute.type);
+
 
           //Remove pen+ uniforms that are static
           if (attribute.name != "u_timer" && attribute.name != "u_res" && attribute.name != "u_transform") {

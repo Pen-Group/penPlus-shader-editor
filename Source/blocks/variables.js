@@ -417,11 +417,7 @@
       const variable = block.getFieldValue("VAR");
 
       const variableName = variable.split(" ")[1];
-      const variableType = variable.split(" ")[2];
-
-      if (variableType == "matrix_2x") variableType = "mat2";
-      if (variableType == "matrix_3x") variableType = "mat3";
-      if (variableType == "matrix_4x") variableType = "mat4";
+      let variableType = variable.split(" ")[2];
 
       const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
 
@@ -430,6 +426,10 @@
       if (block.inputList[0].getShadowDom() == null || block.inputList[0].getShadowDom().getAttribute("type") != shadowDeisred.getAttribute("type")) this.inputList[this.inputList.length - 1].setShadowDom(shadowDeisred);
 
       block.setStyle(__colorVariableBlock(variableType));
+
+      if (variableType == "matrix_2x") variableType = "mat2";
+      if (variableType == "matrix_3x") variableType = "mat3";
+      if (variableType == "matrix_4x") variableType = "mat4";
 
       return `${variableName} = ${variableType}(${value});\n` + nextBlockToCode(block, generator);
     }
@@ -641,8 +641,8 @@
                 </div>
                 ${(penPlus.is300Version && penPlus.experimental) ? `
                 <!--3D Texture-->
-                <div id="texture3D" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
-                  <div style="background-color:var(--3DTexture_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
+                <div id="texture3d" style="left:150%; position:absolute;background-color: var(--EditorTheme_Theme_3);border-radius:1em;width:auto;height:100%;aspect-ratio:7/6; justify-content: center;">
+                  <div style="background-color:var(--texture3d_blocks);position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:100%; aspect-ratio:1; width:auto; height:50%;">
                   </div>
 
                   <p class="noSelect" style="position:absolute;top:85%;left:50%;transform:translate(-50%,-50%);font-size: 1.125em; width:50%; height:50%;">3D Texture</p>

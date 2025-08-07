@@ -322,6 +322,14 @@
           </div>
         </div>
         
+        <div class="modalContentSetting">
+          <div>
+            <label>
+              <input type="color" id="texture3dColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Texture 3d</span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
     `);
@@ -398,6 +406,7 @@
 
       matrix: document.getElementById("matrixColor"),
       texture: document.getElementById("textureColor"),
+      texture3d: document.getElementById("texture3dColor"),
       cubemap: document.getElementById("cubemapColor"),
     };
 
