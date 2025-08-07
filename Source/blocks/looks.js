@@ -13,12 +13,12 @@
         color2: "#855cd6",
         color3: "#774dcb",
         blocks: [
-          "---",
           {
             opcode: "setVertColor",
             type: "command",
             text: "set vertex colour to %1",
             tooltip: "Changes the vertex's color value a desired color.",
+            hideFromPallete: true,
             arguments: [
               {
                 type: "input_value",
@@ -34,13 +34,14 @@
             type: "reporter",
             text: "vertex colour",
             tooltip: "Vertex Color",
+            hideFromPallete: true,
           },
-          "---",
           {
             opcode: "setPixColor",
             type: "command",
             text: "set pixel colour to %1",
             tooltip: "Changes the pixel's color value a desired color.",
+            hideFromPallete: true,
             arguments: [
               {
                 type: "input_value",
@@ -56,7 +57,81 @@
             type: "reporter",
             text: "pixel colour",
             tooltip: "Pixel color",
+            hideFromPallete: true,
           },
+          {
+            opcode: "setColor",
+            type: "command",
+            text: "set colour to %1",
+            arguments: [
+              {
+                type: "input_value",
+                name: "COLOR",
+                shadow: {
+                  type: "color_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "getColor",
+            type: "reporter",
+            text: "colour",
+          },
+          "---",
+          {
+            opcode: "setAttribute",
+            type: "command",
+            text: "set %1 to %2",
+            arguments: [
+              penPlus.createMenu(
+                [
+                  ["hue", "hue"],
+                  ["saturation", "saturation"],
+                  ["value", "value"],
+                  ["red", "red"],
+                  ["green", "green"],
+                  ["blue", "blue"],
+                  ["alpha", "alpha"],
+                ],
+                "ATTRIBUTE"
+              ),
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "changeAttribute",
+            type: "command",
+            text: "change %1 by %2",
+            arguments: [
+              penPlus.createMenu(
+                [
+                  ["hue", "hue"],
+                  ["saturation", "saturation"],
+                  ["value", "value"],
+                  ["red", "red"],
+                  ["green", "green"],
+                  ["blue", "blue"],
+                  ["alpha", "alpha"],
+                ],
+                "ATTRIBUTE"
+              ),
+              {
+                type: "input_value",
+                name: "VALUE",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
           {
             opcode: "mulBlending",
             type: "command",
@@ -241,6 +316,52 @@
 
     getVertColor() {
       return [`v_color`, Order.ATOMIC];
+    }
+
+    setColor(block, generator) {
+      const colour = generator.valueToCode(block, "COLOR", Order.ATOMIC);
+      return (penPlus.compileFunction == "vertex" ? `v_color` : `${penPlus.colorVariable}`) + ` = ${colour};` + nextBlockToCode(block, generator);
+    }
+
+    getColor() {
+      return [(penPlus.compileFunction == "vertex" ? `v_color` : `${penPlus.colorVariable}`), Order.ATOMIC];
+    }
+
+    //Attributes are pretty self explanitory
+    setAttribute(block, generator) {
+      const colorVariable = (penPlus.compileFunction == "vertex" ? `v_color` : `${penPlus.colorVariable}`);
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      switch (block.getFieldValue("ATTRIBUTE")) {
+        case "hue": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) * vec4(0, 1, 1, 1) + vec4(float(${value}), 0, 0, 0));` + nextBlockToCode(block, generator);
+        case "saturation": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) * vec4(1, 0, 1, 1) + vec4(0, float(${value}), 0, 0));` + nextBlockToCode(block, generator);
+        case "value": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) * vec4(1, 1, 0, 1) + vec4(0, 0, float(${value}), 0));` + nextBlockToCode(block, generator);
+        case "red": return  `${colorVariable}.x = float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "green": return  `${colorVariable}.y = float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "blue": return  `${colorVariable}.z = float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "alpha": return  `${colorVariable}.w = float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+      
+        default:
+          return `` + nextBlockToCode(block, generator);
+      }
+    }
+
+    changeAttribute(block, generator) {
+      const colorVariable = (penPlus.compileFunction == "vertex" ? `v_color` : `${penPlus.colorVariable}`);
+      const value = generator.valueToCode(block, "VALUE", Order.ATOMIC);
+
+      switch (block.getFieldValue("ATTRIBUTE")) {
+        case "hue": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) + vec4(float(${value}), 0, 0, 0));` + nextBlockToCode(block, generator);
+        case "saturation": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) + vec4(0, float(${value}), 0, 0));` + nextBlockToCode(block, generator);
+        case "value": return  `${colorVariable} = HSVToRGB(RGBToHSV(${colorVariable}) + vec4(0, 0, float(${value}), 0));` + nextBlockToCode(block, generator);
+        case "red": return  `${colorVariable}.x += float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "green": return  `${colorVariable}.y += float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "blue": return  `${colorVariable}.z += float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+        case "alpha": return  `${colorVariable}.w += float(${value}) / 255.0;` + nextBlockToCode(block, generator);
+      
+        default:
+          return `` + nextBlockToCode(block, generator);
+      }
     }
 
     setPixU(block, generator) {

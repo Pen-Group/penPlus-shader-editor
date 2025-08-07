@@ -103,6 +103,57 @@
             ],
           },
           "---",
+          "Vector Expansions",
+          {
+            opcode: "vec2tovec3",
+            type: "reporter",
+            text: "%1 z:%2",
+            tooltip: "A vector with 3 elements",
+            output: "vec3 arithmatic",
+            style: "vec3_blocks",
+            arguments: [
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec2_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "z",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "vec3tovec4",
+            type: "reporter",
+            text: "%1 w:%2",
+            tooltip: "A vector with 4 elements",
+            output: "vec4 arithmatic",
+            style: "vec4_blocks",
+            arguments: [
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec3_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "w",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          "---",
+          "Vector Components",
           {
             opcode: "getitem",
             type: "reporter",
@@ -121,6 +172,66 @@
                 "coordinate",
                 4
               ),
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec4_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "getitemVec2",
+            type: "reporter",
+            text: "components %1 %2 of %3",
+            tooltip: "A Custom Block!",
+            output: "arithmatic",
+            //style: "return_block", I somewhat like this gray
+            arguments: [
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateX",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateY",4),
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec4_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "getitemVec3",
+            type: "reporter",
+            text: "components %1 %2 %3 of %4",
+            tooltip: "A Custom Block!",
+            output: "arithmatic",
+            //style: "return_block", I somewhat like this gray
+            arguments: [
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateX",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateY",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateZ",4),
+              {
+                type: "input_value",
+                name: "vector",
+                shadow: {
+                  type: "vec4_reporter",
+                },
+              },
+            ],
+          },
+          {
+            opcode: "getitemVec4",
+            type: "reporter",
+            text: "components %1 %2 %3 %4 of %5",
+            tooltip: "A Custom Block!",
+            output: "arithmatic",
+            //style: "return_block", I somewhat like this gray
+            arguments: [
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateX",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateY",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateZ",4),
+              penPlus.createGrid([["x", "x"],["y", "y"],["z", "z"],["w", "w"],],"coordinateW",4),
               {
                 type: "input_value",
                 name: "vector",
@@ -226,8 +337,28 @@
       return [`vec4(${generator.valueToCode(block, "x", Order.ATOMIC)},${generator.valueToCode(block, "y", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)},${generator.valueToCode(block, "w", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
+    vec2tovec3(block, generator) {
+      return [`vec3(${generator.valueToCode(block, "vector", Order.ATOMIC)},${generator.valueToCode(block, "z", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    vec3tovec4(block, generator) {
+      return [`vec4(${generator.valueToCode(block, "vector", Order.ATOMIC)},${generator.valueToCode(block, "w", Order.ATOMIC)})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
     getitem(block, generator) {
       return [`${generator.valueToCode(block, "vector", Order.ATOMIC)}.${block.getFieldValue("coordinate")}`, Order.ATOMIC];
+    }
+
+    getitemVec2(block, generator) {
+      return [`${generator.valueToCode(block, "vector", Order.ATOMIC)}.${block.getFieldValue("coordinateX")}${block.getFieldValue("coordinateY")}`, Order.ATOMIC];
+    }
+
+    getitemVec3(block, generator) {
+      return [`${generator.valueToCode(block, "vector", Order.ATOMIC)}.${block.getFieldValue("coordinateX")}${block.getFieldValue("coordinateY")}${block.getFieldValue("coordinateZ")}`, Order.ATOMIC];
+    }
+
+    getitemVec4(block, generator) {
+      return [`${generator.valueToCode(block, "vector", Order.ATOMIC)}.${block.getFieldValue("coordinateX")}${block.getFieldValue("coordinateY")}${block.getFieldValue("coordinateZ")}${block.getFieldValue("coordinateW")}`, Order.ATOMIC];
     }
 
     normalize(block, generator) {

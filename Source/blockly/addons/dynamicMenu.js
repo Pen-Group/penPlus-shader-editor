@@ -5,7 +5,7 @@
                 let returned = [];
                 const variables = workspace.getAllVariables();
                 variables.forEach(variableDef => {
-                    if (variableDef.name.split(" ")[0] == "hat" || variableDef.name.split(" ")[0] == "varying") {
+                    if (variableDef.name.split(" ")[0] == "hat" || variableDef.name.split(" ")[0] == "varying" || variableDef.name.split(" ")[0] == "") {
                         returned.push([
                             variableDef.name.split(" ")[1],
                             `${variableDef.name} ${variableDef.type}`

@@ -244,6 +244,15 @@
         <div class="modalContentSetting">
           <div>
             <label>
+              <input type="color" id="injectionColor"></input>
+              <span style="color:var(--EditorTheme_Text_1);">Injection</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modalContentSetting">
+          <div>
+            <label>
               <input type="color" id="floatColor"></input>
               <span style="color:var(--EditorTheme_Text_1);">Float</span>
             </label>
@@ -386,6 +395,7 @@
       operators: document.getElementById("operatorsColor"),
       sensing: document.getElementById("sensingColor"),
       myblocks: document.getElementById("myBlocksColor"),
+      injection: document.getElementById("injectionColor"),
 
       variables: document.getElementById("floatColor"),
       int: document.getElementById("intColor"),

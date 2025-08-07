@@ -30,11 +30,25 @@
     }
 
     vertex(block, generator) {
-      return `//Vertex Shader\nvoid vertex() {\n${getHatBlockVariables()}\ngl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);\nv_texCoord = a_texCoord;\nv_color = a_color;${nextBlockToCode(block, generator)}\n}`;
+      penPlus.compileFunction = "vertex";
+      return `//Vertex Shader
+void vertex() {
+  ${getHatBlockVariables()}
+  gl_Position = (rotation(a_position) + vec4(u_transform[0][2],u_transform[0][3],0,0)) * vec4(a_position.w * u_transform[0][0],a_position.w * -u_transform[0][1],1,1) - vec4(0,0,1,0);
+  v_texCoord = a_texCoord;
+  v_color = a_color;
+  ${nextBlockToCode(block, generator)}
+}`;
     }
 
     pixel(block, generator) {
-      return `//Fragment Shader\nvoid fragment() {\ngl_FragColor = v_color;\n${getHatBlockVariables()}\n${nextBlockToCode(block, generator)}\n}`;
+      penPlus.compileFunction = "fragment";
+      return `//Fragment Shader
+void fragment() {
+  gl_FragColor = v_color;
+  ${getHatBlockVariables()}
+  ${nextBlockToCode(block, generator)}
+}`;
     }
   }
 

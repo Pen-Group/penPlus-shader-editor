@@ -141,6 +141,9 @@ function updateGLSL(event) {
 
     penPlus.Generated_GLSL += penPlus.GLSL_GEN.workspaceToCode(penPlus.workspace);
 
+    //If we are in 3.0 append 300 spec
+    if (penPlus.blocklyGLSLVersion == "300") penPlus.Generated_GLSL = "#version 300 es\n" + penPlus.Generated_GLSL;
+
     penPlus.dispatchEvent("onMainScriptCompiled");
 
     penPlus.monacoEditor.setValue(penPlus.Generated_GLSL);

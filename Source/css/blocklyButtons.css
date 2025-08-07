@@ -10,6 +10,5 @@
 }
 
 .myButton > .blocklyText {
-  stroke: var(--EditorTheme_Text_4);
   fill: var(--EditorTheme_Text_4);
 }

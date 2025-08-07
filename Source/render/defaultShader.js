@@ -1,7 +1,7 @@
 (function () {
   penPlus.refreshDefaultShaderString = () => {
     penPlus.defaultShader = (
-      (penPlus.blocklyGLSLVersion == "300") ? `#version 300 es
+      (penPlus.blocklyGLSLVersion == "300") ? `
 //This is the default shader for the shader editor!
 //These functions are here and are written for the GLSL 3.0 specification.
 //You can revert it to GLSL 1.0 by removing the version number
@@ -105,6 +105,48 @@ highp vec4 HSVToRGB(highp float hue, highp float saturation, highp float value, 
   g += m;
   b += m;
   return vec4(r, g, b, a);
+}
+
+highp vec4 HSVToRGB(highp vec4 colorInput) {
+  return HSVToRGB(colorInput.x, colorInput.y, colorInput.z, colorInput.w);
+}
+
+highp vec4 RGBToHSV(highp float r, highp float g, highp float b, highp float a) {
+  //Get the brightest and darkest channels
+  highp float CMax = r;
+  if (g > CMax) { CMax = g; }
+  if (b > CMax) { CMax = b; }
+
+  highp float CMin = r;
+  if (g < CMin) { CMin = g; }
+  if (b < CMin) { CMin = b; }
+
+  highp float Delta = CMax - CMin;
+
+  highp float H = 0.0;
+
+  //Multiply and get the Hue
+  if (CMax == r) {
+      H = 60.0 * mod(((g - b) / Delta), 6.0);
+  }
+  if (CMax == g) {
+      H = 60.0 * ((b - r) / Delta + 2.0);
+  }
+  if (CMax == b) {
+      H = 60.0 * ((r - g) / Delta + 4.0);
+  }
+
+  //Set the saturation
+  highp float S = 0.0;
+  if (CMax != 0.0) {
+      S = Delta / CMax;
+  }
+    
+  return vec4(H, S * 100.0, CMax * 100.0, a);
+}
+
+highp vec4 RGBToHSV(highp vec4 colorInput) {
+  return RGBToHSV(colorInput.x, colorInput.y, colorInput.z, colorInput.w);
 }
 
 highp vec4 rotation(highp vec4 invec4) {
