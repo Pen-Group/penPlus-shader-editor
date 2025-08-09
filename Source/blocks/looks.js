@@ -276,7 +276,7 @@
             type: "reporter",
             text: "color at %1 of 3D texture %2",
             tooltip: "Sample the pixel at the UVW coordinates desired",
-            style: "3DTexture_blocks",
+            style: "texture3d_blocks",
 
             arguments: [
               {
