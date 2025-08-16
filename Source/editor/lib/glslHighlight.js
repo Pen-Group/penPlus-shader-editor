@@ -4,20 +4,20 @@ penPlus.setupMonacoTheme = () => {
     [/(\/\/.*)/, "comment"],
     [/\/\*/, 'comment', '@comment'],
     
-    [/(float+)/, "variable"],
-    [/(int+)/, "int"],
+    [/((?:^|\W)float(?:$|\W))+/, "variable"],
+    [/((?:^|\W)int(?:$|\W))+/, "int"],
 
-    [/(vec2+)/, "vec-two"],
-    [/(vec3+)/, "vec-three"],
-    [/(vec4+)/, "vec-four"],
+    [/((?:^|\W)vec2(?:$|\W))+/, "vec-two"],
+    [/((?:^|\W)vec3(?:$|\W))+/, "vec-three"],
+    [/((?:^|\W)vec4(?:$|\W))+/, "vec-four"],
 
-    [/(mat2+)/, "matrix"],
-    [/(mat3+)/, "matrix"],
-    [/(mat4+)/, "matrix"],
+    [/((?:^|\W)mat2(?:$|\W))+/, "matrix"],
+    [/((?:^|\W)mat3(?:$|\W))+/, "matrix"],
+    [/((?:^|\W)mat4(?:$|\W))+/, "matrix"],
 
-    [/(lowp+)/, "precision"],
-    [/(mediump+)/, "precision"],
-    [/(highp+)/, "precision"],
+    [/((?:^|\W)lowp(?:$|\W))+/, "precision"],
+    [/((?:^|\W)mediump(?:$|\W))+/, "precision"],
+    [/((?:^|\W)highp(?:$|\W))+/, "precision"],
   ];
   const inFunctions = [
     [/([\{])/, "controls", "@controls"],
@@ -51,8 +51,8 @@ penPlus.setupMonacoTheme = () => {
     [/(\^+)/, "operator"],
     ...mainTypes,
 
-    [/return/, "my-blocks"],
-    [/discard/, "my-blocks"],
+    [/((?:^|\W)return(?:$|\W))/, "my-blocks"],
+    [/((?:^|\W)discard(?:$|\W))/, "my-blocks"],
     [/((?:^|\W)if(?:$|\W))/, "controls"],
     [/((?:^|\W)else(?:$|\W))/, "controls"],
     [/((?:^|\W)switch(?:$|\W))/, "controls"],
@@ -60,8 +60,8 @@ penPlus.setupMonacoTheme = () => {
     [/((?:^|\W)for(?:$|\W))/, "controls"],
     [/((?:^|\W)while(?:$|\W))/, "controls"],
     [/((?:^|\W)do(?:$|\W))/, "controls"],
-    [/(break+)/, "controls"],
-    [/(continue+)/, "controls"],
+    [/((?:^|\W)break(?:$|\W))/, "controls"],
+    [/((?:^|\W)continue(?:$|\W))/, "controls"],
     [/\(/, "my-blocks"],
     [/\)/, "my-blocks"],
   ]
