@@ -397,6 +397,28 @@
             ],
           },
           {
+            opcode: "atan2",
+            type: "reporter",
+            text: "atan2 x: %1 y: %2",
+            tooltip: "atan(Y/X)",
+            arguments: [
+              {
+                type: "input_value",
+                name: "A",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+              {
+                type: "input_value",
+                name: "B",
+                shadow: {
+                  type: "number_reporter",
+                },
+              },
+            ],
+          },
+          {
             opcode: "smoothstep",
             type: "reporter",
             text: "smooth %1 and %2 by %3",
@@ -671,6 +693,12 @@
       const arith = block.getFieldValue("arithmatic");
       const A = generator.valueToCode(block, "A", Order.ATOMIC);
       return [`${arith}(${A})` + nextBlockToCode(block, generator), Order.ATOMIC];
+    }
+
+    atan2(block, generator) {
+      const A = generator.valueToCode(block, "A", Order.ATOMIC);
+      const B = generator.valueToCode(block, "B", Order.ATOMIC);
+      return [`atan(${A}, ${B})` + nextBlockToCode(block, generator), Order.ATOMIC];
     }
 
     smoothstep(block, generator) {
