@@ -494,17 +494,33 @@ function previewRender() {
     }
   };
 
+  let resizeRequested = true;
+
+  penPlus.triggerResize = () => {
+    resizeRequested = true;
+  };
+
+  const resizeObserver = new ResizeObserver(() => {
+    resizeRequested = true;
+  });
+  resizeObserver.observe(gl.canvas);
+
   function renderFrame() {
     now = Date.now();
     if (gl && gl.shaders && gl.shaders["editorShader"]) {
       gl.clear(gl.COLOR_BUFFER_BIT );
       penPlus.timer += (now - lastTime) / 1000;
-      document.body.style.setProperty("--U_TIMER", penPlus.timer + "px");
-      document.body.style.setProperty("--U_TIMER_SIN", Math.sin(penPlus.timer * 0.5) + "px");
 
-      gl.canvas.width = penPlus.overrideSize.width || gl.canvas.clientWidth;
-      gl.canvas.height = penPlus.overrideSize.height || gl.canvas.clientHeight;
-      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      if (resizeRequested) {
+        const desiredWidth = penPlus.overrideSize.width || gl.canvas.clientWidth;
+        const desiredHeight = penPlus.overrideSize.height || gl.canvas.clientHeight;
+        if (gl.canvas.width !== desiredWidth || gl.canvas.height !== desiredHeight) {
+          gl.canvas.width = desiredWidth;
+          gl.canvas.height = desiredHeight;
+        }
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        resizeRequested = false;
+      }
 
       gl.useProgram(gl.shaders["editorShader"]);
 

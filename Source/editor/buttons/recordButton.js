@@ -13,6 +13,7 @@
             
         penPlus.overrideSize.width = 960;
         penPlus.overrideSize.height = 720;
+        if (penPlus.triggerResize) penPlus.triggerResize();
 
         const gif = new GIF({
             workers: 5,
@@ -36,6 +37,7 @@
 
             penPlus.overrideSize.width = null;
             penPlus.overrideSize.height = null;
+            if (penPlus.triggerResize) penPlus.triggerResize();
         });
 
         gif.on('progress', (progress) => {

@@ -26,8 +26,6 @@ body {
   --EditorTheme_Text_3: #ffffff;
   --EditorTheme_Text_4: #8b8b8b;
 
-  --U_TIMER: 0px;
-
   --blocklyTextColor: var(--EditorTheme_Text_1);
 
   --EditorTheme_TopBarSize: 64px;
@@ -323,4 +321,22 @@ a:hover {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
+}
+
+@keyframes errorScroll {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px 80px; }
+}
+
+@keyframes warningScroll {
+  from { background-position: 0px 0px; }
+  to { background-position: 40px -40px; }
+}
+
+.fancy-error-bg {
+  animation: errorScroll 4s linear infinite !important;
+}
+
+.fancy-warning-bg {
+  animation: warningScroll 4s linear infinite !important;
 }

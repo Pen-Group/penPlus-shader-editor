@@ -95,7 +95,8 @@
         set value(val) {
           GL.useProgram(program);
           switch (GL.shaders[name].uniforms[uniformName].type) {
-            case "float" || "double":
+            case "float":
+            case "double":
               GL.uniform1f(GL.shaders[name].uniforms[uniformName].location, val);
               break;
 
@@ -108,27 +109,27 @@
               break;
 
             case "vec2":
-              GL.uniform2fv(GL.shaders[name].uniforms[uniformName].location, new Float32Array(val));
+              GL.uniform2fv(GL.shaders[name].uniforms[uniformName].location, val);
               break;
 
             case "vec3":
-              GL.uniform3fv(GL.shaders[name].uniforms[uniformName].location, new Float32Array(val));
+              GL.uniform3fv(GL.shaders[name].uniforms[uniformName].location, val);
               break;
 
             case "vec4":
-              GL.uniform4fv(GL.shaders[name].uniforms[uniformName].location, new Float32Array(val));
+              GL.uniform4fv(GL.shaders[name].uniforms[uniformName].location, val);
               break;
 
             case "mat2":
-              GL.uniformMatrix2fv(GL.shaders[name].uniforms[uniformName].location, false, new Float32Array(val));
+              GL.uniformMatrix2fv(GL.shaders[name].uniforms[uniformName].location, false, val);
               break;
 
             case "mat3":
-              GL.uniformMatrix3fv(GL.shaders[name].uniforms[uniformName].location, false, new Float32Array(val));
+              GL.uniformMatrix3fv(GL.shaders[name].uniforms[uniformName].location, false, val);
               break;
 
             case "mat4":
-              GL.uniformMatrix4fv(GL.shaders[name].uniforms[uniformName].location, false, new Float32Array(val));
+              GL.uniformMatrix4fv(GL.shaders[name].uniforms[uniformName].location, false, val);
               break;
 
             case "samplerCube":
@@ -168,7 +169,10 @@
 
       GL.shaders[name].uniforms[uniformName].type = uniformType;
       switch (uniformType) {
-        case "float" || "int" || "uint" || "double":
+        case "float":
+        case "int":
+        case "uint":
+        case "double":
           GL.shaders[name].uniforms[uniformName].value = 1.0;
           break;
 
